@@ -84,7 +84,7 @@
           <p class="text-lg text-white opacity-90 mb-8">
             Let's create something amazing together. Contact us to discuss your ideas and how we can bring them to life.
           </p>
-          <router-link to="/contact" class="btn-lg bg-white text-accent hover:bg-neutral-cream">
+          <router-link to="/contact" class="btn-lg bg-white text-accent hover:bg-neutral-cream rounded-md">
             Get in Touch
           </router-link>
         </div>
@@ -116,7 +116,7 @@ const portfolioItems = [
   {
     id: 'gotta-go',
     title: 'GottaGo Ottawa',
-    category: 'blog',
+    category: 'blog management',
     description: 'A nonprofit that works with local businesses to provide public washrooms for the homeless. The website features a blog, donation system, and volunteer sign-ups.',
     image: gottaGoImage,
     tags: ['WordPress', 'Custom Theme', 'Event Integration'],
@@ -126,7 +126,7 @@ const portfolioItems = [
   {
     id: 'up-media',
     title: 'UpMedia Video Production',
-    category: 'web desgin',
+    category: 'web design',
     description: 'A video production company website with a portfolio of past projects, client testimonials, and a contact form for inquiries.',
     image: upMediaImage,
     tags: ['WordPress', 'Custom Theme', 'Portfolio Integration'],

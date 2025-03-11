@@ -3,14 +3,7 @@
   <header class="bg-white shadow-md fixed w-full top-0 z-sticky">
     <div class="container-site h-header flex items-center justify-between">
       <!-- Brand Logo/Name -->
-      <div class="flex items-center">
-        <router-link to="/"
-          class="text-2xl font-bold font-heading text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 rounded-sm">
-          Web Masters
-        </router-link>
-      </div>
-
-      <!-- Desktop Navigation -->
+      <Logo /> <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-nav-item" aria-label="Main navigation">
         <router-link v-for="(item, index) in navItems" :key="index" :to="item.url"
           class="font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 rounded-sm p-1"
@@ -91,6 +84,8 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+
+import Logo from '@/assets/Logo.vue'
 
 // Menu state
 const isOpen = ref(false)
