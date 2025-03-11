@@ -15,6 +15,7 @@ import ShopifyView from "@/views/ShopifyView.vue";
 import MaintenanceView from "@/views/MaintenanceView.vue";
 import ConsultationsView from "@/views/ConsultationsView.vue";
 import PolicyView from "@/views/PolicyView.vue";
+import NewClientForm from "@/components/NewClientForm.vue";
 
 const routes = [
   {
@@ -156,6 +157,20 @@ const routes = [
         image: seoConfig.defaultImage,
         type: "website",
         noindex: false,
+      },
+    },
+  },
+  {
+    path: "/new-client-form",
+    name: "NewClientForm",
+    component: NewClientForm,
+    meta: {
+      seo: {
+        title: "New Client Form | WebMaster",
+        description:
+          "Fill out the new client form to get started with our web development services.",
+        image: seoConfig.defaultImage,
+        type: "website",
       },
     },
   },

@@ -11,7 +11,10 @@ const footerLinks = {
     { name: 'Consultations', url: '/consultations' }
   ],
   Company: [
-    { name: 'About Us', url: '/about' }
+    { name: 'About Us', url: '/about' },
+    { name: 'Contact Us', url: '/contact' },
+    { name: 'New Client Form', url: '/new-client-form' },
+    { name: 'Portfolio', url: '/portfolio' }
   ],
   Legal: [
     { name: 'Policies', url: '/policies' },

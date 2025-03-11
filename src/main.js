@@ -6,6 +6,17 @@ import { createApp } from "vue";
 import { createHead } from "@vueuse/head";
 import { createPinia } from "pinia";
 
+// Custom analytics tracking
+window.trackEvent = function (eventName, eventParams) {
+  // Google Analytics tracking
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, eventParams);
+    console.log("Analytics event tracked:", eventName, eventParams);
+  } else {
+    console.log("Analytics tracking (development):", eventName, eventParams);
+  }
+};
+
 import App from "./App.vue";
 import router from "./router";
 
