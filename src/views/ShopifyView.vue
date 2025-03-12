@@ -5,7 +5,7 @@
       <div class="container-site">
         <div class="max-w-content mx-auto text-center">
           <h1 class="text-neutral-cream mb-6">Professional Shopify Development Services</h1>
-          <p class="text-xl mb-8">Elevate your e-commerce business with custom Shopify solutions</p>
+          <p class="text-xl mb-8 text-white">Elevate your e-commerce business with custom Shopify solutions</p>
           <div class="flex justify-center gap-4">
             <button class="btn-primary bg-neutral-cream text-accent-600 hover:bg-neutral-100 btn-lg">Start Your
               Project</button>
@@ -79,53 +79,14 @@
       </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="section-padding">
-      <div class="container-site">
-        <div class="text-center mb-12">
-          <h2>Our Shopify Portfolio</h2>
-          <p class="max-w-content mx-auto">
-            Take a look at some of our recent Shopify store projects and the results we've achieved for our clients.
-          </p>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="(project, index) in portfolio" :key="index" class="card card-hover overflow-hidden">
-            <div class="aspect-[16/9] bg-neutral-200">
-              <!-- Project image placeholder - replace with actual images -->
-              <div class="w-full h-48 bg-neutral-300 flex items-center justify-center">
-                <span class="text-neutral-500">Project Image</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <h4 class="mb-2">{{ project.name }}</h4>
-              <p class="text-sm text-neutral-700 mb-3">{{ project.category }}</p>
-              <p class="mb-4">{{ project.description }}</p>
-              <div class="flex flex-wrap gap-2">
-                <span v-for="(tag, tIndex) in project.tags" :key="tIndex" class="badge badge-light text-xs">
-                  {{ tag }}
-                </span>
-              </div>
-              <button class="btn-text mt-4 inline-flex items-center">
-                View Case Study
-                <span class="ml-1">→</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center mt-8">
-          <button class="btn-secondary">View All Projects</button>
-        </div>
-      </div>
-    </section>
 
     <!-- Benefits Section -->
     <section class="section-padding bg-primary-600 text-neutral-cream">
       <div class="container-site">
         <div class="text-center mb-12">
           <h2 class="text-neutral-cream">Benefits of Working With Us</h2>
-          <p class="max-w-content mx-auto">
+          <p class="max-w-content mx-auto text-white">
             Here's why businesses choose us for their Shopify development needs.
           </p>
         </div>
@@ -185,46 +146,6 @@
       </div>
     </section>
 
-    <!-- Testimonials Carousel -->
-    <section class="section-padding bg-accent-50">
-      <div class="container-site">
-        <div class="text-center mb-12">
-          <h2>What Our Clients Say</h2>
-          <p class="max-w-content mx-auto">
-            Here's what store owners have to say about our Shopify development services.
-          </p>
-        </div>
-
-        <!-- Simple Testimonial Carousel -->
-        <div class="max-w-content mx-auto">
-          <div class="card p-8">
-            <div v-for="(testimonial, index) in testimonials" :key="index" v-show="activeTestimonial === index">
-              <div class="mb-6">
-                <div class="flex mb-4">
-                  <div v-for="i in 5" :key="i" class="text-warning mr-1">★</div>
-                </div>
-                <p class="text-lg italic mb-6">"{{ testimonial.quote }}"</p>
-                <div class="flex items-center">
-                  <div class="w-16 h-16 bg-neutral-200 rounded-full mr-4"></div>
-                  <div>
-                    <h5 class="mb-0">{{ testimonial.name }}</h5>
-                    <p class="text-accent-600 mb-0">{{ testimonial.business }}</p>
-                    <p class="text-sm text-neutral-500 mb-0">{{ testimonial.result }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Carousel Controls -->
-            <div class="flex justify-center mt-6">
-              <button v-for="(_, index) in testimonials" :key="index"
-                :class="['w-3 h-3 rounded-full mx-1', activeTestimonial === index ? 'bg-accent-500' : 'bg-neutral-300']"
-                @click="activeTestimonial = index"></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Statistics Section -->
     <section class="section-padding bg-primary-900 text-neutral-cream">
@@ -232,7 +153,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           <div v-for="(stat, index) in stats" :key="index">
             <div class="text-5xl font-bold text-accent-300 mb-2">{{ stat.value }}</div>
-            <p class="text-lg">{{ stat.label }}</p>
+            <p class="text-lg text-white">{{ stat.label }}</p>
           </div>
         </div>
       </div>
@@ -281,14 +202,14 @@
 
     <!-- Contact Form Section -->
     <section class="section-padding">
-      <div class="container-site">
-        <div class="max-w-form mx-auto">
+      <div class="">
+        <div class="">
           <div class="text-center mb-8">
             <h2>Get in Touch</h2>
             <p>Have questions about our Shopify services? Fill out the form below.</p>
           </div>
 
-          <div class="card">
+          <div class="">
             <div class="card-body">
               <!-- Using the imported ContactForm component -->
               <ContactForm :services="serviceOptions" />

@@ -2,7 +2,7 @@
   <section id="audit" class="py-16 bg-primary-600 text-white">
     <div class="container-site">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6">Ready to Improve Your Online Presence?</h2>
+        <h2 class="text-3xl font-bold mb-6 text-white">Ready to Improve Your Online Presence?</h2>
         <p class="text-lg mb-8 text-primary-100">
           Discover how your website measures up against competitors and get actionable insights to boost your online
           visibility.
