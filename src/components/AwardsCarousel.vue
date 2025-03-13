@@ -6,10 +6,10 @@
             <div class="awards-carousel-container relative" ref="carouselContainer">
                 <div class="awards-track flex items-center transition-transform duration-1000 ease-linear"
                     ref="carouselTrack" :style="{ transform: `translateX(${-scrollPosition}px)` }">
-                    <div class="max-w-100">
+                    <div class="w-screen">
                         <a href="https://www.designrush.com/agency/ecommerce/shopify/ca/ottawa" target="_blank"
                             rel="noopener">
-                            <svg width="382" height="99" viewBox="0 0 382 99" fill="none"
+                            <svg class="" width="100%" height="99%" viewBox="0 0 382 99" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_430_24" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                                     width="382" height="99">
