@@ -8,8 +8,11 @@ import { createPinia } from "pinia";
 
 // Custom analytics tracking
 window.trackEvent = function (eventName, eventParams) {
-  // Google Analytics tracking
-  if (typeof window.gtag === "function") {
+  // Only track events in production
+  if (
+    process.env.NODE_ENV === "production" &&
+    typeof window.gtag === "function"
+  ) {
     window.gtag("event", eventName, eventParams);
     console.log("Analytics event tracked:", eventName, eventParams);
   } else {
@@ -21,8 +24,18 @@ import App from "./App.vue";
 import router from "./router";
 
 const app = createApp(App);
-app.use(Analytics);
-app.use(LuckyOrange);
+
+// Only use Analytics and LuckyOrange in production
+if (process.env.NODE_ENV === "production") {
+  app.use(Analytics);
+  app.use(LuckyOrange);
+  console.log(
+    "Analytics and LuckyOrange initialized in production environment"
+  );
+} else {
+  console.log("Analytics and LuckyOrange disabled in development environment");
+}
+
 // Create and register the head plugin
 const head = createHead();
 app.use(head);

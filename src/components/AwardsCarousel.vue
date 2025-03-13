@@ -6,7 +6,7 @@
             <div class="awards-carousel-container relative" ref="carouselContainer">
                 <div class="awards-track flex items-center transition-transform duration-1000 ease-linear"
                     ref="carouselTrack" :style="{ transform: `translateX(${-scrollPosition}px)` }">
-                    <div class="w-screen">
+                    <div class="w-screen md:max-w-[350px]">
                         <a href="https://www.designrush.com/agency/ecommerce/shopify/ca/ottawa" target="_blank"
                             rel="noopener">
                             <svg class="" width="100%" height="99%" viewBox="0 0 382 99" fill="none"
