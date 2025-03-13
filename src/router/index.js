@@ -18,6 +18,7 @@ import PolicyView from "@/views/PolicyView.vue";
 import NewClientForm from "@/components/NewClientForm.vue";
 import BlogsView from "@/views/BlogsView.vue";
 import BlogArticleView from "@/views/BlogArticleView.vue";
+import LandingSeoView from "@/components/LandingSeoView.vue";
 
 const routes = [
   {
@@ -175,6 +176,11 @@ const routes = [
         type: "website",
       },
     },
+  },
+  {
+    path: "/seo",
+    name: "LandingSeo",
+    component: LandingSeoView,
   },
   // Blog routes
   {

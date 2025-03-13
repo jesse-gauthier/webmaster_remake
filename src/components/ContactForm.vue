@@ -159,8 +159,8 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <section class="container-site section-padding bg-neutral-cream">
-    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="container-site section-padding bg-neutral-cream border-lg">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white shadow-lg rounded-xl overflow-hidden">
         <div class="md:flex">
           <!-- Contact Information Side -->
