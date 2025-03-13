@@ -5,7 +5,7 @@
       <div class="container-site">
         <div class="max-w-content mx-auto text-center">
           <h1 class="text-neutral-cream mb-6">Expert WordPress Development Services</h1>
-          <p class="text-xl mb-8">Custom WordPress solutions tailored to your business needs</p>
+          <p class="text-xl mb-8 text-white">Custom WordPress solutions tailored to your business needs</p>
           <div class="flex justify-center gap-4">
             <button class="btn-primary btn-lg">Get Started</button>
             <button
@@ -33,7 +33,7 @@
             <div class="card-body">
               <div class="flex items-center mb-4">
                 <div class="bg-primary-100 p-3 rounded-full mr-4">
-                  <component :is="service.icon" class="w-6 h-6 text-primary-600" />
+                  <i :class="service.icon"></i>
                 </div>
                 <h3 class="text-xl mb-0">{{ service.title }}</h3>
               </div>
@@ -208,14 +208,14 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import ContactForm from '@/components/ContactForm.vue';
 
 // Services data
 const services = ref([
   {
     title: 'Custom WordPress Development',
-    icon: 'div', // Replace with actual icon component
+    icon: 'fa-brands fa-wordpress',
     description: 'Tailored WordPress websites designed to meet your specific business requirements.',
     features: [
       'Custom theme development',
@@ -227,7 +227,7 @@ const services = ref([
   },
   {
     title: 'WordPress Maintenance',
-    icon: 'div', // Replace with actual icon component
+    icon: 'fa-solid fa-wrench',
     description: 'Keep your WordPress site secure, updated, and running at peak performance.',
     features: [
       'Regular WordPress updates',
@@ -239,7 +239,7 @@ const services = ref([
   },
   {
     title: 'WordPress Migration',
-    icon: 'div', // Replace with actual icon component
+    icon: 'fa-solid fa-arrow-right-arrow-left',
     description: 'Seamless migration of your existing website to WordPress or between hosts.',
     features: [
       'Zero downtime migration',

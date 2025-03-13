@@ -5,11 +5,40 @@
       <!-- Brand Logo/Name -->
       <Logo /> <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-nav-item" aria-label="Main navigation">
-        <router-link v-for="(item, index) in navItems" :key="index" :to="item.url"
-          class="font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 rounded-sm p-1"
-          :class="{ 'text-accent': item.active }" :aria-current="item.active ? 'page' : undefined">
-          {{ item.name }}
-        </router-link>
+        <!-- Parent Nav Items -->
+        <template v-for="(item, index) in navItems" :key="index">
+          <!-- Regular link if no children -->
+          <router-link v-if="!item.children" :to="item.url"
+            class="font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 rounded-sm p-1"
+            :class="{ 'text-accent': item.active }" :aria-current="item.active ? 'page' : undefined">
+            {{ item.name }}
+          </router-link>
+
+          <!-- Dropdown if has children -->
+          <div v-else class="relative group">
+            <!-- Make parent link clickable -->
+            <router-link :to="item.url"
+              class="font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 rounded-sm p-1 flex items-center"
+              :class="{ 'text-accent': item.active }" :aria-current="item.active ? 'page' : undefined"
+              aria-haspopup="true" aria-expanded="false">
+              {{ item.name }}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </router-link>
+            <div
+              class="absolute left-0 mt-1 w-48 bg-white shadow-lg rounded-md py-2 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200">
+              <router-link v-for="(child, childIndex) in item.children" :key="childIndex" :to="child.url"
+                class="block px-4 py-2 text-sm text-neutral-text hover:text-accent hover:bg-neutral-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500"
+                :class="{ 'text-accent bg-neutral-50': child.active }"
+                :aria-current="child.active ? 'page' : undefined">
+                {{ child.name }}
+              </router-link>
+            </div>
+          </div>
+        </template>
+
         <router-link to="/contact"
           class="btn-primary ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500">
           Get in Touch
@@ -37,11 +66,12 @@
         aria-modal="true" id="mobile-menu">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-neutral-900 bg-opacity-50 transition-opacity" @click="closeMenu"
-          aria-hidden="true"></div>
+          aria-hidden="true">
+        </div>
 
         <!-- Drawer -->
         <div
-          class="absolute right-0 top-0 w-64 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out"
+          class="absolute right-0 top-0 w-64 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto"
           role="document">
           <!-- Menu header -->
           <div class="p-5 border-b border-neutral-200">
@@ -60,12 +90,33 @@
 
           <!-- Mobile Nav Items -->
           <nav class="p-5 flex flex-col space-y-4" aria-label="Mobile navigation">
-            <router-link v-for="(item, index) in navItems" :key="index" :to="item.url"
-              class="py-2 px-3 font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 rounded-sm"
-              :class="{ 'text-accent': item.active, 'bg-neutral-50': item.active }"
-              :aria-current="item.active ? 'page' : undefined" @click="closeMenu" tabindex="isOpen ? 0 : -1">
-              {{ item.name }}
-            </router-link>
+            <template v-for="(item, index) in navItems" :key="index">
+              <!-- Parent item -->
+              <router-link v-if="!item.children" :to="item.url"
+                class="py-2 px-3 font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 rounded-sm"
+                :class="{ 'text-accent': item.active, 'bg-neutral-50': item.active }"
+                :aria-current="item.active ? 'page' : undefined" @click="closeMenu" tabindex="isOpen ? 0 : -1">
+                {{ item.name }}
+              </router-link>
+
+              <!-- Parent with children -->
+              <div v-else class="py-2">
+                <!-- Make parent clickable in mobile menu too -->
+                <router-link :to="item.url"
+                  class="px-3 py-2 font-medium text-neutral-text rounded-sm block transition-colors duration-200 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent-500"
+                  :class="{ 'text-accent': item.active, 'bg-neutral-50': item.active }"
+                  :aria-current="item.active ? 'page' : undefined" @click="closeMenu" tabindex="isOpen ? 0 : -1">
+                  {{ item.name }}
+                </router-link>
+                <!-- Child items -->
+                <router-link v-for="(child, childIndex) in item.children" :key="childIndex" :to="child.url"
+                  class="pl-6 py-2 px-3 block font-medium text-neutral-text hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 rounded-sm"
+                  :class="{ 'text-accent': child.active, 'bg-neutral-50': child.active }"
+                  :aria-current="child.active ? 'page' : undefined" @click="closeMenu" tabindex="isOpen ? 0 : -1">
+                  {{ child.name }}
+                </router-link>
+              </div>
+            </template>
             <router-link to="/contact"
               class="btn-primary text-center mt-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               @click="closeMenu" tabindex="isOpen ? 0 : -1">
@@ -95,24 +146,55 @@ let previousActiveElement = null
 // Get current route to determine active state
 const route = useRoute()
 
-// Navigation items - updated to use route paths
+// Navigation items - updated to include children
 const navItems = ref([
   { name: 'Home', url: '/', active: false },
-  { name: 'Services', url: '/services', active: false },
+  {
+    name: 'Services',
+    url: '/services',
+    active: false,
+    children: [
+      { name: 'WordPress', url: '/wordPress', active: false },
+      { name: 'Shopify', url: '/shopify', active: false },
+      { name: 'Monthly Maintenance', url: '/maintenance', active: false },
+      { name: 'Consultations', url: '/consultations', active: false }
+
+    ]
+  },
   { name: 'Portfolio', url: '/portfolio', active: false },
   { name: 'About', url: '/about', active: false },
-  { name: 'Blog', url: '/blog', active: false },
+  {
+    name: 'Blog',
+    url: '/blog',
+    active: false,
+  },
 ])
 
 // Update active state based on current route
 const updateActiveState = () => {
   navItems.value.forEach(item => {
-    // Mark as active if current path matches the navigation item url
-    // For home page, check for exact match to avoid matching every route
-    if (item.url === '/') {
-      item.active = route.path === '/'
+    // Handle items with children
+    if (item.children) {
+      // Check if any child is active
+      const hasActiveChild = item.children.some(child => {
+        // Update child active state
+        if (child.url === '/') {
+          child.active = route.path === '/'
+        } else {
+          child.active = route.path.startsWith(child.url)
+        }
+        return child.active
+      })
+
+      // Parent is active if any child is active or if the parent URL matches
+      item.active = hasActiveChild || (item.url === '/' ? route.path === '/' : route.path.startsWith(item.url))
     } else {
-      item.active = route.path.startsWith(item.url)
+      // For items without children, use original logic
+      if (item.url === '/') {
+        item.active = route.path === '/'
+      } else {
+        item.active = route.path.startsWith(item.url)
+      }
     }
   })
 }
