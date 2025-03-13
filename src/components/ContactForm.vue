@@ -160,7 +160,7 @@ const submitForm = async () => {
 
 <template>
   <section class="container-site section-padding bg-neutral-cream">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white shadow-lg rounded-xl overflow-hidden">
         <div class="md:flex">
           <!-- Contact Information Side -->
@@ -170,7 +170,7 @@ const submitForm = async () => {
               Have a project in mind? We're excited to hear about it. Fill out the form, and our team will get back to
               you within 24 hours.
             </p>
-            <div class="space-y-4">
+            <div class="space-y-4 mb-6">
               <div class="flex items-center">
                 <svg class="w-6 h-6 mr-3 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +180,23 @@ const submitForm = async () => {
                 </svg>
                 <span>Contact@ottawawebmasters.ca</span>
               </div>
+            </div>
 
+            <!-- Who We Are section -->
+            <div class="mt-6 border-t border-primary-dark pt-6 hidden md:block">
+              <h3 class="text-xl font-semibold mb-3 text-white">Who We Are</h3>
+              <p class="text-primary-light mb-3">
+                We are a dedicated team of web design and development specialists based in Ottawa, passionate about
+                creating exceptional websites for small businesses.
+              </p>
+              <p class="text-primary-light mb-3">
+                Our mission is simple: empower small businesses with quality digital solutions that drive real results.
+                This guiding principle shapes every service we offer and every project we undertake.
+              </p>
+              <p class="text-primary-light">
+                With our combined expertise and client-focused approach, we deliver websites that not only look great
+                but also perform exceptionally well in today's competitive digital landscape.
+              </p>
             </div>
           </div>
 

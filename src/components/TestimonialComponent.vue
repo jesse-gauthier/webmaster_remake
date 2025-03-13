@@ -1,6 +1,6 @@
 <template>
-  <section class="container-site bg-neutral-cream">
-    <div class="mt-20  p-8 rounded-lg">
+  <section class="container-site bg-neutral-cream  rounded-lg">
+    <div class="mt-20  p-8">
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/3 flex justify-center">
           <div class="w-52 h-52 rounded-full overflow-hidden border-4 border-white shadow-md">
