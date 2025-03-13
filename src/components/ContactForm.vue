@@ -141,6 +141,11 @@ const submitForm = async () => {
       // Success handling
       submissionSuccess.value = true
 
+      // Google Ads conversion tracking
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', { 'send_to': 'AW-16921221005/xuxtCL2JpKoaEI2v1YQ_' });
+      }
+
       // Reset form
       Object.keys(formData).forEach(key => {
         formData[key] = ''

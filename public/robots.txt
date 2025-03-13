@@ -1,0 +1,29 @@
+# robots.txt for WebMaster site
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /portfolio
+Allow: /contact
+Allow: /about
+Allow: /wordpress
+Allow: /shopify
+Allow: /maintenance
+Allow: /consultations
+Allow: /policies
+Allow: /new-client-form
+Allow: /seo
+Allow: /blog
+Allow: /blog/
+
+# Disallow form processing URLs and admin areas (assuming they exist)
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+Disallow: /form-submission-success
+Disallow: /form-submission-error
+
+# Disallow the 404 page
+Disallow: /404
+
+# Sitemap location
+Sitemap: https://ottawawebmasters.ca/sitemap.xml
