@@ -409,9 +409,9 @@ const currentPricing = computed(() => {
                   </li>
                 </ul>
 
-                <button class="btn-primary w-full mt-auto">
-                  {{ pricingType === 'development' ? 'Start Development' : 'Subscribe' }}
-                </button>
+                <router-link to="/new-client-form" class="btn-primary w-full mt-auto">
+                  {{ pricingType === 'development' ? 'Start Project' : 'Subscribe' }}
+                </router-link>
               </div>
             </div>
           </div>

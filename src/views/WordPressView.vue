@@ -44,7 +44,7 @@
                   <span>{{ feature }}</span>
                 </li>
               </ul>
-              <button class="btn-outline w-full">Learn More</button>
+
             </div>
           </div>
         </div>
@@ -141,9 +141,9 @@
                   <span>{{ feature }}</span>
                 </li>
               </ul>
-              <button :class="[index === 1 ? 'btn-primary' : 'btn-outline', 'w-full']">
+              <router-link to="/new-client-form" :class="[index === 1 ? 'btn-primary' : 'btn-outline', 'w-full']">
                 Get Started
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
