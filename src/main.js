@@ -1,4 +1,5 @@
 import "./assets/main.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import Analytics from "./plugins/analytics";
 import LuckyOrange from "./plugins/luckyOrange";
 

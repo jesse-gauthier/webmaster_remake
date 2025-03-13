@@ -26,7 +26,9 @@
                 </div>
             </div>
         </section>
-
+        <section class="my-3">
+            <TestimonialComponent />
+        </section>
         <!-- Services Section -->
         <section class="py-16 bg-white section-padding">
             <div class="container-site">
@@ -100,16 +102,14 @@
                 </div>
             </div>
         </section>
-        <section class="my-3">
-            <ContactForm />
-        </section>
         <!-- Why Choose Us Section -->
-        <section class="py-16 bg-neutral-50 section-padding">
+        <section class="my-3 bg-neutral-50 section-padding">
             <div class="container-site">
                 <div class="text-center mb-12">
                     <h2>Why Choose Our SEO Services</h2>
                     <p class="max-w-2xl mx-auto">
-                        We combine data-driven strategies with years of SEO expertise to deliver measurable results
+                        We combine data-driven strategies with years of SEO expertise to deliver measurable
+                        results
                         for
                         your business.
                     </p>
@@ -149,16 +149,19 @@
                         </div>
                         <h3 class="text-xl mb-2">Transparent Reporting</h3>
                         <p>
-                            Receive clear monthly reports showing your ranking improvements, traffic growth, and ROI
+                            Receive clear monthly reports showing your ranking improvements, traffic growth, and
+                            ROI
                             from our SEO efforts.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-
+        <section class="my-3">
+            <ContactForm />
+        </section>
         <!-- FAQ Section -->
-        <section class="py-16 bg-neutral-50 section-padding">
+        <section class="mt-3 bg-neutral-50 section-padding">
             <div class="container-site">
                 <div class="text-center mb-12">
                     <h2>Frequently Asked Questions About SEO</h2>
@@ -187,9 +190,11 @@
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h3 class="text-xl mb-3">What makes your SEO services different?</h3>
                             <p>
-                                We focus on sustainable, white-hat SEO strategies that build long-term value. Our
+                                We focus on sustainable, white-hat SEO strategies that build long-term value.
+                                Our
                                 approach combines technical expertise, quality content creation, and data-driven
-                                decision making. We prioritize transparency with detailed monthly reporting and a
+                                decision making. We prioritize transparency with detailed monthly reporting and
+                                a
                                 clear
                                 ROI focus.
                             </p>
@@ -201,8 +206,10 @@
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h3 class="text-xl mb-3">Do you guarantee first-page rankings?</h3>
                             <p>
-                                No reputable SEO agency can guarantee specific rankings, as search algorithms are
-                                complex and constantly evolving. However, we have a proven track record of improving
+                                No reputable SEO agency can guarantee specific rankings, as search algorithms
+                                are
+                                complex and constantly evolving. However, we have a proven track record of
+                                improving
                                 rankings for our clients. We focus on measurable metrics like organic traffic
                                 growth,
                                 lead generation, and revenue increase.
@@ -232,6 +239,7 @@
 import { ref, onMounted } from 'vue';
 import { useSeo } from '@/composables/useSeo';
 import ContactForm from '@/components/ContactForm.vue';
+import TestimonialComponent from './TestimonialComponent.vue';
 
 // SEO configuration
 onMounted(() => {
