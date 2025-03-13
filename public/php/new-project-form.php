@@ -134,19 +134,19 @@ if (!empty($form_data['designPreferences']) || !empty($form_data['competitorWebs
     $message .= "
         <div class='section'>
             <h2>Additional Information</h2>";
-    
+
     if (!empty($form_data['designPreferences'])) {
         $message .= "<p><strong>Design Preferences:</strong><br>" . nl2br(htmlspecialchars($form_data['designPreferences'])) . "</p>";
     }
-    
+
     if (!empty($form_data['competitorWebsites'])) {
         $message .= "<p><strong>Competitor/Inspirational Websites:</strong><br>" . nl2br(htmlspecialchars($form_data['competitorWebsites'])) . "</p>";
     }
-    
+
     if (!empty($form_data['additionalInfo'])) {
         $message .= "<p><strong>Additional Information:</strong><br>" . nl2br(htmlspecialchars($form_data['additionalInfo'])) . "</p>";
     }
-    
+
     $message .= "
         </div>";
 }
