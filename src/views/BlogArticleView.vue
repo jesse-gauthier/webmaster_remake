@@ -45,10 +45,30 @@
                 </div>
             </header>
 
-            <!-- Featured image -->
-            <div v-if="article.featuredImage" class="mb-8">
-                <img :src="article.featuredImage" :alt="article.title"
-                    class="w-full max-h-96 object-cover rounded-lg shadow-md">
+            <!-- Featured image or placeholder -->
+            <div class="mb-8">
+                <div v-if="article.featuredImage" class="rounded-lg shadow-md overflow-hidden">
+                    <img :src="article.featuredImage" :alt="article.title" class="w-full max-h-96 object-cover">
+                </div>
+                <div v-else
+                    class="w-full h-48 md:h-64 rounded-lg shadow-md overflow-hidden flex items-center justify-center"
+                    :style="getPlaceholderStyle(article.category)">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="10" y1="9" x2="8" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-medium px-6">{{ article.category }}</h3>
+                    </div>
+                </div>
             </div>
 
             <!-- Article content -->
@@ -69,7 +89,20 @@
             <div v-if="relatedArticles.length > 0" class="border-t border-neutral-100 pt-8 mt-8">
                 <h3 class="mb-6">You might also like</h3>
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    <div v-for="relatedArticle in relatedArticles" :key="relatedArticle.id" class="card card-hover">
+                    <div v-for="relatedArticle in relatedArticles" :key="relatedArticle.id"
+                        class="card card-hover overflow-hidden">
+                        <!-- Mini featured image or placeholder -->
+                        <div class="h-24 relative">
+                            <img v-if="relatedArticle.featuredImage" :src="relatedArticle.featuredImage"
+                                :alt="relatedArticle.title" class="w-full h-full object-cover">
+                            <div v-else class="w-full h-full flex items-center justify-center"
+                                :style="getPlaceholderStyle(relatedArticle.category)">
+                                <span class="badge badge-light text-white bg-white bg-opacity-20">
+                                    {{ relatedArticle.category }}
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="card-body">
                             <h4 class="mb-2">
                                 <router-link :to="`/blog/${relatedArticle.slug}`"
@@ -77,8 +110,7 @@
                                     {{ relatedArticle.title }}
                                 </router-link>
                             </h4>
-                            <p class="text-sm text-neutral-600">{{ formatDate(relatedArticle.date) }} • {{
-                                relatedArticle.category }}</p>
+                            <p class="text-sm text-neutral-600">{{ formatDate(relatedArticle.date) }}</p>
                         </div>
                     </div>
                 </div>
@@ -91,6 +123,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import blogData from '@/data/blogs.json';
+import { getGradientForCategory } from '@/utils/gradientUtils';
 
 const route = useRoute();
 const slug = computed(() => route.params.slug);
@@ -148,6 +181,11 @@ const relatedArticles = computed(() => {
 const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
+// Use the utility function for consistent gradients
+const getPlaceholderStyle = (category) => {
+    return getGradientForCategory(category);
 };
 </script>
 
