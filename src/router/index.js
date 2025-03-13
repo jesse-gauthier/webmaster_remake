@@ -18,7 +18,7 @@ import PolicyView from "@/views/PolicyView.vue";
 import NewClientForm from "@/components/NewClientForm.vue";
 import BlogsView from "@/views/BlogsView.vue";
 import BlogArticleView from "@/views/BlogArticleView.vue";
-import LandingSeoView from "@/components/LandingSeoView.vue";
+import LandingSeoView from "@/views/LandingSeoView.vue";
 
 const routes = [
   {
@@ -181,6 +181,15 @@ const routes = [
     path: "/seo",
     name: "LandingSeo",
     component: LandingSeoView,
+    meta: {
+      seo: {
+        title: "SEO Services & Optimization | WebMaster",
+        description:
+          "Professional search engine optimization services to improve your website's visibility and rankings in search results.",
+        image: seoConfig.defaultImage,
+        type: "service",
+      },
+    },
   },
   // Blog routes
   {

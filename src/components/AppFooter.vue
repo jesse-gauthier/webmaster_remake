@@ -8,7 +8,8 @@ const footerLinks = {
     { name: 'WordPress', url: '/wordpress' },
     { name: 'Shopify', url: '/shopify' },
     { name: 'Monthly Maintenance', url: '/maintenance' },
-    { name: 'Consultations', url: '/consultations' }
+    { name: 'Consultations', url: '/consultations' },
+    { name: 'Search Engine Optimization', url: '/seo' }
   ],
   Company: [
     { name: 'About Us', url: '/about' },

@@ -237,31 +237,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useSeo } from '@/composables/useSeo';
 import ContactForm from '@/components/ContactForm.vue';
-import TestimonialComponent from './TestimonialComponent.vue';
+import TestimonialComponent from '@/components/TestimonialComponent.vue';
 
-// SEO configuration
-onMounted(() => {
-    useSeo({
-        title: 'Professional Web Development Services | WebMaster',
-        description: 'Custom websites, e-commerce solutions, and ongoing maintenance to help your business thrive online. Get a free consultation today.',
-        url: window.location.pathname,
-        type: 'website',
-        image: '/images/social-share.jpg',
-        structuredData: {
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'WebMaster Web Development',
-            url: window.location.origin,
-            potentialAction: {
-                '@type': 'SearchAction',
-                target: `${window.location.origin}/search?q={search_term_string}`,
-                'query-input': 'required name=search_term_string'
-            }
-        }
-    });
-});
 
 // Track page view
 onMounted(() => {
@@ -274,7 +252,3 @@ onMounted(() => {
     }
 });
 </script>
-
-<style scoped>
-/* Add any specific styles here if needed */
-</style>
