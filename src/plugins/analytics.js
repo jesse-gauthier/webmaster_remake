@@ -15,7 +15,10 @@ export default {
       window.dataLayer.push(arguments);
     }
     gtag("js", new Date());
+
+    // Configure both Google Ads and Google Analytics tags
     gtag("config", "AW-16921221005");
+    gtag("config", "G-58RRPDKZYB");
 
     // Make gtag available throughout the app
     app.config.globalProperties.$gtag = gtag;
