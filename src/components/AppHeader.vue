@@ -3,7 +3,8 @@
   <header class="bg-white shadow-md fixed w-full top-0 z-sticky">
     <div class="container-site h-header flex items-center justify-between">
       <!-- Brand Logo/Name -->
-      <Logo /> <!-- Desktop Navigation -->
+      <Logo />
+      <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-nav-item" aria-label="Main navigation">
         <!-- Parent Nav Items -->
         <template v-for="(item, index) in navItems" :key="index">
@@ -40,7 +41,7 @@
         </template>
 
         <router-link to="/contact"
-          class="btn-primary ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500">
+          class="btn-primary ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 hover:text-white">
           Get in Touch
         </router-link>
       </nav>
@@ -136,7 +137,7 @@
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 
-import Logo from '@/assets/Logo.vue'
+import Logo from '@/assets/logo.vue'
 
 // Menu state
 const isOpen = ref(false)
