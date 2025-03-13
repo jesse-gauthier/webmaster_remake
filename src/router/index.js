@@ -16,6 +16,8 @@ import MaintenanceView from "@/views/MaintenanceView.vue";
 import ConsultationsView from "@/views/ConsultationsView.vue";
 import PolicyView from "@/views/PolicyView.vue";
 import NewClientForm from "@/components/NewClientForm.vue";
+import BlogsView from "@/views/BlogsView.vue";
+import BlogArticleView from "@/views/BlogArticleView.vue";
 
 const routes = [
   {
@@ -174,6 +176,32 @@ const routes = [
       },
     },
   },
+  // Blog routes
+  {
+    path: "/blog",
+    name: "Blog",
+    component: BlogsView,
+    meta: {
+      seo: {
+        title: "Web Development Blog | WebMaster",
+        description:
+          "Insights, tutorials, and expert advice on web development, e-commerce, and digital strategy.",
+        image: seoConfig.defaultImage,
+        type: "website",
+      },
+    },
+  },
+  {
+    path: "/blog/:slug",
+    name: "BlogArticle",
+    component: BlogArticleView,
+    props: true,
+    meta: {
+      seo: {
+        type: "article",
+      },
+    },
+  },
   // 404 page
   {
     path: "/:pathMatch(.*)*",
@@ -202,24 +230,62 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // Check if the route has SEO meta
   if (to.meta.seo) {
-    const seoData = to.meta.seo;
+    // For dynamic blog articles, fetch SEO data from the article content
+    if (to.name === "BlogArticle") {
+      import("@/data/blogs.json").then((module) => {
+        const blogs = module.default;
+        const slug = to.params.slug;
+        const article = blogs.find((blog) => blog.slug === slug);
 
-    // Apply SEO data
-    useSeo({
-      title: seoData.title,
-      description: seoData.description,
-      url: to.path,
-      type: seoData.type || "website",
-      image: seoData.image,
-      structuredData: seoData.structuredData,
-    });
+        if (article) {
+          const seoData = {
+            ...to.meta.seo,
+            title: `${article.title} | WebMaster Blog`,
+            description: article.excerpt,
+            image: article.featuredImage || seoConfig.defaultImage,
+          };
 
-    // Handle noindex pages
-    if (seoData.noindex) {
-      const metaTag = document.createElement("meta");
-      metaTag.setAttribute("name", "robots");
-      metaTag.setAttribute("content", "noindex, nofollow");
-      document.head.appendChild(metaTag);
+          // Apply SEO data
+          useSeo({
+            title: seoData.title,
+            description: seoData.description,
+            url: to.path,
+            type: seoData.type,
+            image: seoData.image,
+            structuredData: {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: article.title,
+              image: article.featuredImage,
+              datePublished: article.date,
+              author: {
+                "@type": "Person",
+                name: article.author,
+              },
+            },
+          });
+        }
+      });
+    } else {
+      const seoData = to.meta.seo;
+
+      // Apply SEO data
+      useSeo({
+        title: seoData.title,
+        description: seoData.description,
+        url: to.path,
+        type: seoData.type || "website",
+        image: seoData.image,
+        structuredData: seoData.structuredData,
+      });
+
+      // Handle noindex pages
+      if (seoData.noindex) {
+        const metaTag = document.createElement("meta");
+        metaTag.setAttribute("name", "robots");
+        metaTag.setAttribute("content", "noindex, nofollow");
+        document.head.appendChild(metaTag);
+      }
     }
   }
 
