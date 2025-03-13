@@ -129,7 +129,7 @@ const submitForm = async () => {
 
   try {
     // Actual API call to PHP endpoint
-    const response = await fetch('/contactForm.php', {
+    const response = await fetch('/php/contactForm.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
