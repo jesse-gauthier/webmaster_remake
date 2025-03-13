@@ -101,6 +101,7 @@ const navItems = ref([
   { name: 'Services', url: '/services', active: false },
   { name: 'Portfolio', url: '/portfolio', active: false },
   { name: 'About', url: '/about', active: false },
+  { name: 'Blog', url: '/blog', active: false },
 ])
 
 // Update active state based on current route
