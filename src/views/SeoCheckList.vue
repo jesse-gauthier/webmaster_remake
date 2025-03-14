@@ -199,7 +199,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
 const isDevelopment = ref(process.env.NODE_ENV === 'development');
 
 // Modal state
-const showConsultModal = ref(true);
+const showConsultModal = ref(false);
 const modalHasBeenShown = ref(false);
 const checklistInteractions = ref(0);
 let pageTimer = null;
