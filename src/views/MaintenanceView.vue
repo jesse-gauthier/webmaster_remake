@@ -6,7 +6,7 @@
         <h1 class="text-3xl md:text-4xl font-bold mb-6">Monthly Website Maintenance</h1>
         <p class="text-lg mb-8">Keep your website running smoothly with our professional maintenance services.</p>
         <div class="flex justify-center">
-          <a href="#pricing" class="btn-primary">View Plans</a>
+          <a href="#pricing" class="btn-primary hover:text-white">View Plans</a>
         </div>
       </div>
     </section>

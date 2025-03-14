@@ -30,7 +30,7 @@
                 With our combined expertise and client-focused approach, we deliver websites that not only look great
                 but also perform exceptionally well in today's competitive digital landscape.
               </p>
-              <a href="#audit" class="btn-primary">Get Your Free SEO Audit</a>
+              <a href="#audit" class="btn-primary hover:text-white">Get Your Free SEO Audit</a>
             </div>
             <div class="bg-primary-100 rounded-lg p-6">
               <!-- Team image placeholder -->
@@ -108,7 +108,7 @@
                 Whatever your digital vision, we have the expertise to bring it to life and help your business thrive
                 online.
               </p>
-              <a href="#audit" class="btn-primary">Get Your Free SEO Audit</a>
+              <a href="#audit" class="btn-primary hover:text-white">Get Your Free SEO Audit</a>
             </div>
           </div>
         </div>

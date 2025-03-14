@@ -13,7 +13,7 @@
               to help your business thrive online.
             </p>
             <div class="flex flex-wrap gap-4">
-              <router-link to="/contact" class="btn-primary">
+              <router-link to="/contact" class="btn-primary hover:text-white">
                 Request a Consultation
               </router-link>
               <router-link to="/portfolio" class="btn-outline">
