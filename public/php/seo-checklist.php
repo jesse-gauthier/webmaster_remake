@@ -8,6 +8,10 @@
  * @package OttawaWebMasters
  */
 
+// Set error handling to ensure clean JSON responses
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
+
 // Set headers for JSON response
 header('Content-Type: application/json');
 
@@ -18,97 +22,105 @@ $response = [
     'data' => []
 ];
 
-// Verify this is a POST request
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $response['message'] = 'Invalid request method.';
-    echo json_encode($response);
-    exit;
+// Simple sanitize function to replace WordPress sanitize_text_field
+function simple_sanitize($input)
+{
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
 }
 
-// Get POST data
-$postData = json_decode(file_get_contents('php://input'), true);
+try {
+    // Verify this is a POST request
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request method.');
+    }
 
-// If no data was received or parsing failed
-if (empty($postData)) {
-    $postData = $_POST;
-}
+    // Get POST data
+    $postData = json_decode(file_get_contents('php://input'), true);
 
-// Validate email
-$email = isset($postData['email']) ? filter_var(trim($postData['email']), FILTER_VALIDATE_EMAIL) : false;
+    // If no data was received or parsing failed
+    if (empty($postData)) {
+        $postData = $_POST;
+    }
 
-if (!$email) {
-    $response['message'] = 'Please provide a valid email address.';
-    echo json_encode($response);
-    exit;
-}
+    // Validate email
+    $email = isset($postData['email']) ? filter_var(trim($postData['email']), FILTER_VALIDATE_EMAIL) : false;
 
-// Validate agreement to terms
-$agreeToTerms = isset($postData['agreeToTerms']) ? (bool) $postData['agreeToTerms'] : false;
+    if (!$email) {
+        throw new Exception('Please provide a valid email address.');
+    }
 
-if (!$agreeToTerms) {
-    $response['message'] = 'You must agree to the terms to proceed.';
-    echo json_encode($response);
-    exit;
-}
+    // Validate agreement to terms
+    $agreeToTerms = isset($postData['agreeToTerms']) ? (bool) $postData['agreeToTerms'] : false;
 
-// Get additional data if available
-$source = isset($postData['source']) ? $postData['source'] : 'SEO Checklist Page';
-$timestamp = date('Y-m-d H:i:s');
-$ipAddress = $_SERVER['REMOTE_ADDR'];
-$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'Unknown';
+    if (!$agreeToTerms) {
+        throw new Exception('You must agree to the terms to proceed.');
+    }
 
-// Prepare email to admin
-$adminEmail = 'jesse@ottawawebmasters.ca';
-$subject = 'New SEO Checklist Subscription';
-$headers = [
-    'Content-Type: text/html; charset=UTF-8',
-    'From: Ottawa Web Masters <no-reply@ottawawebmasters.com>',
-    'Reply-To: ' . $email
-];
+    // Get additional data if available - use our custom sanitize function
+    $source = isset($postData['source']) ? simple_sanitize($postData['source']) : 'SEO Checklist Page';
+    $timestamp = date('Y-m-d H:i:s');
+    $ipAddress = $_SERVER['REMOTE_ADDR'];
+    $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? simple_sanitize($_SERVER['HTTP_USER_AGENT']) : 'Unknown';
 
-$message = '
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>New SEO Checklist Subscription</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2E5944; }
-        .details { background-color: #f5f5f5; padding: 15px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>New SEO Checklist Subscription</h1>
-        <p>A new user has subscribed to access the SEO checklist:</p>
-        
-        <div class="details">
-            <p><strong>Email:</strong> ' . htmlspecialchars($email) . '</p>
-            <p><strong>Source:</strong> ' . htmlspecialchars($source) . '</p>
-            <p><strong>Date:</strong> ' . $timestamp . '</p>
-            <p><strong>IP Address:</strong> ' . $ipAddress . '</p>
-            <p><strong>User Agent:</strong> ' . htmlspecialchars($userAgent) . '</p>
+    // Prepare email to admin
+    $adminEmail = 'jesse@ottawawebmasters.ca';
+    $subject = 'New SEO Checklist Subscription';
+    $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Ottawa Web Masters <no-reply@ottawawebmasters.com>',
+        'Reply-To: ' . $email
+    ];
+
+    $message = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>New SEO Checklist Subscription</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            h1 { color: #2E5944; }
+            .details { background-color: #f5f5f5; padding: 15px; border-radius: 5px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>New SEO Checklist Subscription</h1>
+            <p>A new user has subscribed to access the SEO checklist:</p>
+            
+            <div class="details">
+                <p><strong>Email:</strong> ' . htmlspecialchars($email) . '</p>
+                <p><strong>Source:</strong> ' . htmlspecialchars($source) . '</p>
+                <p><strong>Date:</strong> ' . $timestamp . '</p>
+                <p><strong>IP Address:</strong> ' . $ipAddress . '</p>
+                <p><strong>User Agent:</strong> ' . htmlspecialchars($userAgent) . '</p>
+            </div>
         </div>
-    </div>
-</body>
-</html>
-';
+    </body>
+    </html>
+    ';
 
-// Send email to admin
-$adminEmailSent = mail($adminEmail, $subject, $message, implode("\r\n", $headers));
+    // Send email to admin
+    $adminEmailSent = @mail($adminEmail, $subject, $message, implode("\r\n", $headers));
 
-// Prepare response
-if ($adminEmailSent) {
-    $response['success'] = true;
-    $response['message'] = 'Thank you! Your email has been submitted successfully.';
-} else {
-    $response['message'] = 'There was an error processing your request. Please try again later.';
-    error_log('Email submission failed for: ' . $email);
+    // Prepare response
+    if ($adminEmailSent) {
+        $response['success'] = true;
+        $response['message'] = 'Thank you! Your email has been submitted successfully.';
+    } else {
+        throw new Exception('Email delivery failed. Please try again later.');
+    }
+} catch (Exception $e) {
+    // Log the error for server-side debugging
+    error_log('SEO Checklist Error: ' . $e->getMessage() . ' for email: ' . (isset($email) ? $email : 'not provided'));
+
+    // Set error message in response
+    $response['success'] = false;
+    $response['message'] = $e->getMessage();
 }
 
-// Return JSON response
+// Return JSON response - ensure no whitespace or other output before or after
 echo json_encode($response);
 exit;
 ?>
