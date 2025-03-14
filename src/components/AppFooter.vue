@@ -15,7 +15,8 @@ const footerLinks = {
     { name: 'About Us', url: '/about' },
     { name: 'Contact Us', url: '/contact' },
     { name: 'New Client Form', url: '/new-client-form' },
-    { name: 'Portfolio', url: '/portfolio' }
+    { name: 'Portfolio', url: '/portfolio' },
+    { name: 'Free SEO checklist', url: '/seo-checklist' }
   ],
   Legal: [
     { name: 'Policies', url: '/policies' },
