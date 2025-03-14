@@ -2,13 +2,12 @@
     <section class="bg-neutral-cream py-16">
         <div class="container-site">
             <h2 class="text-center mb-12">Our Awards & Recognition</h2>
-
             <div class="awards-carousel-container relative" ref="carouselContainer">
                 <div class="awards-track flex items-center transition-transform duration-1000 ease-linear"
                     ref="carouselTrack" :style="{ transform: `translateX(${-scrollPosition}px)` }">
                     <div class="w-screen md:max-w-[350px]">
                         <a href="https://www.designrush.com/agency/ecommerce/shopify/ca/ottawa" target="_blank"
-                            rel="noopener">
+                            alt="Ottawa Shopify agency" rel="noopener">
                             <svg class="" width="100%" height="99%" viewBox="0 0 382 99" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_430_24" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"

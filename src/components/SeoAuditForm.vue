@@ -89,7 +89,7 @@
           <!-- Additional Info -->
           <p class="text-xs text-neutral-500 text-center mt-4">
             Have questions? Contact us at <a href="mailto:support@webmaster.com"
-              class="text-accent-600 hover:underline">support@webmaster.com</a>
+              class="text-accent-600 hover:underline">contact@ottawawebmasters.com</a>
           </p>
         </div>
       </div>
