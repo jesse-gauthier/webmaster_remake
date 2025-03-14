@@ -184,7 +184,7 @@
                     consultation with us today.
                 </p>
                 <div class="flex justify-center">
-                    <router-link to="/contact" @click="closeModal" class="btn-primary px-8 py-3">
+                    <router-link to="/contact" @click="closeModal" class="btn-primary px-8 py-3 hover:text-white">
                         Book Your Free Consultation
                     </router-link>
                 </div>
@@ -195,15 +195,11 @@
 
 <script setup>
 import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
 // Add development mode detection
 const isDevelopment = ref(process.env.NODE_ENV === 'development');
 
 // Modal state
-const showConsultModal = ref(false);
+const showConsultModal = ref(true);
 const modalHasBeenShown = ref(false);
 const checklistInteractions = ref(0);
 let pageTimer = null;
