@@ -19,6 +19,7 @@ import NewClientForm from "@/components/NewClientForm.vue";
 import BlogsView from "@/views/BlogsView.vue";
 import BlogArticleView from "@/views/BlogArticleView.vue";
 import LandingSeoView from "@/views/LandingSeoView.vue";
+import SeoCheckList from "@/views/SeoCheckList.vue";
 
 const routes = [
   {
@@ -188,6 +189,20 @@ const routes = [
           "Professional search engine optimization services to improve your website's visibility and rankings in search results.",
         image: seoConfig.defaultImage,
         type: "service",
+      },
+    }
+  },
+  {
+    path: "/seo-checklist",
+    name: "SeoCheckList",
+    component: SeoCheckList,
+    meta: {
+      seo: {
+        title: "SEO Checklist | OttawaWebMasters",
+        description:
+          "Use this SEO checklist to optimize your website for search engines and improve your online visibility.",
+        image: seoConfig.defaultImage,
+        type: "website",
       },
     },
   },
