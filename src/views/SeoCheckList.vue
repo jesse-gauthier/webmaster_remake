@@ -412,25 +412,35 @@ const validateEmail = (email) => {
     return re.test(String(email).toLowerCase());
 };
 
-const submitForm = async () => {
+// Validate form inputs and return whether the form is valid
+const validateForm = () => {
     // Reset errors
     emailError.value = '';
     termsError.value = false;
 
+    let isValid = true;
+
     // Validate email
     if (!email.value.trim()) {
         emailError.value = 'Email address is required';
-        return;
-    }
-
-    if (!validateEmail(email.value)) {
+        isValid = false;
+    } else if (!validateEmail(email.value)) {
         emailError.value = 'Please enter a valid email address';
-        return;
+        isValid = false;
     }
 
     // Validate terms agreement
     if (!agreeToTerms.value) {
         termsError.value = true;
+        isValid = false;
+    }
+
+    return isValid;
+};
+
+const submitForm = async () => {
+    // First validate the form
+    if (!validateForm()) {
         return;
     }
 
@@ -458,31 +468,41 @@ const submitForm = async () => {
             throw new Error(result.message || 'Submission failed');
         }
 
-        // Track lead capture event
-        if (process.env.NODE_ENV === 'production' && typeof window.trackEvent === 'function') {
-            window.trackEvent('lead_capture', {
-                'form_type': 'seo_checklist_access',
-                'source': 'checklist_page'
-            });
-        }
-
-        // Update state to show success message
-        isSubmitting.value = false;
-        isSubmitted.value = true;
-
-        // Store email in localStorage for persistence
-        localStorage.setItem('seo_checklist_email', email.value);
-        localStorage.setItem('seo_checklist_access', 'true');
-
-        // Start progress animation
-        startProgressAnimation();
-
+        // Handle successful submission
+        handleSuccessfulSubmission();
     } catch (error) {
-        console.error('Form submission error:', error);
-        isSubmitting.value = false;
-        emailError.value = error.message || 'Something went wrong. Please try again.';
+        // Handle submission error
+        handleSubmissionError(error);
     }
 };
+
+const handleSuccessfulSubmission = () => {
+    // Track lead capture event
+    if (process.env.NODE_ENV === 'production' && typeof window.trackEvent === 'function') {
+        window.trackEvent('lead_capture', {
+            'form_type': 'seo_checklist_access',
+            'source': 'checklist_page'
+        });
+    }
+
+    // Update state to show success message
+    isSubmitting.value = false;
+    isSubmitted.value = true;
+
+    // Store email in localStorage for persistence
+    localStorage.setItem('seo_checklist_email', email.value);
+    localStorage.setItem('seo_checklist_access', 'true');
+
+    // Start progress animation
+    startProgressAnimation();
+};
+
+const handleSubmissionError = (error) => {
+    console.error('Form submission error:', error);
+    isSubmitting.value = false;
+    emailError.value = error.message || 'Something went wrong. Please try again.';
+};
+
 // Progress animation
 const startProgressAnimation = () => {
     const showDelay = 2000; // 2 seconds
