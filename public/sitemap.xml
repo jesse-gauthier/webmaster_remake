@@ -63,6 +63,12 @@
         <priority>0.8</priority>
     </url>
 
+    <url>
+        <loc>https://ottawawebmasters.ca/seo-checklist</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- New client form -->
     <url>
         <loc>https://ottawawebmasters.ca/new-client-form</loc>

@@ -15,15 +15,13 @@ export const seoConfig = {
     "Professional web development agency specializing in Vue.js, React, and modern web solutions.",
 
   // Social media
-  socialImage: "/images/social-card.jpg",
-  twitterHandle: "@youragency",
-  twitterCardType: "summary_large_image",
+  socialImage: "/images/logo_icon.png",
 
   // Organization schema
   organization: {
     name: "Ottawa Webmasters",
     url: "https://www.ottawawebmasters.ca",
-    logo: "https://youragency.com/images/logo.png",
+    logo: "https://www.ottawawebmasters.ca/images/logo_icon.png",
   },
 
   // Key pages for sitemap priority

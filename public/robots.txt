@@ -12,6 +12,7 @@ Allow: /consultations
 Allow: /policies
 Allow: /new-client-form
 Allow: /seo
+Allow: /seo-checklist
 Allow: /blog
 Allow: /blog/
 

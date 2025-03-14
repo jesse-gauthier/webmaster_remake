@@ -1,7 +1,7 @@
 // src/composables/useSeo.js
 
-import { useHead } from '@vueuse/head'
-import { seoConfig, getOrganizationSchema } from '@/config/seo.config'
+import { useHead } from "@vueuse/head";
+import { seoConfig, getOrganizationSchema } from "@/config/seo.config";
 
 /**
  * Reusable SEO composable for managing head/meta tags
@@ -23,7 +23,7 @@ export function useSeo(options) {
     siteUrl: seoConfig.siteUrl,
     defaultImage: seoConfig.socialImage,
     twitterHandle: seoConfig.twitterHandle,
-  }
+  };
 
   // Merge options with defaults
   const seo = {
@@ -32,62 +32,63 @@ export function useSeo(options) {
       : `${siteConfig.siteName} - Web Development Agency`,
     description:
       options.description ||
-      'Professional web development services specializing in Vue.js, React, and custom solutions.',
+      "Professional web development services specializing in Vue.js, React, and custom solutions.",
     image: options.image
       ? `${siteConfig.siteUrl}${options.image}`
       : `${siteConfig.siteUrl}${siteConfig.defaultImage}`,
-    url: options.url ? `${siteConfig.siteUrl}${options.url}` : siteConfig.siteUrl,
-    type: options.type || 'website',
+    url: options.url
+      ? `${siteConfig.siteUrl}${options.url}`
+      : siteConfig.siteUrl,
+    type: options.type || "website",
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       site: siteConfig.twitterHandle,
       ...options.twitter,
     },
-  }
+  };
 
   // Prepare structured data if provided
   const structuredData = options.structuredData
     ? options.structuredData
     : [
         {
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
+          "@context": "https://schema.org",
+          "@type": "WebSite",
           url: siteConfig.siteUrl,
           name: siteConfig.siteName,
         },
-      ]
+      ];
 
   // Apply meta tags using useHead
   useHead({
     // Basic meta tags
     title: seo.title,
     meta: [
-      { name: 'description', content: seo.description },
+      { name: "description", content: seo.description },
 
       // Open Graph / Facebook
-      { property: 'og:type', content: seo.type },
-      { property: 'og:url', content: seo.url },
-      { property: 'og:title', content: seo.title },
-      { property: 'og:description', content: seo.description },
-      { property: 'og:image', content: seo.image },
+      { property: "og:type", content: seo.type },
+      { property: "og:url", content: seo.url },
+      { property: "og:title", content: seo.title },
+      { property: "og:description", content: seo.description },
+      { property: "og:image", content: seo.image },
 
       // Twitter
-      { name: 'twitter:card', content: seo.twitter.card },
-      { name: 'twitter:site', content: seo.twitter.site },
-      { name: 'twitter:title', content: seo.title },
-      { name: 'twitter:description', content: seo.description },
-      { name: 'twitter:image', content: seo.image },
+      { name: "twitter:card", content: seo.twitter.card },
+      { name: "twitter:site", content: seo.twitter.site },
+      { name: "twitter:title", content: seo.title },
+      { name: "twitter:description", content: seo.description },
+      { name: "twitter:image", content: seo.image },
     ],
-    link: [{ rel: 'canonical', href: seo.url }],
+    link: [{ rel: "canonical", href: seo.url }],
     script: structuredData.map((data) => ({
-      type: 'application/ld+json',
+      type: "application/ld+json",
       children: JSON.stringify(data),
     })),
-  })
+  });
 }
 
-// Example usage - In your Vue component:
-//
+// Example usage
 // import { useSeo } from '@/composables/useSeo'
 //
 // export default {
