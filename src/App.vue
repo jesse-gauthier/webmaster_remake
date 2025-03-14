@@ -4,6 +4,8 @@ import { onMounted, nextTick } from 'vue';
 import { setupSmoothScroll } from './utils/smoothScroll';
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+import SeoChecklistBanner from '@/components/SeoChecklistBanner.vue';
+
 
 // Set up smooth scrolling when the app mounts
 onMounted(() => {
@@ -21,5 +23,6 @@ onMounted(() => {
 <template>
   <AppHeader />
   <RouterView />
+  <SeoChecklistBanner />
   <AppFooter />
 </template>
