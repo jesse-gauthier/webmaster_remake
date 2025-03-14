@@ -78,6 +78,7 @@ const trackBannerClick = () => {
             page: window.location.pathname
         });
     }
+    closeBanner();
 };
 </script>
 
