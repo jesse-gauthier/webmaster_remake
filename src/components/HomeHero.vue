@@ -22,7 +22,7 @@
             our priority.
           </p>
           <div class="flex flex-wrap gap-4 pt-4 animate-slide-up" style="animation-delay: 0.3s">
-            <a href="/services" class="btn-primary btn-lg">Our Services</a>
+            <a href="/services" class="btn-primary btn-lg hover:text-white">Our Services</a>
             <a href="/portfolio" class="btn-outline btn-lg">View Our Work</a>
           </div>
           <!-- Trust Indicators -->
