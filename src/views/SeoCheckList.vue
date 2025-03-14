@@ -42,6 +42,12 @@
                                 Get Instant Access
                             </span>
                         </button>
+
+                        <!-- Development mode skip button -->
+                        <button v-if="isDevelopment" type="button" @click="skipEmailForm"
+                            class="mt-3 w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm">
+                            DEV MODE: Skip Email Form
+                        </button>
                     </form>
 
                     <div class="mt-6 pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
@@ -164,11 +170,43 @@
             </div>
         </div>
     </div>
+
+    <!-- Consultation Modal -->
+    <div v-if="showConsultModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full animate-fade-in relative">
+            <button @click="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="p-6">
+                <h3 class="text-2xl font-bold text-primary-600 mb-4">SEO doesn't have to be hard</h3>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Let our experts handle your SEO strategy while you focus on growing your business. Book a free
+                    consultation with us today.
+                </p>
+                <div class="flex justify-center">
+                    <router-link to="/contact" @click="closeModal" class="btn-primary px-8 py-3">
+                        Book Your Free Consultation
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+// Add development mode detection
+const isDevelopment = ref(process.env.NODE_ENV === 'development');
+
+// Modal state
+const showConsultModal = ref(false);
+const modalHasBeenShown = ref(false);
+const checklistInteractions = ref(0);
+let pageTimer = null;
 
 // Email form state
 const email = ref('');
@@ -380,25 +418,26 @@ const completedCount = computed(() => {
 });
 
 // Filter sections based on search query and completion status
+const filterItems = (section) => {
+    return section.items.filter((item, index) => {
+        const itemKey = `${checklistData.indexOf(section)}-${index}`;
+        const matchesSearch = !searchQuery.value || item.toLowerCase().includes(searchQuery.value.toLowerCase());
+        const matchesFilter =
+            filterStatus.value === 'all' ||
+            (filterStatus.value === 'completed' && checkedItems.value[itemKey]) ||
+            (filterStatus.value === 'incomplete' && !checkedItems.value[itemKey]);
+
+        return matchesSearch && matchesFilter;
+    });
+};
+
 const filteredSections = computed(() => {
     if (!searchQuery.value && filterStatus.value === 'all') {
         return checklistData;
     }
 
     return checklistData.map(section => {
-        const filteredItems = section.items.filter((item, index) => {
-            const itemKey = `${checklistData.indexOf(section)}-${index}`;
-            const matchesSearch = !searchQuery.value ||
-                item.toLowerCase().includes(searchQuery.value.toLowerCase());
-
-            const matchesFilter =
-                filterStatus.value === 'all' ||
-                (filterStatus.value === 'completed' && checkedItems.value[itemKey]) ||
-                (filterStatus.value === 'incomplete' && !checkedItems.value[itemKey]);
-
-            return matchesSearch && matchesFilter;
-        });
-
+        const filteredItems = filterItems(section);
         return {
             ...section,
             items: filteredItems
@@ -575,8 +614,45 @@ const cleanup = () => {
     }
 };
 
+// Skip email form for development mode
+const skipEmailForm = () => {
+    if (isDevelopment.value) {
+        // Store a flag in localStorage to simulate email submission
+        localStorage.setItem('seo_checklist_email', 'dev@example.com');
+        localStorage.setItem('seo_checklist_access', 'true');
+
+        // Set hasAccess to true to immediately show the checklist
+        hasAccess.value = true;
+
+        // Track for debugging purposes
+        console.log('[DEV MODE] Email form skipped');
+    }
+};
+
+// Function to show the modal
+const showModal = () => {
+    if (!modalHasBeenShown.value && hasAccess.value) {
+        showConsultModal.value = true;
+        modalHasBeenShown.value = true;
+
+        // Track modal view if analytics available
+        if (process.env.NODE_ENV === 'production' && typeof window.trackEvent === 'function') {
+            window.trackEvent('modal_view', {
+                'modal_type': 'seo_consultation',
+                'trigger': checklistInteractions.value >= 3 ? 'interaction' : 'time'
+            });
+        }
+    }
+};
+
+// Function to close the modal
+const closeModal = () => {
+    showConsultModal.value = false;
+};
+
 // Initialize component on mount
 onMounted(() => {
+    // Existing initialization code
     // Check if user already has access
     const hasStoredAccess = localStorage.getItem('seo_checklist_access') === 'true';
     if (hasStoredAccess) {
@@ -588,15 +664,48 @@ onMounted(() => {
     if (savedProgress) {
         checkedItems.value = JSON.parse(savedProgress);
     }
+
+    // Add dev mode auto-skip option (uncomment to enable automatic skipping)
+    // if (isDevelopment.value && !hasAccess.value) {
+    //     skipEmailForm();
+    // }
+
+    // Set timer for 40 seconds to show modal
+    if (hasAccess.value) {
+        pageTimer = setTimeout(() => {
+            showModal();
+        }, 40000);
+    }
 });
 
-// Watch for changes to checked items and save automatically
-watch(checkedItems.value, () => {
-    localStorage.setItem('seo-checklist-progress', JSON.stringify(checkedItems.value));
+// Watch for changes to checked items
+watch(checkedItems, (newVal, oldVal) => {
+    // Save progress
+    localStorage.setItem('seo-checklist-progress', JSON.stringify(newVal));
+
+    // Count interactions for modal trigger
+    if (hasAccess.value && !modalHasBeenShown.value) {
+        const oldCheckedCount = Object.values(oldVal).filter(Boolean).length;
+        const newCheckedCount = Object.values(newVal).filter(Boolean).length;
+
+        if (newCheckedCount > oldCheckedCount) {
+            checklistInteractions.value += 1;
+
+            // Show modal after 3 interactions
+            if (checklistInteractions.value >= 3) {
+                showModal();
+            }
+        }
+    }
 }, { deep: true });
 
 // Cleanup on component unmount
 onBeforeUnmount(() => {
     cleanup();
+
+    // Clear the page timer
+    if (pageTimer) {
+        clearTimeout(pageTimer);
+    }
 });
 </script>
