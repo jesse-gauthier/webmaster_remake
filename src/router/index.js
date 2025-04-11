@@ -24,9 +24,17 @@ import VueDevLandingView from "@/views/VueDevLandingView.vue";
 
 const routes = [
   {
-    path: '/applications',
-    name: 'Vue Applications',
-    component: VueDevLandingView
+    path: '/web-applications',
+    name: 'Web Applications',
+    component: VueDevLandingView,
+    meta: {
+      seo: {
+        title: "Vue Application Development | WebMaster",
+        description: "Custom Vue application development with flexible pricing models including equity partnerships and traditional payment options.",
+        image: seoConfig.defaultImage,
+        type: "service",
+      },
+    }
   },
   {
     path: "/",
