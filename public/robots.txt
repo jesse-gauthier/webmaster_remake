@@ -15,6 +15,7 @@ Allow: /seo
 Allow: /seo-checklist
 Allow: /blog
 Allow: /blog/
+Allow: /web-applications
 
 # Disallow form processing URLs and admin areas (assuming they exist)
 Disallow: /admin/

@@ -69,6 +69,13 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Web Applications page -->
+    <url>
+        <loc>https://ottawawebmasters.ca/web-applications</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- New client form -->
     <url>
         <loc>https://ottawawebmasters.ca/new-client-form</loc>
