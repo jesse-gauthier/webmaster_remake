@@ -19,7 +19,7 @@ $config = [
     'data_file' => 'applications.json', // File to store submissions
     'email' => [
         'to' => 'jesse@ottawawebmasters.ca',
-        'from' => 'noreply@' . $_SERVER['HTTP_HOST'],
+        'from' => 'noreply@ottawawebmasters.ca',
         'subject' => 'New Application Development Inquiry',
     ],
     'required_fields' => ['name', 'email'],
@@ -40,10 +40,7 @@ $response = [
 
 // Process form data
 try {
-    // Check for CSRF token (assuming it's sent from frontend)
-    if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
-        throw new Exception('Security validation failed.');
-    }
+   
 
     // Basic input sanitization
     $formData = [];
@@ -100,21 +97,6 @@ header('Content-Type: application/json');
 echo json_encode($response);
 exit;
 
-/**
- * Validates the CSRF token
- * 
- * @param string $token The token to validate
- * @return bool True if token is valid
- */
-function validateCsrfToken($token) {
-    // In a real implementation, you would validate against a token stored in the session
-    // This is a simplified example
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
-}
 
 /**
  * Saves form data to a JSON file
