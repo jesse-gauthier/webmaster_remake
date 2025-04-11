@@ -1,5 +1,19 @@
 <script setup>
 import { ref, onMounted, reactive, inject } from "vue";
+import WebAppModal from "@/components/modals/WebAppModal.vue";
+
+// Modal state
+const isModalOpen = ref(false);
+const openModal = () => {
+  isModalOpen.value = true;
+  // Track modal open in analytics
+  analytics.trackEvent("Modal", "open", "Web App Equity Modal");
+};
+const closeModal = () => {
+  isModalOpen.value = false;
+  // Track modal close in analytics
+  analytics.trackEvent("Modal", "close", "Web App Equity Modal");
+};
 
 // Inject analytics functionality
 const analytics = inject("analytics");
@@ -269,6 +283,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- Modal component with proper props -->
+  <WebAppModal :isOpen="isModalOpen" @close="closeModal" />
+
   <main class="bg-neutral-cream">
     <!-- Hero Section -->
     <section class="relative bg-primary-light py-16 md:py-24 overflow-hidden">
@@ -290,12 +307,13 @@ onMounted(() => {
                 aria-label="See our pricing options"
                 >Explore Pricing</a
               >
-              <a
-                href="#contact"
+              <button
+                @click="openModal"
                 class="btn-outline"
-                aria-label="Contact us about your project"
-                >Let's Talk</a
+                aria-label="Learn about our equity model"
               >
+                Equity Model Details
+              </button>
             </div>
           </div>
           <div class="animate-on-scroll">
@@ -439,12 +457,21 @@ onMounted(() => {
                 >
               </li>
             </ul>
-            <a
-              href="#pricing"
-              class="btn-primary mt-8 inline-block"
-              aria-label="Learn more about our pricing"
-              >See Pricing Details</a
-            >
+            <div class="flex flex-col sm:flex-row gap-4 mt-8">
+              <a
+                href="#pricing"
+                class="btn-primary"
+                aria-label="Learn more about our pricing"
+                >See Pricing Details</a
+              >
+              <button
+                @click="openModal"
+                class="btn-outline"
+                aria-label="View equity model details"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Learn More
+              </button>
+            </div>
           </div>
         </div>
       </div>
