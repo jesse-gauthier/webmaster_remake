@@ -167,26 +167,64 @@ function sendEmailNotification($formData, $emailConfig) {
         'Content-Type: text/html; charset=UTF-8'
     ];
     
-    // Prepare email body
-    $body = '<html><body>';
-    $body .= '<h2>New Application Development Inquiry</h2>';
-    $body .= '<p><strong>Date:</strong> ' . $formData['timestamp'] . '</p>';
-    $body .= '<p><strong>Name:</strong> ' . $formData['name'] . '</p>';
-    $body .= '<p><strong>Email:</strong> ' . $formData['email'] . '</p>';
+    // Prepare email body with better formatting
+    $body = '
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; }
+            .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
+            .content { padding: 20px; background-color: #f9f9f9; }
+            .footer { font-size: 12px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 20px; }
+            h2 { color: #2c3e50; }
+            .data-row { margin-bottom: 10px; }
+            .label { font-weight: bold; color: #2c3e50; }
+            .message-box { background-color: white; padding: 15px; border-left: 4px solid #2c3e50; margin: 15px 0; }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>New Application Development Inquiry</h2>
+        </div>
+        <div class="content">
+            <div class="data-row">
+                <span class="label">Date:</span> ' . $formData['timestamp'] . '
+            </div>
+            <div class="data-row">
+                <span class="label">Name:</span> ' . $formData['name'] . '
+            </div>
+            <div class="data-row">
+                <span class="label">Email:</span> ' . $formData['email'] . '
+            </div>';
     
     if (!empty($formData['company'])) {
-        $body .= '<p><strong>Company:</strong> ' . $formData['company'] . '</p>';
+        $body .= '
+            <div class="data-row">
+                <span class="label">Company:</span> ' . $formData['company'] . '
+            </div>';
     }
     
-    $body .= '<p><strong>Interested In:</strong> ' . formatInterestType($formData['interest']) . '</p>';
+    $body .= '
+            <div class="data-row">
+                <span class="label">Interested In:</span> ' . formatInterestType($formData['interest']) . '
+            </div>';
     
     if (!empty($formData['message'])) {
-        $body .= '<h3>Project Details:</h3>';
-        $body .= '<p>' . nl2br($formData['message']) . '</p>';
+        $body .= '
+            <h3>Project Details:</h3>
+            <div class="message-box">
+                ' . nl2br($formData['message']) . '
+            </div>';
     }
     
-    $body .= '<p><small>IP: ' . $formData['ip'] . '</small></p>';
-    $body .= '</body></html>';
+    $body .= '
+            <div class="footer">
+                <p>This inquiry was submitted from IP: ' . $formData['ip'] . '</p>
+                <p>© ' . date('Y') . ' Ottawa Webmasters - Application Development Form</p>
+            </div>
+        </div>
+    </body>
+    </html>';
     
     // Send email
     $mailSent = mail(
@@ -252,8 +290,8 @@ function backupApplicationData() {
     }
 }
 
-// If script is called with backup parameter from cron job
-if (isset($_GET['action']) && $_GET['action'] === 'backup' && php_sapi_name() === 'cli') {
+// If script is called with backup parameter from anywhere
+if (isset($_GET['action']) && $_GET['action'] === 'backup') {
     backupApplicationData();
     echo "Backup completed.\n";
     exit;
