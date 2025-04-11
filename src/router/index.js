@@ -20,8 +20,14 @@ import BlogsView from "@/views/BlogsView.vue";
 import BlogArticleView from "@/views/BlogArticleView.vue";
 import LandingSeoView from "@/views/LandingSeoView.vue";
 import SeoCheckList from "@/views/SeoCheckList.vue";
+import VueDevLandingView from "@/views/VueDevLandingView.vue";
 
 const routes = [
+  {
+    path: '/applications',
+    name: 'Vue Applications',
+    component: VueDevLandingView
+  },
   {
     path: "/",
     name: "Home",
