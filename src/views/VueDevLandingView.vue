@@ -24,10 +24,6 @@ const formStatus = reactive({
   errors: {},
 });
 
-// Generate a simple CSRF token for form security
-// In a real app, this should come from the server
-const csrfToken = ref(Math.random().toString(36).substring(2));
-
 const submitForm = async (e) => {
   e.preventDefault();
   formStatus.submitting = true;
@@ -56,7 +52,6 @@ const submitForm = async (e) => {
   try {
     // Create form data object for submission
     const form = new FormData();
-    form.append("csrf_token", csrfToken.value);
     form.append("name", formData.name);
     form.append("email", formData.email);
     form.append("company", formData.company);
@@ -82,9 +77,6 @@ const submitForm = async (e) => {
       formData.company = "";
       formData.interest = "equity";
       formData.message = "";
-
-      // Generate new CSRF token
-      csrfToken.value = Math.random().toString(36).substring(2);
     } else {
       // Display server-side validation errors
       if (result.errors) {
@@ -194,7 +186,6 @@ const testimonials = [
       "The equity model was perfect for our startup. We got a high-quality Vue application without the upfront costs, and the team truly became invested in our success.",
     author: "Sarah Johnson",
     company: "FinTech Innovators",
-    image: "https://placehold.co/350x400",
   },
   {
     id: 2,
@@ -202,7 +193,6 @@ const testimonials = [
       "Working with this team transformed our digital presence. Their Vue expertise helped us build a platform that scaled with our business from day one.",
     author: "Michael Chen",
     company: "GrowthMetrics",
-    image: "/api/placeholder/60/60",
   },
   {
     id: 3,
@@ -210,7 +200,6 @@ const testimonials = [
       "The development process was transparent and collaborative. Our Vue application exceeded expectations and continues to drive our business forward.",
     author: "Rajiv Patel",
     company: "EduTech Solutions",
-    image: "/api/placeholder/60/60",
   },
 ];
 
@@ -268,27 +257,41 @@ onMounted(() => {
             </div>
           </div>
           <div class="animate-on-scroll">
-            <div class="relative">
-              <img
-                src="https://placehold.co/350x400"
-                alt="Vue application dashboard example"
-                class="rounded-lg shadow-lg w-full h-auto"
-              />
-              <div
-                class="absolute -bottom-4 -right-4 bg-accent p-4 rounded-lg shadow-lg"
+            <div class="relative flex justify-center items-center h-full">
+              <svg
+                class="w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto"
+                viewBox="0 -17.5 256 256"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMinYMin meet"
               >
-                <i class="fab fa-vuejs text-4xl text-white"></i>
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M204.8 0H256L128 220.8 0 0h97.92L128 51.2 157.44 0h47.36z"
+                    fill="#41B883"
+                  ></path>
+                  <path
+                    d="M0 0l128 220.8L256 0h-51.2L128 132.48 50.56 0H0z"
+                    fill="#41B883"
+                  ></path>
+                  <path
+                    d="M50.56 0L128 133.12 204.8 0h-47.36L128 51.2 97.92 0H50.56z"
+                    fill="#35495E"
+                  ></path>
+                </g>
+              </svg>
+              <div
+                class="absolute -bottom-4 right-0 md:-right-4 bg-accent p-3 md:p-4 rounded-lg shadow-lg"
+              >
+                <i class="fab fa-vuejs text-3xl md:text-4xl text-white"></i>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Vue-inspired decorative elements -->
-        <div class="absolute top-20 right-10 opacity-10 hidden md:block">
-          <i class="fab fa-vuejs text-9xl text-primary"></i>
-        </div>
-        <div class="absolute bottom-10 left-10 opacity-10 hidden md:block">
-          <i class="fas fa-code text-6xl text-accent"></i>
         </div>
       </div>
     </section>
@@ -334,7 +337,7 @@ onMounted(() => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div class="animate-on-scroll order-2 md:order-1">
             <img
-              src="https://placehold.co/350x400"
+              src="https://placehold.co/350x400/2E5944/F7F3E8?text=Vue+Partnership"
               alt="Collaborative development process"
               class="rounded-lg shadow-lg w-full h-auto"
             />
@@ -490,7 +493,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="flex justify-center gap-8 max-w-4xl mx-auto">
           <!-- Equity Model Card -->
           <div
             v-show="pricingModel === 'equity'"
@@ -653,7 +656,7 @@ onMounted(() => {
           >
             <div class="flex items-center mb-6">
               <img
-                :src="testimonial.image"
+                :src="`https://placehold.co/60x60/${testimonial.id % 2 === 0 ? '4292AC' : '2E5944'}/FFFFFF?text=${testimonial.author.charAt(0)}`"
                 :alt="testimonial.author"
                 class="w-12 h-12 rounded-full object-cover"
               />
@@ -726,8 +729,6 @@ onMounted(() => {
                 @submit="submitForm"
                 v-if="!formStatus.submitted || !formStatus.success"
               >
-                <input type="hidden" name="csrf_token" :value="csrfToken" />
-
                 <div class="mb-4">
                   <label for="name" class="form-label">Full Name</label>
                   <input
