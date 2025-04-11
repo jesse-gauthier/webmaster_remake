@@ -1,5 +1,9 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, inject } from "vue";
+
+// Inject analytics functionality
+const analytics = inject("analytics");
+const gtag = inject("gtag");
 
 // Reactive state for pricing toggle
 const pricingModel = ref("equity");
@@ -29,6 +33,9 @@ const submitForm = async (e) => {
   formStatus.submitting = true;
   formStatus.errors = {};
 
+  // Track form submission attempt
+  analytics.trackEvent("Contact", "form_submission_attempt", "Vue Dev Inquiry");
+
   // Basic validation
   let hasErrors = false;
   if (!formData.name.trim()) {
@@ -45,6 +52,12 @@ const submitForm = async (e) => {
   }
 
   if (hasErrors) {
+    // Track validation errors
+    analytics.trackEvent(
+      "Contact",
+      "form_validation_error",
+      Object.keys(formStatus.errors).join(",")
+    );
     formStatus.submitting = false;
     return;
   }
@@ -71,6 +84,20 @@ const submitForm = async (e) => {
     formStatus.message = result.message;
 
     if (result.success) {
+      // Track successful submission
+      analytics.trackEvent(
+        "Contact",
+        "form_submission_success",
+        "Vue Dev Inquiry"
+      );
+
+      // Track conversion for Google Ads (if applicable)
+      gtag("event", "conversion", {
+        send_to: "AW-16921221005/abcdefghijklmnop", // Replace with actual conversion ID/label
+        value: 1,
+        currency: "USD",
+      });
+
       // Reset form on success
       formData.name = "";
       formData.email = "";
@@ -78,12 +105,22 @@ const submitForm = async (e) => {
       formData.interest = "equity";
       formData.message = "";
     } else {
+      // Track server-side validation errors
+      analytics.trackEvent("Contact", "form_server_error", result.message);
+
       // Display server-side validation errors
       if (result.errors) {
         formStatus.errors = result.errors;
       }
     }
   } catch (error) {
+    // Track submission error
+    analytics.trackEvent(
+      "Contact",
+      "form_submission_error",
+      error.message || "Unknown error"
+    );
+
     formStatus.success = false;
     formStatus.message =
       "There was a problem submitting your request. Please try again later.";
@@ -91,6 +128,11 @@ const submitForm = async (e) => {
   } finally {
     formStatus.submitting = false;
   }
+};
+
+// Track form field interactions
+const trackFieldInteraction = (fieldName) => {
+  analytics.trackEvent("Contact", "field_interaction", fieldName);
 };
 
 // Features list
@@ -735,6 +777,7 @@ onMounted(() => {
                     type="text"
                     id="name"
                     v-model="formData.name"
+                    @focus="trackFieldInteraction('name')"
                     class="form-input"
                     :class="{ 'border-error': formStatus.errors.name }"
                     placeholder="Your name"
@@ -751,6 +794,7 @@ onMounted(() => {
                     type="email"
                     id="email"
                     v-model="formData.email"
+                    @focus="trackFieldInteraction('email')"
                     class="form-input"
                     :class="{ 'border-error': formStatus.errors.email }"
                     placeholder="Your email"
@@ -767,6 +811,7 @@ onMounted(() => {
                     type="text"
                     id="company"
                     v-model="formData.company"
+                    @focus="trackFieldInteraction('company')"
                     class="form-input"
                     placeholder="Your company"
                   />
@@ -777,6 +822,7 @@ onMounted(() => {
                   <select
                     id="interest"
                     v-model="formData.interest"
+                    @change="trackFieldInteraction('interest')"
                     class="form-input"
                   >
                     <option value="equity">Equity Partnership Model</option>
@@ -795,6 +841,7 @@ onMounted(() => {
                     id="message"
                     rows="4"
                     v-model="formData.message"
+                    @focus="trackFieldInteraction('message')"
                     class="form-input"
                     placeholder="Tell us about your project"
                   ></textarea>
@@ -821,7 +868,16 @@ onMounted(() => {
                 class="text-center mt-4"
               >
                 <button
-                  @click="formStatus.submitted = false"
+                  @click="
+                    () => {
+                      formStatus.submitted = false;
+                      analytics.trackEvent(
+                        'Contact',
+                        'form_restart',
+                        'New submission'
+                      );
+                    }
+                  "
                   class="btn-outline"
                 >
                   <i class="fas fa-plus mr-2"></i> Submit Another Inquiry
