@@ -21,6 +21,7 @@ import BlogArticleView from "@/views/BlogArticleView.vue";
 import LandingSeoView from "@/views/LandingSeoView.vue";
 import SeoCheckList from "@/views/SeoCheckList.vue";
 import VueDevLandingView from "@/views/VueDevLandingView.vue";
+import StartupPartnershipForm from "@/views/StartupPartnershipForm.vue";
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
         type: "service",
       },
     }
+  },
+  {
+    path: '/startup',
+    name: 'Startup Partnership Program',
+    component: StartupPartnershipForm
   },
   {
     path: "/",

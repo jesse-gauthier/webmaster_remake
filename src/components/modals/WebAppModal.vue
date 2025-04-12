@@ -11,7 +11,7 @@
     >
       <!-- Modal content -->
       <div
-        class="bg-white rounded-lg shadow-xl w-full max-w-2xl transform transition-all duration-300 overflow-hidden"
+        class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[85%] overflow-auto transform transition-all duration-300"
         :class="{
           'opacity-0 scale-95': !showContent,
           'opacity-100 scale-100': showContent,
@@ -19,12 +19,15 @@
         @click.stop
       >
         <!-- Modal header -->
-        <div class="bg-primary p-6 relative">
+        <div v-if="!isExpanding" class="bg-primary p-6 relative">
           <h2 class="text-2xl font-bold text-white">
-            Web App Equity Partnership
+            Have a briliant application idea, but limited budget?
           </h2>
           <p class="text-primary-light mt-1">
-            Shared success, minimal upfront investment
+            This program is for you. For $1500 upfront we will build your idea
+            from ground up. After launch we perform updates, bug fixes,
+            implement new feature, and general maintaince.
+            <strong> At no additional cost. </strong>
           </p>
           <button
             @click="closeModal"
@@ -33,10 +36,14 @@
           >
             <i class="fas fa-times text-xl"></i>
           </button>
+          <!-- This should trigger a google anayltics event -->
+          <button @click="handleViewDetails" class="btn-primary">
+            View Details
+          </button>
         </div>
 
         <!-- Modal body -->
-        <div class="p-6">
+        <div v-if="isExpanding" class="p-6">
           <div class="flex flex-col md:flex-row gap-6">
             <div class="md:w-2/3">
               <h3 class="text-xl font-semibold text-primary mb-3">
@@ -145,6 +152,7 @@
 
         <!-- Modal footer -->
         <div
+          v-if="isExpanding"
           class="bg-neutral-50 p-6 flex flex-col sm:flex-row gap-3 justify-end border-t border-neutral-200"
         >
           <button
@@ -154,14 +162,14 @@
           >
             Close
           </button>
-          <a
-            href="#contact"
+          <router-link
+            to="/web-applications"
             @click="closeModalAndScroll"
             class="btn-primary"
             aria-label="Get started with equity model"
           >
             <i class="fas fa-handshake mr-2"></i> Start the Conversation
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -169,7 +177,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, inject } from "vue";
 
 const props = defineProps({
   isOpen: {
@@ -180,6 +188,8 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 const showContent = ref(false);
+const isExpanding = ref(false);
+const analytics = inject("analytics");
 
 watch(
   () => props.isOpen,
@@ -236,6 +246,15 @@ const closeModalAndScroll = () => {
       contactSection.scrollIntoView({ behavior: "smooth" });
     }
   }, 350);
+};
+
+const handleViewDetails = () => {
+  isExpanding.value = !isExpanding.value;
+
+  // Track the view details click event
+  if (analytics) {
+    analytics.trackEvent("Modal", "view_details_click", "WebApp Modal Details");
+  }
 };
 </script>
 

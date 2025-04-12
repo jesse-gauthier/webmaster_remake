@@ -1,27 +1,28 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   Services: [
-    { name: 'WordPress', url: '/wordpress' },
-    { name: 'Shopify', url: '/shopify' },
-    { name: 'Monthly Maintenance', url: '/maintenance' },
-    { name: 'Consultations', url: '/consultations' },
-    { name: 'Search Engine Optimization', url: '/seo' }
+    { name: "WordPress", url: "/wordpress" },
+    { name: "Shopify", url: "/shopify" },
+    { name: "Monthly Maintenance", url: "/maintenance" },
+    { name: "Consultations", url: "/consultations" },
+    { name: "Search Engine Optimization", url: "/seo" },
   ],
   Company: [
-    { name: 'About Us', url: '/about' },
-    { name: 'Contact Us', url: '/contact' },
-    { name: 'New Client Form', url: '/new-client-form' },
-    { name: 'Portfolio', url: '/portfolio' },
-    { name: 'Free SEO checklist', url: '/seo-checklist' }
+    { name: "About Us", url: "/about" },
+    { name: "Contact Us", url: "/contact" },
+    { name: "New Client Form", url: "/new-client-form" },
+    { name: "Portfolio", url: "/portfolio" },
+    { name: "Free SEO checklist", url: "/seo-checklist" },
   ],
   Legal: [
-    { name: 'Policies', url: '/policies' },
-  ]
-}
+    { name: "Policies", url: "/policies" },
+    { name: "Startup Partnership Program", url: "/startup" },
+  ],
+};
 </script>
 
 <template>
@@ -29,11 +30,18 @@ const footerLinks = {
     <div class="container-site px-4 sm:px-6 lg:px-8 py-10">
       <!-- Quick Links -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div v-for="(links, category) in footerLinks" :key="category" class="space-y-3">
+        <div
+          v-for="(links, category) in footerLinks"
+          :key="category"
+          class="space-y-3"
+        >
           <h3 class="text-lg font-semibold mb-3 text-white">{{ category }}</h3>
           <ul class="space-y-2">
             <li v-for="link in links" :key="link.name">
-              <router-link :to="link.url" class="text-primary-light hover:text-accent transition-colors text-sm">
+              <router-link
+                :to="link.url"
+                class="text-primary-light hover:text-accent transition-colors text-sm"
+              >
                 {{ link.name }}
               </router-link>
             </li>
