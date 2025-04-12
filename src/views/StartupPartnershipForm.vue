@@ -138,11 +138,27 @@ const prevStep = () => {
 // Submit form
 const submitForm = async () => {
   try {
-    // Here you would typically send this data to your backend
-    console.log("Form submitted:", formData.value);
-    console.log("Agreements:", agreements.value);
+    // Show loading state if needed
 
-    // Show success message and reset form
+    // Send data to our PHP endpoint
+    const response = await fetch("/php/startupPartnershipForm.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData: formData.value,
+        agreements: agreements.value,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.message || "Error submitting form");
+    }
+
+    // Show success message
     alert(
       "Thank you for your application. Our team will review your information and contact you shortly."
     );
