@@ -23,6 +23,7 @@ Disallow: /wp-admin/
 Disallow: /cgi-bin/
 Disallow: /form-submission-success
 Disallow: /form-submission-error
+Disallow: /startup
 
 # Disallow the 404 page
 Disallow: /404
