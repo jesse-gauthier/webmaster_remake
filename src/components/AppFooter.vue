@@ -10,6 +10,7 @@ const footerLinks = {
     { name: "Monthly Maintenance", url: "/maintenance" },
     { name: "Consultations", url: "/consultations" },
     { name: "Search Engine Optimization", url: "/seo" },
+    { name: "Web Applications", url: "/web-applications" },
   ],
   Company: [
     { name: "About Us", url: "/about" },

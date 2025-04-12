@@ -11,7 +11,7 @@ import WebAppModal from "@/components/modals/WebAppModal.vue";
 const MODAL_DISMISSED_KEY = "webmasterModalDismissed";
 
 // Modal state
-const isModalOpen = ref(true);
+const isModalOpen = ref(false);
 const modalShown = ref(false);
 let modalTimer = null;
 let interestDetected = false;
