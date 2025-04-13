@@ -4,8 +4,8 @@ export default {
   install: (app, options = {}) => {
     // Default configuration
     const config = {
-      googleAdsId: 'AW-16921221005',
-      googleAnalyticsId: 'G-58RRPDKZYB',
+      googleAdsId: import.meta.env.VITE_GOOGLE_ADS_ID || '',
+      googleAnalyticsId: import.meta.env.VITE_GOOGLE_ANALYTICS_ID || '',
       enableInDevelopment: false,
       debug: false,
       ...options
