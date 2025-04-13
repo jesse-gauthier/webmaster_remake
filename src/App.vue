@@ -85,7 +85,7 @@ const detectUserInterest = () => {
 const trackScrollDepth = () => {
   const scrollDepth =
     window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  if (scrollDepth > 0.4) {
+  if (scrollDepth > 0.6) {
     // If user scrolled 40% of the page
     detectUserInterest();
   }
@@ -98,7 +98,7 @@ const trackMouseActivity = (e) => {
   const viewportHeight = window.innerHeight;
 
   // If mouse is in the bottom third of the screen (often where CTAs are)
-  if (mouseY > viewportHeight * 0.7) {
+  if (mouseY > viewportHeight * 0.9) {
     detectUserInterest();
   }
 };
