@@ -22,6 +22,7 @@ import LandingSeoView from "@/views/LandingSeoView.vue";
 import SeoCheckList from "@/views/SeoCheckList.vue";
 import VueDevLandingView from "@/views/VueDevLandingView.vue";
 import StartupPartnershipForm from "@/views/StartupPartnershipForm.vue";
+import StartupPartnershipView from "@/views/StartupPartnershipView.vue";
 
 const routes = [
   {
@@ -40,7 +41,28 @@ const routes = [
   {
     path: '/startup',
     name: 'Startup Partnership Program',
-    component: StartupPartnershipForm
+    component: StartupPartnershipView,
+    meta: {
+      seo: {
+        title: "Startup Partnership Program | Web Application Development | WebMaster",
+        description: "Our Startup Partnership Program offers premium web application development with just $1,500 upfront and a 5-8% equity stake. Get a dedicated technical partner invested in your long-term success.",
+        image: seoConfig.defaultImage,
+        type: "service",
+      },
+    }
+  },
+  {
+    path: '/startup-application',
+    name: 'Startup Partnership Application',
+    component: StartupPartnershipForm,
+    meta: {
+      seo: {
+        title: "Apply for Startup Partnership | WebMaster",
+        description: "Apply for our Startup Partnership Program and get premium web application development with minimal upfront investment.",
+        image: seoConfig.defaultImage,
+        type: "service",
+      },
+    }
   },
   {
     path: "/",

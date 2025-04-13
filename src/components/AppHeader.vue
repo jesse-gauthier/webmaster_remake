@@ -278,6 +278,7 @@ const navItems = ref([
       { name: "Monthly Maintenance", url: "/maintenance", active: false },
       { name: "Consultations", url: "/consultations", active: false },
       { name: "Web Apps", url: "/web-applications", active: false },
+      { name: "Startup Partnership", url: "/startup", active: false },
     ],
   },
   { name: "Portfolio", url: "/portfolio", active: false },
