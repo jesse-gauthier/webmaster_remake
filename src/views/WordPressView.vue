@@ -14,11 +14,12 @@
             <router-link to="/contact#contact-form" class="btn-primary btn-lg"
               >Get Started</router-link
             >
-            <button
+            <router-link
+              to="/portfolio"
               class="btn-outline border-neutral-cream text-neutral-cream hover:bg-primary-500 hover:border-primary-500"
             >
               View Our Work
-            </button>
+            </router-link>
           </div>
         </div>
       </div>
