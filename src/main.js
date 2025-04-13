@@ -12,6 +12,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
+import * as Sentry from "@sentry/vue";
 import CookieConsentBar from './components/CookieConsentBar.vue';
 
 // Initialize Clarity with configuration options
@@ -41,6 +42,12 @@ if (import.meta.env.PROD) {  // Only run in production
 }
 
 const app = createApp(App);
+
+Sentry.init({
+    app,
+    dsn: "https://9ec69a182e559430664cb0ca48834cd9@o4508343003381760.ingest.us.sentry.io/4509147020984320"
+});
+
 // Create and register the head plugin
 const head = createHead();
 app.use(head);

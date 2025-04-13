@@ -38,9 +38,26 @@ export const clarityService = {
     }
 };
 
+/**
+ * Initialize Clarity with your project ID
+ * This ensures Clarity is properly loaded on page refresh
+ */
+const initClarity = () => {
+    try {
+        if (typeof Clarity.start === 'function') {
+            Clarity.start("r3l7gra9rc");
+        }
+    } catch (error) {
+        console.error('Failed to initialize Clarity:', error);
+    }
+};
+
 // Vue plugin
 export default {
     install(app) {
+        // Initialize Clarity on plugin installation
+        initClarity();
+
         // Make clarity service available via this.$clarity
         app.config.globalProperties.$clarity = clarityService;
 
