@@ -1,11 +1,27 @@
 <script setup>
 import { RouterView } from "vue-router";
-import { onMounted, nextTick, ref, onBeforeUnmount } from "vue";
+import {
+  onMounted,
+  nextTick,
+  ref,
+  onBeforeUnmount,
+  inject,
+  provide,
+} from "vue";
 import { setupSmoothScroll } from "./utils/smoothScroll";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
-import SeoChecklistBanner from "@/components/SeoChecklistBanner.vue";
 import WebAppModal from "@/components/modals/WebAppModal.vue";
+import CookieConsentBar from "./components/CookieConsentBar.vue";
+
+// Inject the updateConsent function from the Analytics plugin
+const updateConsent = inject("updateConsent");
+
+// Provide fallback updateConsent in case the plugin doesn't
+provide("updateConsent", (consent = {}) => {
+  console.log("Fallback consent update:", consent);
+  // If the analytics plugin is loaded, it will override this provider
+});
 
 // Local storage key
 const MODAL_DISMISSED_KEY = "webmasterModalDismissed";
@@ -121,7 +137,6 @@ onBeforeUnmount(() => {
 <template>
   <AppHeader />
   <RouterView />
-  <!-- <SeoChecklistBanner /> -->
   <AppFooter />
   <Transition name="modal-fade">
     <WebAppModal
@@ -131,6 +146,7 @@ onBeforeUnmount(() => {
       class="compact-modal"
     />
   </Transition>
+  <CookieConsentBar :update-consent="updateConsent" />
 </template>
 
 <style>

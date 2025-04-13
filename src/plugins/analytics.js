@@ -11,71 +11,111 @@ export default {
       ...options
     };
 
-    // Skip analytics in development unless explicitly enabled
-    if (process.env.NODE_ENV === 'development' && !config.enableInDevelopment) {
-      console.info('Google Analytics disabled in development');
+    // Create a default console-based implementation for development mode
+    const defaultConsentUpdater = (consent = {}) => {
+      console.log('Development mode: Consent update', consent);
+    };
 
-      // Provide mock implementation for development
-      const mockGtag = (...args) => {
-        if (config.debug) console.log('GA Event (mock):', ...args);
-      };
+    // Initialize gtag for production or use mock for development
+    let gtag;
+    if (import.meta.env.PROD) {
+      // Skip analytics in development unless explicitly enabled
+      if (process.env.NODE_ENV === 'development' && !config.enableInDevelopment) {
+        console.info('Google Analytics disabled in development');
 
-      app.config.globalProperties.$gtag = mockGtag;
-      app.provide('gtag', mockGtag);
+        // Provide mock implementation for development
+        const mockGtag = (...args) => {
+          if (config.debug) console.log('GA Event (mock):', ...args);
+        };
+
+        app.config.globalProperties.$gtag = mockGtag;
+        app.provide('gtag', mockGtag);
+
+        // Provide tracking helper methods
+        provideTrackingMethods(app, mockGtag);
+        return;
+      }
+
+      // Initialize dataLayer
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      // Set default consent parameters (GDPR & privacy compliance)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500 // Wait 500ms for consent update
+      });
+
+      // Configure Google tags
+      gtag('config', config.googleAdsId);
+      gtag('config', config.googleAnalyticsId, {
+        'anonymize_ip': true,
+        'debug_mode': config.debug
+      });
+
+      // Load the gtag script
+      try {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.googleAdsId}`;
+
+        gtagScript.onerror = () => {
+          console.warn('Failed to load Google Analytics script');
+        };
+
+        document.head.appendChild(gtagScript);
+      } catch (err) {
+        console.error('Error initializing analytics:', err);
+      }
+
+      // Make gtag available throughout the app
+      app.config.globalProperties.$gtag = gtag;
+      app.provide('gtag', gtag);
 
       // Provide tracking helper methods
-      provideTrackingMethods(app, mockGtag);
-      return;
-    }
+      provideTrackingMethods(app, gtag);
 
-    // Initialize dataLayer
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    // Set default consent parameters (GDPR & privacy compliance)
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied',
-      'wait_for_update': 500 // Wait 500ms for consent update
-    });
-
-    // Configure Google tags
-    gtag('config', config.googleAdsId);
-    gtag('config', config.googleAnalyticsId, {
-      'anonymize_ip': true,
-      'debug_mode': config.debug
-    });
-
-    // Load the gtag script
-    try {
-      const gtagScript = document.createElement('script');
-      gtagScript.async = true;
-      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.googleAdsId}`;
-
-      gtagScript.onerror = () => {
-        console.warn('Failed to load Google Analytics script');
+      // Add method to update consent when user makes a choice
+      const updateConsentFn = (consent = {}) => {
+        try {
+          gtag('consent', 'update', consent);
+        } catch (err) {
+          console.warn('Failed to update consent', err);
+        }
       };
 
-      document.head.appendChild(gtagScript);
-    } catch (err) {
-      console.error('Error initializing analytics:', err);
+      app.config.globalProperties.$updateConsent = updateConsentFn;
+      app.provide('updateConsent', updateConsentFn);
+    } else {
+      console.log('Google Analytics disabled in development');
+      // Provide a mock implementation
+      gtag = (command, ...args) => {
+        console.log(`GA mock: ${command}`, ...args);
+      };
+
+      // Make gtag available throughout the app
+      app.config.globalProperties.$gtag = gtag;
+      app.provide('gtag', gtag);
+
+      // Provide tracking helper methods
+      provideTrackingMethods(app, gtag);
+
+      // Add method to update consent when user makes a choice
+      const updateConsentFn = (consent = {}) => {
+        try {
+          gtag('consent', 'update', consent);
+        } catch (err) {
+          console.warn('Failed to update consent', err);
+        }
+      };
+
+      app.config.globalProperties.$updateConsent = updateConsentFn;
+      app.provide('updateConsent', updateConsentFn);
     }
-
-    // Make gtag available throughout the app
-    app.config.globalProperties.$gtag = gtag;
-    app.provide('gtag', gtag);
-
-    // Provide tracking helper methods
-    provideTrackingMethods(app, gtag);
-
-    // Add method to update consent when user makes a choice
-    app.config.globalProperties.$updateConsent = (consent = {}) => {
-      gtag('consent', 'update', consent);
-    };
-    app.provide('updateConsent', app.config.globalProperties.$updateConsent);
   },
 };
 
