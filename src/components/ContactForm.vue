@@ -1,11 +1,16 @@
 <!-- /components/ContactForm.vue -->
 
 <script setup>
-import { ref, reactive, computed, inject } from "vue";
+import { ref, reactive, computed, inject, onMounted } from "vue";
 
 // Import analytics from our plugin
 const gtag = inject("gtag");
 const analytics = inject("analytics");
+
+// Track form views
+onMounted(() => {
+  analytics.trackEvent("Form", "view", "Contact Form");
+});
 
 // Form state
 const formData = reactive({
@@ -211,6 +216,11 @@ const submitForm = async () => {
     isSubmitting.value = false;
   }
 };
+
+// Helper function to track field interactions
+const trackFieldInteraction = (fieldName) => {
+  analytics.trackEvent("Form", "field_interaction", fieldName);
+};
 </script>
 
 <template>
@@ -280,6 +290,7 @@ const submitForm = async () => {
                   id="name"
                   v-model="formData.name"
                   @blur="validateField('name')"
+                  @focus="trackFieldInteraction('name')"
                   type="text"
                   class="form-input"
                   :class="{ 'border-error': formErrors.name }"
@@ -297,6 +308,7 @@ const submitForm = async () => {
                   id="email"
                   v-model="formData.email"
                   @blur="validateField('email')"
+                  @focus="trackFieldInteraction('email')"
                   type="email"
                   class="form-input"
                   :class="{ 'border-error': formErrors.email }"
@@ -314,6 +326,7 @@ const submitForm = async () => {
                   id="phone"
                   v-model="formData.phone"
                   @blur="validateField('phone')"
+                  @focus="trackFieldInteraction('phone')"
                   type="tel"
                   class="form-input"
                   :class="{ 'border-error': formErrors.phone }"
@@ -333,6 +346,7 @@ const submitForm = async () => {
                   id="service"
                   v-model="formData.service"
                   @blur="validateField('service')"
+                  @focus="trackFieldInteraction('service')"
                   class="form-input"
                   :class="{ 'border-error': formErrors.service }"
                   required
@@ -357,6 +371,7 @@ const submitForm = async () => {
                   id="budget"
                   v-model="formData.budget"
                   @blur="validateField('budget')"
+                  @focus="trackFieldInteraction('budget')"
                   class="form-input"
                   :class="{ 'border-error': formErrors.budget }"
                   required
@@ -381,6 +396,7 @@ const submitForm = async () => {
                   id="message"
                   v-model="formData.message"
                   @blur="validateField('message')"
+                  @focus="trackFieldInteraction('message')"
                   class="form-input min-h-[120px]"
                   :class="{ 'border-error': formErrors.message }"
                   placeholder="Tell us about your project, goals, and any specific requirements..."
@@ -406,6 +422,9 @@ const submitForm = async () => {
                 type="submit"
                 class="btn-primary w-full"
                 :disabled="isSubmitting"
+                @click="
+                  analytics.trackEvent('Form', 'submit_attempt', 'Contact Form')
+                "
               >
                 <span
                   v-if="isSubmitting"

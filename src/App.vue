@@ -121,7 +121,7 @@ onBeforeUnmount(() => {
 <template>
   <AppHeader />
   <RouterView />
-  <SeoChecklistBanner />
+  <!-- <SeoChecklistBanner /> -->
   <AppFooter />
   <Transition name="modal-fade">
     <WebAppModal

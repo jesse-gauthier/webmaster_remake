@@ -104,6 +104,32 @@ function provideTrackingMethods(app, gtag) {
         'send_to': `${conversionId}/${label}`,
         'value': value
       });
+    },
+
+    // Track form submissions
+    trackFormSubmission: (formName, formData = {}) => {
+      gtag('event', 'form_submission', {
+        'event_category': 'Form',
+        'event_label': formName,
+        'form_data': JSON.stringify(formData)
+      });
+    },
+
+    // Track content engagement
+    trackEngagement: (contentType, contentId, action, value) => {
+      gtag('event', action, {
+        'event_category': 'Engagement',
+        'content_type': contentType,
+        'content_id': contentId,
+        'value': value
+      });
+    },
+
+    // Track ecommerce events
+    trackEcommerce: (action, data = {}) => {
+      gtag('event', action, {
+        ...data
+      });
     }
   };
 
