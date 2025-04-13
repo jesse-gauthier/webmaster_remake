@@ -59,13 +59,6 @@ const trackCtaClick = (buttonName) => {
   <main>
     <section id="hero-section" class="hero-section">
       <HomeHero />
-      <a
-        href="#services"
-        @click="trackCtaClick('hero_services_button')"
-        class="btn-primary"
-      >
-        Explore Our Services
-      </a>
     </section>
     <section id="services-section" class="py-16 bg-white">
       <ServicesShowcase />
