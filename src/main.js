@@ -18,7 +18,7 @@ import CookieConsentBar from './components/CookieConsentBar.vue';
 // Initialize Clarity with configuration options
 if (import.meta.env.PROD) {  // Only run in production
     try {
-        const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || 'r3l7gra9rc';
+        const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || '';
         Clarity.init(projectId, {
             // Respect "Do Not Track" browser setting
             disableDoNotTrack: false,
@@ -59,3 +59,5 @@ app.use(router);
 app.component('CookieConsentBar', CookieConsentBar);
 
 app.mount("#app");
+
+
