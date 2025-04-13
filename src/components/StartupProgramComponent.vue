@@ -34,7 +34,7 @@
             style="animation-delay: 0.2s"
           >
             <a
-              href="#apply"
+              href="/contact#contact-form"
               class="btn-primary bg-white text-primary-600 hover:bg-neutral-100 btn-lg"
             >
               Start Your Tech Partnership → $1,500 to Begin
@@ -57,7 +57,7 @@
         <div class="container-site">
           <div class="flex justify-center">
             <a
-              href="/contact"
+              href="/contact#contact-form"
               class="btn-primary bg-white text-accent-600 hover:bg-neutral-100 shadow-lg"
             >
               Book Your Free Strategy Call (24hr Response Guaranteed)
@@ -821,9 +821,9 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="#risk-free" class="btn-primary">
+          <router-link to="/contact#contact-form" class="btn-primary">
             Get Your Free Consultation & Project Roadmap
-          </a>
+          </router-link>
           <a href="#guide" class="btn-outline ml-4">
             Download Our Partnership Guide
           </a>
@@ -843,12 +843,12 @@
             spots left this month.
           </p>
           <div class="flex flex-wrap justify-center gap-4">
-            <a
-              href="/contact"
+            <router-link
+              to="/contact#contact-form"
               class="btn-lg bg-white text-primary-600 hover:bg-neutral-100"
             >
               Schedule Your Free Consultation
-            </a>
+            </router-link>
             <a
               href="#seo-checklist"
               class="btn-lg border-2 border-white text-white hover:bg-primary-500"

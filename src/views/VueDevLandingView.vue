@@ -623,11 +623,11 @@ onMounted(() => {
                 </li>
               </ul>
 
-              <a
-                href="#contact"
+              <router-link
+                to="/contact#contact-form"
                 class="btn-primary w-full text-center"
                 aria-label="Get started with equity model"
-                >Get Started</a
+                >Get Started</router-link
               >
             </div>
           </div>
@@ -692,11 +692,11 @@ onMounted(() => {
                 </li>
               </ul>
 
-              <a
-                href="#contact"
+              <router-link
+                to="/contact#contact-form"
                 class="btn-outline w-full text-center"
                 aria-label="Get started with traditional model"
-                >Request Quote</a
+                >Request Quote</router-link
               >
             </div>
           </div>

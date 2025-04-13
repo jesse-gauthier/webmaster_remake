@@ -11,11 +11,12 @@
             Elevate your e-commerce business with custom Shopify solutions
           </p>
           <div class="flex justify-center gap-4">
-            <button
+            <router-link
+              to="/contact#contact-form"
               class="btn-primary bg-neutral-cream text-accent-600 hover:bg-neutral-100 btn-lg"
             >
               Start Your Project
-            </button>
+            </router-link>
             <button
               class="btn-outline border-neutral-cream text-neutral-cream hover:bg-accent-500 hover:border-accent-500"
             >
@@ -183,18 +184,21 @@
                   <span>{{ feature }}</span>
                 </li>
               </ul>
-              <button
+              <router-link
+                to="/contact#contact-form"
                 :class="[index === 1 ? 'btn-primary' : 'btn-outline', 'w-full']"
               >
                 Get Started
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
 
         <div class="text-center mt-12">
           <p class="mb-4">Need a custom Shopify solution?</p>
-          <button class="btn-secondary">Request Custom Quote</button>
+          <router-link to="/contact#contact-form" class="btn-secondary"
+            >Request Custom Quote</router-link
+          >
         </div>
       </div>
     </section>
@@ -262,7 +266,7 @@
             for your business.
           </p>
           <router-link
-            to="/contact"
+            to="/contact#contact-form"
             class="btn-primary bg-neutral-cream text-accent-600 hover:bg-neutral-100 btn-lg"
           >
             Book a Free Strategy Call

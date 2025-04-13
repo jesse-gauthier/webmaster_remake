@@ -11,7 +11,9 @@
             Custom WordPress solutions tailored to your business needs
           </p>
           <div class="flex justify-center gap-4">
-            <button class="btn-primary btn-lg">Get Started</button>
+            <router-link to="/contact#contact-form" class="btn-primary btn-lg"
+              >Get Started</router-link
+            >
             <button
               class="btn-outline border-neutral-cream text-neutral-cream hover:bg-primary-500 hover:border-primary-500"
             >
@@ -183,7 +185,7 @@
                 </li>
               </ul>
               <router-link
-                to="/new-client-form"
+                to="/contact#contact-form"
                 :class="[index === 1 ? 'btn-primary' : 'btn-outline', 'w-full']"
               >
                 Get Started
@@ -194,7 +196,9 @@
 
         <div class="text-center mt-12">
           <p class="mb-4">Need a custom solution?</p>
-          <button class="btn-secondary">Contact Us for Custom Pricing</button>
+          <router-link to="/contact#contact-form" class="btn-secondary"
+            >Contact Us for Custom Pricing</router-link
+          >
         </div>
       </div>
     </section>
@@ -211,7 +215,7 @@
             business grow online.
           </p>
           <router-link
-            to="/contact"
+            to="/contact#contact-form"
             class="btn-primary bg-neutral-cream text-accent-600 hover:bg-neutral-100 btn-lg"
           >
             Schedule a Free Consultation
