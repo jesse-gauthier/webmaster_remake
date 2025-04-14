@@ -4,31 +4,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useSeo } from "@/composables/useSeo";
 import { seoConfig } from "@/config/seo.config";
 
-// Import views
-import HomeView from "@/views/HomeView.vue";
-import ServicesView from "@/views/ServicesView.vue";
-import PortfolioView from "@/views/PortfolioView.vue";
-import ContactView from "@/views/ContactView.vue";
-import AboutView from "@/views/AboutView.vue";
-import WordPressView from "@/views/WordPressView.vue";
-import ShopifyView from "@/views/ShopifyView.vue";
-import MaintenanceView from "@/views/MaintenanceView.vue";
-import ConsultationsView from "@/views/ConsultationsView.vue";
-import PolicyView from "@/views/PolicyView.vue";
-import NewClientForm from "@/components/NewClientForm.vue";
-import BlogsView from "@/views/BlogsView.vue";
-import BlogArticleView from "@/views/BlogArticleView.vue";
-import LandingSeoView from "@/views/LandingSeoView.vue";
-import SeoCheckList from "@/views/SeoCheckList.vue";
-import VueDevLandingView from "@/views/VueDevLandingView.vue";
-import StartupPartnershipForm from "@/views/StartupPartnershipForm.vue";
-import StartupPartnershipView from "@/views/StartupPartnershipView.vue";
-
 const routes = [
   {
     path: '/web-applications',
     name: 'Web Applications',
-    component: VueDevLandingView,
+    component: () => import('@/views/VueDevLandingView.vue'),
     meta: {
       seo: {
         title: "Vue Application Development | WebMaster",
@@ -41,7 +21,7 @@ const routes = [
   {
     path: '/startup',
     name: 'Startup Partnership Program',
-    component: StartupPartnershipView,
+    component: () => import('@/views/StartupPartnershipView.vue'),
     meta: {
       seo: {
         title: "Startup Partnership Program | Web Application Development | WebMaster",
@@ -54,7 +34,7 @@ const routes = [
   {
     path: '/startup-application',
     name: 'Startup Partnership Application',
-    component: StartupPartnershipForm,
+    component: () => import('@/views/StartupPartnershipForm.vue'),
     meta: {
       seo: {
         title: "Apply for Startup Partnership | WebMaster",
@@ -67,7 +47,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: HomeView,
+    component: () => import('@/views/HomeView.vue'),
     meta: {
       seo: {
         title: seoConfig.defaultTitle || "Web Development Services | WebMaster",
@@ -82,7 +62,7 @@ const routes = [
   {
     path: "/services",
     name: "Services",
-    component: ServicesView,
+    component: () => import('@/views/ServicesView.vue'),
     meta: {
       seo: {
         title: "Web Development Services | WebMaster",
@@ -109,7 +89,7 @@ const routes = [
   {
     path: "/portfolio",
     name: "Portfolio",
-    component: PortfolioView,
+    component: () => import('@/views/PortfolioView.vue'),
     meta: {
       seo: {
         title: "Web Development Portfolio | WebMaster",
@@ -123,7 +103,7 @@ const routes = [
   {
     path: "/contact",
     name: "Contact",
-    component: ContactView,
+    component: () => import('@/views/ContactView.vue'),
     meta: {
       seo: {
         title: "Contact Us | WebMaster",
@@ -137,7 +117,7 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: AboutView,
+    component: () => import('@/views/AboutView.vue'),
     meta: {
       seo: {
         title: "About Our Web Development Agency | WebMaster",
@@ -151,7 +131,7 @@ const routes = [
   {
     path: "/wordpress",
     name: "WordPress",
-    component: WordPressView,
+    component: () => import('@/views/WordPressView.vue'),
     meta: {
       seo: {
         title: "WordPress Development Services | WebMaster",
@@ -165,7 +145,7 @@ const routes = [
   {
     path: "/shopify",
     name: "Shopify",
-    component: ShopifyView,
+    component: () => import('@/views/ShopifyView.vue'),
     meta: {
       seo: {
         title: "Shopify Development & E-commerce Solutions | WebMaster",
@@ -179,7 +159,7 @@ const routes = [
   {
     path: "/maintenance",
     name: "Maintenance",
-    component: MaintenanceView,
+    component: () => import('@/views/MaintenanceView.vue'),
     meta: {
       seo: {
         title: "Website Maintenance Services | WebMaster",
@@ -193,7 +173,7 @@ const routes = [
   {
     path: "/consultations",
     name: "Consultations",
-    component: ConsultationsView,
+    component: () => import('@/views/ConsultationsView.vue'),
     meta: {
       seo: {
         title: "Web Development Consultations | WebMaster",
@@ -207,7 +187,7 @@ const routes = [
   {
     path: "/policies",
     name: "Policy",
-    component: PolicyView,
+    component: () => import('@/views/PolicyView.vue'),
     meta: {
       seo: {
         title: "Privacy & Terms of Service | WebMaster",
@@ -222,7 +202,7 @@ const routes = [
   {
     path: "/new-client-form",
     name: "NewClientForm",
-    component: NewClientForm,
+    component: () => import('@/components/NewClientForm.vue'),
     meta: {
       seo: {
         title: "New Client Form | WebMaster",
@@ -236,7 +216,7 @@ const routes = [
   {
     path: "/seo",
     name: "LandingSeo",
-    component: LandingSeoView,
+    component: () => import('@/views/LandingSeoView.vue'),
     meta: {
       seo: {
         title: "SEO Services & Optimization | WebMaster",
@@ -250,7 +230,7 @@ const routes = [
   {
     path: "/seo-checklist",
     name: "SeoCheckList",
-    component: SeoCheckList,
+    component: () => import('@/views/SeoCheckList.vue'),
     meta: {
       seo: {
         title: "SEO Checklist | OttawaWebMasters",
@@ -265,7 +245,7 @@ const routes = [
   {
     path: "/blog",
     name: "Blog",
-    component: BlogsView,
+    component: () => import('@/views/BlogsView.vue'),
     meta: {
       seo: {
         title: "Web Development Blog | WebMaster",
@@ -279,7 +259,7 @@ const routes = [
   {
     path: "/blog/:slug",
     name: "BlogArticle",
-    component: BlogArticleView,
+    component: () => import('@/views/BlogArticleView.vue'),
     props: true,
     meta: {
       seo: {
