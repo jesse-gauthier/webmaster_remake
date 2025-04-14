@@ -135,8 +135,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link"> Skip to main content </a>
   <AppHeader />
-  <RouterView />
+  <main id="main-content">
+    <RouterView />
+  </main>
   <AppFooter />
   <Transition name="modal-fade">
     <WebAppModal
@@ -150,6 +154,22 @@ onBeforeUnmount(() => {
 </template>
 
 <style>
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background-color: #4292ac;
+  color: white;
+  z-index: 100;
+  transition: top 0.2s ease;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
