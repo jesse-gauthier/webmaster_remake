@@ -1,4 +1,9 @@
 <template>
+  <CalendlyEmbed
+    v-if="showCalendly"
+    calendlyLink="https://calendly.com/your-link"
+    :showBadgeWidget="false"
+  />
   <div>
     <!-- Hero Section -->
     <section class="bg-primary-600 text-white py-20 relative overflow-hidden">
@@ -34,13 +39,13 @@
             style="animation-delay: 0.2s"
           >
             <a
-              href="/contact#contact-form"
+              href="#startupForm"
               class="btn-primary bg-white text-primary-600 hover:bg-neutral-100 btn-lg"
             >
               Start Your Tech Partnership → $1,500 to Begin
             </a>
             <a
-              href="#calculator"
+              href="#cost-comparison"
               class="btn-outline border-white text-white hover:bg-primary-500 hover:border-primary-500 btn-lg"
             >
               Calculate Your Development Savings
@@ -338,15 +343,6 @@
             </div>
           </div>
         </div>
-
-        <div class="text-center mt-8">
-          <a href="#partnership-model" class="btn-primary">
-            Download Partnership Terms & Benefits
-          </a>
-          <a href="/contact" class="btn-outline ml-4">
-            Schedule Partnership Discussion
-          </a>
-        </div>
       </div>
     </section>
 
@@ -465,11 +461,8 @@
         </div>
 
         <div class="text-center">
-          <a href="#tech-assessment" class="btn-primary">
+          <a href="/contact" target="_blank" class="btn-primary">
             Get Your Free Technical Assessment
-          </a>
-          <a href="#checklist" class="btn-outline ml-4">
-            Download Our Development Checklist
           </a>
         </div>
       </div>
@@ -911,7 +904,14 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
+import CalendlyEmbed from "./CalendlyEmbed.vue";
+
+const showCalendly = ref(false);
+
+const openCalendly = () => {
+  showCalendly.value = true;
+};
 
 // Logic to show sticky CTA on scroll
 onMounted(() => {

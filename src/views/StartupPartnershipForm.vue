@@ -192,7 +192,7 @@ const getEquityAndTerm = computed(() => {
 </script>
 
 <template>
-  <div class="container-site section-padding">
+  <div id="startupForm" class="container-site section-padding">
     <h1 class="text-3xl mb-8">Startup Partnership Program Application</h1>
 
     <!-- Progress bar -->
