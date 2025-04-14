@@ -90,6 +90,19 @@ const routes = [
           "Explore our comprehensive web development services including custom websites, e-commerce solutions, and website maintenance.",
         image: seoConfig.socialImage,
         type: "website",
+        structuredData: [
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Web Development Services",
+            "description": "Explore our comprehensive web development services including custom websites, e-commerce solutions, and website maintenance.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Ottawa Web Masters",
+              "url": "https://ottawawebmasters.ca"
+            }
+          }
+        ]
       },
     },
   },
