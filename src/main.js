@@ -18,22 +18,15 @@ import CookieConsentBar from './components/CookieConsentBar.vue';
 // Initialize Clarity with configuration options
 if (import.meta.env.PROD) {  // Only run in production
     try {
-        const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || '';
-        Clarity.init(projectId, {
-            // Respect "Do Not Track" browser setting
-            disableDoNotTrack: false,
+        const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || 'r3l7gra9rc';
 
-            // Disable session recording if needed
-            // disableSessionRecording: false,
-
-            // Cookie settings for compliance
-            cookies: true,
-
-            // Disable specific features if needed
-            // disableHeatMap: false,
-            // disableExperiments: true,
-        });
-        console.log('Clarity initialized successfully');
+        // Use the correct method to initialize Clarity
+        if (typeof Clarity.start === 'function') {
+            Clarity.start(projectId);
+            console.log('Clarity initialized successfully');
+        } else {
+            console.error('Clarity.start method not available');
+        }
     } catch (error) {
         console.error('Failed to initialize Clarity:', error);
     }

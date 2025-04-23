@@ -11,7 +11,11 @@ export const clarityService = {
      */
     identifyUser(userId, attributes = {}) {
         if (Clarity && typeof Clarity.identify === 'function') {
-            Clarity.identify(userId, attributes);
+            try {
+                Clarity.identify(userId, attributes);
+            } catch (error) {
+                console.error('Clarity identify error:', error);
+            }
         }
     },
 
@@ -22,7 +26,11 @@ export const clarityService = {
      */
     trackEvent(name, properties = {}) {
         if (Clarity && typeof Clarity.event === 'function') {
-            Clarity.event(name, properties);
+            try {
+                Clarity.event(name, properties);
+            } catch (error) {
+                console.error('Clarity event error:', error);
+            }
         }
     },
 
@@ -33,7 +41,11 @@ export const clarityService = {
      */
     setVariable(key, value) {
         if (Clarity && typeof Clarity.set === 'function') {
-            Clarity.set(key, value);
+            try {
+                Clarity.set(key, value);
+            } catch (error) {
+                console.error('Clarity set error:', error);
+            }
         }
     }
 };
@@ -43,20 +55,15 @@ export const clarityService = {
  * This ensures Clarity is properly loaded on page refresh
  */
 const initClarity = () => {
-    try {
-        if (typeof Clarity.start === 'function') {
-            Clarity.start("r3l7gra9rc");
-        }
-    } catch (error) {
-        console.error('Failed to initialize Clarity:', error);
-    }
+    // Don't initialize here - we're now initializing in main.js
+    // This prevents duplicate initialization
 };
 
 // Vue plugin
 export default {
     install(app) {
-        // Initialize Clarity on plugin installation
-        initClarity();
+        // We're not initializing Clarity here anymore
+        // as it's now handled in main.js
 
         // Make clarity service available via this.$clarity
         app.config.globalProperties.$clarity = clarityService;
