@@ -51,23 +51,36 @@ export default {
       });
 
       // Configure Google tags
-      gtag('config', config.googleAdsId);
-      gtag('config', config.googleAnalyticsId, {
-        'anonymize_ip': true,
-        'debug_mode': config.debug
-      });
+      if (config.googleAdsId) {
+        gtag('config', config.googleAdsId);
+      }
+
+      if (config.googleAnalyticsId) {
+        gtag('config', config.googleAnalyticsId, {
+          'anonymize_ip': true,
+          'debug_mode': config.debug
+        });
+      } else {
+        console.warn('Google Analytics ID is missing!');
+      }
 
       // Load the gtag script
       try {
         const gtagScript = document.createElement('script');
         gtagScript.async = true;
-        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.googleAdsId}`;
+        // Use Google Analytics ID for the script source instead of Ads ID
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.googleAnalyticsId}`;
 
-        gtagScript.onerror = () => {
-          console.warn('Failed to load Google Analytics script');
+        gtagScript.onerror = (error) => {
+          console.warn('Failed to load Google Analytics script:', error);
         };
 
         document.head.appendChild(gtagScript);
+
+        // Add an event to log when script loads successfully
+        gtagScript.onload = () => {
+          console.log('Google Analytics script loaded successfully');
+        };
       } catch (err) {
         console.error('Error initializing analytics:', err);
       }
@@ -82,6 +95,7 @@ export default {
       // Add method to update consent when user makes a choice
       const updateConsentFn = (consent = {}) => {
         try {
+          console.log('Updating consent settings:', consent);
           gtag('consent', 'update', consent);
         } catch (err) {
           console.warn('Failed to update consent', err);
