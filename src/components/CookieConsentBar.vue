@@ -185,7 +185,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, defineProps } from "vue";
+
+// Define updateConsent as a prop
+const props = defineProps({
+  updateConsent: {
+    type: Function,
+    default: (consent) => {
+      console.log("Consent update (mock):", consent);
+    },
+  },
+});
 
 const COOKIE_CONSENT_KEY = "cookie_consent_status";
 const COOKIE_PREFERENCES_KEY = "cookie_preferences";
@@ -201,10 +211,6 @@ const cookiePreferences = ref({
 // Get analytics and consent update functions from app with fallbacks for development
 const analytics = inject("analytics", {
   trackEvent: (...args) => console.log("Analytics event (mock):", ...args),
-});
-
-const updateConsent = inject("updateConsent", (consent) => {
-  console.log("Consent update (mock):", consent);
 });
 
 // Initialize component
@@ -244,7 +250,7 @@ const loadSavedPreferences = () => {
 // Apply the consent settings to the actual analytics tools
 const applyConsentPreferences = (preferences) => {
   try {
-    updateConsent({
+    props.updateConsent({
       analytics_storage: preferences.analytics ? "granted" : "denied",
       ad_storage: preferences.marketing ? "granted" : "denied",
       ad_user_data: preferences.marketing ? "granted" : "denied",

@@ -177,6 +177,10 @@ import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 import { useRoute } from "vue-router";
 import blogData from "@/data/blogs.json";
 import { getGradientForCategory } from "@/utils/gradientUtils";
+import { useRouteSeo } from "@/composables/useRouteSeo";
+
+// Apply SEO from route meta
+useRouteSeo();
 
 const route = useRoute();
 const slug = computed(() => route.params.slug);

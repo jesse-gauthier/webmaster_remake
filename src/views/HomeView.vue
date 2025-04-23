@@ -6,10 +6,33 @@ import PricingSection from "@/components/PricingSection.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import AwardsCarousel from "@/components/AwardsCarousel.vue";
 import { onMounted, onUnmounted, ref, inject } from "vue";
+import { useRouteSeo } from "@/composables/useRouteSeo";
+
+// Apply SEO from route meta
+useRouteSeo();
 
 const analytics = inject("analytics");
 const observerRef = ref(null);
 const visibleSections = ref(new Set());
+
+// Define services data
+const services = ref([
+  {
+    id: "web-design",
+    name: "Web Design",
+    link: "/services#web-design",
+  },
+  {
+    id: "web-development",
+    name: "Web Development",
+    link: "/services#web-development",
+  },
+  {
+    id: "seo",
+    name: "SEO Services",
+    link: "/services#seo",
+  },
+]);
 
 // Track page view and setup section tracking
 onMounted(() => {
@@ -62,15 +85,6 @@ const trackCtaClick = (buttonName) => {
     </section>
     <section id="services-section" class="py-16 bg-white">
       <ServicesShowcase />
-      <div v-for="service in services" :key="service.id" class="card">
-        <a
-          :href="service.link"
-          @click="trackCtaClick(`service_${service.id}_button`)"
-          class="btn-text"
-        >
-          Learn More →
-        </a>
-      </div>
     </section>
     <section id="awards-section">
       <AwardsCarousel />

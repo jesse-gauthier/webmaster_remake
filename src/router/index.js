@@ -1,7 +1,6 @@
 // src/router/index.js
 
 import { createRouter, createWebHistory } from "vue-router";
-import { useSeo } from "@/composables/useSeo";
 import { seoConfig } from "@/config/seo.config";
 
 const routes = [
@@ -292,32 +291,26 @@ const router = createRouter({
   },
 });
 
-// SEO route guard
-router.beforeEach((to, from, next) => {
+// SEO route guard - prepare SEO data but don't call useSeo directly
+router.beforeEach(async (to, from, next) => {
   // Check if the route has SEO meta
   if (to.meta.seo) {
     // For dynamic blog articles, fetch SEO data from the article content
     if (to.name === "BlogArticle") {
-      import("@/data/blogs.json").then((module) => {
+      try {
+        const module = await import("@/data/blogs.json");
         const blogs = module.default;
         const slug = to.params.slug;
         const article = blogs.find((blog) => blog.slug === slug);
 
         if (article) {
-          const seoData = {
+          // Set SEO data in the route meta for the component to use
+          to.meta.seoData = {
             ...to.meta.seo,
             title: `${article.title} | WebMaster Blog`,
             description: article.excerpt,
-            image: article.featuredImage || seoConfig.defaultImage,
-          };
-
-          // Apply SEO data
-          useSeo({
-            title: seoData.title,
-            description: seoData.description,
             url: to.path,
-            type: seoData.type,
-            image: seoData.image,
+            image: article.featuredImage || seoConfig.defaultImage,
             structuredData: {
               "@context": "https://schema.org",
               "@type": "BlogPosting",
@@ -329,28 +322,33 @@ router.beforeEach((to, from, next) => {
                 name: article.author,
               },
             },
-          });
+          };
         }
-      });
+      } catch (error) {
+        console.error("Error loading blog data:", error);
+      }
     } else {
-      const seoData = to.meta.seo;
-
-      // Apply SEO data
-      useSeo({
-        title: seoData.title,
-        description: seoData.description,
+      // For static routes, store SEO data in route meta
+      to.meta.seoData = {
+        title: to.meta.seo.title,
+        description: to.meta.seo.description,
         url: to.path,
-        type: seoData.type || "website",
-        image: seoData.image,
-        structuredData: seoData.structuredData,
-      });
+        type: to.meta.seo.type || "website",
+        image: to.meta.seo.image,
+        structuredData: to.meta.seo.structuredData,
+      };
+    }
 
-      // Handle noindex pages
-      if (seoData.noindex) {
-        const metaTag = document.createElement("meta");
-        metaTag.setAttribute("name", "robots");
+    // Handle noindex pages
+    if (to.meta.seo.noindex) {
+      const metaTag = document.querySelector('meta[name="robots"]');
+      if (metaTag) {
         metaTag.setAttribute("content", "noindex, nofollow");
-        document.head.appendChild(metaTag);
+      } else {
+        const newMetaTag = document.createElement("meta");
+        newMetaTag.setAttribute("name", "robots");
+        newMetaTag.setAttribute("content", "noindex, nofollow");
+        document.head.appendChild(newMetaTag);
       }
     }
   }

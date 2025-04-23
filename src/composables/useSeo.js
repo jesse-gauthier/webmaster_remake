@@ -2,6 +2,7 @@
 
 import { useHead } from "@vueuse/head";
 import { seoConfig, getOrganizationSchema } from "@/config/seo.config";
+import { getCurrentInstance } from "vue";
 
 /**
  * Reusable SEO composable for managing head/meta tags
@@ -17,6 +18,13 @@ import { seoConfig, getOrganizationSchema } from "@/config/seo.config";
  * @returns {void}
  */
 export function useSeo(options) {
+  // Check if this is being called within a component's setup function
+  const instance = getCurrentInstance();
+  if (!instance) {
+    console.warn("useSeo must be called within a component setup function");
+    return;
+  }
+
   // Use centralized config from seo.config.js
   const siteConfig = {
     siteName: seoConfig.siteName,
@@ -51,13 +59,13 @@ export function useSeo(options) {
   const structuredData = options.structuredData
     ? options.structuredData
     : [
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          url: siteConfig.siteUrl,
-          name: siteConfig.siteName,
-        },
-      ];
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        url: siteConfig.siteUrl,
+        name: siteConfig.siteName,
+      },
+    ];
 
   // Apply meta tags using useHead
   useHead({
