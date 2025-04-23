@@ -247,6 +247,8 @@ const applyConsentPreferences = (preferences) => {
     updateConsent({
       analytics_storage: preferences.analytics ? "granted" : "denied",
       ad_storage: preferences.marketing ? "granted" : "denied",
+      ad_user_data: preferences.marketing ? "granted" : "denied",
+      ad_personalization: preferences.marketing ? "granted" : "denied",
     });
   } catch (error) {
     console.warn("Failed to update consent settings:", error);
