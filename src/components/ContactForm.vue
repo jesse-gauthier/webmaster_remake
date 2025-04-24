@@ -284,135 +284,217 @@ const trackFieldInteraction = (fieldName) => {
           <!-- Form Side -->
           <div class="md:w-1/2 p-8">
             <form @submit.prevent="submitForm" class="space-y-6">
-              <div>
-                <label for="name" class="form-label">Full Name</label>
-                <input
-                  id="name"
-                  v-model="formData.name"
-                  @blur="validateField('name')"
-                  @focus="trackFieldInteraction('name')"
-                  type="text"
-                  class="form-input"
-                  :class="{ 'border-error': formErrors.name }"
-                  placeholder="Your Full Name"
-                  required
-                />
-                <p v-if="formErrors.name" class="form-error">
-                  {{ formErrors.name }}
-                </p>
-              </div>
+              <div role="group" aria-labelledby="personal-info-heading">
+                <h3 id="personal-info-heading" class="sr-only">
+                  Personal Information
+                </h3>
 
-              <div>
-                <label for="email" class="form-label">Email Address</label>
-                <input
-                  id="email"
-                  v-model="formData.email"
-                  @blur="validateField('email')"
-                  @focus="trackFieldInteraction('email')"
-                  type="email"
-                  class="form-input"
-                  :class="{ 'border-error': formErrors.email }"
-                  placeholder="you@example.com"
-                  required
-                />
-                <p v-if="formErrors.email" class="form-error">
-                  {{ formErrors.email }}
-                </p>
-              </div>
-
-              <div>
-                <label for="phone" class="form-label">Phone Number</label>
-                <input
-                  id="phone"
-                  v-model="formData.phone"
-                  @blur="validateField('phone')"
-                  @focus="trackFieldInteraction('phone')"
-                  type="tel"
-                  class="form-input"
-                  :class="{ 'border-error': formErrors.phone }"
-                  placeholder="(555) 123-4567"
-                  required
-                />
-                <p v-if="formErrors.phone" class="form-error">
-                  {{ formErrors.phone }}
-                </p>
-              </div>
-
-              <div>
-                <label for="service" class="form-label"
-                  >Service Interested In</label
-                >
-                <select
-                  id="service"
-                  v-model="formData.service"
-                  @blur="validateField('service')"
-                  @focus="trackFieldInteraction('service')"
-                  class="form-input"
-                  :class="{ 'border-error': formErrors.service }"
-                  required
-                >
-                  <option value="" disabled>Select a Service</option>
-                  <option
-                    v-for="option in serviceOptions"
-                    :key="option.value"
-                    :value="option.value"
+                <div class="mb-4">
+                  <label for="name" class="form-label" id="name-label"
+                    >Full Name</label
                   >
-                    {{ option.label }}
-                  </option>
-                </select>
-                <p v-if="formErrors.service" class="form-error">
-                  {{ formErrors.service }}
-                </p>
-              </div>
-
-              <div>
-                <label for="budget" class="form-label">Estimated Budget</label>
-                <select
-                  id="budget"
-                  v-model="formData.budget"
-                  @blur="validateField('budget')"
-                  @focus="trackFieldInteraction('budget')"
-                  class="form-input"
-                  :class="{ 'border-error': formErrors.budget }"
-                  required
-                >
-                  <option value="" disabled>Select Budget Range</option>
-                  <option
-                    v-for="option in budgetOptions"
-                    :key="option.value"
-                    :value="option.value"
+                  <input
+                    id="name"
+                    v-model="formData.name"
+                    @blur="validateField('name')"
+                    @focus="trackFieldInteraction('name')"
+                    type="text"
+                    class="form-input"
+                    :class="{ 'border-error': formErrors.name }"
+                    placeholder="Your Full Name"
+                    aria-required="true"
+                    aria-invalid="formErrors.name ? true : false"
+                    aria-describedby="name-error"
+                    required
+                  />
+                  <p
+                    v-if="formErrors.name"
+                    class="form-error"
+                    id="name-error"
+                    aria-live="polite"
                   >
-                    {{ option.label }}
-                  </option>
-                </select>
-                <p v-if="formErrors.budget" class="form-error">
-                  {{ formErrors.budget }}
-                </p>
+                    {{ formErrors.name }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label for="email" class="form-label" id="email-label"
+                    >Email Address</label
+                  >
+                  <input
+                    id="email"
+                    v-model="formData.email"
+                    @blur="validateField('email')"
+                    @focus="trackFieldInteraction('email')"
+                    type="email"
+                    class="form-input"
+                    :class="{ 'border-error': formErrors.email }"
+                    placeholder="you@example.com"
+                    aria-required="true"
+                    aria-invalid="formErrors.email ? true : false"
+                    aria-describedby="email-error"
+                    required
+                  />
+                  <p
+                    v-if="formErrors.email"
+                    class="form-error"
+                    id="email-error"
+                    aria-live="polite"
+                  >
+                    {{ formErrors.email }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label for="phone" class="form-label" id="phone-label"
+                    >Phone Number</label
+                  >
+                  <input
+                    id="phone"
+                    v-model="formData.phone"
+                    @blur="validateField('phone')"
+                    @focus="trackFieldInteraction('phone')"
+                    type="tel"
+                    class="form-input"
+                    :class="{ 'border-error': formErrors.phone }"
+                    placeholder="(555) 123-4567"
+                    aria-required="true"
+                    aria-invalid="formErrors.phone ? true : false"
+                    aria-describedby="phone-error"
+                    required
+                  />
+                  <p
+                    v-if="formErrors.phone"
+                    class="form-error"
+                    id="phone-error"
+                    aria-live="polite"
+                  >
+                    {{ formErrors.phone }}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <label for="message" class="form-label">Project Details</label>
-                <textarea
-                  id="message"
-                  v-model="formData.message"
-                  @blur="validateField('message')"
-                  @focus="trackFieldInteraction('message')"
-                  class="form-input min-h-[120px]"
-                  :class="{ 'border-error': formErrors.message }"
-                  placeholder="Tell us about your project, goals, and any specific requirements..."
-                  required
-                ></textarea>
-                <p v-if="formErrors.message" class="form-error">
-                  {{ formErrors.message }}
-                </p>
+              <div role="group" aria-labelledby="project-info-heading">
+                <h3 id="project-info-heading" class="sr-only">
+                  Project Information
+                </h3>
+
+                <div class="mb-4">
+                  <label for="service" class="form-label" id="service-label">
+                    Service Interested In
+                  </label>
+                  <select
+                    id="service"
+                    v-model="formData.service"
+                    @blur="validateField('service')"
+                    @focus="trackFieldInteraction('service')"
+                    class="form-input"
+                    :class="{ 'border-error': formErrors.service }"
+                    aria-required="true"
+                    aria-invalid="formErrors.service ? true : false"
+                    aria-describedby="service-error"
+                    required
+                  >
+                    <option value="" disabled>Select a Service</option>
+                    <option
+                      v-for="option in serviceOptions"
+                      :key="option.value"
+                      :value="option.value"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <p
+                    v-if="formErrors.service"
+                    class="form-error"
+                    id="service-error"
+                    aria-live="polite"
+                  >
+                    {{ formErrors.service }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label for="budget" class="form-label" id="budget-label"
+                    >Estimated Budget</label
+                  >
+                  <select
+                    id="budget"
+                    v-model="formData.budget"
+                    @blur="validateField('budget')"
+                    @focus="trackFieldInteraction('budget')"
+                    class="form-input"
+                    :class="{ 'border-error': formErrors.budget }"
+                    aria-required="true"
+                    aria-invalid="formErrors.budget ? true : false"
+                    aria-describedby="budget-error"
+                    required
+                  >
+                    <option value="" disabled>Select Budget Range</option>
+                    <option
+                      v-for="option in budgetOptions"
+                      :key="option.value"
+                      :value="option.value"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <p
+                    v-if="formErrors.budget"
+                    class="form-error"
+                    id="budget-error"
+                    aria-live="polite"
+                  >
+                    {{ formErrors.budget }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label for="message" class="form-label" id="message-label"
+                    >Project Details</label
+                  >
+                  <textarea
+                    id="message"
+                    v-model="formData.message"
+                    @blur="validateField('message')"
+                    @focus="trackFieldInteraction('message')"
+                    class="form-input min-h-[120px]"
+                    :class="{ 'border-error': formErrors.message }"
+                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    aria-required="true"
+                    aria-invalid="formErrors.message ? true : false"
+                    aria-describedby="message-error"
+                    required
+                  ></textarea>
+                  <p
+                    v-if="formErrors.message"
+                    class="form-error"
+                    id="message-error"
+                    aria-live="polite"
+                  >
+                    {{ formErrors.message }}
+                  </p>
+                </div>
               </div>
 
               <!-- Submission Alerts -->
-              <div v-if="submissionSuccess" class="alert alert-success">
+              <div
+                v-if="submissionSuccess"
+                class="alert alert-success mb-4"
+                role="status"
+                aria-live="polite"
+              >
+                <span class="sr-only">Success:</span>
                 Thank you! We've received your message and will contact you
                 soon.
               </div>
-              <div v-if="submissionError" class="alert alert-error">
+              <div
+                v-if="submissionError"
+                class="alert alert-error mb-4"
+                role="alert"
+                aria-live="assertive"
+              >
+                <span class="sr-only">Error:</span>
                 Oops! There was an error submitting the form. Please try again
                 later.
               </div>
@@ -422,6 +504,7 @@ const trackFieldInteraction = (fieldName) => {
                 type="submit"
                 class="btn-primary w-full"
                 :disabled="isSubmitting"
+                aria-busy="isSubmitting"
                 @click="
                   analytics.trackEvent('Form', 'submit_attempt', 'Contact Form')
                 "
@@ -429,11 +512,13 @@ const trackFieldInteraction = (fieldName) => {
                 <span
                   v-if="isSubmitting"
                   class="flex items-center justify-center"
+                  aria-hidden="true"
                 >
                   <svg
                     class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
                     <circle
                       class="opacity-25"
@@ -452,6 +537,9 @@ const trackFieldInteraction = (fieldName) => {
                   Sending...
                 </span>
                 <span v-else> Send </span>
+                <span class="sr-only">{{
+                  isSubmitting ? "Submitting form..." : "Submit contact form"
+                }}</span>
               </button>
             </form>
           </div>

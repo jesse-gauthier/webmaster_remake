@@ -1,0 +1,226 @@
+/**
+ * Accessibility CSS
+ * 
+ * This file contains global CSS styles for accessibility features.
+ * Import this file in your main CSS to ensure consistent accessibility styling.
+ */
+
+/* Screen Reader Only - Hide visually but keep accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Screen Reader Only - Focusable version that appears when focused */
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip Links */
+.skip-links {
+  position: absolute;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  top: 0;
+  left: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 8px 16px;
+  background-color: #4292ac;
+  color: white;
+  z-index: 100;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Focus Styles - Enhanced focus indicators for keyboard users */
+:focus {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Only show focus indicators for keyboard users, not mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Live Regions - For screen reader announcements */
+[aria-live] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Reduced Motion - Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (forced-colors: active) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    border: 2px solid transparent;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  :focus {
+    outline: 2px solid CanvasText;
+  }
+}
+
+/* Form Accessibility */
+input:disabled,
+button:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: #f87171;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23F87171' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+  padding-right: 32px;
+}
+
+/* Error messages for form fields */
+.form-error {
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Busy/Loading indicators */
+[aria-busy="true"] {
+  cursor: progress;
+}
+
+/* Improved button accessibility */
+button {
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Improved link accessibility */
+a:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Improved checkbox and radio accessibility */
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Improved select accessibility */
+select:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Improved textarea accessibility */
+textarea:focus-visible {
+  outline: 2px solid #4292ac;
+  outline-offset: 2px;
+}
+
+/* Modal accessibility */
+[role="dialog"][aria-modal="true"] {
+  position: fixed;
+  z-index: 1040;
+}
+
+/* Tooltip accessibility */
+[role="tooltip"] {
+  position: absolute;
+  z-index: 1060;
+}
+
+/* Alert accessibility */
+[role="alert"],
+[role="status"],
+[aria-live="assertive"],
+[aria-live="polite"] {
+  position: relative;
+}
+
+/* Table accessibility */
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+/* Improved contrast for placeholder text */
+::placeholder {
+  color: #6b7280;
+  opacity: 0.7;
+}

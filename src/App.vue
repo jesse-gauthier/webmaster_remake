@@ -135,40 +135,44 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- Skip link for keyboard users -->
-  <a href="#main-content" class="skip-link"> Skip to main content </a>
+  <!-- Enhanced skip links for keyboard users -->
+  <div class="skip-links">
+    <a href="#main-content" class="skip-link" tabindex="0"
+      >Skip to main content</a
+    >
+    <a href="#footer" class="skip-link" tabindex="0">Skip to footer</a>
+  </div>
+
+  <!-- Header with navigation landmark -->
   <AppHeader />
-  <main id="main-content">
+
+  <!-- Main content with improved landmark -->
+  <main id="main-content" role="main" tabindex="-1">
     <RouterView />
   </main>
-  <AppFooter />
+
+  <!-- Footer with landmark -->
+  <AppFooter id="footer" />
+
+  <!-- Improved modal accessibility -->
   <Transition name="modal-fade">
     <WebAppModal
       v-if="isModalOpen"
       :isOpen="isModalOpen"
       @close="closeModal"
       class="compact-modal"
+      aria-modal="true"
+      role="dialog"
+      aria-labelledby="modal-title"
     />
   </Transition>
-  <CookieConsentBar :update-consent="updateConsent" />
+
+  <!-- Cookie consent with improved accessibility -->
+  <CookieConsentBar :update-consent="updateConsent" aria-live="polite" />
 </template>
 
 <style>
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  padding: 8px 16px;
-  background-color: #4292ac;
-  color: white;
-  z-index: 100;
-  transition: top 0.2s ease;
-  font-weight: bold;
-}
-
-.skip-link:focus {
-  top: 0;
-}
+/* Skip link styles are now managed in accessibility.css */
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {

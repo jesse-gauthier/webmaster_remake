@@ -4,10 +4,41 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ottawa Web Masters - Professional web design and development services for small businesses in Ottawa."
+    />
+    <meta name="theme-color" content="#2E5944" />
+    <!-- Accessibility meta tags -->
     <title>Ottawa Web Masters</title>
+    <!-- Preload critical fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <!-- Accessibility enhancement: Add no-JS fallback message -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          text-align: center;
+          max-width: 600px;
+          margin: 0 auto;
+        "
+      >
+        <h1>JavaScript Required</h1>
+        <p>
+          We're sorry, but Ottawa Web Masters requires JavaScript to function
+          properly. Please enable JavaScript in your browser settings to
+          continue.
+        </p>
+        <p>
+          If you need assistance, please contact us at
+          Contact@ottawawebmasters.ca
+        </p>
+      </div>
+    </noscript>
   </body>
 </html>
