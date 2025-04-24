@@ -56,9 +56,16 @@ export function useSeo(options) {
   };
 
   // Prepare structured data if provided
-  const structuredData = options.structuredData
-    ? options.structuredData
-    : [
+  let structuredDataArray = [];
+
+  if (options.structuredData) {
+    // Handle both single object and array cases
+    structuredDataArray = Array.isArray(options.structuredData)
+      ? options.structuredData
+      : [options.structuredData];
+  } else {
+    // Default structured data
+    structuredDataArray = [
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -66,6 +73,7 @@ export function useSeo(options) {
         name: siteConfig.siteName,
       },
     ];
+  }
 
   // Apply meta tags using useHead
   useHead({
@@ -89,7 +97,7 @@ export function useSeo(options) {
       { name: "twitter:image", content: seo.image },
     ],
     link: [{ rel: "canonical", href: seo.url }],
-    script: structuredData.map((data) => ({
+    script: structuredDataArray.map((data) => ({
       type: "application/ld+json",
       children: JSON.stringify(data),
     })),

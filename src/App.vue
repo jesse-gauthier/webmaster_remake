@@ -13,6 +13,8 @@ import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 import WebAppModal from "@/components/modals/WebAppModal.vue";
 import CookieConsentBar from "./components/CookieConsentBar.vue";
+import BreadcrumbStructuredData from "./components/BreadcrumbStructuredData.vue";
+import WebsiteStructuredData from "./components/WebsiteStructuredData.vue";
 
 // Inject the updateConsent function from the Analytics plugin
 const updateConsent = inject("updateConsent");
@@ -169,6 +171,10 @@ onBeforeUnmount(() => {
 
   <!-- Cookie consent with improved accessibility -->
   <CookieConsentBar :update-consent="updateConsent" aria-live="polite" />
+
+  <!-- Structured data for SEO -->
+  <BreadcrumbStructuredData />
+  <WebsiteStructuredData />
 </template>
 
 <style>
