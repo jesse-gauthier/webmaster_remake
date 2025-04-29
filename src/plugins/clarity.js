@@ -1,4 +1,4 @@
-import { clarity } from '@microsoft/clarity';
+import clarity from '@microsoft/clarity';
 
 /**
  * Utility functions for Microsoft Clarity analytics

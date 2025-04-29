@@ -1,6 +1,6 @@
 import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { clarity } from '@microsoft/clarity';
+import clarity from '@microsoft/clarity';
 import ClarityPlugin from './plugins/clarity';
 
 import Analytics from "./plugins/analytics";
