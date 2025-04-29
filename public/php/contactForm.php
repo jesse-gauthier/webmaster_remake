@@ -22,12 +22,22 @@ function logSubmission($data, $status)
     $logEntry = date('Y-m-d H:i:s') . " | Status: {$status}\n";
     $logEntry .= "Name: " . ($data['name'] ?? 'N/A') . "\n";
     $logEntry .= "Email: " . ($data['email'] ?? 'N/A') . "\n";
+    $logEntry .= "Phone: " . ($data['phone'] ?? 'N/A') . "\n";
     $logEntry .= "Service: " . ($data['service'] ?? 'N/A') . "\n";
     $logEntry .= "Budget: " . ($data['budget'] ?? 'N/A') . "\n";
     $logEntry .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
     $logEntry .= "-------------------\n";
 
     file_put_contents(LOG_FILE, $logEntry, FILE_APPEND);
+    
+    // Also save full submission data to its own JSON file
+    $filename = SUBMISSIONS_DIR . 'contact_form_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+    file_put_contents($filename, json_encode([
+        'timestamp' => date('Y-m-d H:i:s'),
+        'status' => $status,
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'data' => $data
+    ], JSON_PRETTY_PRINT));
 }
 
 // CORS and Headers

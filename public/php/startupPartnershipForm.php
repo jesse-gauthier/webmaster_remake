@@ -207,6 +207,32 @@ $headers .= "X-Mailer: PHP/" . phpversion();
 $adminMailSent = mail($adminEmail, $adminSubject, $adminBody, $headers);
 $customerMailSent = mail($formData['email'], $customerSubject, $customerBody, $headers);
 
+// Save submission data to a JSON file
+try {
+    // Ensure submissions directory exists
+    $submissions_dir = __DIR__ . '/submissions/';
+    if (!is_dir($submissions_dir)) {
+        mkdir($submissions_dir, 0755, true);
+    }
+    
+    // Create JSON file with submission data
+    $json_filename = $submissions_dir . 'startup_partnership_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+    $submission_data = [
+        'timestamp' => date('Y-m-d H:i:s'),
+        'status' => ($adminMailSent && $customerMailSent) ? 'SUCCESS' : 'FAILED',
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'data' => [
+            'formData' => $formData,
+            'agreements' => $agreements
+        ]
+    ];
+    
+    file_put_contents($json_filename, json_encode($submission_data, JSON_PRETTY_PRINT));
+} catch (Exception $e) {
+    // Log error but continue processing
+    error_log('Startup Partnership Error: Failed to save submission to file: ' . $e->getMessage());
+}
+
 // Return response
 if ($adminMailSent && $customerMailSent) {
     echo json_encode(['success' => true, 'message' => 'Application submitted successfully']);

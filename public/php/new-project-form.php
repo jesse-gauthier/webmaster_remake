@@ -167,10 +167,30 @@ $mail_sent = mail($to, $subject, $message, $headers);
 
 // Log submission
 try {
+    // Ensure submissions directory exists
+    $submissions_dir = __DIR__ . '/submissions/';
+    if (!is_dir($submissions_dir)) {
+        mkdir($submissions_dir, 0755, true);
+    }
+    
+    // Log to traditional log file
     $log_file = __DIR__ . '/form_submissions.log';
     $timestamp = date('Y-m-d H:i:s');
     $log_message = "[{$timestamp}] Form submitted by {$form_data['name']} ({$form_data['email']}) - Project type: {$form_data['projectType']}\n";
     file_put_contents($log_file, $log_message, FILE_APPEND);
+    
+    // Save full submission data to a JSON file
+    $json_filename = $submissions_dir . 'project_form_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+    file_put_contents($json_filename, json_encode([
+        'timestamp' => $timestamp,
+        'status' => $mail_sent ? 'SUCCESS' : 'FAILED',
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'data' => $form_data,
+        'formatted' => [
+            'budget' => $budget_display,
+            'timeline' => $timeline_display
+        ]
+    ], JSON_PRETTY_PRINT));
 } catch (Exception $e) {
     // Log failure shouldn't stop the process
     error_log("Failed to write to log file: " . $e->getMessage());

@@ -130,6 +130,23 @@ function saveFormData($formData, $filePath) {
         throw new Exception('Failed to save form data.');
     }
     
+    // Also save this submission to its own file in the submissions directory
+    $submissions_dir = __DIR__ . '/submissions/';
+    if (!is_dir($submissions_dir)) {
+        mkdir($submissions_dir, 0755, true);
+    }
+    
+    $json_filename = $submissions_dir . 'application_dev_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+    $individual_result = file_put_contents(
+        $json_filename,
+        json_encode($formData, JSON_PRETTY_PRINT),
+        LOCK_EX
+    );
+    
+    if ($individual_result === false) {
+        error_log('Failed to save individual submission file: ' . $json_filename);
+    }
+    
     return true;
 }
 

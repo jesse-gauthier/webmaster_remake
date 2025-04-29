@@ -141,6 +141,32 @@ $headers = [
 // Send email
 $mailSuccess = mail($to, $subject, $message, implode("\r\n", $headers));
 
+// Log submission to a file
+try {
+    // Ensure submissions directory exists
+    $submissions_dir = __DIR__ . '/submissions/';
+    if (!is_dir($submissions_dir)) {
+        mkdir($submissions_dir, 0755, true);
+    }
+    
+    // Save full submission data to a JSON file
+    $json_filename = $submissions_dir . 'seo_audit_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+    file_put_contents($json_filename, json_encode([
+        'timestamp' => date('Y-m-d H:i:s'),
+        'status' => $mailSuccess ? 'SUCCESS' : 'FAILED',
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'data' => [
+            'name' => $name,
+            'email' => $email,
+            'website' => $website,
+            'date' => $date
+        ]
+    ], JSON_PRETTY_PRINT));
+} catch (Exception $e) {
+    // Log failure shouldn't stop the process
+    error_log("Failed to write SEO audit submission to file: " . $e->getMessage());
+}
+
 if ($mailSuccess) {
     echo json_encode(['success' => true, 'message' => 'Form submitted successfully. We will contact you shortly.']);
 } else {

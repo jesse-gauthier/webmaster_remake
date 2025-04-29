@@ -104,6 +104,34 @@ try {
     // Send email to admin
     $adminEmailSent = @mail($adminEmail, $subject, $message, implode("\r\n", $headers));
 
+    // Save submission data to a JSON file
+    try {
+        // Ensure submissions directory exists
+        $submissions_dir = __DIR__ . '/submissions/';
+        if (!is_dir($submissions_dir)) {
+            mkdir($submissions_dir, 0755, true);
+        }
+        
+        // Create JSON file with submission data
+        $json_filename = $submissions_dir . 'seo_checklist_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
+        $submission_data = [
+            'timestamp' => $timestamp,
+            'status' => $adminEmailSent ? 'SUCCESS' : 'FAILED',
+            'ip' => $ipAddress,
+            'data' => [
+                'email' => $email,
+                'source' => $source,
+                'userAgent' => $userAgent,
+                'agreeToTerms' => $agreeToTerms
+            ]
+        ];
+        
+        file_put_contents($json_filename, json_encode($submission_data, JSON_PRETTY_PRINT));
+    } catch (Exception $e) {
+        // Log error but continue processing
+        error_log('SEO Checklist Error: Failed to save submission to file: ' . $e->getMessage());
+    }
+
     // Prepare response
     if ($adminEmailSent) {
         $response['success'] = true;
