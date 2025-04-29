@@ -4,10 +4,11 @@ import { ref, computed } from "vue";
 const platformToggle = ref("wordpress");
 const pricingType = ref("development");
 
+// Modified to remove specific price points and focus on features and tiers
 const wordpressDevelopment = [
   {
     name: "Seedling Site",
-    upfrontCost: 1499,
+    tier: "Basic",
     features: [
       "Single Page Website",
       "Mobile Responsive Design",
@@ -21,7 +22,7 @@ const wordpressDevelopment = [
   },
   {
     name: "Sprout Pro",
-    upfrontCost: 2999,
+    tier: "Standard",
     features: [
       "Up to 5 Custom Pages",
       "Advanced Custom Design",
@@ -35,7 +36,7 @@ const wordpressDevelopment = [
   },
   {
     name: "Bloom Enterprise",
-    upfrontCost: 4999,
+    tier: "Professional",
     features: [
       "Up to 10 Custom Pages",
       "Custom WordPress Development",
@@ -51,7 +52,7 @@ const wordpressDevelopment = [
   },
   {
     name: "Grove Pro",
-    upfrontCost: 7999,
+    tier: "Premium",
     features: [
       "Complex Custom WordPress Site",
       "Unlimited Pages",
@@ -66,7 +67,7 @@ const wordpressDevelopment = [
   },
   {
     name: "Forest Ecosystem",
-    upfrontCost: 12999,
+    tier: "Enterprise",
     features: [
       "Full Custom Digital Ecosystem",
       "Multi-site WordPress Setup",
@@ -84,7 +85,7 @@ const wordpressDevelopment = [
 const wordpressMonthly = [
   {
     name: "Basic Care",
-    monthlyCost: 79,
+    tier: "Essential",
     features: [
       "Monthly Security Updates",
       "Basic Plugin Updates",
@@ -97,7 +98,7 @@ const wordpressMonthly = [
   },
   {
     name: "Growth Support",
-    monthlyCost: 149,
+    tier: "Standard",
     features: [
       "Comprehensive Plugin Updates",
       "Monthly Security Audit",
@@ -111,7 +112,7 @@ const wordpressMonthly = [
   },
   {
     name: "Pro Maintenance",
-    monthlyCost: 249,
+    tier: "Professional",
     features: [
       "Complete Site Management",
       "Advanced Security Monitoring",
@@ -127,7 +128,7 @@ const wordpressMonthly = [
   },
   {
     name: "Enterprise Guardian",
-    monthlyCost: 399,
+    tier: "Premium",
     features: [
       "Comprehensive Site Management",
       "Advanced Security & Compliance",
@@ -142,7 +143,7 @@ const wordpressMonthly = [
   },
   {
     name: "Full Ecosystem",
-    monthlyCost: 599,
+    tier: "Enterprise",
     features: [
       "Complete Digital Ecosystem Management",
       "Multi-site Coordination",
@@ -160,7 +161,7 @@ const wordpressMonthly = [
 const shopifyDevelopment = [
   {
     name: "Startup Launch",
-    upfrontCost: 1799,
+    tier: "Basic",
     features: [
       "Basic Shopify Store Setup",
       "Up to 20 Products",
@@ -174,7 +175,7 @@ const shopifyDevelopment = [
   },
   {
     name: "Merchant Voyage",
-    upfrontCost: 3499,
+    tier: "Standard",
     features: [
       "Custom Shopify Design",
       "Up to 50 Products",
@@ -188,7 +189,7 @@ const shopifyDevelopment = [
   },
   {
     name: "Commerce Explorer",
-    upfrontCost: 5999,
+    tier: "Professional",
     features: [
       "Premium Shopify Store",
       "Up to 100 Products",
@@ -204,7 +205,7 @@ const shopifyDevelopment = [
   },
   {
     name: "Retail Horizon",
-    upfrontCost: 8999,
+    tier: "Premium",
     features: [
       "Enterprise E-commerce Solution",
       "Unlimited Products",
@@ -219,7 +220,7 @@ const shopifyDevelopment = [
   },
   {
     name: "Global Marketplace",
-    upfrontCost: 14999,
+    tier: "Enterprise",
     features: [
       "Comprehensive E-commerce Ecosystem",
       "Multi-platform Integration",
@@ -237,7 +238,7 @@ const shopifyDevelopment = [
 const shopifyMonthly = [
   {
     name: "Basic Store Care",
-    monthlyCost: 99,
+    tier: "Essential",
     features: [
       "Monthly Store Updates",
       "Basic App Maintenance",
@@ -250,7 +251,7 @@ const shopifyMonthly = [
   },
   {
     name: "Merchant Support",
-    monthlyCost: 199,
+    tier: "Standard",
     features: [
       "Comprehensive App Updates",
       "Monthly Store Audit",
@@ -264,7 +265,7 @@ const shopifyMonthly = [
   },
   {
     name: "E-commerce Pro",
-    monthlyCost: 299,
+    tier: "Professional",
     features: [
       "Complete Store Management",
       "Advanced Performance Monitoring",
@@ -280,7 +281,7 @@ const shopifyMonthly = [
   },
   {
     name: "Retail Guardian",
-    monthlyCost: 499,
+    tier: "Premium",
     features: [
       "Comprehensive Store Management",
       "Advanced Marketing Support",
@@ -295,7 +296,7 @@ const shopifyMonthly = [
   },
   {
     name: "Marketplace Master",
-    monthlyCost: 699,
+    tier: "Enterprise",
     features: [
       "Full E-commerce Ecosystem Management",
       "Multi-platform Coordination",
@@ -331,9 +332,9 @@ const currentPricing = computed(() => {
           Tailored Digital Solutions
         </h2>
         <p class="text-neutral-text max-w-2xl mx-auto mb-8">
-          Choose between our comprehensive development packages or ongoing
-          monthly maintenance plans. We've got the right solution for every
-          stage of your digital journey.
+          Every project is unique. Explore our service tiers and discover the
+          perfect solution for your specific needs, goals, and budget. Contact
+          us for a personalized quote tailored to your project.
         </p>
 
         <div
@@ -374,7 +375,7 @@ const currentPricing = computed(() => {
                   : 'bg-white text-accent hover:bg-accent-50',
               ]"
             >
-              Upfront
+              Development
             </button>
             <button
               @click="pricingType = 'monthly'"
@@ -385,7 +386,7 @@ const currentPricing = computed(() => {
                   : 'bg-white text-accent hover:bg-accent-50',
               ]"
             >
-              Monthly
+              Maintenance
             </button>
           </div>
         </div>
@@ -404,18 +405,13 @@ const currentPricing = computed(() => {
                 <h3 class="text-xl font-bold text-primary mt-4 mb-2">
                   {{ plan.name }}
                 </h3>
-                <div class="text-4xl font-bold text-accent mb-4">
-                  <template v-if="pricingType === 'development'">
-                    ${{ plan.upfrontCost }}
-                  </template>
-                  <template v-else>
-                    ${{ plan.monthlyCost }}
-                    <span class="text-base text-neutral-text">/mo</span>
-                  </template>
+                <div class="text-lg font-medium text-neutral-text mb-1">
+                  {{ plan.tier }} Tier
                 </div>
+                <div class="custom-divider mx-auto mb-4"></div>
 
                 <div v-if="plan.recommended" class="absolute top-4 right-4">
-                  <span class="badge badge-primary">Best Value</span>
+                  <span class="badge badge-primary">Most Popular</span>
                 </div>
               </div>
 
@@ -444,19 +440,26 @@ const currentPricing = computed(() => {
                   </li>
                 </ul>
 
-                <router-link
-                  to="/new-client-form"
-                  class="btn-primary w-full mt-auto"
-                >
-                  {{
-                    pricingType === "development"
-                      ? "Start Project"
-                      : "Subscribe"
-                  }}
+                <router-link to="/contact" class="btn-primary w-full mt-auto">
+                  Get Custom Quote
                 </router-link>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="mt-12 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold text-primary mb-4">
+            Need a Custom Solution?
+          </h3>
+          <p class="text-neutral-text mb-4">
+            We understand that every business has unique requirements. Contact
+            us for a personalized consultation and custom quote tailored
+            specifically to your project needs.
+          </p>
+          <router-link to="/contact" class="btn-accent inline-block">
+            Schedule a Consultation
+          </router-link>
         </div>
       </div>
     </div>
@@ -482,6 +485,10 @@ const currentPricing = computed(() => {
 
 .card-body {
   @apply p-6 pt-0 flex flex-col flex-grow;
+}
+
+.custom-divider {
+  @apply w-12 h-1 bg-accent rounded-full;
 }
 
 /* Recommended Plan Highlight */
