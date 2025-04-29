@@ -21,12 +21,12 @@
         <!-- Modal header -->
         <div v-if="!isExpanding" class="bg-primary p-6 relative">
           <h2 class="text-2xl font-bold text-white">
-            Have a briliant application idea, but limited budget?
+            Have a brilliant application idea, but limited budget?
           </h2>
           <p class="text-primary-light mt-1">
             This program is for you. For $1500 upfront we will build your idea
-            from ground up. After launch we perform updates, bug fixes,
-            implement new feature, and general maintaince.
+            from the ground up. After launch we perform updates, bug fixes,
+            implement new features, and general maintenance.
             <strong> At no additional cost. </strong>
           </p>
           <button

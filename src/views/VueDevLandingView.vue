@@ -406,7 +406,7 @@ onMounted(() => {
             <h2 class="text-2xl md:text-4xl font-bold text-primary mb-4">
               Our Equity Partnership Model
             </h2>
-            <p class="text-lg text-neutral-text mb-6">
+            <p class="text-lg text-neutral-text max-w-3xl mx-auto">
               We're not just developers — we're your partners in success. Our
               equity model aligns our interests and allows you to launch with
               minimal upfront costs.
@@ -430,8 +430,8 @@ onMounted(() => {
                   <i class="fas fa-check text-sm"></i>
                 </div>
                 <span class="ml-3 text-neutral-text"
-                  >We take a percentage of revenue once your application
-                  generates profit</span
+                  >We take a small percentage of revenue (5-8%) only once your
+                  application generates profit</span
                 >
               </li>
               <li class="flex items-start">
@@ -441,8 +441,8 @@ onMounted(() => {
                   <i class="fas fa-check text-sm"></i>
                 </div>
                 <span class="ml-3 text-neutral-text"
-                  >Our success is tied directly to your success — we're invested
-                  in your growth</span
+                  >Enterprise-grade development with modern frameworks and
+                  technologies</span
                 >
               </li>
               <li class="flex items-start">
@@ -452,8 +452,8 @@ onMounted(() => {
                   <i class="fas fa-check text-sm"></i>
                 </div>
                 <span class="ml-3 text-neutral-text"
-                  >Includes ongoing support, maintenance, and feature
-                  enhancements</span
+                  >Ongoing technical partnership including maintenance, updates,
+                  and scaling</span
                 >
               </li>
             </ul>

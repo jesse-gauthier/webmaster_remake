@@ -355,7 +355,8 @@
           </h2>
           <p class="text-lg text-neutral-text">
             We leverage modern, scalable technologies to build applications that
-            are secure, performant, and future-proof.
+            are secure, performant, and future-proof. Our technical expertise
+            spans across the entire development lifecycle.
           </p>
         </div>
 
@@ -372,23 +373,27 @@
             <ul class="space-y-3">
               <li class="flex items-start">
                 <i class="fas fa-check text-accent mt-1 mr-2"></i>
-                <span>Advanced encryption protocols</span>
+                <span>End-to-end encryption</span>
               </li>
               <li class="flex items-start">
                 <i class="fas fa-check text-accent mt-1 mr-2"></i>
-                <span>Cloud-based infrastructure</span>
+                <span>OWASP compliance</span>
               </li>
               <li class="flex items-start">
                 <i class="fas fa-check text-accent mt-1 mr-2"></i>
-                <span>Regular security audits</span>
+                <span>Serverless architecture</span>
               </li>
               <li class="flex items-start">
                 <i class="fas fa-check text-accent mt-1 mr-2"></i>
-                <span>Performance optimization</span>
+                <span>CDN integration</span>
               </li>
               <li class="flex items-start">
                 <i class="fas fa-check text-accent mt-1 mr-2"></i>
-                <span>99.9% uptime guarantee</span>
+                <span>Advanced caching strategies</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <span>Penetration testing</span>
               </li>
             </ul>
           </div>
