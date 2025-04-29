@@ -279,9 +279,11 @@ const navItems = ref([
       { name: "Consultations", url: "/consultations", active: false },
       { name: "Web Apps", url: "/web-applications", active: false },
       { name: "Startup Partnership", url: "/startup", active: false },
+      { name: "Technology Stack", url: "/technology-stack", active: false },
     ],
   },
   { name: "Portfolio", url: "/portfolio", active: false },
+  { name: "Case Studies", url: "/case-studies", active: false },
   { name: "About", url: "/about", active: false },
   {
     name: "Blog",

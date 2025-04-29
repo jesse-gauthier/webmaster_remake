@@ -363,10 +363,20 @@ onMounted(() => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary mb-4">
             Modern Vue Applications Built for Growth
           </h2>
-          <p class="text-lg text-neutral-text max-w-3xl mx-auto">
+          <p class="text-lg text-neutral-text max-w-3xl mx-auto mb-4">
             We specialize in developing cutting-edge Vue 3 applications that
             combine elegant design with powerful functionality.
           </p>
+          <router-link
+            to="/technology-stack"
+            class="inline-block mb-8 text-accent hover:text-primary transition-colors"
+          >
+            <span class="flex items-center">
+              <i class="fas fa-code-branch mr-2"></i>
+              Explore our complete technology stack
+              <i class="fas fa-chevron-right ml-2 text-sm"></i>
+            </span>
+          </router-link>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

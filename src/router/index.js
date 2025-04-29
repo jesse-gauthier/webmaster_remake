@@ -240,6 +240,32 @@ const routes = [
       },
     },
   },
+  {
+    path: '/technology-stack',
+    name: 'Technology Stack',
+    component: () => import('@/views/TechnologyStackView.vue'),
+    meta: {
+      seo: {
+        title: "Our Technology Stack | WebMaster",
+        description: "Explore our comprehensive technology stack including frontend, backend, CMS platforms, and infrastructure solutions for web development projects.",
+        image: seoConfig.defaultImage,
+        type: "website",
+      },
+    }
+  },
+  {
+    path: '/case-studies',
+    name: 'Case Studies',
+    component: () => import('@/views/CaseStudiesView.vue'),
+    meta: {
+      seo: {
+        title: "Case Studies | Web Development Success Stories | WebMaster",
+        description: "Explore our web development case studies showcasing successful projects across e-commerce, custom applications, WordPress sites, and more. See real results from our work.",
+        image: seoConfig.defaultImage,
+        type: "website",
+      },
+    }
+  },
   // Blog routes
   {
     path: "/blog",

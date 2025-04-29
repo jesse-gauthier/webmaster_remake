@@ -131,12 +131,20 @@
             Let's create something amazing together. Contact us to discuss your
             ideas and how we can bring them to life.
           </p>
-          <router-link
-            to="/contact"
-            class="btn-lg bg-white text-accent hover:bg-neutral-cream rounded-md"
-          >
-            Get in Touch
-          </router-link>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <router-link
+              to="/contact"
+              class="btn-lg bg-white text-accent hover:bg-neutral-cream rounded-md"
+            >
+              Get in Touch
+            </router-link>
+            <router-link
+              to="/case-studies"
+              class="btn-lg border-2 border-white text-white hover:bg-accent-500 rounded-md"
+            >
+              View Case Studies
+            </router-link>
+          </div>
         </div>
       </div>
     </section>

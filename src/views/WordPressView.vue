@@ -35,6 +35,16 @@
             build their online presence, engage with their audience, and grow
             their revenue.
           </p>
+          <router-link
+            to="/technology-stack"
+            class="inline-block mt-4 text-accent-500 hover:text-primary-600 transition-colors"
+          >
+            <span class="flex items-center justify-center">
+              <i class="fas fa-server mr-2"></i>
+              Explore our full technology stack beyond WordPress
+              <i class="fas fa-chevron-right ml-2 text-sm"></i>
+            </span>
+          </router-link>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
