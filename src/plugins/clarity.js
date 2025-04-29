@@ -53,9 +53,6 @@ export const clarityService = {
 // Vue plugin
 export default {
     install(app) {
-        // We're not initializing Clarity here anymore
-        // as it's now handled in main.js
-
         // Make clarity service available via this.$clarity
         app.config.globalProperties.$clarity = clarityService;
 
