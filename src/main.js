@@ -1,6 +1,6 @@
 import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import Clarity from '@microsoft/clarity';
+import { clarity } from '@microsoft/clarity';
 import ClarityPlugin from './plugins/clarity';
 
 import Analytics from "./plugins/analytics";
@@ -20,13 +20,11 @@ if (import.meta.env.PROD) {  // Only run in production
     try {
         const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || 'r3l7gra9rc';
 
-        // Use the correct method to initialize Clarity
-        if (typeof Clarity.start === 'function') {
-            Clarity.start(projectId);
-            console.log('Clarity initialized successfully');
-        } else {
-            console.error('Clarity.start method not available');
-        }
+        // Initialize Clarity using the correct method
+        clarity.load({
+            projectId: projectId
+        });
+        console.log('Clarity initialized successfully');
     } catch (error) {
         console.error('Failed to initialize Clarity:', error);
     }

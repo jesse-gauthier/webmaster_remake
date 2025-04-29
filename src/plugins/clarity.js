@@ -1,4 +1,4 @@
-import Clarity from '@microsoft/clarity';
+import { clarity } from '@microsoft/clarity';
 
 /**
  * Utility functions for Microsoft Clarity analytics
@@ -10,9 +10,9 @@ export const clarityService = {
      * @param {object} attributes - Additional user attributes
      */
     identifyUser(userId, attributes = {}) {
-        if (Clarity && typeof Clarity.identify === 'function') {
+        if (clarity && typeof clarity.identify === 'function') {
             try {
-                Clarity.identify(userId, attributes);
+                clarity.identify(userId, attributes);
             } catch (error) {
                 console.error('Clarity identify error:', error);
             }
@@ -25,9 +25,9 @@ export const clarityService = {
      * @param {object} properties - Event properties
      */
     trackEvent(name, properties = {}) {
-        if (Clarity && typeof Clarity.event === 'function') {
+        if (clarity && typeof clarity.event === 'function') {
             try {
-                Clarity.event(name, properties);
+                clarity.event(name, properties);
             } catch (error) {
                 console.error('Clarity event error:', error);
             }
@@ -40,23 +40,14 @@ export const clarityService = {
      * @param {string} value - Variable value
      */
     setVariable(key, value) {
-        if (Clarity && typeof Clarity.set === 'function') {
+        if (clarity && typeof clarity.set === 'function') {
             try {
-                Clarity.set(key, value);
+                clarity.set(key, value);
             } catch (error) {
                 console.error('Clarity set error:', error);
             }
         }
     }
-};
-
-/**
- * Initialize Clarity with your project ID
- * This ensures Clarity is properly loaded on page refresh
- */
-const initClarity = () => {
-    // Don't initialize here - we're now initializing in main.js
-    // This prevents duplicate initialization
 };
 
 // Vue plugin

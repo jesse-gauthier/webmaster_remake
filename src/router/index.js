@@ -367,15 +367,13 @@ router.afterEach((to, from) => {
 // Track route changes in Clarity
 router.afterEach((to) => {
   // Send page view to Clarity when available
-  if (window.clarity) {
+  if (window.clarity && typeof window.clarity === 'function') {
     // Track the page view
     window.clarity('set', 'page_path', to.path);
     window.clarity('set', 'page_name', to.name || '');
 
     // Optional: track page view as an event
-    if (typeof window.clarity === 'function') {
-      window.clarity('pageview');
-    }
+    window.clarity('pageview');
   }
 });
 
