@@ -1,6 +1,6 @@
 import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import clarity from '@microsoft/clarity';
+import Clarity from '@microsoft/clarity';
 import ClarityPlugin from './plugins/clarity';
 
 import Analytics from "./plugins/analytics";
@@ -16,7 +16,7 @@ import * as Sentry from "@sentry/vue";
 import CookieConsentBar from './components/CookieConsentBar.vue';
 
 // Initialize Clarity with configuration options
-if (!import.meta.env.PROD) {  // Only run in production
+if (import.meta.env.PROD) {  // Only run in production
     try {
         const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || 'r3l7gra9rc';
 
