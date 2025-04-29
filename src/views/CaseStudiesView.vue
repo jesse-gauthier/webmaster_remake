@@ -77,13 +77,11 @@
                 ]"
               >
                 <div class="relative">
-                  <img
-                    :src="study.images.featured"
-                    :alt="`${study.title} project screenshot`"
-                    class="rounded-lg shadow-lg w-full h-auto"
-                    width="600"
-                    height="400"
-                  />
+                  <div
+                    :style="`background-image: url(${study.images.featured}); background-position: center; background-size: contain; background-repeat: no-repeat;`"
+                    class="rounded-lg shadow-lg w-full h-64 md:h-80"
+                    :aria-label="`${study.title} project screenshot`"
+                  ></div>
                   <div class="absolute top-4 right-4">
                     <span
                       class="inline-block bg-primary text-white text-xs px-3 py-1 rounded-full capitalize"
@@ -329,7 +327,7 @@ const caseStudies = [
         { src: "/images/hero-image.jpg", alt: "County Cooperage mobile view" },
       ],
     },
-    link: "https://thecountycooperage.com",
+    link: "https://www.thecountycooperage.ca",
   },
   {
     id: 2,
@@ -375,7 +373,7 @@ const caseStudies = [
         },
       ],
     },
-    link: "https://gottaottawa.org",
+    link: "https://new.gottago-ottawa.ca/",
   },
   {
     id: 3,
@@ -415,7 +413,7 @@ const caseStudies = [
         { src: "/images/hero-image.jpg", alt: "UpMedia booking system" },
       ],
     },
-    link: "https://upmediapro.com",
+    link: "https://www.upmedia.video/",
   },
   {
     id: 4,
@@ -456,7 +454,7 @@ const caseStudies = [
         { src: "/images/hero-image.jpg", alt: "Luma CRM sales pipeline view" },
       ],
     },
-    link: "https://lumacrm.io",
+    link: "https://lumacrm.ca",
   },
 ];
 
