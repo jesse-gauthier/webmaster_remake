@@ -70,7 +70,7 @@ const validateEmail = () => {
 
 const validatePhone = () => {
   const phoneRegex =
-    /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
   formErrors.phone = phoneRegex.test(formData.phone)
     ? ""
     : "Please enter a valid phone number";

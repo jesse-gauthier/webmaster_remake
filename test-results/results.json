@@ -1,0 +1,608 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\playwright.config.js",
+    "rootDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/jesse/Documents/github/webmaster_remake/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/jesse/Documents/github/webmaster_remake/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/jesse/Documents/github/webmaster_remake/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/jesse/Documents/github/webmaster_remake/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/jesse/Documents/github/webmaster_remake/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "C:/Users/jesse/Documents/github/webmaster_remake/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5174",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "simple-screenshots.spec.js",
+      "file": "simple-screenshots.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Website Screenshots",
+          "file": "simple-screenshots.spec.js",
+          "line": 21,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Capture Desktop Screenshots",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30165,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n=== DESKTOP SCREENSHOTS ===\n"
+                        },
+                        {
+                          "text": "📸 Capturing homepage...\n"
+                        },
+                        {
+                          "text": "   ✅ homepage - Web Development Experts | Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing services...\n"
+                        },
+                        {
+                          "text": "   ✅ services - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing about...\n"
+                        },
+                        {
+                          "text": "   ✅ about - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing contact...\n"
+                        },
+                        {
+                          "text": "   ✅ contact - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing portfolio...\n"
+                        },
+                        {
+                          "text": "   ✅ portfolio - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing case-studies...\n"
+                        },
+                        {
+                          "text": "   ✅ case-studies - Case Studies | Web Development Success Stories | WebMaster\n"
+                        },
+                        {
+                          "text": "📸 Capturing technology-stack...\n"
+                        },
+                        {
+                          "text": "   ✅ technology-stack - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing wordpress...\n"
+                        },
+                        {
+                          "text": "   ✅ wordpress - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing shopify...\n"
+                        },
+                        {
+                          "text": "   ✅ shopify - Ottawa Web Masters\n"
+                        },
+                        {
+                          "text": "📸 Capturing web-applications...\n"
+                        },
+                        {
+                          "text": "📸 Capturing startup-partnership...\n"
+                        },
+                        {
+                          "text": "📸 Capturing seo-services...\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "   ❌ Error capturing web-applications: page.waitForTimeout: Test timeout of 30000ms exceeded.\n"
+                        },
+                        {
+                          "text": "   ❌ Error capturing startup-partnership: page.goto: Target page, context or browser has been closed\n"
+                        },
+                        {
+                          "text": "   ❌ Error capturing seo-services: page.goto: Target page, context or browser has been closed\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-08-27T18:07:53.866Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-94bfa-Capture-Desktop-Screenshots-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-94bfa-Capture-Desktop-Screenshots-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-94bfa-Capture-Desktop-Screenshots-chromium\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "70512da31d064e2fcae8-a88538525a2d945c05a1",
+              "file": "simple-screenshots.spec.js",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "Capture Mobile Screenshots",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30263,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n=== MOBILE SCREENSHOTS ===\n"
+                        },
+                        {
+                          "text": "📱 Capturing homepage mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ homepage mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing services mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ services mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing about mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ about mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing contact mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ contact mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing portfolio mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ portfolio mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing case-studies mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ case-studies mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing technology-stack mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ technology-stack mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing wordpress mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ wordpress mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing shopify mobile...\n"
+                        },
+                        {
+                          "text": "   ✅ shopify mobile\n"
+                        },
+                        {
+                          "text": "📱 Capturing web-applications mobile...\n"
+                        },
+                        {
+                          "text": "📱 Capturing startup-partnership mobile...\n"
+                        },
+                        {
+                          "text": "📱 Capturing seo-services mobile...\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "   ❌ Error capturing mobile web-applications: page.waitForTimeout: Test timeout of 30000ms exceeded.\n"
+                        },
+                        {
+                          "text": "   ❌ Error capturing mobile startup-partnership: page.goto: Target page, context or browser has been closed\n"
+                        },
+                        {
+                          "text": "   ❌ Error capturing mobile seo-services: page.goto: Target page, context or browser has been closed\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-08-27T18:08:25.607Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-ee33e--Capture-Mobile-Screenshots-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-ee33e--Capture-Mobile-Screenshots-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\test-results\\simple-screenshots-Website-ee33e--Capture-Mobile-Screenshots-chromium\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "70512da31d064e2fcae8-ef7c8c37ea49075f1a35",
+              "file": "simple-screenshots.spec.js",
+              "line": 65,
+              "column": 3
+            },
+            {
+              "title": "Test Page Loading and Console Errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14678,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== CONSOLE ERROR TESTING ===\n"
+                        },
+                        {
+                          "text": "🔍 Testing homepage for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ homepage loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing services for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ services loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing about for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ about loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing contact for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ contact loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing portfolio for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ portfolio loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing case-studies for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ case-studies loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing technology-stack for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ technology-stack loaded without errors\n"
+                        },
+                        {
+                          "text": "🔍 Testing wordpress for errors...\n"
+                        },
+                        {
+                          "text": "   ✅ wordpress loaded without errors\n"
+                        },
+                        {
+                          "text": "\n📊 SUMMARY:\n"
+                        },
+                        {
+                          "text": "   Console Errors: 0\n"
+                        },
+                        {
+                          "text": "   Page Errors: 0\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-27T18:08:57.207Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70512da31d064e2fcae8-4d2377a74ffb553f6d85",
+              "file": "simple-screenshots.spec.js",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "Performance Check on Key Pages",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2532,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== PERFORMANCE TESTING ===\n"
+                        },
+                        {
+                          "text": "⚡ Testing homepage performance...\n"
+                        },
+                        {
+                          "text": "   ✅ homepage:\n"
+                        },
+                        {
+                          "text": "      - Total load time: 969ms\n"
+                        },
+                        {
+                          "text": "      - DOM ready: 246ms\n"
+                        },
+                        {
+                          "text": "      - Load complete: 335ms\n"
+                        },
+                        {
+                          "text": "⚡ Testing services performance...\n"
+                        },
+                        {
+                          "text": "   ✅ services:\n"
+                        },
+                        {
+                          "text": "      - Total load time: 607ms\n"
+                        },
+                        {
+                          "text": "      - DOM ready: 65ms\n"
+                        },
+                        {
+                          "text": "      - Load complete: 68ms\n"
+                        },
+                        {
+                          "text": "⚡ Testing portfolio performance...\n"
+                        },
+                        {
+                          "text": "   ✅ portfolio:\n"
+                        },
+                        {
+                          "text": "      - Total load time: 605ms\n"
+                        },
+                        {
+                          "text": "      - DOM ready: 63ms\n"
+                        },
+                        {
+                          "text": "      - Load complete: 67ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-27T18:09:12.181Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70512da31d064e2fcae8-d9d1bc4743420ef9926c",
+              "file": "simple-screenshots.spec.js",
+              "line": 167,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-27T18:07:52.851Z",
+    "duration": 82079.632,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

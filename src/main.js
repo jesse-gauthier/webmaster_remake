@@ -19,9 +19,6 @@ import CookieConsentBar from './components/CookieConsentBar.vue';
 if (import.meta.env.PROD) {  // Only run in production
     try {
         const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID || 'r3l7gra9rc';
-
-        // Initialize Clarity using the correct method
-        Clarity.init(projectId);
         console.log('Clarity initialized successfully');
     } catch (error) {
         console.error('Failed to initialize Clarity:', error);
