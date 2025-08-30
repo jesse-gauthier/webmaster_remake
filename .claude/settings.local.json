@@ -12,7 +12,8 @@
       "WebFetch(domain:www.upmedia.video)",
       "WebFetch(domain:lumacrm.ca)",
       "Bash(curl:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm audit:*)"
     ],
     "deny": [],
     "ask": []
