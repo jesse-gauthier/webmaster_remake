@@ -11,10 +11,7 @@ export default {
       ...options
     };
 
-    // Create a default console-based implementation for development mode
-    const defaultConsentUpdater = (consent = {}) => {
-      console.log('Development mode: Consent update', consent);
-    };
+    // Note: Default consent updater removed as it was unused
 
     // Initialize gtag for production or use mock for development
     let gtag;

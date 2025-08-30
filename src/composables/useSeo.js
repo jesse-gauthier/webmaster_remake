@@ -1,7 +1,7 @@
 // src/composables/useSeo.js
 
 import { useHead } from "@vueuse/head";
-import { seoConfig, getOrganizationSchema } from "@/config/seo.config";
+import { seoConfig } from "@/config/seo.config";
 import { getCurrentInstance } from "vue";
 
 /**

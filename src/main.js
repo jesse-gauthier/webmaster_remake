@@ -2,6 +2,12 @@ import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 import Analytics from "./plugins/analytics";
+import { 
+  preloadCriticalResources, 
+  setupPerformanceMonitoring, 
+  optimizeFontLoading,
+  monitorPerformanceBudget 
+} from "./utils/performance";
 
 import { createApp } from "vue";
 import { createHead } from "@vueuse/head";
@@ -11,6 +17,12 @@ import App from "./App.vue";
 import router from "./router";
 
 import CookieConsentBar from './components/CookieConsentBar.vue';
+
+// Initialize performance optimizations early
+preloadCriticalResources();
+optimizeFontLoading();
+setupPerformanceMonitoring();
+monitorPerformanceBudget();
 
 
 const app = createApp(App);

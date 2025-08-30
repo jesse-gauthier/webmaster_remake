@@ -40,7 +40,7 @@ export const getGradientForCategory = (category) => {
  * @param {string} category - The category
  * @returns {string} - CSS color style
  */
-export const getTextColorForCategory = (category) => {
+export const getTextColorForCategory = (_category) => {
   // All our gradients are dark enough for white text
   return "color: white";
 };

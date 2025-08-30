@@ -2,6 +2,7 @@
 
 <script setup>
 import { ref, reactive, computed, inject, onMounted } from "vue";
+import { sanitizeInput, isValidEmail, isValidPhone, checkRateLimit, generateCSRFToken } from "@/utils/security";
 
 // Import analytics from our plugin
 const gtag = inject("gtag");
@@ -20,6 +21,15 @@ const formData = reactive({
   service: "",
   budget: "",
   message: "",
+});
+
+// Security measures
+const csrfToken = ref("");
+const honeypot = ref(""); // Hidden field for bot detection
+
+// Generate CSRF token on mount
+onMounted(() => {
+  csrfToken.value = generateCSRFToken();
 });
 
 // Validation state
@@ -58,20 +68,20 @@ const budgetOptions = [
 
 // Validation functions
 const validateName = () => {
+  formData.name = sanitizeInput(formData.name);
   formErrors.name = formData.name.trim() ? "" : "Name is required";
 };
 
 const validateEmail = () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  formErrors.email = emailRegex.test(formData.email)
+  formData.email = sanitizeInput(formData.email);
+  formErrors.email = isValidEmail(formData.email)
     ? ""
     : "Please enter a valid email address";
 };
 
 const validatePhone = () => {
-  const phoneRegex =
-    /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-  formErrors.phone = phoneRegex.test(formData.phone)
+  formData.phone = sanitizeInput(formData.phone);
+  formErrors.phone = isValidPhone(formData.phone)
     ? ""
     : "Please enter a valid phone number";
 };
@@ -85,6 +95,7 @@ const validateBudget = () => {
 };
 
 const validateMessage = () => {
+  formData.message = sanitizeInput(formData.message);
   formErrors.message =
     formData.message.trim().length >= 10
       ? ""
@@ -128,6 +139,18 @@ const isFormValid = computed(() => {
 
 // Form submission handler
 const submitForm = async () => {
+  // Check for bot honeypot
+  if (honeypot.value) {
+    console.warn("Bot detected via honeypot");
+    return;
+  }
+
+  // Rate limiting check
+  if (!checkRateLimit("contact_form", 3, 300000)) { // 3 attempts per 5 minutes
+    submissionError.value = "Too many submission attempts. Please wait before trying again.";
+    return;
+  }
+
   // Validate form
   if (!isFormValid.value) {
     return;
@@ -139,13 +162,22 @@ const submitForm = async () => {
   submissionError.value = false;
 
   try {
+    // Prepare secure form data with CSRF token
+    const secureFormData = {
+      ...formData,
+      csrf_token: csrfToken.value,
+      timestamp: Date.now(),
+      user_agent: navigator.userAgent.substring(0, 200) // Limit UA string length
+    };
+
     // Actual API call to PHP endpoint
     const response = await fetch("/php/contactForm.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest", // Helps prevent CSRF
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(secureFormData),
     });
 
     if (response.ok) {
@@ -315,6 +347,19 @@ const trackFieldInteraction = (fieldName) => {
                   >
                     {{ formErrors.name }}
                   </p>
+                </div>
+
+                <!-- Honeypot field for bot detection - hidden from users -->
+                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                  <label for="website-field">Leave this field empty</label>
+                  <input
+                    id="website-field"
+                    v-model="honeypot"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="new-password"
+                  />
                 </div>
 
                 <div class="mb-4">

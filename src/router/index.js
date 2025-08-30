@@ -311,7 +311,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   // Improved scroll behavior to ensure scrolling to top with smooth animation on every navigation
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior() {
     // Always scroll to top with smooth behavior
     return { top: 0, left: 0, behavior: "smooth" };
   },
@@ -382,7 +382,7 @@ router.beforeEach(async (to, from, next) => {
   next();
 });
 
-router.afterEach((to, from) => {
+router.afterEach(() => {
   window.scrollTo({
     top: 0,
     left: 0,

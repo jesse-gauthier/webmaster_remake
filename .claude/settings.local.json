@@ -13,7 +13,11 @@
       "WebFetch(domain:lumacrm.ca)",
       "Bash(curl:*)",
       "Bash(ls:*)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

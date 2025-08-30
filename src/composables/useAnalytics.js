@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, inject } from 'vue';
+import { onUnmounted, ref, inject } from 'vue';
 
 /**
  * Composable for consistent analytics tracking throughout the application
