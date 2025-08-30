@@ -18,8 +18,8 @@ $config = [
     'data_dir' => __DIR__ . '/data', // Directory where submissions will be stored
     'data_file' => 'applications.json', // File to store submissions
     'email' => [
-        'to' => 'jesse@ottawawebmasters.ca',
-        'from' => 'noreply@ottawawebmasters.ca',
+        'to' => 'Sales@ottawawebmasters.ca',
+        'from' => 'Sales@ottawawebmasters.ca',
         'subject' => 'New Application Development Inquiry',
     ],
     'required_fields' => ['name', 'email'],
@@ -40,7 +40,7 @@ $response = [
 
 // Process form data
 try {
-   
+
 
     // Basic input sanitization
     $formData = [];
@@ -51,43 +51,43 @@ try {
             $formData[$field] = '';
         }
     }
-    
+
     // Validate required fields
     foreach ($config['required_fields'] as $field) {
         if (empty($formData[$field])) {
             $response['errors'][$field] = ucfirst($field) . ' is required.';
         }
     }
-    
+
     // Validate email format
     if (!empty($formData['email']) && !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
         $response['errors']['email'] = 'Please enter a valid email address.';
     }
-    
+
     // If there are validation errors, return them
     if (!empty($response['errors'])) {
         $response['message'] = 'Please correct the errors in the form.';
         echo json_encode($response);
         exit;
     }
-    
+
     // Add timestamp to form data
     $formData['timestamp'] = date('Y-m-d H:i:s');
     $formData['ip'] = $_SERVER['REMOTE_ADDR'];
-    
+
     // Save form data to file
     saveFormData($formData, $config['data_dir'] . '/' . $config['data_file']);
-    
+
     // Send email notification
     sendEmailNotification($formData, $config['email']);
-    
+
     // Set success response
     $response['success'] = true;
     $response['message'] = 'Thank you for your inquiry. We will contact you shortly.';
-    
+
 } catch (Exception $e) {
     $response['message'] = 'An error occurred while processing your request: ' . $e->getMessage();
-    
+
     // Log error for admin (don't expose to client)
     error_log('Form submission error: ' . $e->getMessage());
 }
@@ -105,7 +105,8 @@ exit;
  * @param string $filePath Path to the data file
  * @return bool True if save successful
  */
-function saveFormData($formData, $filePath) {
+function saveFormData($formData, $filePath)
+{
     // Load existing data
     $applications = [];
     if (file_exists($filePath)) {
@@ -114,39 +115,39 @@ function saveFormData($formData, $filePath) {
             $applications = json_decode($fileContent, true) ?: [];
         }
     }
-    
+
     // Add new submission with a unique ID
     $formData['id'] = uniqid('app_');
     $applications[] = $formData;
-    
+
     // Save updated data back to file
     $result = file_put_contents(
-        $filePath, 
+        $filePath,
         json_encode($applications, JSON_PRETTY_PRINT),
         LOCK_EX
     );
-    
+
     if ($result === false) {
         throw new Exception('Failed to save form data.');
     }
-    
+
     // Also save this submission to its own file in the submissions directory
     $submissions_dir = __DIR__ . '/submissions/';
     if (!is_dir($submissions_dir)) {
         mkdir($submissions_dir, 0755, true);
     }
-    
+
     $json_filename = $submissions_dir . 'application_dev_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
     $individual_result = file_put_contents(
         $json_filename,
         json_encode($formData, JSON_PRETTY_PRINT),
         LOCK_EX
     );
-    
+
     if ($individual_result === false) {
         error_log('Failed to save individual submission file: ' . $json_filename);
     }
-    
+
     return true;
 }
 
@@ -157,7 +158,8 @@ function saveFormData($formData, $filePath) {
  * @param array $emailConfig Email configuration
  * @return bool True if email sent successfully
  */
-function sendEmailNotification($formData, $emailConfig) {
+function sendEmailNotification($formData, $emailConfig)
+{
     // Prepare email headers
     $headers = [
         'From: ' . $emailConfig['from'],
@@ -165,7 +167,7 @@ function sendEmailNotification($formData, $emailConfig) {
         'X-Mailer: PHP/' . phpversion(),
         'Content-Type: text/html; charset=UTF-8'
     ];
-    
+
     // Prepare email body with better formatting
     $body = '
     <html>
@@ -195,19 +197,19 @@ function sendEmailNotification($formData, $emailConfig) {
             <div class="data-row">
                 <span class="label">Email:</span> ' . $formData['email'] . '
             </div>';
-    
+
     if (!empty($formData['company'])) {
         $body .= '
             <div class="data-row">
                 <span class="label">Company:</span> ' . $formData['company'] . '
             </div>';
     }
-    
+
     $body .= '
             <div class="data-row">
                 <span class="label">Interested In:</span> ' . formatInterestType($formData['interest']) . '
             </div>';
-    
+
     if (!empty($formData['message'])) {
         $body .= '
             <h3>Project Details:</h3>
@@ -215,7 +217,7 @@ function sendEmailNotification($formData, $emailConfig) {
                 ' . nl2br($formData['message']) . '
             </div>';
     }
-    
+
     $body .= '
             <div class="footer">
                 <p>This inquiry was submitted from IP: ' . $formData['ip'] . '</p>
@@ -224,7 +226,7 @@ function sendEmailNotification($formData, $emailConfig) {
         </div>
     </body>
     </html>';
-    
+
     // Send email
     $mailSent = mail(
         $emailConfig['to'],
@@ -232,12 +234,12 @@ function sendEmailNotification($formData, $emailConfig) {
         $body,
         implode("\r\n", $headers)
     );
-    
+
     if (!$mailSent) {
         // Log error but don't throw exception to allow saving to file still
         error_log('Failed to send email notification for form submission.');
     }
-    
+
     return $mailSent;
 }
 
@@ -247,13 +249,14 @@ function sendEmailNotification($formData, $emailConfig) {
  * @param string $interest Interest type from form
  * @return string Formatted interest type
  */
-function formatInterestType($interest) {
+function formatInterestType($interest)
+{
     $types = [
         'equity' => 'Equity Partnership Model',
         'traditional' => 'Traditional Payment Model',
         'undecided' => 'Not Sure Yet'
     ];
-    
+
     return isset($types[$interest]) ? $types[$interest] : $interest;
 }
 
@@ -261,26 +264,27 @@ function formatInterestType($interest) {
  * Creates a backup of the applications data file
  * This function runs weekly via a cron job
  */
-function backupApplicationData() {
+function backupApplicationData()
+{
     global $config;
-    
+
     $sourceFile = $config['data_dir'] . '/' . $config['data_file'];
     if (file_exists($sourceFile)) {
         $backupDir = $config['data_dir'] . '/backups';
-        
+
         // Create backup directory if it doesn't exist
         if (!file_exists($backupDir)) {
             mkdir($backupDir, 0755, true);
         }
-        
+
         // Create backup with timestamp
         $backupFile = $backupDir . '/applications_' . date('Y-m-d_His') . '.json';
         copy($sourceFile, $backupFile);
-        
+
         // Remove backups older than 30 days
         $oldBackups = glob($backupDir . '/applications_*.json');
         $now = time();
-        
+
         foreach ($oldBackups as $backup) {
             if ($now - filemtime($backup) > 30 * 24 * 60 * 60) {
                 unlink($backup);

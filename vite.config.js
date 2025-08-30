@@ -1,4 +1,3 @@
-import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -7,10 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools(), sentryVitePlugin({
-    org: "ottawa-web-masters",
-    project: "ottawa-web-masters"
-  })],
+  plugins: [vue(), vueDevTools()],
 
   resolve: {
     alias: {
@@ -25,7 +21,7 @@ export default defineConfig({
   server: {
     headers: {
       'X-Frame-Options': 'SAMEORIGIN',
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' https://clarity.microsoft.com https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://clarity.microsoft.com; frame-src 'self' https://calendly.com https://*.calendly.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none'",
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; frame-src 'self' https://calendly.com https://*.calendly.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none'",
       'X-Content-Type-Options': 'nosniff',
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',

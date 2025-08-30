@@ -47,7 +47,7 @@ $website = filter_var($data['website'], FILTER_SANITIZE_URL);
 $date = date("F j, Y");
 
 // Email recipient
-$to = 'jesse@ottawawebmasters.ca';
+$to = 'Sales@ottawawebmasters.ca';
 
 // Email subject
 $subject = 'New SEO Audit Request';
@@ -133,7 +133,7 @@ $message = "
 $headers = [
     'MIME-Version: 1.0',
     'Content-type: text/html; charset=utf-8',
-    'From: Ottawa Webmasters <no-reply@ottawawebmasters.ca>',
+    'From: Ottawa Webmasters <Sales@ottawawebmasters.ca>',
     'Reply-To: ' . $email,
     'X-Mailer: PHP/' . phpversion()
 ];
@@ -148,7 +148,7 @@ try {
     if (!is_dir($submissions_dir)) {
         mkdir($submissions_dir, 0755, true);
     }
-    
+
     // Save full submission data to a JSON file
     $json_filename = $submissions_dir . 'seo_audit_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
     file_put_contents($json_filename, json_encode([

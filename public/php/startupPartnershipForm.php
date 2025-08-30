@@ -27,8 +27,10 @@ $formData = $data['formData'];
 $agreements = $data['agreements'];
 
 // Check for required fields
-if (empty($formData['businessName']) || empty($formData['contactName']) || 
-    empty($formData['email']) || empty($formData['phone'])) {
+if (
+    empty($formData['businessName']) || empty($formData['contactName']) ||
+    empty($formData['email']) || empty($formData['phone'])
+) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     exit;
@@ -42,10 +44,11 @@ if (!filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
 }
 
 // Admin email
-$adminEmail = 'jesse@ottawawebmasters.ca';
+$adminEmail = 'Sales@ottawawebmasters.ca';
 
 // Format data for email
-function formatSection($title, $content) {
+function formatSection($title, $content)
+{
     return "<h3 style='color: #2c5282; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;'>$title</h3>
             <div style='margin-left: 15px;'>$content</div>";
 }
@@ -92,18 +95,18 @@ $adminBody = "
         </table>
         
         <h2>Business Concept</h2>" .
-        formatSection("Business Description", nl2br(htmlspecialchars($formData['businessDescription']))) .
-        formatSection("Problem Solved", nl2br(htmlspecialchars($formData['problemSolved']))) .
-        formatSection("Target Market", nl2br(htmlspecialchars($formData['targetMarket']))) .
-        formatSection("Competitive Advantage", nl2br(htmlspecialchars($formData['competitiveDifferentiator']))) .
-        formatSection("Current Stage", ucfirst($formData['currentStage'])) . "
+    formatSection("Business Description", nl2br(htmlspecialchars($formData['businessDescription']))) .
+    formatSection("Problem Solved", nl2br(htmlspecialchars($formData['problemSolved']))) .
+    formatSection("Target Market", nl2br(htmlspecialchars($formData['targetMarket']))) .
+    formatSection("Competitive Advantage", nl2br(htmlspecialchars($formData['competitiveDifferentiator']))) .
+    formatSection("Current Stage", ucfirst($formData['currentStage'])) . "
         
         <h2>Market Information</h2>" .
-        formatSection("Industry Size and Growth", nl2br(htmlspecialchars($formData['industrySize']))) .
-        formatSection("Target Customer Profile", nl2br(htmlspecialchars($formData['targetCustomerProfile']))) .
-        formatSection("Competitor Analysis", nl2br(htmlspecialchars($formData['competitorAnalysis']))) .
-        formatSection("Market Entry Strategy", nl2br(htmlspecialchars($formData['marketEntryStrategy']))) .
-        formatSection("Revenue Generation Strategy", nl2br(htmlspecialchars($formData['revenueStrategy']))) . "
+    formatSection("Industry Size and Growth", nl2br(htmlspecialchars($formData['industrySize']))) .
+    formatSection("Target Customer Profile", nl2br(htmlspecialchars($formData['targetCustomerProfile']))) .
+    formatSection("Competitor Analysis", nl2br(htmlspecialchars($formData['competitorAnalysis']))) .
+    formatSection("Market Entry Strategy", nl2br(htmlspecialchars($formData['marketEntryStrategy']))) .
+    formatSection("Revenue Generation Strategy", nl2br(htmlspecialchars($formData['revenueStrategy']))) . "
         
         <h2>Financial Information</h2>
         <table>
@@ -114,17 +117,17 @@ $adminBody = "
             <tr><th>Projected Breakeven Point</th><td>{$formData['projectedBreakeven']}</td></tr>
             <tr><th>Existing Funding</th><td>" . ucfirst($formData['existingFunding']) . "</td></tr>
         </table>" .
-        ($formData['existingFunding'] === 'yes' ? formatSection("Funding Details", nl2br(htmlspecialchars($formData['fundingDetails']))) : '') . "
+    ($formData['existingFunding'] === 'yes' ? formatSection("Funding Details", nl2br(htmlspecialchars($formData['fundingDetails']))) : '') . "
         
         <h2>Technical Requirements</h2>
         <table>
             <tr><th>Application Complexity</th><td>" . ucfirst($formData['applicationComplexity']) . "</td></tr>
         </table>" .
-        formatSection("Key Features Required", nl2br(htmlspecialchars($formData['keyFeatures']))) .
-        formatSection("User Types/Roles", nl2br(htmlspecialchars($formData['userTypes']))) .
-        formatSection("Integration Requirements", nl2br(htmlspecialchars($formData['integrationRequirements']))) .
-        formatSection("Scalability Needs", nl2br(htmlspecialchars($formData['scalabilityNeeds']))) .
-        formatSection("Timeline Expectations", nl2br(htmlspecialchars($formData['timelineExpectations']))) . "
+    formatSection("Key Features Required", nl2br(htmlspecialchars($formData['keyFeatures']))) .
+    formatSection("User Types/Roles", nl2br(htmlspecialchars($formData['userTypes']))) .
+    formatSection("Integration Requirements", nl2br(htmlspecialchars($formData['integrationRequirements']))) .
+    formatSection("Scalability Needs", nl2br(htmlspecialchars($formData['scalabilityNeeds']))) .
+    formatSection("Timeline Expectations", nl2br(htmlspecialchars($formData['timelineExpectations']))) . "
         
         <h2>Agreements</h2>
         <div class='agreement-section'>
@@ -199,8 +202,8 @@ $customerBody = "
 // Set mail headers
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=utf-8\r\n";
-$headers .= "From: WebMaster Partnership Program <noreply@ottawawebmasters.ca>\r\n";
-$headers .= "Reply-To: jesse@ottawawebmasters.ca\r\n";
+$headers .= "From: WebMaster Partnership Program <Sales@ottawawebmasters.ca>\r\n";
+$headers .= "Reply-To: Sales@ottawawebmasters.ca\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion();
 
 // Send emails
@@ -214,7 +217,7 @@ try {
     if (!is_dir($submissions_dir)) {
         mkdir($submissions_dir, 0755, true);
     }
-    
+
     // Create JSON file with submission data
     $json_filename = $submissions_dir . 'startup_partnership_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
     $submission_data = [
@@ -226,7 +229,7 @@ try {
             'agreements' => $agreements
         ]
     ];
-    
+
     file_put_contents($json_filename, json_encode($submission_data, JSON_PRETTY_PRINT));
 } catch (Exception $e) {
     // Log error but continue processing

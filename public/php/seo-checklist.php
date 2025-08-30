@@ -63,11 +63,11 @@ try {
     $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? simple_sanitize($_SERVER['HTTP_USER_AGENT']) : 'Unknown';
 
     // Prepare email to admin
-    $adminEmail = 'jesse@ottawawebmasters.ca';
+    $adminEmail = 'Sales@ottawawebmasters.ca';
     $subject = 'New SEO Checklist Subscription';
     $headers = [
         'Content-Type: text/html; charset=UTF-8',
-        'From: Ottawa Web Masters <no-reply@ottawawebmasters.com>',
+        'From: Ottawa Web Masters <Sales@ottawawebmasters.ca>',
         'Reply-To: ' . $email
     ];
 
@@ -111,7 +111,7 @@ try {
         if (!is_dir($submissions_dir)) {
             mkdir($submissions_dir, 0755, true);
         }
-        
+
         // Create JSON file with submission data
         $json_filename = $submissions_dir . 'seo_checklist_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
         $submission_data = [
@@ -125,7 +125,7 @@ try {
                 'agreeToTerms' => $agreeToTerms
             ]
         ];
-        
+
         file_put_contents($json_filename, json_encode($submission_data, JSON_PRETTY_PRINT));
     } catch (Exception $e) {
         // Log error but continue processing

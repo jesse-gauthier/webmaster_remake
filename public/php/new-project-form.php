@@ -39,7 +39,7 @@ if (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
 }
 
 // Email recipient
-$to = 'jesse@ottawawebmasters.ca';
+$to = 'Sales@ottawawebmasters.ca';
 
 // Email subject
 $subject = 'New Web Development Project Inquiry from ' . $form_data['name'];
@@ -172,13 +172,13 @@ try {
     if (!is_dir($submissions_dir)) {
         mkdir($submissions_dir, 0755, true);
     }
-    
+
     // Log to traditional log file
     $log_file = __DIR__ . '/form_submissions.log';
     $timestamp = date('Y-m-d H:i:s');
     $log_message = "[{$timestamp}] Form submitted by {$form_data['name']} ({$form_data['email']}) - Project type: {$form_data['projectType']}\n";
     file_put_contents($log_file, $log_message, FILE_APPEND);
-    
+
     // Save full submission data to a JSON file
     $json_filename = $submissions_dir . 'project_form_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
     file_put_contents($json_filename, json_encode([

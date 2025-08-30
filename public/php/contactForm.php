@@ -29,7 +29,7 @@ function logSubmission($data, $status)
     $logEntry .= "-------------------\n";
 
     file_put_contents(LOG_FILE, $logEntry, FILE_APPEND);
-    
+
     // Also save full submission data to its own JSON file
     $filename = SUBMISSIONS_DIR . 'contact_form_' . date('Y-m-d_His') . '_' . substr(md5(rand()), 0, 6) . '.json';
     file_put_contents($filename, json_encode([
@@ -166,7 +166,7 @@ function handleSubmission()
     $budgetLabel = formatBudgetLabel($data['budget']);
 
     // Prepare email data
-    $to = 'jesse@ottawawebmasters.ca';
+    $to = 'Sales@ottawawebmasters.ca';
     $subject = 'New Project Inquiry from ' . $data['name'];
 
     // Create HTML email
@@ -231,7 +231,7 @@ function handleSubmission()
 
     // Email headers for HTML email
     $headers = [
-        'From: Ottawa Webmasters <noreply@ottawawebmasters.ca>',
+        'From: Ottawa Webmasters <Sales@ottawawebmasters.ca>',
         'Reply-To: ' . htmlspecialchars($data['email']),
         'X-Mailer: PHP/' . phpversion(),
         'MIME-Version: 1.0',

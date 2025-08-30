@@ -4,7 +4,15 @@
       "Bash(npm run dev:*)",
       "Bash(npm install:*)",
       "Bash(npx playwright:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(rm:*)",
+      "WebFetch(domain:www.thecountycooperage.ca)",
+      "Bash(del \"src\\plugins\\clarity.js\")",
+      "WebFetch(domain:new.gottago-ottawa.ca)",
+      "WebFetch(domain:www.upmedia.video)",
+      "WebFetch(domain:lumacrm.ca)",
+      "Bash(curl:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
