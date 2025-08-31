@@ -79,8 +79,25 @@ export default async function handler(req, res) {
 
         res.status(200).json({ success: true, message: 'Form submitted successfully' })
     } catch (error) {
-        console.error('Form submission error:', error)
-        res.status(500).json({ error: 'Internal server error' })
+        console.error('Form submission error:', {
+            message: error.message,
+            stack: error.stack,
+            timestamp: new Date().toISOString()
+        })
+        
+        // Return more specific error messages for debugging
+        if (error.message.includes('Missing environment variables')) {
+            return res.status(500).json({ error: 'Server configuration error' })
+        }
+        
+        if (error.message.includes('getaddrinfo ENOTFOUND') || error.message.includes('connect ECONNREFUSED')) {
+            return res.status(500).json({ error: 'Email service unavailable' })
+        }
+        
+        res.status(500).json({ 
+            error: 'Internal server error',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
     }
 }
 
