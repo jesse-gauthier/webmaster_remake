@@ -27,7 +27,7 @@ async function processFormData(data) {
     const { email, message } = data
 
     // Create transporter
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
         host: 'mail.protonmail.ch',
         port: 587,
         secure: false,
