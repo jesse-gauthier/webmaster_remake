@@ -1,3 +1,5 @@
+import nodemailer from 'nodemailer'
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' })
@@ -24,26 +26,33 @@ export default async function handler(req, res) {
 async function processFormData(data) {
     const { email, message } = data
 
-    // Send email to contact@ottawawebmasters.ca
-    const response = await fetch('https://api.vercel.com/v1/integrations/webhooks/email/send', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            to: 'contact@ottawawebmasters.ca',
-            subject: 'New Form Submission',
-            html: `
-                <h3>New Contact Form Submission</h3>
-                <p><strong>From:</strong> ${email}</p>
-                <p><strong>Message:</strong></p>
-                <p>${message}</p>
-            `,
-            replyTo: email
-        })
+    // Create transporter
+    const transporter = nodemailer.createTransporter({
+        host: 'mail.protonmail.ch',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
     })
 
-    if (!response.ok) {
-        throw new Error('Failed to send email')
+    // Email options
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_TO,
+        subject: 'New Form Submission',
+        html: `
+            <h2>New Form Submission</h2>
+            <p><strong>From:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>
+            <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+        `
     }
+
+    // Send email
+    await transporter.sendMail(mailOptions)
+
+    return { success: true }
 }
