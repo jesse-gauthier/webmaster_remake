@@ -1,12 +1,13 @@
 import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-
+import { inject } from "@vercel/analytics"
+inject()
 import Analytics from "./plugins/analytics";
-import { 
-  preloadCriticalResources, 
-  setupPerformanceMonitoring, 
+import {
+  preloadCriticalResources,
+  setupPerformanceMonitoring,
   optimizeFontLoading,
-  monitorPerformanceBudget 
+  monitorPerformanceBudget
 } from "./utils/performance";
 
 import { createApp } from "vue";
