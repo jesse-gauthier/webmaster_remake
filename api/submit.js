@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
 async function processFormData(data) {
     const { email, message } = data
-    
+
     // Send email to contact@ottawawebmasters.ca
     const response = await fetch('https://api.vercel.com/v1/integrations/webhooks/email/send', {
         method: 'POST',
@@ -42,7 +42,7 @@ async function processFormData(data) {
             replyTo: email
         })
     })
-    
+
     if (!response.ok) {
         throw new Error('Failed to send email')
     }
