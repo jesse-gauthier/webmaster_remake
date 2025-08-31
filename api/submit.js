@@ -1,17 +1,78 @@
 import nodemailer from 'nodemailer'
 
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+}
+
+function sanitizeHtml(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+}
+
+function validateEnvironment() {
+    const required = ['EMAIL_USER', 'EMAIL_PASS', 'EMAIL_TO']
+    const missing = required.filter(key => !process.env[key])
+    if (missing.length > 0) {
+        throw new Error(`Missing environment variables: ${missing.join(', ')}`)
+    }
+}
+
+const submissionTimes = new Map()
+
+function checkRateLimit(ip) {
+    const now = Date.now()
+    const lastSubmission = submissionTimes.get(ip)
+    
+    if (lastSubmission && now - lastSubmission < 60000) { // 1 minute
+        return false
+    }
+    
+    submissionTimes.set(ip, now)
+    
+    // Clean old entries
+    for (const [key, time] of submissionTimes.entries()) {
+        if (now - time > 60000) {
+            submissionTimes.delete(key)
+        }
+    }
+    
+    return true
+}
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
     try {
+        // Rate limiting
+        const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'unknown'
+        if (!checkRateLimit(clientIp)) {
+            return res.status(429).json({ error: 'Too many requests. Please wait before submitting again.' })
+        }
+
         const { email, message } = req.body
 
         // Validate input
         if (!email || !message) {
             return res.status(400).json({ error: 'Missing required fields' })
         }
+
+        if (!validateEmail(email)) {
+            return res.status(400).json({ error: 'Invalid email format' })
+        }
+
+        if (message.length > 5000) {
+            return res.status(400).json({ error: 'Message too long (max 5000 characters)' })
+        }
+
+        // Validate environment
+        validateEnvironment()
 
         // Process the data (save to database, send email, etc.)
         await processFormData({ email, message })
@@ -44,9 +105,9 @@ async function processFormData(data) {
         subject: 'New Form Submission',
         html: `
             <h2>New Form Submission</h2>
-            <p><strong>From:</strong> ${email}</p>
+            <p><strong>From:</strong> ${sanitizeHtml(email)}</p>
             <p><strong>Message:</strong></p>
-            <p>${message}</p>
+            <p>${sanitizeHtml(message).replace(/\n/g, '<br>')}</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
         `
     }
