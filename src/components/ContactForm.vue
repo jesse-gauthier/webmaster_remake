@@ -170,14 +170,33 @@ const submitForm = async () => {
       user_agent: navigator.userAgent.substring(0, 200) // Limit UA string length
     };
 
-    // Actual API call to PHP endpoint
-    const response = await fetch("/php/contactForm.php", {
+    // Submit to API endpoint
+    const response = await fetch("/api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest", // Helps prevent CSRF
       },
-      body: JSON.stringify(secureFormData),
+      body: JSON.stringify({
+        email: formData.email,
+        message: `
+Contact Form Submission
+
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Service: ${serviceOptions.find(s => s.value === formData.service)?.label || formData.service}
+Budget: ${budgetOptions.find(b => b.value === formData.budget)?.label || formData.budget}
+
+Message:
+${formData.message}
+
+Additional Details:
+- CSRF Token: ${csrfToken.value}
+- Timestamp: ${new Date().toISOString()}
+- User Agent: ${navigator.userAgent.substring(0, 200)}
+        `.trim()
+      }),
     });
 
     if (response.ok) {

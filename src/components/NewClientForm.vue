@@ -411,13 +411,49 @@ const submitForm = async () => {
         // Track analytics event
         trackFormSubmission()
 
-        // Submit form data to PHP script
-        const response = await fetch('/php/new-project-form.php', {
+        // Submit form data to API endpoint
+        const response = await fetch('/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({
+                email: formData.email,
+                message: `
+New Client Project Questionnaire
+
+=== BASIC INFORMATION ===
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.companyName || 'Not provided'}
+Phone: ${formData.phoneNumber || 'Not provided'}
+
+=== PROJECT DETAILS ===
+Project Type: ${formData.projectType}
+Budget: ${formData.budget}
+Timeline: ${formData.timeline}
+
+=== PROJECT SPECIFICS ===
+${formData.projectType === 'website' ? `
+Website Type: ${formData.websiteType || 'Not specified'}
+Number of Pages: ${formData.numPages || 'Not specified'}
+Content Ready: ${formData.contentReady ? 'Yes' : 'No'}
+` : ''}${formData.projectType === 'ecommerce' ? `
+Number of Products: ${formData.numProducts || 'Not specified'}
+Payment Gateways: ${formData.paymentGateways?.join(', ') || 'Not specified'}
+` : ''}${formData.projectType === 'webapp' ? `
+App Features: ${formData.appFeatures?.join(', ') || 'Not specified'}
+User Authentication: ${formData.userAuth ? 'Yes' : 'No'}
+` : ''}${formData.projectType === 'other' ? `
+Project Description: ${formData.projectDescription || 'Not provided'}
+` : ''}
+
+=== ADDITIONAL INFORMATION ===
+Design Preferences: ${formData.designPreferences || 'Not provided'}
+Competitor/Inspiration Websites: ${formData.competitorWebsites || 'Not provided'}
+Additional Information: ${formData.additionalInfo || 'Not provided'}
+                `.trim()
+            })
         })
 
         const result = await response.json()

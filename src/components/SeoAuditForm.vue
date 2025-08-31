@@ -194,12 +194,23 @@ const submitForm = async () => {
   formState.message = "";
 
   try {
-    const response = await fetch("/php/handle-seo-form.php", {
+    const response = await fetch("/api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        email: formData.email,
+        message: `
+SEO Audit Request
+
+Name: ${formData.name}
+Email: ${formData.email}
+Website: ${formData.website}
+
+This is a request for a free SEO audit. Please provide a detailed analysis of the website's SEO performance and recommendations for improvement.
+        `.trim()
+      }),
     });
 
     const result = await response.json();

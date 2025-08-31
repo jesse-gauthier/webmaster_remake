@@ -302,9 +302,29 @@ const submitForm = async () => {
   isSubmitting.value = true;
 
   try {
-    // Here you would typically send the email to your backend
-    // For this example, we'll simulate a successful submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Send email to API endpoint
+    const response = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        message: `
+SEO Checklist Subscription
+
+Email: ${email.value}
+
+User has requested access to the SEO checklist and agreed to receive marketing emails.
+        `.trim()
+      }),
+    });
+
+    const result = await response.json();
+    
+    if (!result.success) {
+      throw new Error(result.message || 'Subscription failed');
+    }
 
     // Track successful submission
     trackEvent("lead_capture", {

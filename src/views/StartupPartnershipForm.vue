@@ -140,15 +140,58 @@ const submitForm = async () => {
   try {
     // Show loading state if needed
 
-    // Send data to our PHP endpoint
-    const response = await fetch("/php/startupPartnershipForm.php", {
+    // Send data to API endpoint
+    const response = await fetch("/api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        formData: formData.value,
-        agreements: agreements.value,
+        email: formData.value.email,
+        message: `
+Startup Partnership Program Application
+
+=== BASIC INFORMATION ===
+Business Name: ${formData.value.businessName}
+Contact Name: ${formData.value.contactName}
+Email: ${formData.value.email}
+Phone: ${formData.value.phone}
+Website: ${formData.value.website || 'Not provided'}
+
+=== BUSINESS CONCEPT ===
+Description: ${formData.value.businessDescription}
+Problem Solved: ${formData.value.problemSolved}
+Target Market: ${formData.value.targetMarket}
+Competitive Advantage: ${formData.value.competitiveDifferentiator || 'Not provided'}
+Current Stage: ${formData.value.currentStage}
+
+=== MARKET INFORMATION ===
+Industry Size: ${formData.value.industrySize}
+Target Customer Profile: ${formData.value.targetCustomerProfile}
+Competitor Analysis: ${formData.value.competitorAnalysis || 'Not provided'}
+Market Entry Strategy: ${formData.value.marketEntryStrategy || 'Not provided'}
+Revenue Strategy: ${formData.value.revenueStrategy}
+
+=== FINANCIAL INFORMATION ===
+Initial Investment: ${formData.value.initialInvestment}
+Monthly Operating Costs: ${formData.value.monthlyOperatingCosts || 'Not provided'}
+Projected First Year Revenue: ${formData.value.projectedFirstYearRevenue}
+Projected Month 6 Revenue: ${formData.value.projectedMonth6Revenue}
+Projected Breakeven: ${formData.value.projectedBreakeven}
+Existing Funding: ${formData.value.existingFunding}
+Funding Details: ${formData.value.fundingDetails || 'Not provided'}
+
+=== TECHNICAL REQUIREMENTS ===
+Application Complexity: ${formData.value.applicationComplexity}
+Key Features: ${formData.value.keyFeatures}
+User Types: ${formData.value.userTypes}
+Integration Requirements: ${formData.value.integrationRequirements || 'Not provided'}
+Scalability Needs: ${formData.value.scalabilityNeeds || 'Not provided'}
+Timeline Expectations: ${formData.value.timelineExpectations || 'Not provided'}
+
+=== AGREEMENTS ===
+All partnership terms have been agreed to by the applicant.
+        `.trim()
       }),
     });
 
