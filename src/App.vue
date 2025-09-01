@@ -1,5 +1,6 @@
 <script setup>
 import { RouterView } from "vue-router";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 import {
   onMounted,
   nextTick,
@@ -81,12 +82,12 @@ const closeModal = () => {
 const detectUserInterest = (delay = 2000) => {
   if (!modalShown.value && !interestDetected && canShowModal()) {
     interestDetected = true;
-    
+
     // Clear any existing interest timer
     if (interestTimer) {
       clearTimeout(interestTimer);
     }
-    
+
     // Show modal after delay
     interestTimer = setTimeout(() => {
       showModal();
@@ -98,7 +99,7 @@ const detectUserInterest = (delay = 2000) => {
 const trackScrollDepth = () => {
   const scrollDepth =
     window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  
+
   // Mark threshold as met when user scrolls 60% of the page
   if (scrollDepth > 0.6 && !scrollThresholdMet) {
     scrollThresholdMet = true;
@@ -191,6 +192,7 @@ onBeforeUnmount(() => {
   <!-- Structured data for SEO -->
   <BreadcrumbStructuredData />
   <WebsiteStructuredData />
+  <SpeedInsights />
 </template>
 
 <style>

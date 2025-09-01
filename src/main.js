@@ -1,6 +1,8 @@
 import "./assets/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { inject } from "@vercel/analytics"
+
+
 inject()
 import Analytics from "./plugins/analytics";
 import {
