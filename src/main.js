@@ -1,10 +1,10 @@
 import "./assets/main.css";
-import "@fortawesome/fontawesome-free/css/all.css";
 import { inject } from "@vercel/analytics"
-
+import { FontAwesomeIcon } from "./plugins/fontawesome"
 
 inject()
 import Analytics from "./plugins/analytics";
+import TawkTo from "./plugins/tawkto";
 import {
   preloadCriticalResources,
   setupPerformanceMonitoring,
@@ -21,11 +21,17 @@ import router from "./router";
 
 import CookieConsentBar from './components/CookieConsentBar.vue';
 
-// Initialize performance optimizations early
+// Initialize critical performance optimizations immediately
 preloadCriticalResources();
-optimizeFontLoading();
-setupPerformanceMonitoring();
-monitorPerformanceBudget();
+
+// Defer non-critical performance utilities after initial render
+window.addEventListener('load', () => {
+  requestIdleCallback(() => {
+    optimizeFontLoading();
+    setupPerformanceMonitoring();
+    monitorPerformanceBudget();
+  }, { timeout: 1000 });
+});
 
 
 const app = createApp(App);
@@ -35,10 +41,12 @@ const app = createApp(App);
 const head = createHead();
 app.use(head);
 app.use(Analytics);
+app.use(TawkTo);
 app.use(createPinia());
 app.use(router);
 
 app.component('CookieConsentBar', CookieConsentBar);
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount("#app");
 

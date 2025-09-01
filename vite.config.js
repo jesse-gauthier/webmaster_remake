@@ -22,7 +22,7 @@ export default defineConfig({
         manualChunks: {
           // Vendor chunks
           'vendor-vue': ['vue', 'vue-router', 'pinia'],
-          'vendor-ui': ['@vueuse/head', '@fortawesome/fontawesome-free'],
+          'vendor-ui': ['@vueuse/head'],
           
           // Feature-based chunks
           'blog': [
@@ -91,12 +91,12 @@ export default defineConfig({
       // Enhanced CSP - more restrictive for development
       'Content-Security-Policy': [
         "default-src 'self'",
-        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Vite dev
+        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com https://embed.tawk.to 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Vite dev
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https: blob:",
-        "connect-src 'self' https://www.google-analytics.com https://analytics.google.com ws://localhost:*", // ws for HMR
-        "frame-src 'self' https://calendly.com https://*.calendly.com",
+        "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.tawk.to wss://*.tawk.to ws://localhost:*", // ws for HMR
+        "frame-src 'self' https://calendly.com https://*.calendly.com https://*.tawk.to",
         "frame-ancestors 'self'",
         "form-action 'self'",
         "base-uri 'self'",

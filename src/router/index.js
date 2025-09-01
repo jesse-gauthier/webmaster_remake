@@ -318,43 +318,48 @@ const router = createRouter({
 });
 
 // SEO route guard - prepare SEO data but don't call useSeo directly
-router.beforeEach(async (to, from, next) => {
-  // Check if the route has SEO meta
+router.beforeEach((to, from, next) => {
+  // Allow navigation to proceed immediately
+  next();
+  
+  // Handle SEO data asynchronously after navigation
   if (to.meta.seo) {
     // For dynamic blog articles, fetch SEO data from the article content
     if (to.name === "BlogArticle") {
-      try {
-        const module = await import("@/data/blogs.json");
-        const blogs = module.default;
-        const slug = to.params.slug;
-        const article = blogs.find((blog) => blog.slug === slug);
+      // Load blog data asynchronously without blocking navigation
+      import("@/data/blogs.json")
+        .then(module => {
+          const blogs = module.default;
+          const slug = to.params.slug;
+          const article = blogs.find((blog) => blog.slug === slug);
 
-        if (article) {
-          // Set SEO data in the route meta for the component to use
-          to.meta.seoData = {
-            ...to.meta.seo,
-            title: `${article.title} | WebMaster Blog`,
-            description: article.excerpt,
-            url: to.path,
-            image: article.featuredImage || seoConfig.defaultImage,
-            structuredData: {
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              headline: article.title,
-              image: article.featuredImage,
-              datePublished: article.date,
-              author: {
-                "@type": "Person",
-                name: article.author,
+          if (article) {
+            // Set SEO data in the route meta for the component to use
+            to.meta.seoData = {
+              ...to.meta.seo,
+              title: `${article.title} | WebMaster Blog`,
+              description: article.excerpt,
+              url: to.path,
+              image: article.featuredImage || seoConfig.defaultImage,
+              structuredData: {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: article.title,
+                image: article.featuredImage,
+                datePublished: article.date,
+                author: {
+                  "@type": "Person",
+                  name: article.author,
+                },
               },
-            },
-          };
-        }
-      } catch (error) {
-        console.error("Error loading blog data:", error);
-      }
+            };
+          }
+        })
+        .catch(error => {
+          console.error("Error loading blog data:", error);
+        });
     } else {
-      // For static routes, store SEO data in route meta
+      // For static routes, store SEO data in route meta immediately
       to.meta.seoData = {
         title: to.meta.seo.title,
         description: to.meta.seo.description,
@@ -367,19 +372,19 @@ router.beforeEach(async (to, from, next) => {
 
     // Handle noindex pages
     if (to.meta.seo.noindex) {
-      const metaTag = document.querySelector('meta[name="robots"]');
-      if (metaTag) {
-        metaTag.setAttribute("content", "noindex, nofollow");
-      } else {
-        const newMetaTag = document.createElement("meta");
-        newMetaTag.setAttribute("name", "robots");
-        newMetaTag.setAttribute("content", "noindex, nofollow");
-        document.head.appendChild(newMetaTag);
-      }
+      requestIdleCallback(() => {
+        const metaTag = document.querySelector('meta[name="robots"]');
+        if (metaTag) {
+          metaTag.setAttribute("content", "noindex, nofollow");
+        } else {
+          const newMetaTag = document.createElement("meta");
+          newMetaTag.setAttribute("name", "robots");
+          newMetaTag.setAttribute("content", "noindex, nofollow");
+          document.head.appendChild(newMetaTag);
+        }
+      });
     }
   }
-
-  next();
 });
 
 router.afterEach(() => {
