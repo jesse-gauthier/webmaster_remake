@@ -32,7 +32,9 @@ const MODAL_DISMISSED_KEY = "webmasterModalDismissed";
 const isModalOpen = ref(false);
 const modalShown = ref(false);
 let modalTimer = null;
+let interestTimer = null;
 let interestDetected = false;
+let scrollThresholdMet = false;
 
 // Check if modal should be shown based on local storage
 const canShowModal = () => {
@@ -75,21 +77,33 @@ const closeModal = () => {
   }
 };
 
-// Function to detect user interest
-const detectUserInterest = () => {
+// Function to detect user interest with delay
+const detectUserInterest = (delay = 2000) => {
   if (!modalShown.value && !interestDetected && canShowModal()) {
     interestDetected = true;
-    showModal();
+    
+    // Clear any existing interest timer
+    if (interestTimer) {
+      clearTimeout(interestTimer);
+    }
+    
+    // Show modal after delay
+    interestTimer = setTimeout(() => {
+      showModal();
+    }, delay);
   }
 };
 
-// Set up scroll depth tracking
+// Set up scroll depth tracking with throttling
 const trackScrollDepth = () => {
   const scrollDepth =
     window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  if (scrollDepth > 0.6) {
-    // If user scrolled 40% of the page
-    detectUserInterest();
+  
+  // Mark threshold as met when user scrolls 60% of the page
+  if (scrollDepth > 0.6 && !scrollThresholdMet) {
+    scrollThresholdMet = true;
+    // Trigger with a longer delay for scroll-based interest
+    detectUserInterest(3000);
   }
 };
 
@@ -99,9 +113,10 @@ const trackMouseActivity = (e) => {
   const mouseY = e.clientY;
   const viewportHeight = window.innerHeight;
 
-  // If mouse is in the bottom third of the screen (often where CTAs are)
+  // If mouse is in the bottom 10% of the screen (often where CTAs are)
   if (mouseY > viewportHeight * 0.9) {
-    detectUserInterest();
+    // Trigger with shorter delay for mouse-based interest
+    detectUserInterest(1500);
   }
 };
 
@@ -116,12 +131,12 @@ onMounted(() => {
     });
   });
 
-  // Set up modal timer (3 seconds)
+  // Set up modal timer (8 seconds for less aggressive timing)
   modalTimer = setTimeout(() => {
     if (!modalShown.value && canShowModal()) {
       showModal();
     }
-  }, 3000);
+  }, 8000);
 
   // Set up interest detection
   window.addEventListener("scroll", trackScrollDepth);
@@ -131,6 +146,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   // Clean up timers and event listeners
   if (modalTimer) clearTimeout(modalTimer);
+  if (interestTimer) clearTimeout(interestTimer);
   window.removeEventListener("scroll", trackScrollDepth);
   document.removeEventListener("mousemove", trackMouseActivity);
 });

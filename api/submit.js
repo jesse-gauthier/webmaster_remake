@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -15,7 +15,7 @@ function sanitizeHtml(str) {
 }
 
 function validateEnvironment() {
-    const required = ['EMAIL_USER', 'EMAIL_PASS', 'EMAIL_TO']
+    const required = ['RESEND_API_KEY', 'EMAIL_TO']
     const missing = required.filter(key => !process.env[key])
     if (missing.length > 0) {
         throw new Error(`Missing environment variables: ${missing.join(', ')}`)
@@ -90,8 +90,8 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: 'Server configuration error' })
         }
         
-        if (error.message.includes('getaddrinfo ENOTFOUND') || error.message.includes('connect ECONNREFUSED')) {
-            return res.status(500).json({ error: 'Email service unavailable' })
+        if (error.message.includes('API key')) {
+            return res.status(500).json({ error: 'Email service configuration error' })
         }
         
         res.status(500).json({ 
@@ -104,23 +104,10 @@ export default async function handler(req, res) {
 async function processFormData(data) {
     const { email, message } = data
 
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-        host: 'mail.protonmail.ch',
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        },
-        connectionTimeout: 10000,
-        greetingTimeout: 5000,
-        socketTimeout: 10000
-    })
+    const resend = new Resend(process.env.RESEND_API_KEY)
 
-    // Email options
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
+    const emailData = await resend.emails.send({
+        from: 'noreply@ottawawebmasters.ca',
         to: process.env.EMAIL_TO,
         subject: 'New Form Submission',
         html: `
@@ -130,10 +117,7 @@ async function processFormData(data) {
             <p>${sanitizeHtml(message).replace(/\n/g, '<br>')}</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
         `
-    }
+    })
 
-    // Send email
-    await transporter.sendMail(mailOptions)
-
-    return { success: true }
+    return { success: true, emailId: emailData.id }
 }
