@@ -92,8 +92,8 @@ export default defineConfig({
       'Content-Security-Policy': [
         "default-src 'self'",
         "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com https://embed.tawk.to 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Vite dev
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-        "font-src 'self' https://fonts.gstatic.com",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://embed.tawk.to",
+        "font-src 'self' https://fonts.gstatic.com https://embed.tawk.to",
         "img-src 'self' data: https: blob:",
         "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.tawk.to wss://*.tawk.to ws://localhost:*", // ws for HMR
         "frame-src 'self' https://calendly.com https://*.calendly.com https://*.tawk.to",
@@ -131,10 +131,10 @@ export default defineConfig({
         'usb=()'
       ].join(', '),
       
-      // Cross-origin policies
-      'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Resource-Policy': 'same-site'
+      // Cross-origin policies - relaxed for Tawk.to integration
+      'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+      // Removed 'Cross-Origin-Embedder-Policy': 'require-corp' to allow Tawk.to
+      'Cross-Origin-Resource-Policy': 'cross-origin'
     }
   }
 })
