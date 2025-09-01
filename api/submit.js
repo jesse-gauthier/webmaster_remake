@@ -27,20 +27,20 @@ const submissionTimes = new Map()
 function checkRateLimit(ip) {
     const now = Date.now()
     const lastSubmission = submissionTimes.get(ip)
-    
+
     if (lastSubmission && now - lastSubmission < 60000) { // 1 minute
         return false
     }
-    
+
     submissionTimes.set(ip, now)
-    
+
     // Clean old entries
     for (const [key, time] of submissionTimes.entries()) {
         if (now - time > 60000) {
             submissionTimes.delete(key)
         }
     }
-    
+
     return true
 }
 
@@ -58,10 +58,10 @@ export default async function handler(req, res) {
             timestamp: new Date().toISOString(),
             method: req.method
         })
-        
+
         if (!checkRateLimit(clientIp)) {
             console.warn('Rate limit exceeded:', { ip: clientIp, timestamp: new Date().toISOString() })
-            return res.status(429).json({ 
+            return res.status(429).json({
                 error: 'Too many requests. Please wait before submitting again.',
                 code: 'RATE_LIMIT_EXCEEDED'
             })
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
 
         // Process the data (save to database, send email, etc.)
         const result = await processFormData({ email, message })
-        
+
         console.log('Form submission successful:', {
             ip: clientIp,
             email: email,
@@ -95,10 +95,10 @@ export default async function handler(req, res) {
             timestamp: new Date().toISOString()
         })
 
-        res.status(200).json({ 
-            success: true, 
+        res.status(200).json({
+            success: true,
             message: 'Form submitted successfully',
-            id: result.emailId 
+            id: result.emailId
         })
     } catch (error) {
         console.error('Form submission error:', {
@@ -106,44 +106,44 @@ export default async function handler(req, res) {
             stack: error.stack,
             timestamp: new Date().toISOString()
         })
-        
+
         // Return more specific error messages for debugging
         if (error.message.includes('Missing environment variables')) {
-            return res.status(500).json({ 
+            return res.status(500).json({
                 error: 'Server configuration error',
                 code: 'ENV_CONFIG_ERROR'
             })
         }
-        
+
         if (error.message.includes('authentication failed')) {
-            return res.status(500).json({ 
+            return res.status(500).json({
                 error: 'Email service configuration error',
                 code: 'EMAIL_AUTH_ERROR'
             })
         }
 
         if (error.message.includes('configuration error')) {
-            return res.status(500).json({ 
+            return res.status(500).json({
                 error: 'Email service configuration error',
                 code: 'EMAIL_CONFIG_ERROR'
             })
         }
 
         if (error.message.includes('rate limit exceeded')) {
-            return res.status(429).json({ 
+            return res.status(429).json({
                 error: 'Service temporarily unavailable. Please try again later.',
                 code: 'EMAIL_RATE_LIMIT'
             })
         }
 
         if (error.message.includes('network error')) {
-            return res.status(503).json({ 
+            return res.status(503).json({
                 error: 'Email service temporarily unavailable',
                 code: 'EMAIL_NETWORK_ERROR'
             })
         }
-        
-        res.status(500).json({ 
+
+        res.status(500).json({
             error: 'Internal server error',
             details: process.env.NODE_ENV === 'development' ? error.message : undefined
         })
@@ -162,9 +162,9 @@ async function processFormData(data) {
         const resend = new Resend(process.env.RESEND_API_KEY)
 
         // Validate email configuration
-        const fromEmail = 'noreply@ottawawebmasters.ca'
+        const fromEmail = 'noreply@contact.ottawawebmasters.ca'
         const toEmail = process.env.EMAIL_TO
-        
+
         if (!toEmail || !toEmail.includes('@')) {
             throw new Error('Invalid recipient email configuration')
         }
@@ -219,7 +219,7 @@ async function processFormData(data) {
         if (error.message.includes('network') || error.message.includes('timeout')) {
             throw new Error('Email service network error')
         }
-        
+
         // Re-throw the error with original message for unhandled cases
         throw error
     }
