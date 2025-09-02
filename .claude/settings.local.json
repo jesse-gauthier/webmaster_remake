@@ -30,7 +30,10 @@
       "mcp__playwright__browser_resize",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_snapshot",
-      "mcp__playwright__browser_evaluate"
+      "mcp__playwright__browser_evaluate",
+      "Bash(for file in src/components/*.vue)",
+      "Bash(do cp \"$file\" components/)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
