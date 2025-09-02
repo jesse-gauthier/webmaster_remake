@@ -285,34 +285,14 @@ const focusState = reactive({ service: false, budget: false });
     id="contact-form"
     class="relative py-24 overflow-hidden bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900"
   >
-    <!-- Animated background orbs -->
-    <div class="pointer-events-none absolute inset-0 opacity-30">
-      <div
-        class="absolute -left-32 -top-16 w-72 h-72 bg-accent-500 rounded-full blur-3xl mix-blend-screen animate-pulse"
-      ></div>
-      <div
-        class="absolute right-0 top-1/3 w-80 h-80 bg-primary-500/40 rounded-full blur-3xl mix-blend-screen animate-pulse delay-700"
-      ></div>
-      <div
-        class="absolute -bottom-24 left-1/4 w-96 h-96 bg-accent-400/40 rounded-full blur-3xl mix-blend-screen animate-pulse delay-1000"
-      ></div>
-    </div>
-
     <div class="container-site relative z-10 px-4 sm:px-6 lg:px-8">
       <div
         class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-stretch"
       >
         <!-- Info Panel -->
         <div
-          class="relative group p-8 sm:p-10 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/10 shadow-2xl flex flex-col justify-center overflow-hidden"
+          class="relative p-8 sm:p-10 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/10 shadow-2xl flex flex-col justify-center overflow-hidden"
         >
-          <div
-            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-          >
-            <div
-              class="absolute -inset-1 bg-gradient-to-tr from-accent-500/30 via-primary-500/20 to-primary-300/20 blur-2xl"
-            ></div>
-          </div>
           <div class="relative">
             <h2
               class="text-3xl sm:text-4xl font-bold mb-4 text-white tracking-tight"
@@ -351,7 +331,7 @@ const focusState = reactive({ service: false, budget: false });
                   </div>
                   <a
                     href="mailto:Contact@ottawawebmasters.ca"
-                    class="text-white font-medium hover:text-accent-200 transition-colors"
+                    class="text-white font-medium hover:text-accent-200"
                     >Contact@ottawawebmasters.ca</a
                   >
                 </div>
@@ -452,7 +432,7 @@ const focusState = reactive({ service: false, budget: false });
                     @blur="validateField('name')"
                     @focus="trackFieldInteraction('name')"
                     type="text"
-                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none"
                     :class="
                       formErrors.name
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -466,7 +446,7 @@ const focusState = reactive({ service: false, budget: false });
                   />
                   <label
                     for="name"
-                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
                     >Full Name</label
                   >
                   <p
@@ -507,7 +487,7 @@ const focusState = reactive({ service: false, budget: false });
                     @blur="validateField('email')"
                     @focus="trackFieldInteraction('email')"
                     type="email"
-                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none"
                     :class="
                       formErrors.email
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -521,7 +501,7 @@ const focusState = reactive({ service: false, budget: false });
                   />
                   <label
                     for="email"
-                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
                     >Email Address</label
                   >
                   <p
@@ -541,7 +521,7 @@ const focusState = reactive({ service: false, budget: false });
                     @blur="validateField('phone')"
                     @focus="trackFieldInteraction('phone')"
                     type="tel"
-                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none"
                     :class="
                       formErrors.phone
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -555,7 +535,7 @@ const focusState = reactive({ service: false, budget: false });
                   />
                   <label
                     for="phone"
-                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
                     >Phone Number</label
                   >
                   <p
@@ -586,7 +566,7 @@ const focusState = reactive({ service: false, budget: false });
                       trackFieldInteraction('service');
                       focusState.service = true;
                     "
-                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 p-3 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition appearance-none pr-10"
+                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 p-3 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none appearance-none pr-10"
                     :class="
                       formErrors.service
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -645,7 +625,7 @@ const focusState = reactive({ service: false, budget: false });
                       trackFieldInteraction('budget');
                       focusState.budget = true;
                     "
-                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition appearance-none pr-10"
+                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none appearance-none pr-10"
                     :class="
                       formErrors.budget
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -699,7 +679,7 @@ const focusState = reactive({ service: false, budget: false });
                     v-model="formData.message"
                     @blur="validateField('message')"
                     @focus="trackFieldInteraction('message')"
-                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition min-h-[140px] resize-y"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none min-h-[140px] resize-y"
                     :class="
                       formErrors.message
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
@@ -713,7 +693,7 @@ const focusState = reactive({ service: false, budget: false });
                   ></textarea>
                   <label
                     for="message"
-                    class="pointer-events-none absolute left-4 top-6 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    class="pointer-events-none absolute left-4 top-6 text-neutral-500 text-sm origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
                     >Project Details</label
                   >
                   <p
@@ -752,7 +732,7 @@ const focusState = reactive({ service: false, budget: false });
               <!-- Submit Button -->
               <button
                 type="submit"
-                class="relative w-full inline-flex items-center justify-center gap-2 font-semibold tracking-wide text-white rounded-xl px-6 py-4 bg-gradient-to-r from-accent-500 via-accent-600 to-primary-600 hover:from-accent-400 hover:via-accent-500 hover:to-primary-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-400/40 shadow-lg shadow-accent-900/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed group"
+                class="relative w-full inline-flex items-center justify-center gap-2 font-semibold tracking-wide text-white rounded-xl px-6 py-4 bg-gradient-to-r from-accent-500 via-accent-600 to-primary-600 hover:from-accent-400 hover:via-accent-500 hover:to-primary-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-400/40 shadow-lg shadow-accent-900/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 :disabled="isSubmitting"
                 aria-busy="isSubmitting"
                 @click="
@@ -765,7 +745,7 @@ const focusState = reactive({ service: false, budget: false });
                   aria-hidden="true"
                 >
                   <svg
-                    class="animate-spin h-5 w-5 text-white"
+                    class="h-5 w-5 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -788,7 +768,7 @@ const focusState = reactive({ service: false, budget: false });
                 <span v-else class="flex items-center"
                   >Send Message
                   <svg
-                    class="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1"
+                    class="w-5 h-5 ml-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
