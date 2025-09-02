@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Prevent layout shift by providing minimum height for header space */
+.h-header {
+  min-height: 80px;
+}
+
+/* Ensure critical above-the-fold content has reserved space */
+#app {
+  min-height: 100vh;
+}
+
+/* Reserve space for hero section to prevent layout shift */
+.hero-section {
+  min-height: 80vh;
+}
+
+/* Ensure images don't cause layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent font loading layout shift */
+body {
+  font-family: 'Open Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}

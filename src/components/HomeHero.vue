@@ -90,10 +90,11 @@
             <img 
               src="/images/hero-image.jpg" 
               alt="Web design and development illustration"
-              class="rounded-lg shadow-lg relative z-10 w-full"
+              class="rounded-lg shadow-lg relative z-10 w-full h-auto aspect-[3/2]"
               loading="eager"
               width="600"
               height="400"
+              style="min-height: 400px;"
               onerror="this.src='https://via.placeholder.com/600x400/EDF5F0/2E5944?text=Web+Masters';" 
             />
 
