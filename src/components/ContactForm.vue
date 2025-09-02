@@ -1,32 +1,37 @@
 <!-- /components/ContactForm.vue -->
 
 <script setup>
-import { ref, reactive, computed, inject, onMounted } from "vue";
-import { sanitizeInput, isValidEmail, isValidPhone, checkRateLimit, generateCSRFToken } from "@/utils/security";
+import { ref, reactive, computed, inject, onMounted } from 'vue';
+import {
+  sanitizeInput,
+  isValidEmail,
+  isValidPhone,
+  checkRateLimit,
+  generateCSRFToken,
+} from '@/utils/security';
 
 // Import analytics from our plugin
-const gtag = inject("gtag");
-const analytics = inject("analytics");
+const gtag = inject('gtag');
+const analytics = inject('analytics');
 
 // Track form views
 onMounted(() => {
-  analytics.trackEvent("Form", "view", "Contact Form");
+  analytics.trackEvent('Form', 'view', 'Contact Form');
 });
 
 // Form state
 const formData = reactive({
-  name: "",
-  email: "",
-  phone: "",
-  service: "",
-  budget: "",
-  message: "",
+  name: '',
+  email: '',
+  phone: '',
+  service: '',
+  budget: '',
+  message: '',
 });
 
 // Security measures
-const csrfToken = ref("");
-const honeypot = ref(""); // Hidden field for bot detection
-
+const csrfToken = ref('');
+const honeypot = ref(''); // Hidden field for bot detection
 // Generate CSRF token on mount
 onMounted(() => {
   csrfToken.value = generateCSRFToken();
@@ -34,12 +39,12 @@ onMounted(() => {
 
 // Validation state
 const formErrors = reactive({
-  name: "",
-  email: "",
-  phone: "",
-  service: "",
-  budget: "",
-  message: "",
+  name: '',
+  email: '',
+  phone: '',
+  service: '',
+  budget: '',
+  message: '',
 });
 
 // Submission state
@@ -49,77 +54,72 @@ const submissionError = ref(false);
 
 // Service options
 const serviceOptions = [
-  { value: "wordpress_development", label: "WordPress Development" },
-  { value: "wordpress_maintenance", label: "WordPress Maintenance" },
-  { value: "shopify_development", label: "Shopify Development" },
-  { value: "shopify_maintenance", label: "Shopify Maintenance" },
-  { value: "consultation", label: "Consultation" },
-  { value: "other", label: "Other" },
+  { value: 'wordpress_development', label: 'WordPress Development' },
+  { value: 'wordpress_maintenance', label: 'WordPress Maintenance' },
+  { value: 'shopify_development', label: 'Shopify Development' },
+  { value: 'shopify_maintenance', label: 'Shopify Maintenance' },
+  { value: 'consultation', label: 'Consultation' },
+  { value: 'other', label: 'Other' },
 ];
 
 // Budget options
 const budgetOptions = [
-  { value: "under_1000", label: "Under $1,000" },
-  { value: "1000_5000", label: "$1,000 - $5,000" },
-  { value: "5000_10000", label: "$5,000 - $10,000" },
-  { value: "10000_25000", label: "$10,000 - $25,000" },
-  { value: "over_25000", label: "Over $25,000" },
+  { value: 'under_1000', label: 'Under $1,000' },
+  { value: '1000_5000', label: '$1,000 - $5,000' },
+  { value: '5000_10000', label: '$5,000 - $10,000' },
+  { value: '10000_25000', label: '$10,000 - $25,000' },
+  { value: 'over_25000', label: 'Over $25,000' },
 ];
 
 // Validation functions
 const validateName = () => {
   formData.name = sanitizeInput(formData.name);
-  formErrors.name = formData.name.trim() ? "" : "Name is required";
+  formErrors.name = formData.name.trim() ? '' : 'Name is required';
 };
-
 const validateEmail = () => {
   formData.email = sanitizeInput(formData.email);
   formErrors.email = isValidEmail(formData.email)
-    ? ""
-    : "Please enter a valid email address";
+    ? ''
+    : 'Please enter a valid email address';
 };
-
 const validatePhone = () => {
   formData.phone = sanitizeInput(formData.phone);
   formErrors.phone = isValidPhone(formData.phone)
-    ? ""
-    : "Please enter a valid phone number";
+    ? ''
+    : 'Please enter a valid phone number';
 };
-
 const validateService = () => {
-  formErrors.service = formData.service ? "" : "Please select a service";
+  formErrors.service = formData.service ? '' : 'Please select a service';
 };
-
 const validateBudget = () => {
-  formErrors.budget = formData.budget ? "" : "Please select a budget range";
+  formErrors.budget = formData.budget ? '' : 'Please select a budget range';
 };
-
 const validateMessage = () => {
   formData.message = sanitizeInput(formData.message);
   formErrors.message =
     formData.message.trim().length >= 10
-      ? ""
-      : "Message must be at least 10 characters long";
+      ? ''
+      : 'Message must be at least 10 characters long';
 };
 
-const validateField = (field) => {
+const validateField = field => {
   switch (field) {
-    case "name":
+    case 'name':
       validateName();
       break;
-    case "email":
+    case 'email':
       validateEmail();
       break;
-    case "phone":
+    case 'phone':
       validatePhone();
       break;
-    case "service":
+    case 'service':
       validateService();
       break;
-    case "budget":
+    case 'budget':
       validateBudget();
       break;
-    case "message":
+    case 'message':
       validateMessage();
       break;
   }
@@ -127,27 +127,29 @@ const validateField = (field) => {
 
 // Validate entire form
 const isFormValid = computed(() => {
-  validateField("name");
-  validateField("email");
-  validateField("phone");
-  validateField("service");
-  validateField("budget");
-  validateField("message");
+  validateField('name');
+  validateField('email');
+  validateField('phone');
+  validateField('service');
+  validateField('budget');
+  validateField('message');
 
-  return !Object.values(formErrors).some((error) => error !== "");
+  return !Object.values(formErrors).some(error => error !== '');
 });
 
 // Form submission handler
 const submitForm = async () => {
   // Check for bot honeypot
   if (honeypot.value) {
-    console.warn("Bot detected via honeypot");
+    console.warn('Bot detected via honeypot');
     return;
   }
 
   // Rate limiting check
-  if (!checkRateLimit("contact_form", 3, 300000)) { // 3 attempts per 5 minutes
-    submissionError.value = "Too many submission attempts. Please wait before trying again.";
+  if (!checkRateLimit('contact_form', 3, 300000)) {
+    // 3 attempts per 5 minutes
+    submissionError.value =
+      'Too many submission attempts. Please wait before trying again.';
     return;
   }
 
@@ -167,15 +169,15 @@ const submitForm = async () => {
       ...formData,
       csrf_token: csrfToken.value,
       timestamp: Date.now(),
-      user_agent: navigator.userAgent.substring(0, 200) // Limit UA string length
+      user_agent: navigator.userAgent.substring(0, 200), // Limit UA string length
     };
 
     // Submit to API endpoint
-    const response = await fetch("/api/submit", {
-      method: "POST",
+    const response = await fetch('/api/submit', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest", // Helps prevent CSRF
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest', // Helps prevent CSRF
       },
       body: JSON.stringify({
         email: formData.email,
@@ -195,7 +197,7 @@ Additional Details:
 - CSRF Token: ${csrfToken.value}
 - Timestamp: ${new Date().toISOString()}
 - User Agent: ${navigator.userAgent.substring(0, 200)}
-        `.trim()
+        `.trim(),
       }),
     });
 
@@ -210,37 +212,37 @@ Additional Details:
 
         // Determine estimated value based on budget selection
         let estimatedValue = 0;
-        if (formData.budget === "under_1000") estimatedValue = 1000;
-        else if (formData.budget === "1000_5000") estimatedValue = 3000;
-        else if (formData.budget === "5000_10000") estimatedValue = 7500;
-        else if (formData.budget === "10000_25000") estimatedValue = 17500;
-        else if (formData.budget === "over_25000") estimatedValue = 30000;
+        if (formData.budget === 'under_1000') estimatedValue = 1000;
+        else if (formData.budget === '1000_5000') estimatedValue = 3000;
+        else if (formData.budget === '5000_10000') estimatedValue = 7500;
+        else if (formData.budget === '10000_25000') estimatedValue = 17500;
+        else if (formData.budget === 'over_25000') estimatedValue = 30000;
 
         // Track the lead conversion using our analytics methods
         if (analytics) {
           // Track Google Ads conversion
           analytics.trackConversion(
-            "AW-16921221005",
-            "xuxtCL2JpKoaEI2v1YQ_",
+            'AW-16921221005',
+            'xuxtCL2JpKoaEI2v1YQ_',
             estimatedValue
           );
 
           // Track the lead event with detailed parameters
           analytics.trackEvent(
-            "Lead",
-            "generate_lead",
+            'Lead',
+            'generate_lead',
             formData.service,
             estimatedValue
           );
 
           // Send more detailed custom event
-          gtag("event", "generate_lead", {
-            currency: "CAD",
+          gtag('event', 'generate_lead', {
+            currency: 'CAD',
             value: estimatedValue,
             transaction_id: transactionId,
             service_type: formData.service,
             budget_range: formData.budget,
-            lead_source: "contact_form",
+            lead_source: 'contact_form',
             user_data: {
               email_address: formData.email,
               phone_number: formData.phone,
@@ -248,20 +250,20 @@ Additional Details:
           });
         }
       } catch (analyticsError) {
-        console.error("Analytics tracking error:", analyticsError);
+        console.error('Analytics tracking error:', analyticsError);
         // Non-blocking - continue with form success flow
       }
 
       // Reset form
-      Object.keys(formData).forEach((key) => {
-        formData[key] = "";
+      Object.keys(formData).forEach(key => {
+        formData[key] = '';
       });
     } else {
       // Error handling
       submissionError.value = true;
     }
   } catch (error) {
-    console.error("Submission error:", error);
+    console.error('Submission error:', error);
     submissionError.value = true;
   } finally {
     isSubmitting.value = false;
@@ -269,98 +271,207 @@ Additional Details:
 };
 
 // Helper function to track field interactions
-const trackFieldInteraction = (fieldName) => {
-  analytics.trackEvent("Form", "field_interaction", fieldName);
+const trackFieldInteraction = fieldName => {
+  analytics.trackEvent('Form', 'field_interaction', fieldName);
 };
+
+// Focus state for selects (since peer placeholder trick not available)
+const focusState = reactive({ service: false, budget: false });
 </script>
 
 <template>
-  <section class="container-site section-padding bg-neutral-cream border-lg">
-    <div class="mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-        <div class="md:flex">
-          <!-- Contact Information Side -->
+  <!-- Updated Contact Section with gradient + decorative elements for cohesion with hero -->
+  <section
+    id="contact-form"
+    class="relative py-24 overflow-hidden bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900"
+  >
+    <!-- Animated background orbs -->
+    <div class="pointer-events-none absolute inset-0 opacity-30">
+      <div
+        class="absolute -left-32 -top-16 w-72 h-72 bg-accent-500 rounded-full blur-3xl mix-blend-screen animate-pulse"
+      ></div>
+      <div
+        class="absolute right-0 top-1/3 w-80 h-80 bg-primary-500/40 rounded-full blur-3xl mix-blend-screen animate-pulse delay-700"
+      ></div>
+      <div
+        class="absolute -bottom-24 left-1/4 w-96 h-96 bg-accent-400/40 rounded-full blur-3xl mix-blend-screen animate-pulse delay-1000"
+      ></div>
+    </div>
+
+    <div class="container-site relative z-10 px-4 sm:px-6 lg:px-8">
+      <div
+        class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-stretch"
+      >
+        <!-- Info Panel -->
+        <div
+          class="relative group p-8 sm:p-10 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/10 shadow-2xl flex flex-col justify-center overflow-hidden"
+        >
           <div
-            class="md:w-1/2 bg-primary text-white p-8 flex flex-col justify-center"
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           >
-            <h2 class="text-3xl font-bold mb-4 text-white">
+            <div
+              class="absolute -inset-1 bg-gradient-to-tr from-accent-500/30 via-primary-500/20 to-primary-300/20 blur-2xl"
+            ></div>
+          </div>
+          <div class="relative">
+            <h2
+              class="text-3xl sm:text-4xl font-bold mb-4 text-white tracking-tight"
+            >
               Let's Talk Digital
             </h2>
-            <p class="mb-6 text-primary-light">
-              Have a project in mind? We're excited to hear about it. Fill out
-              the form, and our team will get back to you within 24 hours.
+            <p class="mb-6 text-primary-100 text-lg leading-relaxed">
+              Have a project in mind? Tell us about it and we'll reply within
+              <span class="font-semibold text-accent-300">24 hours</span> with
+              insights and next steps.
             </p>
-            <div class="space-y-4 mb-6">
-              <div class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-accent"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start gap-4">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  ></path>
-                </svg>
-                <span>Contact@ottawawebmasters.ca</span>
-              </div>
-            </div>
-
-            <!-- Who We Are section -->
-            <div class="mt-6 border-t border-primary-dark pt-6 hidden md:block">
-              <h3 class="text-xl font-semibold mb-3 text-white">Who We Are</h3>
-              <p class="text-primary-light mb-3">
-                We are a dedicated team of web design and development
-                specialists based in Ottawa, passionate about creating
-                exceptional websites for small businesses.
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206A8.959 8.959 0 0112 21"
+                    />
+                  </svg>
+                </span>
+                <div class="text-primary-100 text-sm">
+                  <div
+                    class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                  >
+                    Email
+                  </div>
+                  <a
+                    href="mailto:Contact@ottawawebmasters.ca"
+                    class="text-white font-medium hover:text-accent-200 transition-colors"
+                    >Contact@ottawawebmasters.ca</a
+                  >
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5h2l3.6 7.59-1.35 2.45A1 1 0 008 17h9m0 0a3 3 0 100 6 3 3 0 000-6zm0 0H10M6 5h15l-1.68 6H8.52"
+                    />
+                  </svg>
+                </span>
+                <div class="text-primary-100 text-sm">
+                  <div
+                    class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                  >
+                    Projects
+                  </div>
+                  <p class="text-white font-medium">100+ Websites Delivered</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+                <div class="text-white text-sm">
+                  <div
+                    class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                  >
+                    Satisfaction
+                  </div>
+                  <p class="text-white font-medium">98% Client Happiness</p>
+                </div>
+              </li>
+            </ul>
+            <div
+              class="hidden md:block space-y-4 text-white text-sm leading-relaxed"
+            >
+              <p class="text-white">
+                We're a dedicated Ottawa-based web team helping small businesses
+                grow through performance-driven design, development, and
+                optimization.
               </p>
-              <p class="text-primary-light mb-3">
-                Our mission is simple: empower small businesses with quality
-                digital solutions that drive real results. This guiding
-                principle shapes every service we offer and every project we
-                undertake.
+              <p class="text-white">
+                Our process blends strategy, conversion insights, and fast
+                iterative builds to deliver sites that both look stunning and
+                drive measurable results.
               </p>
-              <p class="text-primary-light">
-                With our combined expertise and client-focused approach, we
-                deliver websites that not only look great but also perform
-                exceptionally well in today's competitive digital landscape.
+              <p class="text-accent-200 font-medium">
+                Ready when you are. Let's build something impactful.
               </p>
             </div>
           </div>
+        </div>
 
-          <!-- Form Side -->
-          <div class="md:w-1/2 p-8">
-            <form @submit.prevent="submitForm" class="space-y-6">
+        <!-- Form Card -->
+        <div class="relative">
+          <div
+            class="relative p-6 sm:p-8 lg:p-10 rounded-3xl bg-white shadow-xl ring-1 ring-neutral-200/60 overflow-hidden"
+          >
+            <div
+              class="absolute -inset-px rounded-3xl pointer-events-none border border-transparent bg-gradient-to-tr from-accent-500/10 via-transparent to-primary-500/10"
+            ></div>
+            <form @submit.prevent="submitForm" class="space-y-6 relative z-10">
               <div role="group" aria-labelledby="personal-info-heading">
                 <h3 id="personal-info-heading" class="sr-only">
                   Personal Information
                 </h3>
 
-                <div class="mb-4">
-                  <label for="name" class="form-label" id="name-label"
-                    >Full Name</label
-                  >
+                <div class="mb-4 relative">
                   <input
                     id="name"
                     v-model="formData.name"
                     @blur="validateField('name')"
                     @focus="trackFieldInteraction('name')"
                     type="text"
-                    class="form-input"
-                    :class="{ 'border-error': formErrors.name }"
-                    placeholder="Your Full Name"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    :class="
+                      formErrors.name
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
+                    placeholder=" "
                     aria-required="true"
                     aria-invalid="formErrors.name ? true : false"
                     aria-describedby="name-error"
                     required
                   />
+                  <label
+                    for="name"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    >Full Name</label
+                  >
                   <p
                     v-if="formErrors.name"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="name-error"
                     aria-live="polite"
                   >
@@ -369,7 +480,15 @@ const trackFieldInteraction = (fieldName) => {
                 </div>
 
                 <!-- Honeypot field for bot detection - hidden from users -->
-                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                <div
+                  style="
+                    position: absolute;
+                    left: -9999px;
+                    opacity: 0;
+                    pointer-events: none;
+                  "
+                  aria-hidden="true"
+                >
                   <label for="website-field">Leave this field empty</label>
                   <input
                     id="website-field"
@@ -381,27 +500,33 @@ const trackFieldInteraction = (fieldName) => {
                   />
                 </div>
 
-                <div class="mb-4">
-                  <label for="email" class="form-label" id="email-label"
-                    >Email Address</label
-                  >
+                <div class="mb-4 relative">
                   <input
                     id="email"
                     v-model="formData.email"
                     @blur="validateField('email')"
                     @focus="trackFieldInteraction('email')"
                     type="email"
-                    class="form-input"
-                    :class="{ 'border-error': formErrors.email }"
-                    placeholder="you@example.com"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    :class="
+                      formErrors.email
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
+                    placeholder=" "
                     aria-required="true"
                     aria-invalid="formErrors.email ? true : false"
                     aria-describedby="email-error"
                     required
                   />
+                  <label
+                    for="email"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    >Email Address</label
+                  >
                   <p
                     v-if="formErrors.email"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="email-error"
                     aria-live="polite"
                   >
@@ -409,27 +534,33 @@ const trackFieldInteraction = (fieldName) => {
                   </p>
                 </div>
 
-                <div class="mb-4">
-                  <label for="phone" class="form-label" id="phone-label"
-                    >Phone Number</label
-                  >
+                <div class="mb-4 relative">
                   <input
                     id="phone"
                     v-model="formData.phone"
                     @blur="validateField('phone')"
                     @focus="trackFieldInteraction('phone')"
                     type="tel"
-                    class="form-input"
-                    :class="{ 'border-error': formErrors.phone }"
-                    placeholder="(555) 123-4567"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition"
+                    :class="
+                      formErrors.phone
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
+                    placeholder=" "
                     aria-required="true"
                     aria-invalid="formErrors.phone ? true : false"
                     aria-describedby="phone-error"
                     required
                   />
+                  <label
+                    for="phone"
+                    class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    >Phone Number</label
+                  >
                   <p
                     v-if="formErrors.phone"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="phone-error"
                     aria-live="polite"
                   >
@@ -443,17 +574,24 @@ const trackFieldInteraction = (fieldName) => {
                   Project Information
                 </h3>
 
-                <div class="mb-4">
-                  <label for="service" class="form-label" id="service-label">
-                    Service Interested In
-                  </label>
+                <div class="mb-4 relative">
                   <select
                     id="service"
                     v-model="formData.service"
-                    @blur="validateField('service')"
-                    @focus="trackFieldInteraction('service')"
-                    class="form-input"
-                    :class="{ 'border-error': formErrors.service }"
+                    @blur="
+                      validateField('service');
+                      focusState.service = false;
+                    "
+                    @focus="
+                      trackFieldInteraction('service');
+                      focusState.service = true;
+                    "
+                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 p-3 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition appearance-none pr-10"
+                    :class="
+                      formErrors.service
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
                     aria-required="true"
                     aria-invalid="formErrors.service ? true : false"
                     aria-describedby="service-error"
@@ -468,9 +606,26 @@ const trackFieldInteraction = (fieldName) => {
                       {{ option.label }}
                     </option>
                   </select>
+                  <span
+                    class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-neutral-400"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
                   <p
                     v-if="formErrors.service"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="service-error"
                     aria-live="polite"
                   >
@@ -478,17 +633,24 @@ const trackFieldInteraction = (fieldName) => {
                   </p>
                 </div>
 
-                <div class="mb-4">
-                  <label for="budget" class="form-label" id="budget-label"
-                    >Estimated Budget</label
-                  >
+                <div class="mb-4 relative">
                   <select
                     id="budget"
                     v-model="formData.budget"
-                    @blur="validateField('budget')"
-                    @focus="trackFieldInteraction('budget')"
-                    class="form-input"
-                    :class="{ 'border-error': formErrors.budget }"
+                    @blur="
+                      validateField('budget');
+                      focusState.budget = false;
+                    "
+                    @focus="
+                      trackFieldInteraction('budget');
+                      focusState.budget = true;
+                    "
+                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition appearance-none pr-10"
+                    :class="
+                      formErrors.budget
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
                     aria-required="true"
                     aria-invalid="formErrors.budget ? true : false"
                     aria-describedby="budget-error"
@@ -503,9 +665,36 @@ const trackFieldInteraction = (fieldName) => {
                       {{ option.label }}
                     </option>
                   </select>
+                  <label
+                    :for="'budget'"
+                    :class="[
+                      'pointer-events-none absolute left-4 text-neutral-500 text-sm transition-all duration-200 origin-left',
+                      focusState.budget || formData.budget
+                        ? 'top-2 text-xs text-accent-600'
+                        : 'top-1/2 -translate-y-1/2',
+                    ]"
+                    >Estimated Budget</label
+                  >
+                  <span
+                    class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-neutral-400"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
                   <p
                     v-if="formErrors.budget"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="budget-error"
                     aria-live="polite"
                   >
@@ -513,26 +702,32 @@ const trackFieldInteraction = (fieldName) => {
                   </p>
                 </div>
 
-                <div class="mb-4">
-                  <label for="message" class="form-label" id="message-label"
-                    >Project Details</label
-                  >
+                <div class="mb-6 relative">
                   <textarea
                     id="message"
                     v-model="formData.message"
                     @blur="validateField('message')"
                     @focus="trackFieldInteraction('message')"
-                    class="form-input min-h-[120px]"
-                    :class="{ 'border-error': formErrors.message }"
-                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition min-h-[140px] resize-y"
+                    :class="
+                      formErrors.message
+                        ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
+                        : ''
+                    "
+                    placeholder=" "
                     aria-required="true"
                     aria-invalid="formErrors.message ? true : false"
                     aria-describedby="message-error"
                     required
                   ></textarea>
+                  <label
+                    for="message"
+                    class="pointer-events-none absolute left-4 top-6 text-neutral-500 text-sm transition-all duration-200 origin-left peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
+                    >Project Details</label
+                  >
                   <p
                     v-if="formErrors.message"
-                    class="form-error"
+                    class="mt-1 text-sm text-red-500"
                     id="message-error"
                     aria-live="polite"
                   >
@@ -566,7 +761,7 @@ const trackFieldInteraction = (fieldName) => {
               <!-- Submit Button -->
               <button
                 type="submit"
-                class="btn-primary w-full"
+                class="relative w-full inline-flex items-center justify-center gap-2 font-semibold tracking-wide text-white rounded-xl px-6 py-4 bg-gradient-to-r from-accent-500 via-accent-600 to-primary-600 hover:from-accent-400 hover:via-accent-500 hover:to-primary-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-400/40 shadow-lg shadow-accent-900/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed group"
                 :disabled="isSubmitting"
                 aria-busy="isSubmitting"
                 @click="
@@ -575,14 +770,13 @@ const trackFieldInteraction = (fieldName) => {
               >
                 <span
                   v-if="isSubmitting"
-                  class="flex items-center justify-center"
+                  class="flex items-center"
                   aria-hidden="true"
                 >
                   <svg
-                    class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    class="animate-spin h-5 w-5 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                   >
                     <circle
                       class="opacity-25"
@@ -591,18 +785,33 @@ const trackFieldInteraction = (fieldName) => {
                       r="10"
                       stroke="currentColor"
                       stroke-width="4"
-                    ></circle>
+                    />
                     <path
                       class="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
+                    />
                   </svg>
                   Sending...
                 </span>
-                <span v-else> Send </span>
+                <span v-else class="flex items-center"
+                  >Send Message
+                  <svg
+                    class="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </span>
                 <span class="sr-only">{{
-                  isSubmitting ? "Submitting form..." : "Submit contact form"
+                  isSubmitting ? 'Submitting form...' : 'Submit contact form'
                 }}</span>
               </button>
             </form>
@@ -612,3 +821,97 @@ const trackFieldInteraction = (fieldName) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Subtle pulsing animations reused from hero style sensibility */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.6;
+  }
+}
+@keyframes pulse-slower {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 12s ease-in-out infinite;
+}
+.animate-pulse-slower {
+  animation: pulse-slower 18s ease-in-out infinite;
+}
+
+/* Floating label pattern */
+.form-field {
+  @apply w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition;
+}
+.form-field.error {
+  @apply border-red-400 focus:border-red-400 focus:ring-red-300/40;
+}
+.floating-label {
+  @apply absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm pointer-events-none transition-all duration-300 origin-left;
+}
+.field-group .floating-label.has-value {
+  @apply top-2 text-[11px] tracking-wide text-neutral-500;
+}
+/* Use :focus-within on wrapper since label precedes input */
+.field-group:focus-within .floating-label {
+  @apply top-2 text-[11px] tracking-wide text-accent-600;
+}
+/* When there is user input (non-empty) keep label floated */
+.field-group input:not(:placeholder-shown) ~ .floating-label,
+.field-group textarea:not(:placeholder-shown) ~ .floating-label,
+.field-group select:not([value='']) ~ .floating-label {
+  @apply top-2 text-[11px] tracking-wide text-neutral-500;
+}
+.input-error {
+  @apply mt-1 text-sm text-red-500;
+}
+
+/* Adjust textarea label positioning */
+.floating-label.textarea {
+  @apply top-6;
+}
+.floating-label.textarea.has-value {
+  @apply top-2;
+}
+.field-group:focus-within textarea + .floating-label {
+  @apply top-2;
+}
+.field-group textarea:not(:placeholder-shown) ~ .floating-label {
+  @apply top-2;
+}
+
+/* Select label offset */
+.floating-label.select {
+  @apply top-1/2;
+}
+.floating-label.select.has-value {
+  @apply top-2;
+}
+.field-group:focus-within select + .floating-label {
+  @apply top-2;
+}
+.field-group select:not([value='']) ~ .floating-label {
+  @apply top-2;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .form-field {
+    border: 1px solid CanvasText !important;
+  }
+}
+</style>
