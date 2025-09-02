@@ -203,7 +203,29 @@
       </div>
     </section>
     <section class="my-3">
-      <LazyContactForm />
+      <div ref="contactRoot" class="lazy-contact-form">
+        <Suspense v-if="contactShouldLoad">
+          <template #default>
+            <AsyncContactForm />
+          </template>
+          <template #fallback>
+            <div
+              class="flex items-center justify-center py-16"
+              aria-busy="true"
+            >
+              <div
+                class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+              ></div>
+              <span class="sr-only">Loading contact form...</span>
+            </div>
+          </template>
+        </Suspense>
+        <noscript>
+          <p class="text-sm text-neutral-600">
+            Enable JavaScript to load the contact form.
+          </p>
+        </noscript>
+      </div>
     </section>
     <!-- FAQ Section -->
     <section class="mt-3 bg-neutral-50 section-padding">
@@ -287,9 +309,51 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  defineAsyncComponent,
+  watchEffect,
+} from 'vue';
 import { Icon } from '@iconify/vue';
-import LazyContactForm from '@/components/LazyContactForm.vue';
+// Inline async ContactForm
+const AsyncContactForm = defineAsyncComponent(
+  () => import('@/components/ContactForm.vue')
+);
+const contactShouldLoad = ref(false);
+const contactRoot = ref(null);
+let contactObserver;
+const contactLoadIfIntersecting = entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  });
+};
+onMounted(() => {
+  if ('IntersectionObserver' in window) {
+    contactObserver = new IntersectionObserver(contactLoadIfIntersecting, {
+      rootMargin: '200px 0px',
+    });
+    if (contactRoot.value) contactObserver.observe(contactRoot.value);
+  } else {
+    contactShouldLoad.value = true;
+  }
+});
+onBeforeUnmount(() => {
+  if (contactObserver) contactObserver.disconnect();
+});
+watchEffect(() => {
+  if (!contactShouldLoad.value && contactRoot.value) {
+    const r = contactRoot.value.getBoundingClientRect();
+    if (r.top < window.innerHeight + 200) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  }
+});
 import TestimonialComponent from '@/components/TestimonialComponent.vue';
 import { useRouteSeo } from '@/composables/useRouteSeo';
 import { useSeo } from '@/composables/useSeo';

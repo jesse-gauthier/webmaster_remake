@@ -303,28 +303,28 @@
       </div>
     </section>
 
-  <!-- SEO Audit Component (lazy) -->
-  <LazySeoAuditForm id="audit-section" />
+    <!-- SEO Audit Component (lazy) -->
+    <LazySeoAuditForm id="audit-section" />
   </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import { inject } from "vue";
-import LazySeoAuditForm from "@/components/LazySeoAuditForm.vue";
+import { onMounted, onUnmounted, ref } from 'vue';
+import { inject } from 'vue';
+import LazySeoAuditForm from '@/components/LazySeoAuditForm.vue';
 
 // Get analytics methods
-const analytics = inject("analytics");
+const analytics = inject('analytics');
 
 // Track page view when component mounts
 onMounted(() => {
-  analytics.pageView("/about");
-  analytics.trackEvent("Page", "view", "About Page");
+  analytics.pageView('/about');
+  analytics.trackEvent('Page', 'view', 'About Page');
 });
 
 // Track button clicks
-const trackButtonClick = (buttonName) => {
-  analytics.trackEvent("Button", "click", buttonName);
+const trackButtonClick = buttonName => {
+  analytics.trackEvent('Button', 'click', buttonName);
 };
 
 // Track section visibility
@@ -334,12 +334,12 @@ const observerRef = ref(null);
 // Set up intersection observer to track when sections become visible
 onMounted(() => {
   observerRef.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+    entries => {
+      entries.forEach(entry => {
         const sectionId = entry.target.id;
         if (entry.isIntersecting && !visibleSections.value.has(sectionId)) {
           visibleSections.value.add(sectionId);
-          analytics.trackEvent("Section", "view", sectionId);
+          analytics.trackEvent('Section', 'view', sectionId);
         }
       });
     },
@@ -347,7 +347,7 @@ onMounted(() => {
   );
 
   // Observe all sections
-  document.querySelectorAll("section[id]").forEach((section) => {
+  document.querySelectorAll('section[id]').forEach(section => {
     observerRef.value.observe(section);
   });
 });

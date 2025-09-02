@@ -3,9 +3,16 @@ import HomeHero from '@/components/HomeHero.vue';
 import ServicesShowcase from '@/components/ServicesShowcase.vue';
 import WorkProcess from '@/components/WorkProcess.vue';
 import PricingSection from '@/components/PricingSection.vue';
-import LazyContactForm from '@/components/LazyContactForm.vue';
 import AwardsCarousel from '@/components/AwardsCarousel.vue';
-import { onMounted, onUnmounted, ref, inject } from 'vue';
+import {
+  onMounted,
+  onUnmounted,
+  ref,
+  inject,
+  onBeforeUnmount,
+  defineAsyncComponent,
+  watchEffect,
+} from 'vue';
 import { Icon } from '@iconify/vue';
 import { useRouteSeo } from '@/composables/useRouteSeo';
 
@@ -16,26 +23,22 @@ const analytics = inject('analytics');
 const observerRef = ref(null);
 const visibleSections = ref(new Set());
 
-// Define services data
-const services = ref([
-  {
-    id: 'web-design',
-    name: 'Web Design',
-    link: '/services#web-design',
-  },
-  {
-    id: 'web-development',
-    name: 'Web Development',
-    link: '/services#web-development',
-  },
-  {
-    id: 'seo',
-    name: 'SEO Services',
-    link: '/services#seo',
-  },
-]);
+// Inline async ContactForm lazy load
+const AsyncContactForm = defineAsyncComponent(
+  () => import('@/components/ContactForm.vue')
+);
+const contactShouldLoad = ref(false);
+const contactRoot = ref(null);
+let contactObserver;
+const contactLoadIfIntersecting = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  });
+};
 
-// Track page view and setup section tracking
 onMounted(() => {
   // Track page view
   analytics.pageView('/');
@@ -43,6 +46,29 @@ onMounted(() => {
 
   // Set up section visibility tracking
   setupSectionVisibilityTracking();
+
+  // contact lazy observer
+  if ('IntersectionObserver' in window) {
+    contactObserver = new IntersectionObserver(contactLoadIfIntersecting, {
+      rootMargin: '200px 0px',
+    });
+    if (contactRoot.value) contactObserver.observe(contactRoot.value);
+  } else {
+    contactShouldLoad.value = true;
+  }
+});
+
+onBeforeUnmount(() => {
+  if (contactObserver) contactObserver.disconnect();
+});
+watchEffect(() => {
+  if (!contactShouldLoad.value && contactRoot.value) {
+    const rect = contactRoot.value.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  }
 });
 
 // Clean up observer
@@ -470,7 +496,29 @@ const trackCtaClick = buttonName => {
       <PricingSection />
     </section>
     <section id="contact-section">
-      <LazyContactForm />
+      <div ref="contactRoot" class="lazy-contact-form">
+        <Suspense v-if="contactShouldLoad">
+          <template #default>
+            <AsyncContactForm />
+          </template>
+          <template #fallback>
+            <div
+              class="flex items-center justify-center py-16"
+              aria-busy="true"
+            >
+              <div
+                class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+              ></div>
+              <span class="sr-only">Loading contact form...</span>
+            </div>
+          </template>
+        </Suspense>
+        <noscript>
+          <p class="text-sm text-neutral-600">
+            Enable JavaScript to load the contact form.
+          </p>
+        </noscript>
+      </div>
     </section>
   </main>
 </template>

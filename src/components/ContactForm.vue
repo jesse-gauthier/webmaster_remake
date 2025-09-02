@@ -52,8 +52,13 @@ const isSubmitting = ref(false);
 const submissionSuccess = ref(false);
 const submissionError = ref(false);
 
-// Service options
-const serviceOptions = [
+// Allow external override of service list (e.g., specialized landing pages)
+const props = defineProps({
+  services: { type: Array, required: false, default: null },
+});
+
+// Default service options
+const defaultServiceOptions = [
   { value: 'wordpress_development', label: 'WordPress Development' },
   { value: 'wordpress_maintenance', label: 'WordPress Maintenance' },
   { value: 'shopify_development', label: 'Shopify Development' },
@@ -61,6 +66,16 @@ const serviceOptions = [
   { value: 'consultation', label: 'Consultation' },
   { value: 'other', label: 'Other' },
 ];
+
+// Use external services if provided (map simple strings to {value,label})
+const serviceOptions =
+  props.services && props.services.length
+    ? props.services.map(s =>
+        typeof s === 'string'
+          ? { value: s.toLowerCase().replace(/\s+/g, '_'), label: s }
+          : s
+      )
+    : defaultServiceOptions;
 
 // Budget options
 const budgetOptions = [
