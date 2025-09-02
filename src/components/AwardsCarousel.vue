@@ -1,7 +1,7 @@
 <template>
-  <section class="bg-neutral-cream py-16">
+  <section class="bg-neutral-cream py-12 sm:py-16">
     <div class="container-site">
-      <h2 class="text-center mb-12">Our Awards & Recognition</h2>
+      <h2 class="text-xl sm:text-2xl md:text-3xl text-center mb-8 sm:mb-12">Our Awards & Recognition</h2>
       <div class="awards-carousel-container relative" ref="carouselContainer">
         <div
           class="awards-track flex items-center transition-transform duration-1000 ease-linear"

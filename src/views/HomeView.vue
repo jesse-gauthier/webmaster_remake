@@ -91,30 +91,30 @@ const trackCtaClick = (buttonName) => {
     </section>
 
     <!-- Technology Stack Section -->
-    <section id="tech-stack-section" class="py-16 bg-neutral-50">
-      <div class="container-site px-4 sm:px-6">
-        <div class="max-w-3xl mx-auto text-center mb-12">
-          <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">
+    <section id="tech-stack-section" class="py-12 sm:py-16 bg-neutral-50">
+      <div class="container-site">
+        <div class="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
             Our Technology Stack
           </h2>
-          <p class="text-lg text-neutral-text mb-8">
+          <p class="text-base sm:text-lg text-neutral-text mb-8">
             We leverage cutting-edge technologies to build robust, scalable, and
             high-performing digital solutions.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <!-- Frontend Technologies -->
           <div
-            class="bg-white rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+            class="bg-white rounded-lg p-4 sm:p-6 shadow-sm transition-all duration-300 hover:shadow-md"
           >
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
+                class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-light rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
               >
-                <i class="fas fa-code text-primary text-xl"></i>
+                <i class="fas fa-code text-primary text-lg sm:text-xl"></i>
               </div>
-              <h3 class="text-xl font-semibold text-primary">Frontend</h3>
+              <h3 class="text-lg sm:text-xl font-semibold text-primary">Frontend</h3>
             </div>
 
             <ul class="space-y-3">
@@ -154,15 +154,15 @@ const trackCtaClick = (buttonName) => {
 
           <!-- Backend Technologies -->
           <div
-            class="bg-white rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+            class="bg-white rounded-lg p-4 sm:p-6 shadow-sm transition-all duration-300 hover:shadow-md"
           >
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
+                class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-light rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
               >
-                <i class="fas fa-server text-primary text-xl"></i>
+                <i class="fas fa-server text-primary text-lg sm:text-xl"></i>
               </div>
-              <h3 class="text-xl font-semibold text-primary">Backend</h3>
+              <h3 class="text-lg sm:text-xl font-semibold text-primary">Backend</h3>
             </div>
 
             <ul class="space-y-3">
@@ -202,15 +202,15 @@ const trackCtaClick = (buttonName) => {
 
           <!-- CMS & E-commerce -->
           <div
-            class="bg-white rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+            class="bg-white rounded-lg p-4 sm:p-6 shadow-sm transition-all duration-300 hover:shadow-md"
           >
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
+                class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-light rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0"
               >
-                <i class="fas fa-shopping-cart text-primary text-xl"></i>
+                <i class="fas fa-shopping-cart text-primary text-lg sm:text-xl"></i>
               </div>
-              <h3 class="text-xl font-semibold text-primary">Platforms</h3>
+              <h3 class="text-lg sm:text-xl font-semibold text-primary">Platforms</h3>
             </div>
 
             <ul class="space-y-3">
