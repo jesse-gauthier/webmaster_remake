@@ -1,6 +1,14 @@
 <script setup>
-import { RouterView } from "vue-router";
-import { SpeedInsights } from "@vercel/speed-insights/vue";
+import { RouterView } from 'vue-router';
+// Lazy/conditional SpeedInsights: only import in production to disable during dev
+let SpeedInsights = null;
+if (import.meta.env.PROD) {
+  import('@vercel/speed-insights/vue')
+    .then(m => {
+      SpeedInsights = m.SpeedInsights;
+    })
+    .catch(e => console.warn('SpeedInsights load failed', e));
+}
 import {
   onMounted,
   nextTick,
@@ -8,21 +16,21 @@ import {
   onBeforeUnmount,
   inject,
   provide,
-} from "vue";
-import { setupSmoothScroll } from "./utils/smoothScroll";
-import AppHeader from "./components/AppHeader.vue";
-import AppFooter from "./components/AppFooter.vue";
+} from 'vue';
+import { setupSmoothScroll } from './utils/smoothScroll';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 // import WebAppModal from "@/components/modals/WebAppModal.vue"; // Disabled for better UX
-import CookieConsentBar from "./components/CookieConsentBar.vue";
-import BreadcrumbStructuredData from "./components/BreadcrumbStructuredData.vue";
-import WebsiteStructuredData from "./components/WebsiteStructuredData.vue";
+import CookieConsentBar from './components/CookieConsentBar.vue';
+import BreadcrumbStructuredData from './components/BreadcrumbStructuredData.vue';
+import WebsiteStructuredData from './components/WebsiteStructuredData.vue';
 
 // Inject the updateConsent function from the Analytics plugin
-const updateConsent = inject("updateConsent");
+const updateConsent = inject('updateConsent');
 
 // Provide fallback updateConsent in case the plugin doesn't
-provide("updateConsent", (consent = {}) => {
-  console.log("Fallback consent update:", consent);
+provide('updateConsent', (consent = {}) => {
+  console.log('Fallback consent update:', consent);
   // If the analytics plugin is loaded, it will override this provider
 });
 
@@ -128,7 +136,7 @@ onMounted(() => {
   setupSmoothScroll();
 
   // Also set up smooth scrolling when routes change
-  window.addEventListener("popstate", () => {
+  window.addEventListener('popstate', () => {
     nextTick(() => {
       setupSmoothScroll();
     });
@@ -195,7 +203,8 @@ onBeforeUnmount(() => {
   <!-- Structured data for SEO -->
   <BreadcrumbStructuredData />
   <WebsiteStructuredData />
-  <SpeedInsights />
+  <!-- Only render SpeedInsights in production -->
+  <component :is="SpeedInsights" v-if="SpeedInsights" />
 </template>
 
 <style>
