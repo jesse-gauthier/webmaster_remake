@@ -115,7 +115,7 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
 
    gtagId: string,
 
-   luckyOrangeId: string,
+   clarityProjectId: string,
   }
 declare module '@nuxt/schema' {
   interface RuntimeConfig extends UserRuntimeConfig {}

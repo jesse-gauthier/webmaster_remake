@@ -1,3 +1,4 @@
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-09-02',
   devtools: { enabled: true },
@@ -48,7 +49,7 @@ export default defineNuxtConfig({
     public: {
       gtmId: process.env.NUXT_PUBLIC_GTM_ID || '',
       gtagId: process.env.NUXT_PUBLIC_GTAG_ID || '',
-      luckyOrangeId: process.env.NUXT_PUBLIC_LUCKY_ORANGE_ID || ''
+      clarityProjectId: process.env.NUXT_PUBLIC_CLARITY_PROJECT_ID || ''
     }
   },
 

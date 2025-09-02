@@ -686,7 +686,7 @@ const _inlineRuntimeConfig = {
   "public": {
     "gtmId": "",
     "gtagId": "",
-    "luckyOrangeId": ""
+    "clarityProjectId": ""
   },
   "sitemap": {
     "isI18nMapped": false,

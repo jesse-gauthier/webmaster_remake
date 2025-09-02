@@ -38,7 +38,8 @@
       "Bash(do echo \"Fixing $file\")",
       "Bash(sed:*)",
       "Bash(for file in pages/landing-seo.vue pages/consultations.vue)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(del \"C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\plugins\\luckyOrange.js\")"
     ],
     "deny": [],
     "ask": []
