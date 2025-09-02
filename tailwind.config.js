@@ -263,6 +263,10 @@ export default {
         '.btn-lg': {
           padding: '0.75rem 2rem',
           fontSize: '1.125rem',
+          minHeight: '48px',
+          '@screen sm': {
+            minHeight: 'auto',
+          },
         },
 
         // Card Components

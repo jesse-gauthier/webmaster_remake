@@ -42,7 +42,13 @@
               <div
                 class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
               >
-                <i class="fas fa-code text-primary text-xl"></i>
+                <Icon
+                  icon="mdi:code-braces"
+                  class="text-primary text-xl"
+                  width="22"
+                  height="22"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">Frontend</h3>
             </div>
@@ -50,7 +56,13 @@
             <ul class="space-y-4">
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-vuejs text-accent text-xl"></i>
+                  <Icon
+                    icon="mdi:vuejs"
+                    class="text-accent text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark">Vue.js</span>
@@ -63,7 +75,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-react text-blue-500 text-xl"></i>
+                  <Icon
+                    icon="mdi:react"
+                    class="text-blue-500 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark">React</span>
@@ -76,7 +94,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-js text-yellow-500 text-xl"></i>
+                  <Icon
+                    icon="mdi:language-javascript"
+                    class="text-yellow-500 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -91,7 +115,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-css3-alt text-blue-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:language-css3"
+                    class="text-blue-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -116,7 +146,13 @@
               <div
                 class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
               >
-                <i class="fas fa-server text-primary text-xl"></i>
+                <Icon
+                  icon="mdi:server"
+                  class="text-primary text-xl"
+                  width="22"
+                  height="22"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">Backend</h3>
             </div>
@@ -124,7 +160,13 @@
             <ul class="space-y-4">
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-node-js text-green-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:nodejs"
+                    class="text-green-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark">Node.js</span>
@@ -137,7 +179,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-php text-purple-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:language-php"
+                    class="text-purple-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark">PHP</span>
@@ -150,7 +198,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fas fa-database text-blue-500 text-xl"></i>
+                  <Icon
+                    icon="mdi:database"
+                    class="text-blue-500 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -165,7 +219,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fas fa-network-wired text-gray-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:graphql"
+                    class="text-gray-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -190,7 +250,13 @@
               <div
                 class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mr-4"
               >
-                <i class="fas fa-cloud text-primary text-xl"></i>
+                <Icon
+                  icon="mdi:cloud-outline"
+                  class="text-primary text-xl"
+                  width="22"
+                  height="22"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">Infrastructure</h3>
             </div>
@@ -198,7 +264,13 @@
             <ul class="space-y-4">
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-aws text-orange-500 text-xl"></i>
+                  <Icon
+                    icon="mdi:aws"
+                    class="text-orange-500 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -213,7 +285,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fab fa-docker text-blue-500 text-xl"></i>
+                  <Icon
+                    icon="mdi:docker"
+                    class="text-blue-500 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -228,7 +306,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fas fa-lock text-gray-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:lock"
+                    class="text-gray-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -243,7 +327,13 @@
 
               <li class="flex items-start">
                 <div class="min-w-10 flex-shrink-0">
-                  <i class="fas fa-tachometer-alt text-green-600 text-xl"></i>
+                  <Icon
+                    icon="mdi:speedometer"
+                    class="text-green-600 text-xl"
+                    width="22"
+                    height="22"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
                   <span class="font-medium text-primary-dark"
@@ -279,7 +369,13 @@
           >
             <div class="flex flex-col items-center mb-6 text-center">
               <div class="w-20 h-20 mb-4">
-                <i class="fab fa-wordpress text-5xl text-[#21759b]"></i>
+                <Icon
+                  icon="mdi:wordpress"
+                  class="text-5xl text-[#21759b]"
+                  width="60"
+                  height="60"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">WordPress</h3>
             </div>
@@ -291,31 +387,61 @@
 
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Custom theme development</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Plugin customization and development</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >WooCommerce integration</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Performance optimization</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Security hardening</span
                 >
@@ -337,7 +463,13 @@
           >
             <div class="flex flex-col items-center mb-6 text-center">
               <div class="w-20 h-20 mb-4">
-                <i class="fab fa-shopify text-5xl text-[#7AB55C]"></i>
+                <Icon
+                  icon="mdi:shopify"
+                  class="text-5xl text-[#7AB55C]"
+                  width="60"
+                  height="60"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">Shopify</h3>
             </div>
@@ -349,31 +481,61 @@
 
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Store setup and configuration</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Custom theme development</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >App integration and development</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Product migration and setup</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Payment gateway integration</span
                 >
@@ -395,7 +557,13 @@
           >
             <div class="flex flex-col items-center mb-6 text-center">
               <div class="w-20 h-20 mb-4">
-                <i class="fas fa-code-branch text-5xl text-primary"></i>
+                <Icon
+                  icon="mdi:source-branch"
+                  class="text-5xl text-primary"
+                  width="60"
+                  height="60"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl font-semibold text-primary">
                 Custom Web Applications
@@ -409,31 +577,61 @@
 
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >SaaS application development</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Customer portals and dashboards</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >E-commerce platforms</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >Content management systems</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-3"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                />
                 <span class="text-sm text-neutral-text"
                   >API development and integration</span
                 >
@@ -468,26 +666,50 @@
               </h3>
               <ul class="space-y-3">
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Agile development methodology with regular client
                     feedback</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Responsive design for all devices and screen sizes</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Accessibility compliance (WCAG standards)</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >SEO-friendly code and structure</span
                   >
@@ -501,25 +723,49 @@
               </h3>
               <ul class="space-y-3">
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Comprehensive testing across browsers and devices</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Performance optimization for fast load times</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Security best practices implementation</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mt-1 mr-3"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span class="text-neutral-text"
                     >Code reviews and automated testing</span
                   >
@@ -576,12 +822,13 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted } from 'vue';
+import { Icon } from '@iconify/vue';
 
 // Add AOS animation on component mount
 onMounted(() => {
   // Check if AOS is available (you would need to add AOS library to your project)
-  if (typeof AOS !== "undefined") {
+  if (typeof AOS !== 'undefined') {
     AOS.init({
       duration: 800,
       once: true,

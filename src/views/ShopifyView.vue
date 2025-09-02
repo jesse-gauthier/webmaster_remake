@@ -241,7 +241,7 @@
               class="flex justify-between items-center p-4 cursor-pointer bg-white hover:bg-neutral-50"
             >
               <h4 class="mb-0">{{ item.question }}</h4>
-              <span class="text-xl">{{ item.open ? "−" : "+" }}</span>
+              <span class="text-xl">{{ item.open ? '−' : '+' }}</span>
             </div>
             <div
               v-if="item.open"
@@ -289,8 +289,30 @@
 
           <div class="">
             <div class="card-body">
-              <!-- Using the imported ContactForm component -->
-              <ContactForm :services="serviceOptions" />
+              <!-- Inline lazy-loaded ContactForm -->
+              <div ref="contactRoot" class="lazy-contact-form">
+                <Suspense v-if="contactShouldLoad">
+                  <template #default>
+                    <AsyncContactForm :services="serviceOptions" />
+                  </template>
+                  <template #fallback>
+                    <div
+                      class="flex items-center justify-center py-16"
+                      aria-busy="true"
+                    >
+                      <div
+                        class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+                      ></div>
+                      <span class="sr-only">Loading contact form...</span>
+                    </div>
+                  </template>
+                </Suspense>
+                <noscript>
+                  <p class="text-sm text-neutral-600">
+                    Enable JavaScript to load the contact form.
+                  </p>
+                </noscript>
+              </div>
             </div>
           </div>
         </div>
@@ -300,105 +322,153 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import ContactForm from "@/components/ContactForm.vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  defineAsyncComponent,
+  watchEffect,
+} from 'vue';
+
+// Async load of ContactForm (code split)
+const AsyncContactForm = defineAsyncComponent(
+  () => import('@/components/ContactForm.vue')
+);
+
+const contactShouldLoad = ref(false);
+const contactRoot = ref(null);
+let contactObserver;
+
+const contactLoadIfIntersecting = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  });
+};
+
+onMounted(() => {
+  if ('IntersectionObserver' in window) {
+    contactObserver = new IntersectionObserver(contactLoadIfIntersecting, {
+      rootMargin: '200px 0px',
+    });
+    if (contactRoot.value) contactObserver.observe(contactRoot.value);
+  } else {
+    contactShouldLoad.value = true;
+  }
+});
+
+onBeforeUnmount(() => {
+  if (contactObserver) contactObserver.disconnect();
+});
+
+watchEffect(() => {
+  if (!contactShouldLoad.value && contactRoot.value) {
+    const rect = contactRoot.value.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  }
+});
 
 // Shopify Features
 const shopifyFeatures = ref([
   {
-    icon: "🛒",
-    title: "Easy to Use",
+    icon: '🛒',
+    title: 'Easy to Use',
     description:
       "Shopify's intuitive interface makes it easy to manage products, orders, and customers without technical expertise.",
   },
   {
-    icon: "🚀",
-    title: "Scalable Platform",
+    icon: '🚀',
+    title: 'Scalable Platform',
     description:
-      "From startups to enterprise businesses, Shopify scales with your business as you grow.",
+      'From startups to enterprise businesses, Shopify scales with your business as you grow.',
   },
   {
-    icon: "🔒",
-    title: "Secure & Reliable",
+    icon: '🔒',
+    title: 'Secure & Reliable',
     description:
-      "Built-in security features and 99.99% uptime ensure your store is always safe and accessible.",
+      'Built-in security features and 99.99% uptime ensure your store is always safe and accessible.',
   },
   {
-    icon: "🔌",
-    title: "App Ecosystem",
+    icon: '🔌',
+    title: 'App Ecosystem',
     description:
       "Extend your store's functionality with thousands of apps from the Shopify App Store.",
   },
   {
-    icon: "📱",
-    title: "Mobile Responsive",
+    icon: '📱',
+    title: 'Mobile Responsive',
     description:
-      "All Shopify themes are mobile-responsive out of the box, ensuring a seamless shopping experience.",
+      'All Shopify themes are mobile-responsive out of the box, ensuring a seamless shopping experience.',
   },
   {
-    icon: "💳",
-    title: "Payment Options",
+    icon: '💳',
+    title: 'Payment Options',
     description:
-      "Support for multiple payment gateways and Shopify Payments for reduced transaction fees.",
+      'Support for multiple payment gateways and Shopify Payments for reduced transaction fees.',
   },
 ]);
 
 // Services data
 const services = ref([
   {
-    icon: "🏪",
-    title: "Shopify Store Setup",
+    icon: '🏪',
+    title: 'Shopify Store Setup',
     description:
-      "Get your Shopify store up and running quickly with our professional setup service.",
+      'Get your Shopify store up and running quickly with our professional setup service.',
     features: [
-      "Store configuration & setup",
-      "Product upload & organization",
-      "Payment gateway integration",
-      "Shipping & tax settings",
-      "Basic theme customization",
-      "Training & documentation",
+      'Store configuration & setup',
+      'Product upload & organization',
+      'Payment gateway integration',
+      'Shipping & tax settings',
+      'Basic theme customization',
+      'Training & documentation',
     ],
   },
   {
-    icon: "🎨",
-    title: "Custom Theme Development",
+    icon: '🎨',
+    title: 'Custom Theme Development',
     description:
-      "Stand out from the competition with a custom-designed Shopify theme that reflects your brand.",
+      'Stand out from the competition with a custom-designed Shopify theme that reflects your brand.',
     features: [
-      "Custom design & development",
-      "Mobile-responsive layouts",
-      "Brand-aligned user experience",
-      "Enhanced navigation & filters",
-      "Optimized for conversions",
-      "Performance optimization",
+      'Custom design & development',
+      'Mobile-responsive layouts',
+      'Brand-aligned user experience',
+      'Enhanced navigation & filters',
+      'Optimized for conversions',
+      'Performance optimization',
     ],
   },
   {
-    icon: "🔌",
-    title: "Shopify App Development",
+    icon: '🔌',
+    title: 'Shopify App Development',
     description:
       "Custom Shopify apps to extend your store's functionality and streamline operations.",
     features: [
-      "Custom app development",
-      "Third-party integrations",
-      "API development",
-      "Automation solutions",
-      "Data migration tools",
-      "Technical documentation",
+      'Custom app development',
+      'Third-party integrations',
+      'API development',
+      'Automation solutions',
+      'Data migration tools',
+      'Technical documentation',
     ],
   },
   {
-    icon: "🚀",
-    title: "Shopify Plus Migration",
+    icon: '🚀',
+    title: 'Shopify Plus Migration',
     description:
-      "Seamlessly migrate to Shopify Plus for enterprise-level features and scalability.",
+      'Seamlessly migrate to Shopify Plus for enterprise-level features and scalability.',
     features: [
-      "Seamless data migration",
-      "Custom checkout experience",
-      "Advanced integrations",
-      "Workflow automation",
-      "Multi-channel selling setup",
-      "Staff training & support",
+      'Seamless data migration',
+      'Custom checkout experience',
+      'Advanced integrations',
+      'Workflow automation',
+      'Multi-channel selling setup',
+      'Staff training & support',
     ],
   },
 ]);
@@ -406,119 +476,119 @@ const services = ref([
 // Portfolio projects
 const portfolio = ref([
   {
-    name: "ModernHome",
-    category: "Home Decor",
+    name: 'ModernHome',
+    category: 'Home Decor',
     description:
-      "A custom Shopify store for a premium home decor brand featuring advanced filtering and a unique checkout experience.",
-    tags: ["Shopify Plus", "Custom Theme", "Advanced Filtering", "B2C"],
+      'A custom Shopify store for a premium home decor brand featuring advanced filtering and a unique checkout experience.',
+    tags: ['Shopify Plus', 'Custom Theme', 'Advanced Filtering', 'B2C'],
   },
   {
-    name: "AthleteGear",
-    category: "Sports Equipment",
+    name: 'AthleteGear',
+    category: 'Sports Equipment',
     description:
-      "An e-commerce platform for a sports equipment retailer with subscription options and a loyalty program.",
-    tags: ["Subscription Model", "Loyalty Program", "Shopify Apps", "B2C"],
+      'An e-commerce platform for a sports equipment retailer with subscription options and a loyalty program.',
+    tags: ['Subscription Model', 'Loyalty Program', 'Shopify Apps', 'B2C'],
   },
   {
-    name: "PureBeauty",
-    category: "Cosmetics",
+    name: 'PureBeauty',
+    category: 'Cosmetics',
     description:
-      "A visually stunning Shopify store for a cosmetics brand featuring product quizzes and a virtual try-on experience.",
-    tags: ["AR Try-On", "Product Quiz", "Custom Theme", "B2C"],
+      'A visually stunning Shopify store for a cosmetics brand featuring product quizzes and a virtual try-on experience.',
+    tags: ['AR Try-On', 'Product Quiz', 'Custom Theme', 'B2C'],
   },
   {
-    name: "CraftSupply",
-    category: "Craft Materials",
+    name: 'CraftSupply',
+    category: 'Craft Materials',
     description:
-      "A B2B Shopify store for a craft supply wholesaler with bulk ordering and tiered pricing.",
-    tags: ["B2B", "Wholesale", "Bulk Ordering", "Tiered Pricing"],
+      'A B2B Shopify store for a craft supply wholesaler with bulk ordering and tiered pricing.',
+    tags: ['B2B', 'Wholesale', 'Bulk Ordering', 'Tiered Pricing'],
   },
   {
-    name: "TechGadgets",
-    category: "Electronics",
+    name: 'TechGadgets',
+    category: 'Electronics',
     description:
-      "A high-volume Shopify store for a tech retailer featuring advanced product filtering and comparison tools.",
-    tags: ["High Volume", "Product Comparison", "Advanced Search", "B2C"],
+      'A high-volume Shopify store for a tech retailer featuring advanced product filtering and comparison tools.',
+    tags: ['High Volume', 'Product Comparison', 'Advanced Search', 'B2C'],
   },
   {
-    name: "OrganicFoods",
-    category: "Food & Beverage",
+    name: 'OrganicFoods',
+    category: 'Food & Beverage',
     description:
-      "A subscription-based Shopify store for an organic food delivery service with recurring delivery options.",
-    tags: ["Subscription", "Delivery Scheduling", "Shopify Flow", "B2C"],
+      'A subscription-based Shopify store for an organic food delivery service with recurring delivery options.',
+    tags: ['Subscription', 'Delivery Scheduling', 'Shopify Flow', 'B2C'],
   },
 ]);
 
 // Benefits
 const benefits = ref([
   {
-    icon: "🏆",
-    title: "Shopify Experts",
+    icon: '🏆',
+    title: 'Shopify Experts',
     description:
-      "Our team is certified by Shopify and has years of experience building successful online stores.",
+      'Our team is certified by Shopify and has years of experience building successful online stores.',
   },
   {
-    icon: "⚡",
-    title: "Fast Turnaround",
+    icon: '⚡',
+    title: 'Fast Turnaround',
     description:
-      "We deliver projects on time without compromising on quality or attention to detail.",
+      'We deliver projects on time without compromising on quality or attention to detail.',
   },
   {
-    icon: "🔄",
-    title: "Ongoing Support",
+    icon: '🔄',
+    title: 'Ongoing Support',
     description:
-      "We provide continuous support to ensure your store performs optimally after launch.",
+      'We provide continuous support to ensure your store performs optimally after launch.',
   },
   {
-    icon: "📈",
-    title: "Growth-Focused",
+    icon: '📈',
+    title: 'Growth-Focused',
     description:
-      "We build stores with conversion optimization and scalability in mind.",
+      'We build stores with conversion optimization and scalability in mind.',
   },
 ]);
 
 // Pricing plans
 const plans = ref([
   {
-    name: "Starter",
-    description: "For new businesses",
-    price: "2,499",
-    billing: "one-time",
+    name: 'Starter',
+    description: 'For new businesses',
+    price: '2,499',
+    billing: 'one-time',
     features: [
-      "Shopify store setup",
-      "Premium theme customization",
-      "Product upload (up to 50 products)",
-      "Payment gateway integration",
-      "Basic SEO setup",
-      "30 days post-launch support",
+      'Shopify store setup',
+      'Premium theme customization',
+      'Product upload (up to 50 products)',
+      'Payment gateway integration',
+      'Basic SEO setup',
+      '30 days post-launch support',
     ],
   },
   {
-    name: "Growth",
-    description: "For established businesses",
-    price: "4,999",
-    billing: "one-time",
+    name: 'Growth',
+    description: 'For established businesses',
+    price: '4,999',
+    billing: 'one-time',
     features: [
-      "Everything in Starter",
-      "Custom theme development",
-      "Product upload (up to 200 products)",
-      "Advanced SEO optimization",
-      "Email marketing integration",
-      "60 days post-launch support",
+      'Everything in Starter',
+      'Custom theme development',
+      'Product upload (up to 200 products)',
+      'Advanced SEO optimization',
+      'Email marketing integration',
+      '60 days post-launch support',
     ],
   },
   {
-    name: "Enterprise",
-    description: "For scaling businesses",
-    price: "9,999",
-    billing: "one-time",
+    name: 'Enterprise',
+    description: 'For scaling businesses',
+    price: '9,999',
+    billing: 'one-time',
     features: [
-      "Everything in Growth",
-      "Shopify Plus migration",
-      "Custom app development",
-      "ERP/CRM integration",
-      "Conversion optimization",
-      "90 days post-launch support",
+      'Everything in Growth',
+      'Shopify Plus migration',
+      'Custom app development',
+      'ERP/CRM integration',
+      'Conversion optimization',
+      '90 days post-launch support',
     ],
   },
 ]);
@@ -527,74 +597,74 @@ const plans = ref([
 const testimonials = ref([
   {
     quote:
-      "Our Shopify store has completely transformed our business. Sales have increased by 135% since launch, and the customer experience is fantastic.",
-    name: "Emily Rodriguez",
-    business: "BeautyEssentials.com",
-    result: "Sales increased by 135%",
+      'Our Shopify store has completely transformed our business. Sales have increased by 135% since launch, and the customer experience is fantastic.',
+    name: 'Emily Rodriguez',
+    business: 'BeautyEssentials.com',
+    result: 'Sales increased by 135%',
   },
   {
     quote:
-      "The team delivered our custom Shopify store ahead of schedule and under budget. Their attention to detail and focus on conversion optimization has been invaluable.",
-    name: "Mark Johnson",
-    business: "OutdoorGearPro.com",
-    result: "Conversion rate improved by 45%",
+      'The team delivered our custom Shopify store ahead of schedule and under budget. Their attention to detail and focus on conversion optimization has been invaluable.',
+    name: 'Mark Johnson',
+    business: 'OutdoorGearPro.com',
+    result: 'Conversion rate improved by 45%',
   },
   {
     quote:
-      "Migrating our large inventory to Shopify Plus was a daunting task, but the process was seamless. Our new store is faster, more user-friendly, and much easier to manage.",
-    name: "Sophia Chen",
-    business: "FashionForward.com",
-    result: "Page load time reduced by 67%",
+      'Migrating our large inventory to Shopify Plus was a daunting task, but the process was seamless. Our new store is faster, more user-friendly, and much easier to manage.',
+    name: 'Sophia Chen',
+    business: 'FashionForward.com',
+    result: 'Page load time reduced by 67%',
   },
 ]);
 
 // Stats
 const stats = ref([
   {
-    value: "200+",
-    label: "Shopify Stores Launched",
+    value: '200+',
+    label: 'Shopify Stores Launched',
   },
   {
-    value: "95%",
-    label: "Client Satisfaction Rate",
+    value: '95%',
+    label: 'Client Satisfaction Rate',
   },
   {
-    value: "45%",
-    label: "Avg. Conversion Increase",
+    value: '45%',
+    label: 'Avg. Conversion Increase',
   },
   {
-    value: "24/7",
-    label: "Support & Maintenance",
+    value: '24/7',
+    label: 'Support & Maintenance',
   },
 ]);
 
 // FAQs
 const faqs = ref([
   {
-    question: "How long does it take to build a Shopify store?",
+    question: 'How long does it take to build a Shopify store?',
     answer: `The timeline for building a Shopify store depends on the complexity of your requirements. A basic store with theme customization can be completed in 2-3 weeks, while a custom-built store with advanced functionality may take 6-8 weeks. During our initial consultation, we'll provide you with a specific timeline based on your project scope.`,
     open: true,
   },
   {
-    question: "Do you offer Shopify maintenance services?",
+    question: 'Do you offer Shopify maintenance services?',
     answer:
-      "Yes, we offer ongoing Shopify maintenance services to keep your store running smoothly. Our maintenance plans include regular updates, security monitoring, performance optimization, and technical support. We can create a custom maintenance plan based on your specific needs.",
+      'Yes, we offer ongoing Shopify maintenance services to keep your store running smoothly. Our maintenance plans include regular updates, security monitoring, performance optimization, and technical support. We can create a custom maintenance plan based on your specific needs.',
     open: false,
   },
   {
-    question: "Can you migrate my existing online store to Shopify?",
+    question: 'Can you migrate my existing online store to Shopify?',
     answer:
-      "Absolutely! We specialize in migrating online stores from platforms like WooCommerce, Magento, BigCommerce, and others to Shopify. Our migration process ensures that all your products, customers, orders, and content are transferred accurately with minimal disruption to your business.",
+      'Absolutely! We specialize in migrating online stores from platforms like WooCommerce, Magento, BigCommerce, and others to Shopify. Our migration process ensures that all your products, customers, orders, and content are transferred accurately with minimal disruption to your business.',
     open: false,
   },
   {
-    question: "Do I need Shopify Plus for my business?",
+    question: 'Do I need Shopify Plus for my business?',
     answer:
-      "Shopify Plus is designed for high-volume merchants and enterprise businesses. It offers additional features like customizable checkout, higher API limits, advanced automation with Shopify Flow, and dedicated support. During our consultation, we can assess your business needs and recommend whether Shopify Plus would be beneficial for your specific situation.",
+      'Shopify Plus is designed for high-volume merchants and enterprise businesses. It offers additional features like customizable checkout, higher API limits, advanced automation with Shopify Flow, and dedicated support. During our consultation, we can assess your business needs and recommend whether Shopify Plus would be beneficial for your specific situation.',
     open: false,
   },
   {
-    question: "Can you help with Shopify SEO?",
+    question: 'Can you help with Shopify SEO?',
     answer: `Yes, we provide comprehensive Shopify SEO services to help improve your store's visibility in search engines.Our SEO services include keyword research, on- page optimization, technical SEO, content strategy, and structured data implementation.We focus on sustainable SEO practices that drive organic traffic and conversions.`,
     open: false,
   },
@@ -605,16 +675,16 @@ const activeTestimonial = ref(0);
 
 // Service options for contact form
 const serviceOptions = ref([
-  "Shopify Store Setup",
-  "Custom Theme Development",
-  "Shopify App Development",
-  "Shopify Plus Migration",
-  "Shopify SEO",
-  "Shopify Maintenance",
+  'Shopify Store Setup',
+  'Custom Theme Development',
+  'Shopify App Development',
+  'Shopify Plus Migration',
+  'Shopify SEO',
+  'Shopify Maintenance',
 ]);
 
 // Methods
-const toggleFaq = (index) => {
+const toggleFaq = index => {
   faqs.value[index].open = !faqs.value[index].open;
 };
 </script>

@@ -40,9 +40,21 @@
             class="inline-block mt-4 text-accent-500 hover:text-primary-600 transition-colors"
           >
             <span class="flex items-center justify-center">
-              <i class="fas fa-server mr-2"></i>
+              <Icon
+                icon="mdi:server"
+                class="mr-2"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              />
               Explore our full technology stack beyond WordPress
-              <i class="fas fa-chevron-right ml-2 text-sm"></i>
+              <Icon
+                icon="mdi:chevron-right"
+                class="ml-2 text-sm"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              />
             </span>
           </router-link>
         </div>
@@ -56,7 +68,12 @@
             <div class="card-body">
               <div class="flex items-center mb-4">
                 <div class="bg-primary-100 p-3 rounded-full mr-4">
-                  <i :class="service.icon"></i>
+                  <Icon
+                    :icon="service.icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 class="text-xl mb-0">{{ service.title }}</h3>
               </div>
@@ -239,7 +256,29 @@
     <section class="section-padding">
       <div class="container-site">
         <div class="mx-auto">
-          <ContactForm />
+          <div ref="contactRoot" class="lazy-contact-form">
+            <Suspense v-if="contactShouldLoad">
+              <template #default>
+                <AsyncContactForm />
+              </template>
+              <template #fallback>
+                <div
+                  class="flex items-center justify-center py-16"
+                  aria-busy="true"
+                >
+                  <div
+                    class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+                  ></div>
+                  <span class="sr-only">Loading contact form...</span>
+                </div>
+              </template>
+            </Suspense>
+            <noscript>
+              <p class="text-sm text-neutral-600">
+                Enable JavaScript to load the contact form.
+              </p>
+            </noscript>
+          </div>
         </div>
       </div>
     </section>
@@ -266,7 +305,7 @@
               class="flex justify-between items-center p-4 cursor-pointer bg-white hover:bg-neutral-50"
             >
               <h4 class="mb-0">{{ item.question }}</h4>
-              <span class="text-xl">{{ item.open ? "−" : "+" }}</span>
+              <span class="text-xl">{{ item.open ? '−' : '+' }}</span>
             </div>
             <div
               v-if="item.open"
@@ -282,48 +321,92 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import ContactForm from "@/components/ContactForm.vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  defineAsyncComponent,
+  watchEffect,
+} from 'vue';
+import { Icon } from '@iconify/vue';
+
+// Inline async ContactForm
+const AsyncContactForm = defineAsyncComponent(
+  () => import('@/components/ContactForm.vue')
+);
+const contactShouldLoad = ref(false);
+const contactRoot = ref(null);
+let contactObserver;
+const contactLoadIfIntersecting = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  });
+};
+onMounted(() => {
+  if ('IntersectionObserver' in window) {
+    contactObserver = new IntersectionObserver(contactLoadIfIntersecting, {
+      rootMargin: '200px 0px',
+    });
+    if (contactRoot.value) contactObserver.observe(contactRoot.value);
+  } else {
+    contactShouldLoad.value = true;
+  }
+});
+onBeforeUnmount(() => {
+  if (contactObserver) contactObserver.disconnect();
+});
+watchEffect(() => {
+  if (!contactShouldLoad.value && contactRoot.value) {
+    const rect = contactRoot.value.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      contactShouldLoad.value = true;
+      if (contactObserver) contactObserver.disconnect();
+    }
+  }
+});
 
 // Services data
 const services = ref([
   {
-    title: "Custom WordPress Development",
-    icon: "fa-brands fa-wordpress",
+    title: 'Custom WordPress Development',
+    icon: 'mdi:wordpress',
     description:
-      "Tailored WordPress websites designed to meet your specific business requirements.",
+      'Tailored WordPress websites designed to meet your specific business requirements.',
     features: [
-      "Custom theme development",
-      "Plugin development & integration",
-      "E-commerce functionality",
-      "Performance optimization",
-      "Mobile-responsive design",
+      'Custom theme development',
+      'Plugin development & integration',
+      'E-commerce functionality',
+      'Performance optimization',
+      'Mobile-responsive design',
     ],
   },
   {
-    title: "WordPress Maintenance",
-    icon: "fa-solid fa-wrench",
+    title: 'WordPress Maintenance',
+    icon: 'mdi:wrench',
     description:
-      "Keep your WordPress site secure, updated, and running at peak performance.",
+      'Keep your WordPress site secure, updated, and running at peak performance.',
     features: [
-      "Regular WordPress updates",
-      "Security monitoring & hardening",
-      "Performance optimization",
-      "Daily/weekly backups",
-      "Technical support",
+      'Regular WordPress updates',
+      'Security monitoring & hardening',
+      'Performance optimization',
+      'Daily/weekly backups',
+      'Technical support',
     ],
   },
   {
-    title: "WordPress Migration",
-    icon: "fa-solid fa-arrow-right-arrow-left",
+    title: 'WordPress Migration',
+    icon: 'mdi:arrow-left-right',
     description:
-      "Seamless migration of your existing website to WordPress or between hosts.",
+      'Seamless migration of your existing website to WordPress or between hosts.',
     features: [
-      "Zero downtime migration",
-      "Data & content transfer",
-      "SEO preservation",
-      "Performance testing",
-      "Post-migration support",
+      'Zero downtime migration',
+      'Data & content transfer',
+      'SEO preservation',
+      'Performance testing',
+      'Post-migration support',
     ],
   },
 ]);
@@ -331,24 +414,24 @@ const services = ref([
 // Process steps
 const process = ref([
   {
-    title: "Discovery",
+    title: 'Discovery',
     description:
-      "We analyze your business needs and goals to develop a strategic plan for your WordPress project.",
+      'We analyze your business needs and goals to develop a strategic plan for your WordPress project.',
   },
   {
-    title: "Design",
+    title: 'Design',
     description:
-      "Our designers create wireframes and mockups of your WordPress site based on your brand guidelines.",
+      'Our designers create wireframes and mockups of your WordPress site based on your brand guidelines.',
   },
   {
-    title: "Development",
+    title: 'Development',
     description:
-      "Our WordPress experts build your custom website with clean, optimized code and the latest technologies.",
+      'Our WordPress experts build your custom website with clean, optimized code and the latest technologies.',
   },
   {
-    title: "Launch",
+    title: 'Launch',
     description:
-      "We thoroughly test your site before deployment and provide training on how to manage your new WordPress site.",
+      'We thoroughly test your site before deployment and provide training on how to manage your new WordPress site.',
   },
 ]);
 
@@ -356,66 +439,66 @@ const process = ref([
 const testimonials = ref([
   {
     quote:
-      "Working with this team was a game-changer for our business. Our new WordPress site increased our conversion rate by 45% in the first month.",
-    name: "Sarah Johnson",
-    company: "Marketing Director, TechCorp",
+      'Working with this team was a game-changer for our business. Our new WordPress site increased our conversion rate by 45% in the first month.',
+    name: 'Sarah Johnson',
+    company: 'Marketing Director, TechCorp',
   },
   {
     quote:
-      "The WordPress maintenance service has saved us countless hours and prevented several potential security issues. Worth every penny!",
-    name: "Michael Chen",
-    company: "CEO, GrowthStart",
+      'The WordPress maintenance service has saved us countless hours and prevented several potential security issues. Worth every penny!',
+    name: 'Michael Chen',
+    company: 'CEO, GrowthStart',
   },
   {
     quote:
-      "The migration to WordPress was smooth and seamless. Our team was up and running on the new platform with minimal training.",
-    name: "Laura Martinez",
-    company: "Operations Manager, CreativeHub",
+      'The migration to WordPress was smooth and seamless. Our team was up and running on the new platform with minimal training.',
+    name: 'Laura Martinez',
+    company: 'Operations Manager, CreativeHub',
   },
 ]);
 
 // Pricing plans
 const plans = ref([
   {
-    name: "Basic",
-    description: "For small businesses starting out",
-    price: "999",
-    billing: "one-time",
+    name: 'Basic',
+    description: 'For small businesses starting out',
+    price: '999',
+    billing: 'one-time',
     features: [
-      "Custom WordPress theme",
-      "Mobile responsive design",
-      "Contact form integration",
-      "5 pages of content",
-      "Basic SEO setup",
-      "1 month of support",
+      'Custom WordPress theme',
+      'Mobile responsive design',
+      'Contact form integration',
+      '5 pages of content',
+      'Basic SEO setup',
+      '1 month of support',
     ],
   },
   {
-    name: "Professional",
-    description: "For growing businesses",
-    price: "1,999",
-    billing: "one-time",
+    name: 'Professional',
+    description: 'For growing businesses',
+    price: '1,999',
+    billing: 'one-time',
     features: [
-      "Everything in Basic",
-      "E-commerce functionality",
-      "Custom plugin integration",
-      "Advanced SEO setup",
-      "Performance optimization",
-      "3 months of support",
+      'Everything in Basic',
+      'E-commerce functionality',
+      'Custom plugin integration',
+      'Advanced SEO setup',
+      'Performance optimization',
+      '3 months of support',
     ],
   },
   {
-    name: "Enterprise",
-    description: "For established businesses",
-    price: "3,499",
-    billing: "one-time",
+    name: 'Enterprise',
+    description: 'For established businesses',
+    price: '3,499',
+    billing: 'one-time',
     features: [
-      "Everything in Professional",
-      "Custom plugin development",
-      "Multilingual support",
-      "Advanced security setup",
-      "Membership functionality",
-      "6 months of support",
+      'Everything in Professional',
+      'Custom plugin development',
+      'Multilingual support',
+      'Advanced security setup',
+      'Membership functionality',
+      '6 months of support',
     ],
   },
 ]);
@@ -423,39 +506,39 @@ const plans = ref([
 // FAQs
 const faqs = ref([
   {
-    question: "How long does it take to develop a WordPress website?",
+    question: 'How long does it take to develop a WordPress website?',
     answer:
-      "Typically, a custom WordPress website takes 4-8 weeks to complete, depending on the complexity of the project. Basic websites may be completed in as little as 2-3 weeks, while more complex projects with e-commerce or custom functionality may take 8-12 weeks.",
+      'Typically, a custom WordPress website takes 4-8 weeks to complete, depending on the complexity of the project. Basic websites may be completed in as little as 2-3 weeks, while more complex projects with e-commerce or custom functionality may take 8-12 weeks.',
     open: true,
   },
   {
-    question: "Do you provide WordPress hosting services?",
+    question: 'Do you provide WordPress hosting services?',
     answer:
       "While we don't directly provide hosting, we partner with premium WordPress hosting providers and can manage the setup and configuration process for you. We'll recommend the best hosting solution based on your website's needs and budget.",
     open: false,
   },
   {
-    question: "Can you work with an existing WordPress website?",
+    question: 'Can you work with an existing WordPress website?',
     answer:
       "Absolutely! We can help optimize, redesign, or add new features to your existing WordPress site. We'll first conduct a thorough audit to identify areas for improvement before making any changes.",
     open: false,
   },
   {
-    question: "What about WordPress security?",
+    question: 'What about WordPress security?',
     answer:
-      "Security is a top priority in all our WordPress development projects. We implement industry best practices including secure coding standards, regular updates, strong authentication, firewall protection, and malware scanning to keep your site secure.",
+      'Security is a top priority in all our WordPress development projects. We implement industry best practices including secure coding standards, regular updates, strong authentication, firewall protection, and malware scanning to keep your site secure.',
     open: false,
   },
   {
-    question: "Do you offer ongoing maintenance after the website launch?",
+    question: 'Do you offer ongoing maintenance after the website launch?',
     answer:
-      "Yes, we offer various WordPress maintenance packages to keep your site secure, updated, and performing optimally. Our maintenance services include regular updates, security monitoring, backups, performance optimization, and technical support.",
+      'Yes, we offer various WordPress maintenance packages to keep your site secure, updated, and performing optimally. Our maintenance services include regular updates, security monitoring, backups, performance optimization, and technical support.',
     open: false,
   },
 ]);
 
 // Methods
-const toggleFaq = (index) => {
+const toggleFaq = index => {
   faqs.value[index].open = !faqs.value[index].open;
 };
 </script>

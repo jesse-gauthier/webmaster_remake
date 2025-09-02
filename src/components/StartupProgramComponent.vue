@@ -119,22 +119,44 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              <i class="fas fa-dollar-sign text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:currency-usd"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-bold text-primary mb-3">
               Minimal Upfront Investment
             </h3>
             <ul class="text-left space-y-2">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Only $1,500 admin fee</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>No massive development costs</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Preserve your capital for growth</span>
               </li>
             </ul>
@@ -146,22 +168,44 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              <i class="fas fa-handshake text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:handshake"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-bold text-primary mb-3">
               True Partnership Model
             </h3>
             <ul class="text-left space-y-2">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>5-8% equity stake</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>5-8 years commitment</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Aligned success interests</span>
               </li>
             </ul>
@@ -173,22 +217,44 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              <i class="fas fa-code text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:code-tags"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-bold text-primary mb-3">
               Full-Service Development
             </h3>
             <ul class="text-left space-y-2">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Custom SaaS application</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Ongoing maintenance</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Technical partnership</span>
               </li>
             </ul>
@@ -198,7 +264,13 @@
         <div class="text-center">
           <a href="#cost-comparison" class="btn-accent">
             Save $48,500+ on Development Costs
-            <i class="fas fa-arrow-right ml-2"></i>
+            <Icon
+              icon="mdi:arrow-right"
+              class="ml-2"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            />
           </a>
         </div>
       </div>
@@ -231,19 +303,43 @@
               </h3>
               <ul class="text-left space-y-2">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>In-depth business analysis</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Market opportunity assessment</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Feature prioritization</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Technical requirements gathering</span>
                 </li>
               </ul>
@@ -262,19 +358,43 @@
               </h3>
               <ul class="text-left space-y-2">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>UX/UI design</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Wireframing</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Prototyping</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Mobile-responsive layouts</span>
                 </li>
               </ul>
@@ -293,19 +413,43 @@
               </h3>
               <ul class="text-left space-y-2">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Custom application build</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Regular progress updates</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Quality assurance testing</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Cross-browser compatibility</span>
                 </li>
               </ul>
@@ -324,19 +468,43 @@
               </h3>
               <ul class="text-left space-y-2">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Market deployment</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>24/7 technical support</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Continuous optimization</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-accent mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Performance monitoring</span>
                 </li>
               </ul>
@@ -365,34 +533,74 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6"
             >
-              <i class="fas fa-shield-alt text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:shield-outline"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-semibold text-primary mb-4 text-center">
               Security & Performance
             </h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>End-to-end encryption</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>OWASP compliance</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Serverless architecture</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>CDN integration</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Advanced caching strategies</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Penetration testing</span>
               </li>
             </ul>
@@ -402,30 +610,64 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6"
             >
-              <i class="fas fa-code-branch text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:source-branch"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-semibold text-primary mb-4 text-center">
               Development Standards
             </h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Mobile-first approach</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Clean, scalable code</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Comprehensive testing</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Version control</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>CI/CD implementation</span>
               </li>
             </ul>
@@ -435,30 +677,64 @@
             <div
               class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6"
             >
-              <i class="fas fa-tasks text-primary-600 text-2xl"></i>
+              <Icon
+                icon="mdi:checklist"
+                class="text-primary-600 text-2xl"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl font-semibold text-primary mb-4 text-center">
               Quality Assurance
             </h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Cross-browser testing</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Load testing</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Security scanning</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Accessibility compliance</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:check"
+                  class="text-accent mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span>Performance benchmarking</span>
               </li>
             </ul>
@@ -508,15 +784,33 @@
 
               <ul class="space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>No ongoing commitment</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Additional costs for maintenance</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Pay regardless of success</span>
                 </li>
               </ul>
@@ -541,15 +835,33 @@
 
               <ul class="space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Benefits & overhead costs</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Management complexity</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-times text-error mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:close"
+                    class="text-error mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Infrastructure costs</span>
                 </li>
               </ul>
@@ -574,19 +886,43 @@
 
               <ul class="space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Full technical partnership</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Aligned success interests</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>Ongoing maintenance included</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1 mr-2"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1 mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
                   <span>No hidden costs</span>
                 </li>
               </ul>
@@ -622,7 +958,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-laptop-code text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:laptop"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">
               Custom Web Application Development
             </h3>
@@ -635,7 +977,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fab fa-wordpress text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:wordpress"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">
               WordPress & Shopify Solutions
             </h3>
@@ -648,7 +996,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-paint-brush text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:brush"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">UX/UI Design</h3>
             <p class="text-neutral-text text-sm">
               Intuitive user experiences with beautiful, conversion-focused
@@ -659,7 +1013,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-shopping-cart text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:cart"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">E-commerce Integration</h3>
             <p class="text-neutral-text text-sm">
               Seamless payment processing, inventory management, and shopping
@@ -670,7 +1030,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-search text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:magnify"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">SEO Optimization</h3>
             <p class="text-neutral-text text-sm">
               Technical SEO and content optimization to improve visibility and
@@ -681,7 +1047,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-tools text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:tools"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">Monthly Maintenance</h3>
             <p class="text-neutral-text text-sm">
               Ongoing updates, security patches, and performance optimization
@@ -692,7 +1064,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-comments text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:comment-processing-outline"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">Technical Consultations</h3>
             <p class="text-neutral-text text-sm">
               Expert guidance on technology decisions, strategies, and growth
@@ -703,7 +1081,13 @@
           <div
             class="p-6 rounded-lg border border-neutral-100 hover:shadow-lg transition-shadow"
           >
-            <i class="fas fa-mobile-alt text-accent text-3xl mb-4"></i>
+            <Icon
+              icon="mdi:cellphone"
+              class="text-accent text-3xl mb-4"
+              width="40"
+              height="40"
+              aria-hidden="true"
+            />
             <h3 class="text-lg font-semibold mb-2">Mobile-Responsive Design</h3>
             <p class="text-neutral-text text-sm">
               Applications that work seamlessly across all devices and screen
@@ -909,8 +1293,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import CalendlyEmbed from "./CalendlyEmbed.vue";
+import { ref, onMounted, onUnmounted } from 'vue';
+import { Icon } from '@iconify/vue';
+import CalendlyEmbed from './CalendlyEmbed.vue';
 
 const showCalendly = ref(false);
 
@@ -921,24 +1306,24 @@ const openCalendly = () => {
 // Logic to show sticky CTA on scroll
 onMounted(() => {
   const handleScroll = () => {
-    const stickyCta = document.getElementById("sticky-cta");
+    const stickyCta = document.getElementById('sticky-cta');
     if (stickyCta) {
       // Show sticky CTA after scrolling down 500px
       if (window.scrollY > 500) {
-        stickyCta.classList.add("opacity-100");
-        stickyCta.classList.remove("opacity-0", "translate-y-full");
+        stickyCta.classList.add('opacity-100');
+        stickyCta.classList.remove('opacity-0', 'translate-y-full');
       } else {
-        stickyCta.classList.remove("opacity-100");
-        stickyCta.classList.add("opacity-0", "translate-y-full");
+        stickyCta.classList.remove('opacity-100');
+        stickyCta.classList.add('opacity-0', 'translate-y-full');
       }
     }
   };
 
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener('scroll', handleScroll);
 
   // Clean up the event listener
   onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener('scroll', handleScroll);
   });
 });
 </script>

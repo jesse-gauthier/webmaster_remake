@@ -60,8 +60,8 @@
             >
               {{
                 formState.submitting
-                  ? "Submitting..."
-                  : "Request Free SEO Audit"
+                  ? 'Submitting...'
+                  : 'Request Free SEO Audit'
               }}
             </button>
             <p
@@ -100,14 +100,18 @@
             class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600"
           >
             <span class="sr-only">Close</span>
-            <i class="fas fa-times text-xl"></i>
+            <Icon icon="mdi:close" class="text-xl" aria-hidden="true" />
           </button>
 
           <!-- Success Icon -->
           <div
             class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
           >
-            <i class="fas fa-check text-primary-600 text-3xl"></i>
+            <Icon
+              icon="mdi:check"
+              class="text-primary-600 text-3xl"
+              aria-hidden="true"
+            />
           </div>
 
           <h3 class="text-2xl font-bold text-primary-700 text-center mb-2">
@@ -124,21 +128,39 @@
             </h4>
             <ul class="text-sm text-neutral-700 space-y-2">
               <li class="flex items-start">
-                <i class="fas fa-clock text-accent-500 mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:clock-outline"
+                  class="text-accent-500 mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span
                   >Our SEO experts will review your website within
                   <strong>48 hours</strong></span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-file-alt text-accent-500 mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:file-document-outline"
+                  class="text-accent-500 mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span
                   >We'll prepare a detailed report with actionable
                   recommendations</span
                 >
               </li>
               <li class="flex items-start">
-                <i class="fas fa-envelope text-accent-500 mt-1 mr-2"></i>
+                <Icon
+                  icon="mdi:email-outline"
+                  class="text-accent-500 mt-1 mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 <span
                   >You'll receive the audit report via email at
                   <strong>{{ formData.email }}</strong></span
@@ -166,38 +188,39 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted, inject } from "vue";
+import { reactive, ref, onMounted, inject } from 'vue';
+import { Icon } from '@iconify/vue';
 
 const formData = reactive({
-  name: "",
-  email: "",
-  website: "",
+  name: '',
+  email: '',
+  website: '',
 });
 
 const formState = reactive({
   submitting: false,
-  message: "",
+  message: '',
   success: false,
 });
 
 const showSuccessModal = ref(false);
 
-const analytics = inject("analytics");
+const analytics = inject('analytics');
 
 // Track form view
 onMounted(() => {
-  analytics.trackEvent("Form", "view", "SEO Audit Form");
+  analytics.trackEvent('Form', 'view', 'SEO Audit Form');
 });
 
 const submitForm = async () => {
   formState.submitting = true;
-  formState.message = "";
+  formState.message = '';
 
   try {
-    const response = await fetch("/api/submit", {
-      method: "POST",
+    const response = await fetch('/api/submit', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: formData.email,
@@ -209,7 +232,7 @@ Email: ${formData.email}
 Website: ${formData.website}
 
 This is a request for a free SEO audit. Please provide a detailed analysis of the website's SEO performance and recommendations for improvement.
-        `.trim()
+        `.trim(),
       }),
     });
 
@@ -221,15 +244,15 @@ This is a request for a free SEO audit. Please provide a detailed analysis of th
       showSuccessModal.value = true;
 
       // Track successful form submission
-      analytics.trackFormSubmission("seo_audit_form", {
+      analytics.trackFormSubmission('seo_audit_form', {
         website: formData.website,
         source_page: document.location.pathname,
       });
 
       // Track conversion
       analytics.trackConversion(
-        "AW-16921221005",
-        "seo_audit_request",
+        'AW-16921221005',
+        'seo_audit_request',
         50 // Estimated value
       );
 
@@ -237,11 +260,11 @@ This is a request for a free SEO audit. Please provide a detailed analysis of th
       // It will be reset when the modal is closed
     } else {
       formState.message =
-        result.message || "An error occurred. Please try again.";
+        result.message || 'An error occurred. Please try again.';
     }
   } catch (error) {
-    console.error("Error submitting form:", error);
-    formState.message = "An error occurred. Please try again later.";
+    console.error('Error submitting form:', error);
+    formState.message = 'An error occurred. Please try again later.';
     formState.success = false;
   } finally {
     formState.submitting = false;
@@ -252,20 +275,20 @@ const closeModal = () => {
   showSuccessModal.value = false;
 
   // Reset form after closing the modal
-  formData.name = "";
-  formData.email = "";
-  formData.website = "";
+  formData.name = '';
+  formData.email = '';
+  formData.website = '';
 };
 
 // Track input interactions
-const trackFieldFocus = (fieldName) => {
-  analytics.trackEvent("Form", "field_focus", fieldName);
+const trackFieldFocus = fieldName => {
+  analytics.trackEvent('Form', 'field_focus', fieldName);
 };
 
 // Add event listener to close modal with ESC key
-if (typeof window !== "undefined") {
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && showSuccessModal.value) {
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && showSuccessModal.value) {
       closeModal();
     }
   });

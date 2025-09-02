@@ -34,7 +34,7 @@
             class="absolute top-4 right-4 text-white hover:text-primary-light transition-colors"
             aria-label="Close modal"
           >
-            <i class="fas fa-times text-xl"></i>
+            <Icon icon="mdi:close" class="text-xl" aria-hidden="true" />
           </button>
           <!-- This should trigger a google anayltics event -->
           <button @click="handleViewDetails" class="btn-primary">
@@ -59,7 +59,7 @@
                   <div
                     class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                   >
-                    <i class="fas fa-check text-sm"></i>
+                    <Icon icon="mdi:check" class="text-sm" aria-hidden="true" />
                   </div>
                   <span class="ml-3 text-neutral-text"
                     >Pay just $1,500 upfront vs. $15,000-$50,000</span
@@ -69,7 +69,7 @@
                   <div
                     class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                   >
-                    <i class="fas fa-check text-sm"></i>
+                    <Icon icon="mdi:check" class="text-sm" aria-hidden="true" />
                   </div>
                   <span class="ml-3 text-neutral-text"
                     >We take a small percentage of revenue once profitable</span
@@ -79,7 +79,7 @@
                   <div
                     class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                   >
-                    <i class="fas fa-check text-sm"></i>
+                    <Icon icon="mdi:check" class="text-sm" aria-hidden="true" />
                   </div>
                   <span class="ml-3 text-neutral-text"
                     >Ongoing support and maintenance included</span
@@ -89,7 +89,7 @@
                   <div
                     class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                   >
-                    <i class="fas fa-check text-sm"></i>
+                    <Icon icon="mdi:check" class="text-sm" aria-hidden="true" />
                   </div>
                   <span class="ml-3 text-neutral-text"
                     >Strategic partnership for long-term growth</span
@@ -124,23 +124,39 @@
 
               <ul class="text-sm space-y-2 mb-6">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success text-sm mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success text-sm mt-1"
+                    aria-hidden="true"
+                  />
                   <span class="ml-2 text-neutral-text"
                     >Full application development</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success text-sm mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success text-sm mt-1"
+                    aria-hidden="true"
+                  />
                   <span class="ml-2 text-neutral-text">2-5% revenue share</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success text-sm mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success text-sm mt-1"
+                    aria-hidden="true"
+                  />
                   <span class="ml-2 text-neutral-text"
                     >Ongoing maintenance</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success text-sm mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success text-sm mt-1"
+                    aria-hidden="true"
+                  />
                   <span class="ml-2 text-neutral-text"
                     >Feature enhancements</span
                   >
@@ -168,7 +184,14 @@
             class="btn-primary"
             aria-label="Get started with equity model"
           >
-            <i class="fas fa-handshake mr-2"></i> Start the Conversation
+            <Icon
+              icon="mdi:handshake"
+              class="mr-2"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            />
+            Start the Conversation
           </router-link>
         </div>
       </div>
@@ -177,7 +200,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch, inject } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, inject } from 'vue';
+import { Icon } from '@iconify/vue';
 
 const props = defineProps({
   isOpen: {
@@ -186,54 +210,54 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close']);
 const showContent = ref(false);
 const isExpanding = ref(false);
-const analytics = inject("analytics");
+const analytics = inject('analytics');
 
 watch(
   () => props.isOpen,
-  async (newVal) => {
+  async newVal => {
     if (newVal) {
       // When opening, first mount the component, then animate in
       await nextTick();
       showContent.value = true;
 
       // Prevent scrolling when modal is open
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
       // When closing, first animate out, then unmount
       showContent.value = false;
 
       // Re-enable scrolling
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
   },
   { immediate: true }
 );
 
 // Handle ESC key to close the modal
-const handleKeyDown = (e) => {
-  if (e.key === "Escape" && props.isOpen) {
+const handleKeyDown = e => {
+  if (e.key === 'Escape' && props.isOpen) {
     closeModal();
   }
 };
 
 onMounted(() => {
-  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener('keydown', handleKeyDown);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener('keydown', handleKeyDown);
   // Ensure scrolling is re-enabled when component is destroyed
-  document.body.style.overflow = "";
+  document.body.style.overflow = '';
 });
 
 const closeModal = () => {
   showContent.value = false;
   // Allow time for the closing animation before emitting the close event
   setTimeout(() => {
-    emit("close");
+    emit('close');
   }, 300);
 };
 
@@ -241,9 +265,9 @@ const closeModalAndScroll = () => {
   closeModal();
   // Allow time for modal to close, then scroll to contact section
   setTimeout(() => {
-    const contactSection = document.getElementById("contact");
+    const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   }, 350);
 };
@@ -253,7 +277,7 @@ const handleViewDetails = () => {
 
   // Track the view details click event
   if (analytics) {
-    analytics.trackEvent("Modal", "view_details_click", "WebApp Modal Details");
+    analytics.trackEvent('Modal', 'view_details_click', 'WebApp Modal Details');
   }
 };
 </script>
