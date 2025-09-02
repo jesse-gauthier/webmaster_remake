@@ -241,6 +241,19 @@ const routes = [
     },
   },
   {
+    path: '/gift',
+    name: 'Gift',
+    component: () => import('@/views/GiftView.vue'),
+    meta: {
+      seo: {
+        title: 'Free SEO Checklist Gift | WebMaster',
+        description: 'Unlock our interactive 100+ point SEO checklist by entering your email to receive ongoing optimization tips and resources.',
+        image: seoConfig.defaultImage,
+        type: 'website'
+      }
+    }
+  },
+  {
     path: '/technology-stack',
     name: 'Technology Stack',
     component: () => import('@/views/TechnologyStackView.vue'),
@@ -321,7 +334,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // Allow navigation to proceed immediately
   next();
-  
+
   // Handle SEO data asynchronously after navigation
   if (to.meta.seo) {
     // For dynamic blog articles, fetch SEO data from the article content
