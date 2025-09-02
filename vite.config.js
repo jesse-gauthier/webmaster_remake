@@ -91,18 +91,18 @@ export default defineConfig({
       // Enhanced CSP - more restrictive for development
       'Content-Security-Policy': [
         "default-src 'self'",
-        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com https://embed.tawk.to 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Vite dev
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://embed.tawk.to",
-        "font-src 'self' https://fonts.gstatic.com https://embed.tawk.to",
+        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://calendly.com https://*.calendly.com https://tools.luckyorange.com https://*.luckyorange.com 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Vite dev
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.luckyorange.com",
+        "font-src 'self' https://fonts.gstatic.com https://*.luckyorange.com",
         "img-src 'self' data: https: blob:",
-        "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.tawk.to wss://*.tawk.to ws://localhost:*", // ws for HMR
-        "frame-src 'self' https://calendly.com https://*.calendly.com https://*.tawk.to",
+        "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.luckyorange.com wss://*.luckyorange.com wss://in.visitors.live https://pubsub.googleapis.com ws://localhost:*", // ws for HMR
+        "frame-src 'self' https://calendly.com https://*.calendly.com https://*.luckyorange.com",
         "frame-ancestors 'self'",
         "form-action 'self'",
         "base-uri 'self'",
         "object-src 'none'",
         "media-src 'self'",
-        "worker-src 'self'",
+        "worker-src 'self' blob:",
         "manifest-src 'self'"
       ].join('; '),
       
@@ -131,9 +131,9 @@ export default defineConfig({
         'usb=()'
       ].join(', '),
       
-      // Cross-origin policies - relaxed for Tawk.to integration
+      // Cross-origin policies - configured for third-party integrations
       'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
-      // Removed 'Cross-Origin-Embedder-Policy': 'require-corp' to allow Tawk.to
+      // Removed 'Cross-Origin-Embedder-Policy': 'require-corp' to allow third-party scripts
       'Cross-Origin-Resource-Policy': 'cross-origin'
     }
   }

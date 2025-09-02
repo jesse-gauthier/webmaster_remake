@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "./plugins/fontawesome"
 
 inject()
 import Analytics from "./plugins/analytics";
-import TawkTo from "./plugins/tawkto";
+import LuckyOrange from "./plugins/luckyOrange";
 import {
   preloadCriticalResources,
   setupPerformanceMonitoring,
@@ -41,7 +41,7 @@ const app = createApp(App);
 const head = createHead();
 app.use(head);
 app.use(Analytics);
-app.use(TawkTo);
+app.use(LuckyOrange);
 app.use(createPinia());
 app.use(router);
 
