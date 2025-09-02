@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
+  compatibilityDate: '2025-09-02',
   devtools: { enabled: true },
-  
+
   // CSS Configuration
   css: [
     '~/assets/css/main.css',
@@ -42,7 +43,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Private keys (only available on server-side)
     // apiSecret: process.env.API_SECRET,
-    
+
     // Public keys (exposed to client-side)
     public: {
       gtmId: process.env.NUXT_PUBLIC_GTM_ID || '',
@@ -54,7 +55,6 @@ export default defineNuxtConfig({
   // Modules
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxt/content',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
@@ -67,28 +67,17 @@ export default defineNuxtConfig({
     viewer: true
   },
 
-  // Content Module
-  content: {
-    // Options for @nuxt/content
-    markdown: {
-      toc: {
-        depth: 3,
-        searchDepth: 3
-      }
-    }
-  },
-
   // Robots Configuration
   robots: {
     UserAgent: '*',
     Allow: '/',
     Disallow: ['/admin', '/.nuxt', '/api/'],
-    Sitemap: 'https://yourdomain.com/sitemap.xml'
+    Sitemap: 'https://ottawawebmasters.ca/sitemap.xml'
   },
 
   // Sitemap Configuration
   sitemap: {
-    hostname: 'https://yourdomain.com',
+    hostname: 'https://ottawawebmasters.ca',
     gzip: true,
     routes: async () => {
       // Add any dynamic routes here

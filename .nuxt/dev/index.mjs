@@ -3,7 +3,7 @@ import { Server } from 'node:http';
 import { resolve as resolve$1, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getRequestHost, getRequestProtocol, setHeader, getQuery as getQuery$1, getHeader, readBody, getRouterParam, getResponseStatus, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatusText } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/h3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getRequestHost, getRequestProtocol, setHeader, getQuery as getQuery$1, getHeader, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/h3/dist/index.mjs';
 import { escapeHtml } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/@vue/shared/dist/shared.cjs.js';
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, hasProtocol, withHttps, withoutTrailingSlash, decodePath, withLeadingSlash, withoutProtocol, withBase, parsePath, parseQuery, stringifyQuery, encodePath, stringifyParsedURL, joinRelativeURL } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/ufo/dist/index.mjs';
@@ -33,9 +33,8 @@ import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/jesse/
 import devalue from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/@nuxt/devalue/dist/devalue.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$2, isAbsolute } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/pathe/dist/index.mjs';
+import { dirname as dirname$1, resolve as resolve$2 } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/pathe/dist/index.mjs';
 import { walkResolver } from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/nuxt/node_modules/unhead/dist/utils.mjs';
-import localAdapter from 'file://C:/Users/jesse/Documents/github/webmaster_remake/node_modules/db0/dist/connectors/better-sqlite3.mjs';
 
 const serverAssets = [{"baseName":"server","dir":"C:/Users/jesse/Documents/github/webmaster_remake/server/assets"}];
 
@@ -636,12 +635,6 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
-      "/__nuxt_content/**": {
-        "robots": false
-      },
-      "/__nuxt_content/content/sql_dump.txt": {
-        "prerender": true
-      },
       "/__sitemap__/style.xsl": {
         "headers": {
           "Content-Type": "application/xslt+xml"
@@ -675,39 +668,7 @@ const _inlineRuntimeConfig = {
   "public": {
     "gtmId": "",
     "gtagId": "",
-    "luckyOrangeId": "",
-    "content": {
-      "wsUrl": "ws://localhost:4001/"
-    },
-    "mdc": {
-      "components": {
-        "prose": true,
-        "map": {}
-      },
-      "headings": {
-        "anchorLinks": {
-          "h1": false,
-          "h2": true,
-          "h3": true,
-          "h4": true,
-          "h5": false,
-          "h6": false
-        }
-      }
-    }
-  },
-  "content": {
-    "databaseVersion": "v3.5.0",
-    "version": "3.6.3",
-    "database": {
-      "type": "sqlite",
-      "filename": "./contents.sqlite"
-    },
-    "localDatabase": {
-      "type": "sqlite",
-      "filename": "C:/Users/jesse/Documents/github/webmaster_remake/.data/content/contents.sqlite"
-    },
-    "integrityCheck": true
+    "luckyOrangeId": ""
   },
   "sitemap": {
     "isI18nMapped": false,
@@ -752,8 +713,7 @@ const _inlineRuntimeConfig = {
         "include": [],
         "exclude": [
           "/_**",
-          "/_nuxt/**",
-          "/__nuxt_content/**"
+          "/_nuxt/**"
         ],
         "includeAppSources": true
       }
@@ -2463,242 +2423,6 @@ const _iqzCTU = defineEventHandler(async (e) => {
     robotsHeader,
     robotsContent
   };
-});
-
-const checksums = {
-  "content": "v3.5.0--bgIYhpjRuV8zbHJE_CfelwKpJ_Td6YuGJwixiek8lmI"
-};
-const checksumsStructure = {
-  "content": "bgIYhpjRuV8zbHJE_CfelwKpJ_Td6YuGJwixiek8lmI"
-};
-const tables = {
-  "content": "_content_content",
-  "info": "_content_info"
-};
-const contentManifest = {
-  "content": {
-    "type": "page",
-    "fields": {
-      "id": "string",
-      "title": "string",
-      "body": "json",
-      "description": "string",
-      "extension": "string",
-      "meta": "json",
-      "navigation": "json",
-      "path": "string",
-      "seo": "json",
-      "stem": "string"
-    }
-  },
-  "info": {
-    "type": "data",
-    "fields": {}
-  }
-};
-
-const buildGroup = (group, type) => {
-  const conditions = group._conditions;
-  return conditions.length > 0 ? `(${conditions.join(` ${type} `)})` : "";
-};
-const collectionQueryGroup = (collection) => {
-  const conditions = [];
-  const query = {
-    // @ts-expect-error -- internal
-    _conditions: conditions,
-    where(field, operator, value) {
-      let condition;
-      switch (operator.toUpperCase()) {
-        case "IN":
-        case "NOT IN":
-          if (Array.isArray(value)) {
-            const values = value.map((val) => singleQuote(val)).join(", ");
-            condition = `"${String(field)}" ${operator.toUpperCase()} (${values})`;
-          } else {
-            throw new TypeError(`Value for ${operator} must be an array`);
-          }
-          break;
-        case "BETWEEN":
-        case "NOT BETWEEN":
-          if (Array.isArray(value) && value.length === 2) {
-            condition = `"${String(field)}" ${operator.toUpperCase()} ${singleQuote(value[0])} AND ${singleQuote(value[1])}`;
-          } else {
-            throw new Error(`Value for ${operator} must be an array with two elements`);
-          }
-          break;
-        case "IS NULL":
-        case "IS NOT NULL":
-          condition = `"${String(field)}" ${operator.toUpperCase()}`;
-          break;
-        case "LIKE":
-        case "NOT LIKE":
-          condition = `"${String(field)}" ${operator.toUpperCase()} ${singleQuote(value)}`;
-          break;
-        default:
-          condition = `"${String(field)}" ${operator} ${singleQuote(typeof value === "boolean" ? Number(value) : value)}`;
-      }
-      conditions.push(`${condition}`);
-      return query;
-    },
-    andWhere(groupFactory) {
-      const group = groupFactory(collectionQueryGroup());
-      conditions.push(buildGroup(group, "AND"));
-      return query;
-    },
-    orWhere(groupFactory) {
-      const group = groupFactory(collectionQueryGroup());
-      conditions.push(buildGroup(group, "OR"));
-      return query;
-    }
-  };
-  return query;
-};
-const collectionQueryBuilder = (collection, fetch) => {
-  const params = {
-    conditions: [],
-    selectedFields: [],
-    offset: 0,
-    limit: 0,
-    orderBy: [],
-    // Count query
-    count: {
-      field: "",
-      distinct: false
-    }
-  };
-  const query = {
-    // @ts-expect-error -- internal
-    __params: params,
-    andWhere(groupFactory) {
-      const group = groupFactory(collectionQueryGroup());
-      params.conditions.push(buildGroup(group, "AND"));
-      return query;
-    },
-    orWhere(groupFactory) {
-      const group = groupFactory(collectionQueryGroup());
-      params.conditions.push(buildGroup(group, "OR"));
-      return query;
-    },
-    path(path) {
-      return query.where("path", "=", withoutTrailingSlash(path));
-    },
-    skip(skip) {
-      params.offset = skip;
-      return query;
-    },
-    where(field, operator, value) {
-      query.andWhere((group) => group.where(String(field), operator, value));
-      return query;
-    },
-    limit(limit) {
-      params.limit = limit;
-      return query;
-    },
-    select(...fields) {
-      if (fields.length) {
-        params.selectedFields.push(...fields);
-      }
-      return query;
-    },
-    order(field, direction) {
-      params.orderBy.push(`"${String(field)}" ${direction}`);
-      return query;
-    },
-    async all() {
-      return fetch(collection, buildQuery()).then((res) => res || []);
-    },
-    async first() {
-      return fetch(collection, buildQuery({ limit: 1 })).then((res) => res[0] || null);
-    },
-    async count(field = "*", distinct = false) {
-      return fetch(collection, buildQuery({
-        count: { field: String(field), distinct }
-      })).then((m) => m[0].count);
-    }
-  };
-  function buildQuery(opts = {}) {
-    let query2 = "SELECT ";
-    if (opts?.count) {
-      query2 += `COUNT(${opts.count.distinct ? "DISTINCT " : ""}${opts.count.field}) as count`;
-    } else {
-      const fields = Array.from(new Set(params.selectedFields));
-      query2 += fields.length > 0 ? fields.map((f) => `"${String(f)}"`).join(", ") : "*";
-    }
-    query2 += ` FROM ${tables[String(collection)]}`;
-    if (params.conditions.length > 0) {
-      query2 += ` WHERE ${params.conditions.join(" AND ")}`;
-    }
-    if (params.orderBy.length > 0) {
-      query2 += ` ORDER BY ${params.orderBy.join(", ")}`;
-    } else {
-      query2 += ` ORDER BY stem ASC`;
-    }
-    const limit = opts?.limit || params.limit;
-    if (limit > 0) {
-      if (params.offset > 0) {
-        query2 += ` LIMIT ${limit} OFFSET ${params.offset}`;
-      } else {
-        query2 += ` LIMIT ${limit}`;
-      }
-    }
-    return query2;
-  }
-  return query;
-};
-function singleQuote(value) {
-  return `'${String(value).replace(/'/g, "''")}'`;
-}
-
-async function fetchDatabase(event, collection) {
-  return await $fetch(`/__nuxt_content/${collection}/sql_dump.txt`, {
-    context: event ? { cloudflare: event.context.cloudflare } : {},
-    responseType: "text",
-    headers: {
-      "content-type": "text/plain",
-      ...event?.node?.req?.headers?.cookie ? { cookie: event.node.req.headers.cookie } : {}
-    },
-    query: { v: checksums[String(collection)], t: Date.now()  }
-  });
-}
-async function fetchQuery(event, collection, sql) {
-  return await $fetch(`/__nuxt_content/${collection}/query`, {
-    context: event ? { cloudflare: event.context.cloudflare } : {},
-    headers: {
-      "content-type": "application/json",
-      ...event?.node?.req?.headers?.cookie ? { cookie: event.node.req.headers.cookie } : {}
-    },
-    query: { v: checksums[String(collection)], t: Date.now()  },
-    method: "POST",
-    body: {
-      sql
-    }
-  });
-}
-
-const queryCollection = (event, collection) => {
-  return collectionQueryBuilder(collection, (collection2, sql) => fetchQuery(event, collection2, sql));
-};
-
-const _BDBExf = defineEventHandler(async (e) => {
-  const collections = [];
-  for (const collection in contentManifest) {
-    if (contentManifest[collection].fields.sitemap) {
-      collections.push(collection);
-    }
-  }
-  const contentList = [];
-  for (const collection of collections) {
-    contentList.push(
-      queryCollection(e, collection).select("path", "sitemap").where("path", "IS NOT NULL").where("sitemap", "IS NOT NULL").all()
-    );
-  }
-  const results = await Promise.all(contentList);
-  return results.flatMap((c) => {
-    return c.filter((c2) => c2.sitemap !== false && c2.path).flatMap((c2) => ({
-      loc: c2.path,
-      ...c2.sitemap || {}
-    }));
-  }).filter(Boolean);
 });
 
 const logger = createConsola({
@@ -4654,379 +4378,6 @@ async function getIslandContext(event) {
   return ctx;
 }
 
-const _PRX7QE = eventHandler(async (event) => {
-  const collection = getRouterParam(event, "collection");
-  setHeader(event, "Content-Type", "text/plain");
-  const data = await useStorage().getItem(`build:content:database.compressed.mjs`) || "";
-  if (data) {
-    const lineStart = `export const ${collection} = "`;
-    const content = String(data).split("\n").find((line) => line.startsWith(lineStart));
-    if (content) {
-      return content.substring(lineStart.length, content.length - 1);
-    }
-  }
-  return await import('file://C:/Users/jesse/Documents/github/webmaster_remake/.nuxt/content/database.compressed.mjs').then((m) => m[collection]);
-});
-
-async function decompressSQLDump(base64Str, compressionType = "gzip") {
-  const binaryData = Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0));
-  const response = new Response(new Blob([binaryData]));
-  const decompressedStream = response.body?.pipeThrough(new DecompressionStream(compressionType));
-  const text = await new Response(decompressedStream).text();
-  return JSON.parse(text);
-}
-
-function refineContentFields(sql, doc) {
-  const fields = findCollectionFields(sql);
-  const item = { ...doc };
-  for (const key in item) {
-    if (fields[key] === "json" && item[key] && item[key] !== "undefined") {
-      item[key] = JSON.parse(item[key]);
-    }
-    if (fields[key] === "boolean" && item[key] !== "undefined") {
-      item[key] = Boolean(item[key]);
-    }
-  }
-  for (const key in item) {
-    if (item[key] === "NULL") {
-      item[key] = void 0;
-    }
-  }
-  return item;
-}
-function findCollectionFields(sql) {
-  const table = sql.match(/FROM\s+(\w+)/);
-  if (!table) {
-    return {};
-  }
-  const info = contentManifest[getCollectionName(table[1])];
-  return info?.fields || {};
-}
-function getCollectionName(table) {
-  return table.replace(/^_content_/, "");
-}
-
-let db;
-function loadDatabaseAdapter(config) {
-  const { database, localDatabase } = config;
-  if (!db) {
-    {
-      db = localAdapter(refineDatabaseConfig(localDatabase));
-    }
-  }
-  return {
-    all: async (sql, params = []) => {
-      return db.prepare(sql).all(...params).then((result) => (result || []).map((item) => refineContentFields(sql, item)));
-    },
-    first: async (sql, params = []) => {
-      return db.prepare(sql).get(...params).then((item) => item ? refineContentFields(sql, item) : item);
-    },
-    exec: async (sql, params = []) => {
-      return db.prepare(sql).run(...params);
-    }
-  };
-}
-const checkDatabaseIntegrity = {};
-const integrityCheckPromise = {};
-async function checkAndImportDatabaseIntegrity(event, collection, config) {
-  if (checkDatabaseIntegrity[String(collection)] !== false) {
-    checkDatabaseIntegrity[String(collection)] = false;
-    integrityCheckPromise[String(collection)] = integrityCheckPromise[String(collection)] || _checkAndImportDatabaseIntegrity(event, collection, checksums[String(collection)], checksumsStructure[String(collection)], config).then((isValid) => {
-      checkDatabaseIntegrity[String(collection)] = !isValid;
-    }).catch((error) => {
-      console.error("Database integrity check failed", error);
-      checkDatabaseIntegrity[String(collection)] = true;
-      integrityCheckPromise[String(collection)] = null;
-    });
-  }
-  if (integrityCheckPromise[String(collection)]) {
-    await integrityCheckPromise[String(collection)];
-  }
-}
-async function _checkAndImportDatabaseIntegrity(event, collection, integrityVersion, structureIntegrityVersion, config) {
-  const db2 = loadDatabaseAdapter(config);
-  const before = await db2.first(`SELECT * FROM ${tables.info} WHERE id = ?`, [`checksum_${collection}`]).catch(() => null);
-  if (before?.version && !String(before.version)?.startsWith(`${config.databaseVersion}--`)) {
-    await db2.exec(`DROP TABLE IF EXISTS ${tables.info}`);
-    before.version = "";
-  }
-  const unchangedStructure = before?.structureVersion === structureIntegrityVersion;
-  if (before?.version) {
-    if (before.version === integrityVersion) {
-      if (before.ready) {
-        return true;
-      }
-      await waitUntilDatabaseIsReady(db2, collection);
-      return true;
-    }
-    await db2.exec(`DELETE FROM ${tables.info} WHERE id = ?`, [`checksum_${collection}`]);
-    if (!unchangedStructure) {
-      await db2.exec(`DROP TABLE IF EXISTS ${tables[collection]}`);
-    }
-  }
-  const dump = await loadDatabaseDump(event, collection).then(decompressSQLDump);
-  const dumpLinesHash = dump.map((row) => row.split(" -- ").pop());
-  let hashesInDb = /* @__PURE__ */ new Set();
-  if (unchangedStructure) {
-    const hashListFromTheDump = new Set(dumpLinesHash);
-    const hashesInDbRecords = await db2.all(`SELECT __hash__ FROM ${tables[collection]}`).catch(() => []);
-    hashesInDb = new Set(hashesInDbRecords.map((r) => r.__hash__));
-    const hashesToDelete = hashesInDb.difference(hashListFromTheDump);
-    if (hashesToDelete.size) {
-      await db2.exec(`DELETE FROM ${tables[collection]} WHERE __hash__ IN (${Array(hashesToDelete.size).fill("?").join(",")})`, Array.from(hashesToDelete));
-    }
-  }
-  await dump.reduce(async (prev, sql, index) => {
-    await prev;
-    const hash = dumpLinesHash[index];
-    const statement = sql.substring(0, sql.length - hash.length - 4);
-    if (unchangedStructure) {
-      if (hash === "structure") {
-        return Promise.resolve();
-      }
-      if (hashesInDb.has(hash)) {
-        return Promise.resolve();
-      }
-    }
-    await db2.exec(statement).catch((err) => {
-      const message = err.message || "Unknown error";
-      console.error(`Failed to execute SQL ${sql}: ${message}`);
-    });
-  }, Promise.resolve());
-  const after = await db2.first(`SELECT version FROM ${tables.info} WHERE id = ?`, [`checksum_${collection}`]).catch(() => ({ version: "" }));
-  return after?.version === integrityVersion;
-}
-const REQUEST_TIMEOUT = 90;
-async function waitUntilDatabaseIsReady(db2, collection) {
-  let iterationCount = 0;
-  let interval;
-  await new Promise((resolve, reject) => {
-    interval = setInterval(async () => {
-      const row = await db2.first(`SELECT ready FROM ${tables.info} WHERE id = ?`, [`checksum_${collection}`]).catch(() => ({ ready: true }));
-      if (row?.ready) {
-        clearInterval(interval);
-        resolve(0);
-      }
-      if (iterationCount++ > REQUEST_TIMEOUT) {
-        clearInterval(interval);
-        reject(new Error("Waiting for another database initialization timed out"));
-      }
-    }, 1e3);
-  }).catch((e) => {
-    throw e;
-  }).finally(() => {
-    if (interval) {
-      clearInterval(interval);
-    }
-  });
-}
-async function loadDatabaseDump(event, collection) {
-  return await fetchDatabase(event, String(collection)).catch((e) => {
-    console.error("Failed to fetch compressed dump", e);
-    return "";
-  });
-}
-function refineDatabaseConfig(config) {
-  if (config.type === "d1") {
-    return { ...config, bindingName: config.bindingName || config.binding };
-  }
-  if (config.type === "sqlite") {
-    const _config = { ...config };
-    if (config.filename === ":memory:") {
-      return { name: "memory" };
-    }
-    if ("filename" in config) {
-      const filename = isAbsolute(config?.filename || "") || config?.filename === ":memory:" ? config?.filename : new URL(config.filename, globalThis._importMeta_.url).pathname;
-      _config.path = process.platform === "win32" && filename.startsWith("/") ? filename.slice(1) : filename;
-    }
-    return _config;
-  }
-  return config;
-}
-
-const SQL_COMMANDS = /SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|\$/i;
-const SQL_COUNT_REGEX = /COUNT\((DISTINCT )?([a-z_]\w+|\*)\)/i;
-const SQL_SELECT_REGEX = /^SELECT (.*) FROM (\w+)( WHERE .*)? ORDER BY (["\w,\s]+) (ASC|DESC)( LIMIT \d+)?( OFFSET \d+)?$/;
-function assertSafeQuery(sql, collection) {
-  if (!sql) {
-    throw new Error("Invalid query");
-  }
-  const cleanedupQuery = cleanupQuery(sql);
-  if (cleanedupQuery !== sql) {
-    throw new Error("Invalid query");
-  }
-  const match = sql.match(SQL_SELECT_REGEX);
-  if (!match) {
-    throw new Error("Invalid query");
-  }
-  const [_, select, from, where, orderBy, order, limit, offset] = match;
-  const columns = select.trim().split(", ");
-  if (columns.length === 1) {
-    if (columns[0] !== "*" && !columns[0].match(SQL_COUNT_REGEX) && !columns[0].match(/^"[a-z_]\w+"$/i)) {
-      throw new Error("Invalid query");
-    }
-  } else if (!columns.every((column) => column.match(/^"[a-z_]\w+"$/i))) {
-    throw new Error("Invalid query");
-  }
-  if (from !== `_content_${collection}`) {
-    throw new Error("Invalid query");
-  }
-  if (where) {
-    if (!where.startsWith(" WHERE (") || !where.endsWith(")")) {
-      throw new Error("Invalid query");
-    }
-    const noString = cleanupQuery(where, { removeString: true });
-    if (noString.match(SQL_COMMANDS)) {
-      throw new Error("Invalid query");
-    }
-  }
-  const _order = (orderBy + " " + order).split(", ");
-  if (!_order.every((column) => column.match(/^("[a-zA-Z_]+"|[a-zA-Z_]+) (ASC|DESC)$/))) {
-    throw new Error("Invalid query");
-  }
-  if (limit !== void 0 && !limit.match(/^ LIMIT \d+$/)) {
-    throw new Error("Invalid query");
-  }
-  if (offset !== void 0 && !offset.match(/^ OFFSET \d+$/)) {
-    throw new Error("Invalid query");
-  }
-  return true;
-}
-function cleanupQuery(query, options = { removeString: false }) {
-  let inString = false;
-  let stringFence = "";
-  let result = "";
-  for (let i = 0; i < query.length; i++) {
-    const char = query[i];
-    const prevChar = query[i - 1];
-    const nextChar = query[i + 1];
-    if (char === "'" || char === '"') {
-      if (!options?.removeString) {
-        result += char;
-        continue;
-      }
-      if (inString) {
-        if (char !== stringFence || nextChar === stringFence || prevChar === stringFence) {
-          continue;
-        }
-        inString = false;
-        stringFence = "";
-        continue;
-      } else {
-        inString = true;
-        stringFence = char;
-        continue;
-      }
-    }
-    if (!inString) {
-      if (char === "-" && nextChar === "-") {
-        return result;
-      }
-      if (char === "/" && nextChar === "*") {
-        i += 2;
-        while (i < query.length && !(query[i] === "*" && query[i + 1] === "/")) {
-          i += 1;
-        }
-        i += 2;
-        continue;
-      }
-      result += char;
-    }
-  }
-  return result;
-}
-
-function defineNitroPlugin(def) {
-  return def;
-}
-
-function defineRenderHandler(render) {
-  const runtimeConfig = useRuntimeConfig();
-  return eventHandler(async (event) => {
-    const nitroApp = useNitroApp();
-    const ctx = { event, render, response: void 0 };
-    await nitroApp.hooks.callHook("render:before", ctx);
-    if (!ctx.response) {
-      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
-        setResponseHeader(event, "Content-Type", "image/x-icon");
-        return send(
-          event,
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        );
-      }
-      ctx.response = await ctx.render(event);
-      if (!ctx.response) {
-        const _currentStatus = getResponseStatus(event);
-        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
-        return send(
-          event,
-          "No response returned from render handler: " + event.path
-        );
-      }
-    }
-    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
-    if (ctx.response.headers) {
-      setResponseHeaders(event, ctx.response.headers);
-    }
-    if (ctx.response.statusCode || ctx.response.statusMessage) {
-      setResponseStatus(
-        event,
-        ctx.response.statusCode,
-        ctx.response.statusMessage
-      );
-    }
-    return ctx.response.body;
-  });
-}
-
-const scheduledTasks = false;
-
-const tasks = {
-  
-};
-
-const __runningTasks__ = {};
-async function runTask(name, {
-  payload = {},
-  context = {}
-} = {}) {
-  if (__runningTasks__[name]) {
-    return __runningTasks__[name];
-  }
-  if (!(name in tasks)) {
-    throw createError({
-      message: `Task \`${name}\` is not available!`,
-      statusCode: 404
-    });
-  }
-  if (!tasks[name].resolve) {
-    throw createError({
-      message: `Task \`${name}\` is not implemented!`,
-      statusCode: 501
-    });
-  }
-  const handler = await tasks[name].resolve();
-  const taskEvent = { name, payload, context };
-  __runningTasks__[name] = handler.run(taskEvent);
-  try {
-    const res = await __runningTasks__[name];
-    return res;
-  } finally {
-    delete __runningTasks__[name];
-  }
-}
-
-const _8VoUXt = eventHandler(async (event) => {
-  const { sql } = await readBody(event);
-  const collection = getRouterParam(event, "collection");
-  assertSafeQuery(sql, collection);
-  const conf = useRuntimeConfig().content;
-  if (conf.integrityCheck) {
-    await checkAndImportDatabaseIntegrity(event, collection, conf);
-  }
-  return loadDatabaseAdapter(conf).all(sql);
-});
-
 const _lazy_1soMBS = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
@@ -5038,13 +4389,10 @@ const handlers = [
   { route: '', handler: _Ap6f0Y, lazy: false, middleware: true, method: undefined },
   { route: '/__robots__/debug.json', handler: _jB9p7a, lazy: false, middleware: false, method: undefined },
   { route: '/__robots__/debug-path.json', handler: _iqzCTU, lazy: false, middleware: false, method: undefined },
-  { route: '/__sitemap__/nuxt-content-urls.json', handler: _BDBExf, lazy: false, middleware: false, method: undefined },
   { route: '/__sitemap__/debug.json', handler: _Ztvuxg, lazy: false, middleware: false, method: undefined },
   { route: '/__sitemap__/style.xsl', handler: _GEEAZN, lazy: false, middleware: false, method: undefined },
   { route: '/sitemap.xml', handler: _UEpRjd, lazy: false, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/__nuxt_content/:collection/sql_dump.txt', handler: _PRX7QE, lazy: false, middleware: false, method: undefined },
-  { route: '/__nuxt_content/:collection/query', handler: _8VoUXt, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_1soMBS, lazy: true, middleware: false, method: undefined }
 ];
 
@@ -5189,6 +4537,86 @@ function useNitroApp() {
 }
 runNitroPlugins(nitroApp$1);
 
+function defineNitroPlugin(def) {
+  return def;
+}
+
+function defineRenderHandler(render) {
+  const runtimeConfig = useRuntimeConfig();
+  return eventHandler(async (event) => {
+    const nitroApp = useNitroApp();
+    const ctx = { event, render, response: void 0 };
+    await nitroApp.hooks.callHook("render:before", ctx);
+    if (!ctx.response) {
+      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
+        setResponseHeader(event, "Content-Type", "image/x-icon");
+        return send(
+          event,
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      }
+      ctx.response = await ctx.render(event);
+      if (!ctx.response) {
+        const _currentStatus = getResponseStatus(event);
+        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
+        return send(
+          event,
+          "No response returned from render handler: " + event.path
+        );
+      }
+    }
+    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
+    if (ctx.response.headers) {
+      setResponseHeaders(event, ctx.response.headers);
+    }
+    if (ctx.response.statusCode || ctx.response.statusMessage) {
+      setResponseStatus(
+        event,
+        ctx.response.statusCode,
+        ctx.response.statusMessage
+      );
+    }
+    return ctx.response.body;
+  });
+}
+
+const scheduledTasks = false;
+
+const tasks = {
+  
+};
+
+const __runningTasks__ = {};
+async function runTask(name, {
+  payload = {},
+  context = {}
+} = {}) {
+  if (__runningTasks__[name]) {
+    return __runningTasks__[name];
+  }
+  if (!(name in tasks)) {
+    throw createError({
+      message: `Task \`${name}\` is not available!`,
+      statusCode: 404
+    });
+  }
+  if (!tasks[name].resolve) {
+    throw createError({
+      message: `Task \`${name}\` is not implemented!`,
+      statusCode: 501
+    });
+  }
+  const handler = await tasks[name].resolve();
+  const taskEvent = { name, payload, context };
+  __runningTasks__[name] = handler.run(taskEvent);
+  try {
+    const res = await __runningTasks__[name];
+    return res;
+  } finally {
+    delete __runningTasks__[name];
+  }
+}
+
 if (!globalThis.crypto) {
   globalThis.crypto = nodeCrypto;
 }
@@ -5294,17 +4722,6 @@ const sources$1 = [
         },
         "urls": [],
         "sourceType": "user"
-    },
-    {
-        "context": {
-            "name": "@nuxt/content@v3:urls",
-            "description": "Generated from your markdown files.",
-            "tips": [
-                "Parsing the following collections: "
-            ]
-        },
-        "fetch": "/__sitemap__/nuxt-content-urls.json",
-        "sourceType": "app"
     },
     {
         "context": {
