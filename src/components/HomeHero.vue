@@ -1,6 +1,6 @@
 <!-- Enhanced Hero Section -->
 <template>
-  <section class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 min-h-screen overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 min-h-screen overflow-hidden hero-section">
     <!-- Dynamic Background Pattern Elements -->
     <div class="absolute inset-0 overflow-hidden opacity-20">
       <div class="absolute -right-40 -top-40 w-96 h-96 bg-accent rounded-full animate-bounce-light"></div>
@@ -41,7 +41,7 @@
 
           <!-- Enhanced Description -->
           <p class="text-xl sm:text-2xl text-primary-100 animate-slide-up leading-relaxed" style="animation-delay: 0.3s">
-            We transform your vision into powerful digital solutions that drive growth, 
+            We transform your vision into powerful digital solutions that drive growth,
             engage customers, and deliver measurable results for your business.
           </p>
 
@@ -71,7 +71,7 @@
                 <div class="text-xs text-primary-200">Successfully Delivered</div>
               </div>
             </div>
-            
+
             <div class="flex items-center gap-3">
               <div class="bg-primary-300 bg-opacity-30 rounded-full p-2">
                 <svg class="h-6 w-6 text-primary-100" fill="currentColor" viewBox="0 0 20 20">
@@ -98,56 +98,61 @@
           </div>
         </div>
 
-        <!-- Right Column - Enhanced Hero Visual -->
+        <!-- Right Column - Enhanced Hero Visual with aspect ratio -->
         <div class="relative flex justify-center lg:justify-end animate-fade-in" style="animation-delay: 0.2s">
           <div class="relative w-full max-w-lg lg:max-w-full">
-            <!-- Main Hero Image with enhanced styling -->
+            <!-- Main Hero Image with fixed aspect ratio to prevent layout shift -->
             <div class="relative group">
               <div class="absolute -inset-4 bg-gradient-to-r from-accent-500 to-primary-500 rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-              <img 
-                src="/images/hero-image.jpg" 
+              <!-- Use OptimizedImage component to prevent layout shift -->
+              <OptimizedImage
+                src="/images/hero-image.jpg"
                 alt="Web design and development illustration"
-                class="relative rounded-xl shadow-2xl w-full h-auto aspect-[4/3] object-cover transform group-hover:scale-105 transition-all duration-500"
+                aspect-ratio="4-3"
                 loading="eager"
-                width="600"
-                height="450"
-                style="min-height: 400px;"
-                onerror="this.src='https://via.placeholder.com/600x450/4292AC/FFFFFF?text=Ottawa+Web+Masters';" 
+                fetchpriority="high"
+                :width="600"
+                :height="450"
+                image-class="rounded-xl transform group-hover:scale-105 transition-all duration-500"
+                fallback-text="Ottawa Web Masters"
               />
             </div>
 
-            <!-- Enhanced Floating Card Elements -->
-            <div class="hidden md:block absolute -bottom-8 -left-16 bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl z-20 transform -rotate-3 animate-bounce-light border border-accent/20">
-              <div class="flex items-center gap-4">
-                <div class="bg-accent rounded-full p-3">
-                  <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-base font-semibold text-primary">
-                    Affordable Pricing
-                  </p>
-                  <p class="text-sm text-neutral-600">
-                    Tailored to your budget
-                  </p>
+            <!-- Enhanced Floating Card Elements with fixed positioning -->
+            <div class="hidden md:block absolute -bottom-8 -left-16 w-64 h-20 z-20">
+              <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform -rotate-3 animate-bounce-light border border-accent/20 w-full h-full">
+                <div class="flex items-center gap-4 h-full">
+                  <div class="bg-accent rounded-full p-3 flex-shrink-0">
+                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-base font-semibold text-primary truncate">
+                      Affordable Pricing
+                    </p>
+                    <p class="text-sm text-neutral-600 truncate">
+                      Tailored to your budget
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="hidden md:block absolute -top-6 -right-12 bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl z-20 transform rotate-3 animate-bounce-light border border-primary/20" style="animation-delay: 1s">
-              <div class="flex items-center gap-4">
-                <div class="bg-primary rounded-full p-3">
-                  <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-base font-semibold text-primary">
-                    Lightning Fast
-                  </p>
-                  <p class="text-sm text-neutral-600">
-                    Optimized performance
+            <div class="hidden md:block absolute -top-6 -right-12 w-64 h-20 z-20">
+              <div class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform rotate-3 animate-bounce-light border border-primary/20 w-full h-full" style="animation-delay: 1s">
+                <div class="flex items-center gap-4 h-full">
+                  <div class="bg-primary rounded-full p-3 flex-shrink-0">
+                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-base font-semibold text-primary truncate">
+                      Lightning Fast
+                    </p>
+                    <p class="text-sm text-neutral-600 truncate">
+                      Optimized performance
                   </p>
                 </div>
               </div>
@@ -175,5 +180,5 @@
 </template>
 
 <script setup>
-// No additional setup required for this component
+import OptimizedImage from '@/components/OptimizedImage.vue'
 </script>

@@ -10,6 +10,48 @@
     />
     <meta name="theme-color" content="#2E5944" />
 
+    <!-- Critical resource preloads to prevent layout shift -->
+    <link
+      rel="preload"
+      href="/images/hero-image.jpg"
+      as="image"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="/images/logo_icon.png"
+      as="image"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- SEO meta tags -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Ottawa Web Masters" />
@@ -47,16 +89,10 @@
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    
-    <!-- Preload critical fonts to prevent layout shift -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/images/logo_icon.png" as="image" />
-    <link rel="preload" href="/favicon.ico" as="image" />
-    <link rel="preload" href="/images/hero-image.jpg" as="image" />
+    <!-- Remove duplicate font loading - already preloaded above -->
   </head>
-  <body>
+  <body class="pt-20">
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <!-- Accessibility enhancement: Add no-JS fallback message -->

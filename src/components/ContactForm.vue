@@ -440,14 +440,14 @@ const focusState = reactive({ service: false, budget: false });
                   Personal Information
                 </h3>
 
-                <div class="mb-4 relative">
+                <div class="mb-4 relative h-20">
                   <input
                     id="name"
                     v-model="formData.name"
                     @blur="validateField('name')"
                     @focus="trackFieldInteraction('name')"
                     type="text"
-                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none"
+                    class="peer w-full h-14 rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition-colors duration-200"
                     :class="
                       formErrors.name
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'

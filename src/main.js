@@ -1,4 +1,6 @@
 import "./assets/main.css";
+import { initCLSPrevention, initCoreWebVitals } from './utils/clsOptimization.js';
+import { initBounceRateOptimization } from './utils/bounceRateOptimization.js';
 // Iconify: import only required icons to satisfy strict CSP (no runtime fetches)
 import { addCollection } from '@iconify/vue';
 // Import all mdi icons referenced in templates so CSP doesn't require remote fetches
@@ -151,6 +153,18 @@ window.addEventListener('load', () => {
 
 const app = createApp(App);
 
+// Initialize CLS prevention and Core Web Vitals monitoring
+initCLSPrevention();
+const vitalsMonitor = initCoreWebVitals();
+
+// Initialize bounce rate optimization
+const bounceOptimization = initBounceRateOptimization();
+
+// Make monitoring tools available globally for debugging
+if (typeof window !== 'undefined') {
+  window.vitalsMonitor = vitalsMonitor;
+  window.bounceOptimization = bounceOptimization;
+}
 
 // Create and register the head plugin
 const head = createHead();

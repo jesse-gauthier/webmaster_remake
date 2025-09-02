@@ -1,12 +1,15 @@
 <!-- AccessibleHeaderNav.vue -->
 <template>
-  <header class="bg-white shadow-md fixed w-full top-0 z-sticky">
-    <div class="container-site h-header flex items-center justify-between">
-      <!-- Brand Logo/Name -->
-      <Logo />
-      <!-- Desktop Navigation -->
+  <header class="bg-white shadow-md fixed w-full top-0 z-sticky h-header">
+    <div class="container-site h-full flex items-center justify-between">
+      <!-- Brand Logo/Name with fixed dimensions -->
+      <div class="flex-shrink-0 w-48">
+        <Logo />
+      </div>
+
+      <!-- Desktop Navigation with reserved space -->
       <nav
-        class="hidden lg:flex items-center space-x-nav-item"
+        class="hidden lg:flex items-center space-x-nav-item flex-1 justify-end"
         aria-label="Main navigation"
       >
         <!-- Parent Nav Items -->
@@ -252,10 +255,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
-import { useRoute } from "vue-router";
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { useRoute } from 'vue-router';
 
-import Logo from "@/assets/logo.vue";
+import Logo from '@/assets/logo.vue';
 
 // Menu state
 const isOpen = ref(false);
@@ -267,41 +270,41 @@ const route = useRoute();
 
 // Navigation items - updated to include children
 const navItems = ref([
-  { name: "Home", url: "/", active: false },
+  { name: 'Home', url: '/', active: false },
   {
-    name: "Services",
-    url: "/services",
+    name: 'Services',
+    url: '/services',
     active: false,
     children: [
-      { name: "WordPress", url: "/wordPress", active: false },
-      { name: "Shopify", url: "/shopify", active: false },
-      { name: "Monthly Maintenance", url: "/maintenance", active: false },
-      { name: "Consultations", url: "/consultations", active: false },
-      { name: "Web Apps", url: "/web-applications", active: false },
-      { name: "Startup Partnership", url: "/startup", active: false },
-      { name: "Technology Stack", url: "/technology-stack", active: false },
+      { name: 'WordPress', url: '/wordPress', active: false },
+      { name: 'Shopify', url: '/shopify', active: false },
+      { name: 'Monthly Maintenance', url: '/maintenance', active: false },
+      { name: 'Consultations', url: '/consultations', active: false },
+      { name: 'Web Apps', url: '/web-applications', active: false },
+      { name: 'Startup Partnership', url: '/startup', active: false },
+      { name: 'Technology Stack', url: '/technology-stack', active: false },
     ],
   },
-  { name: "Portfolio", url: "/portfolio", active: false },
-  { name: "Case Studies", url: "/case-studies", active: false },
-  { name: "About", url: "/about", active: false },
+  { name: 'Portfolio', url: '/portfolio', active: false },
+  { name: 'Case Studies', url: '/case-studies', active: false },
+  { name: 'About', url: '/about', active: false },
   {
-    name: "Blog",
-    url: "/blog",
+    name: 'Blog',
+    url: '/blog',
     active: false,
   },
 ]);
 
 // Update active state based on current route
 const updateActiveState = () => {
-  navItems.value.forEach((item) => {
+  navItems.value.forEach(item => {
     // Handle items with children
     if (item.children) {
       // Check if any child is active
-      const hasActiveChild = item.children.some((child) => {
+      const hasActiveChild = item.children.some(child => {
         // Update child active state
-        if (child.url === "/") {
-          child.active = route.path === "/";
+        if (child.url === '/') {
+          child.active = route.path === '/';
         } else {
           child.active = route.path.startsWith(child.url);
         }
@@ -311,13 +314,13 @@ const updateActiveState = () => {
       // Parent is active if any child is active or if the parent URL matches
       item.active =
         hasActiveChild ||
-        (item.url === "/"
-          ? route.path === "/"
+        (item.url === '/'
+          ? route.path === '/'
           : route.path.startsWith(item.url));
     } else {
       // For items without children, use original logic
-      if (item.url === "/") {
-        item.active = route.path === "/";
+      if (item.url === '/') {
+        item.active = route.path === '/';
       } else {
         item.active = route.path.startsWith(item.url);
       }
@@ -336,9 +339,9 @@ const toggleMenu = () => {
 
   // Prevent scrolling when menu is open
   if (isOpen.value) {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   } else {
-    document.body.style.overflow = "";
+    document.body.style.overflow = '';
 
     // Restore focus
     if (previousActiveElement) {
@@ -350,7 +353,7 @@ const toggleMenu = () => {
 // Close menu
 const closeMenu = () => {
   isOpen.value = false;
-  document.body.style.overflow = "";
+  document.body.style.overflow = '';
 
   // Restore focus
   if (previousActiveElement) {
@@ -370,12 +373,12 @@ const onMobileMenuOpen = () => {
 // After mobile menu closes
 const onMobileMenuClose = () => {
   // Ensure the body can scroll again
-  document.body.style.overflow = "";
+  document.body.style.overflow = '';
 };
 
 // Handle escape key to close menu
-const handleEscKey = (event) => {
-  if (event.key === "Escape" && isOpen.value) {
+const handleEscKey = event => {
+  if (event.key === 'Escape' && isOpen.value) {
     closeMenu();
   }
 };
@@ -388,10 +391,10 @@ const handleResize = () => {
 };
 
 // Focus trap within the mobile menu for accessibility
-const handleTabKey = (event) => {
+const handleTabKey = event => {
   if (!isOpen.value) return;
 
-  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenu = document.getElementById('mobile-menu');
   if (!mobileMenu) return;
 
   const focusableElements = mobileMenu.querySelectorAll(
@@ -417,10 +420,10 @@ const handleTabKey = (event) => {
 
 // Setup event listeners and initialize active state
 onMounted(() => {
-  window.addEventListener("resize", handleResize);
-  window.addEventListener("keydown", handleEscKey);
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Tab") {
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('keydown', handleEscKey);
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Tab') {
       handleTabKey(e);
     }
   });
@@ -431,10 +434,10 @@ onMounted(() => {
 
 // Clean up event listeners
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize);
-  window.removeEventListener("keydown", handleEscKey);
-  window.removeEventListener("keydown", handleTabKey);
-  document.body.style.overflow = "";
+  window.removeEventListener('resize', handleResize);
+  window.removeEventListener('keydown', handleEscKey);
+  window.removeEventListener('keydown', handleTabKey);
+  document.body.style.overflow = '';
 });
 </script>
 
