@@ -13,11 +13,9 @@
         </div>
       </template>
     </Suspense>
-    <noscript>
-      <p class="text-sm text-neutral-600">
-        Enable JavaScript to load the contact form.
-      </p>
-    </noscript>
+    <p v-if="!shouldLoad && !isJavaScriptEnabled" class="text-sm text-neutral-600">
+      Enable JavaScript to load the contact form.
+    </p>
   </div>
 </template>
 
@@ -39,6 +37,7 @@ const passThroughProps = props;
 
 const shouldLoad = ref(false);
 const root = ref(null);
+const isJavaScriptEnabled = ref(false);
 let observer;
 
 // Async load of the original heavy component (separate chunk)
@@ -56,6 +55,7 @@ const loadIfIntersecting = entries => {
 };
 
 onMounted(() => {
+  isJavaScriptEnabled.value = true;
   // If already below-the-fold, defer until visible; if above, load immediately
   if ('IntersectionObserver' in window) {
     observer = new IntersectionObserver(loadIfIntersecting, {

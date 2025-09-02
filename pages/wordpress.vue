@@ -379,17 +379,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
-if (process.client) {
-  watchEffect(() => {
-    if (!contactShouldLoad.value && contactRoot.value) {
-      const rect = contactRoot.value.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 200) {
-        contactShouldLoad.value = true;
-        if (contactObserver) contactObserver.disconnect();
-      }
-    }
-  });
-}
 
 // Services data
 const services = ref([
@@ -457,6 +446,19 @@ const process = ref([
       'We thoroughly test your site before deployment and provide training on how to manage your new WordPress site.',
   },
 ]);
+
+// Client-side contact form intersection observer
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
+    }
+  });
+}
 
 // Testimonials
 const testimonials = ref([

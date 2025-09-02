@@ -37,7 +37,8 @@
       "Bash(for file in pages/consultations.vue pages/landing-seo.vue pages/shopify.vue pages/wordpress.vue)",
       "Bash(do echo \"Fixing $file\")",
       "Bash(sed:*)",
-      "Bash(for file in pages/landing-seo.vue pages/consultations.vue)"
+      "Bash(for file in pages/landing-seo.vue pages/consultations.vue)",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "ask": []
