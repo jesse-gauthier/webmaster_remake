@@ -271,7 +271,7 @@ export function optimizeThirdPartyScripts(scripts = {}) {
   
   const allScripts = { ...defaultScripts, ...scripts }
   
-  Object.entries(allScripts).forEach(([name, config]) => {
+  Object.entries(allScripts).forEach(([_name, config]) => {
     if (document.querySelector(`script[src*="${config.src}"]`)) return
     
     const script = document.createElement('script')

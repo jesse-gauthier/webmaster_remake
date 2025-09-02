@@ -10,9 +10,9 @@
  */
 export function generateResponsiveImages(baseSrc, options = {}) {
   const {
-    sizes = ['small', 'medium', 'large'],
-    quality = 85,
-    format = 'webp'
+    _sizes = ['small', 'medium', 'large'],
+    _quality = 85,
+    _format = 'webp'
   } = options
 
   // In a real implementation, you'd use an image optimization service

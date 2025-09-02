@@ -21,7 +21,10 @@
       "Bash(mkdir:*)",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_console_messages",
-      "mcp__playwright__browser_wait_for"
+      "mcp__playwright__browser_wait_for",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm outdated)",
+      "Bash(npm update:*)"
     ],
     "deny": [],
     "ask": []

@@ -345,7 +345,7 @@ export function optimizeCTAButtons(selector = '.cta-button', options = {}) {
     
     // Add click tracking
     if (clickTracking) {
-      button.addEventListener('click', (e) => {
+      button.addEventListener('click', (_e) => {
         const buttonText = button.textContent.trim()
         const buttonId = button.id || 'unnamed'
         
