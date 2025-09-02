@@ -665,16 +665,7 @@ const focusState = reactive({ service: false, budget: false });
                       {{ option.label }}
                     </option>
                   </select>
-                  <label
-                    :for="'budget'"
-                    :class="[
-                      'pointer-events-none absolute left-4 text-neutral-500 text-sm transition-all duration-200 origin-left',
-                      focusState.budget || formData.budget
-                        ? 'top-2 text-xs text-accent-600'
-                        : 'top-1/2 -translate-y-1/2',
-                    ]"
-                    >Estimated Budget</label
-                  >
+
                   <span
                     class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-neutral-400"
                   >
@@ -821,97 +812,3 @@ const focusState = reactive({ service: false, budget: false });
     </div>
   </section>
 </template>
-
-<style scoped>
-/* Subtle pulsing animations reused from hero style sensibility */
-@keyframes pulse-slow {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.6;
-  }
-}
-@keyframes pulse-slower {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.4;
-  }
-}
-.animate-pulse-slow {
-  animation: pulse-slow 12s ease-in-out infinite;
-}
-.animate-pulse-slower {
-  animation: pulse-slower 18s ease-in-out infinite;
-}
-
-/* Floating label pattern */
-.form-field {
-  @apply w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition;
-}
-.form-field.error {
-  @apply border-red-400 focus:border-red-400 focus:ring-red-300/40;
-}
-.floating-label {
-  @apply absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm pointer-events-none transition-all duration-300 origin-left;
-}
-.field-group .floating-label.has-value {
-  @apply top-2 text-[11px] tracking-wide text-neutral-500;
-}
-/* Use :focus-within on wrapper since label precedes input */
-.field-group:focus-within .floating-label {
-  @apply top-2 text-[11px] tracking-wide text-accent-600;
-}
-/* When there is user input (non-empty) keep label floated */
-.field-group input:not(:placeholder-shown) ~ .floating-label,
-.field-group textarea:not(:placeholder-shown) ~ .floating-label,
-.field-group select:not([value='']) ~ .floating-label {
-  @apply top-2 text-[11px] tracking-wide text-neutral-500;
-}
-.input-error {
-  @apply mt-1 text-sm text-red-500;
-}
-
-/* Adjust textarea label positioning */
-.floating-label.textarea {
-  @apply top-6;
-}
-.floating-label.textarea.has-value {
-  @apply top-2;
-}
-.field-group:focus-within textarea + .floating-label {
-  @apply top-2;
-}
-.field-group textarea:not(:placeholder-shown) ~ .floating-label {
-  @apply top-2;
-}
-
-/* Select label offset */
-.floating-label.select {
-  @apply top-1/2;
-}
-.floating-label.select.has-value {
-  @apply top-2;
-}
-.field-group:focus-within select + .floating-label {
-  @apply top-2;
-}
-.field-group select:not([value='']) ~ .floating-label {
-  @apply top-2;
-}
-
-/* High contrast mode support */
-@media (forced-colors: active) {
-  .form-field {
-    border: 1px solid CanvasText !important;
-  }
-}
-</style>
