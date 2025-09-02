@@ -1,13 +1,12 @@
 <template>
   <div>
     <StartupProgramComponent />
-    <StartupPartnershipForm />
   </div>
 </template>
 
 <script setup>
 import { onMounted, inject } from "vue";
-import StartupPartnershipForm from "~/views/StartupPartnershipForm.vue";
+import StartupProgramComponent from "~/components/ui/StartupProgramComponent.vue";
 import { useSeo } from '~/composables/useSeo';
 
 // Get analytics methods

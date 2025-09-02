@@ -276,7 +276,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import ServicesVisual from '../components/ServicesShowcase.vue'
+import ServicesVisual from '~/components/ui/ServicesShowcase.vue'
 import { useSeo } from '~/composables/useSeo'
 
 // SEO Setup

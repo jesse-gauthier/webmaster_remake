@@ -1,34 +1,6 @@
-// FontAwesome selective imports for better performance
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-// Import only the icons we actually use
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
-  faCode,
-  faServer, 
-  faShoppingCart,
-  faSearch,
-  faLink,
-  faFileAlt,
-  faChartLine,
-  faChartBar,
-  faCogs,
-  faFileContract,
-  faCircleNotch,
-  faCheckCircle,
-  faChevronUp,
-  faChevronDown,
-  faTimes,
-  faExternalLinkAlt,
-  faQuoteLeft
-} from '@fortawesome/free-solid-svg-icons'
-
-import {
-  faVuejs
-} from '@fortawesome/free-brands-svg-icons'
-
-// Add icons to library
-library.add(
   faCode,
   faServer,
   faShoppingCart,
@@ -45,8 +17,30 @@ library.add(
   faChevronDown,
   faTimes,
   faExternalLinkAlt,
-  faQuoteLeft,
-  faVuejs
-)
+  faQuoteLeft
+} from '@fortawesome/free-solid-svg-icons';
+import { faVuejs } from '@fortawesome/free-brands-svg-icons';
 
-export { FontAwesomeIcon }
+export default defineNuxtPlugin(nuxtApp => {
+  library.add(
+    faCode,
+    faServer,
+    faShoppingCart,
+    faSearch,
+    faLink,
+    faFileAlt,
+    faChartLine,
+    faChartBar,
+    faCogs,
+    faFileContract,
+    faCircleNotch,
+    faCheckCircle,
+    faChevronUp,
+    faChevronDown,
+    faTimes,
+    faExternalLinkAlt,
+    faQuoteLeft,
+    faVuejs
+  );
+  nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon);
+});

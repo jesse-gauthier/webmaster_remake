@@ -635,6 +635,24 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/startup": {
+        "redirect": {
+          "to": "/startup-partnership",
+          "statusCode": 301
+        }
+      },
+      "/seo": {
+        "redirect": {
+          "to": "/landing-seo",
+          "statusCode": 301
+        }
+      },
+      "/web-applications": {
+        "redirect": {
+          "to": "/services#web-applications",
+          "statusCode": 301
+        }
+      },
       "/__sitemap__/style.xsl": {
         "headers": {
           "Content-Type": "application/xslt+xml"
@@ -4736,6 +4754,9 @@ const sources$1 = [
                 "loc": "/404"
             },
             {
+                "loc": "/seo"
+            },
+            {
                 "loc": "/blog"
             },
             {
@@ -4790,10 +4811,16 @@ const sources$1 = [
                 "loc": "/technology-stack"
             },
             {
+                "loc": "/web-applications"
+            },
+            {
                 "loc": "/startup-partnership"
             },
             {
                 "loc": "/startup-partnership-form"
+            },
+            {
+                "loc": "/startup"
             }
         ],
         "sourceType": "app"
@@ -4815,7 +4842,9 @@ const sources$1 = [
             "/blog",
             "/case-studies",
             "/seo-checklist",
-            "/startup-partnership"
+            "/startup-partnership",
+            "/seo",
+            "/web-applications"
         ],
         "sourceType": "app"
     }

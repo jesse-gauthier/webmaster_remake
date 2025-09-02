@@ -469,23 +469,25 @@ import { useSeo } from '~/composables/useSeo';
 // SEO Setup
 useSeo({
   title: 'Contact Ottawa Webmasters | Get Your Free Consultation',
-  description: 'Contact Ottawa Webmasters for professional web development, design, and SEO services. Get your free consultation today and transform your online presence.',
+  description:
+    'Contact Ottawa Webmasters for professional web development, design, and SEO services. Get your free consultation today and transform your online presence.',
   url: '/contact',
   structuredData: {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     name: 'Contact Ottawa Webmasters',
-    description: 'Get in touch with Ottawa Webmasters for professional web services',
+    description:
+      'Get in touch with Ottawa Webmasters for professional web services',
     provider: {
       '@type': 'Organization',
-      name: 'Ottawa Webmasters'
-    }
-  }
+      name: 'Ottawa Webmasters',
+    },
+  },
 });
 
 // Async component (code-split chunk)
 const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/ContactForm.vue')
+  () => import('@/components/forms/ContactForm.vue')
 );
 
 const contactShouldLoad = ref(false);
@@ -516,13 +518,16 @@ onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
 
-watchEffect(() => {
-  if (!contactShouldLoad.value && contactRoot.value) {
-    const rect = contactRoot.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
+// Guard for SSR: only run this reactive DOM check on client
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
     }
-  }
-});
+  });
+}
 </script>

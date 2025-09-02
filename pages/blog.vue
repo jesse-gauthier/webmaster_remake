@@ -69,8 +69,8 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import blogData from '~/data/blogs.json';
-import BlogPagination from '~/components/BlogPagination.vue';
-import BlogCard from '~/components/BlogCard.vue';
+import BlogPagination from '~/components/ui/BlogPagination.vue';
+import BlogCard from '~/components/ui/BlogCard.vue';
 
 const route = useRoute();
 const router = useRouter();

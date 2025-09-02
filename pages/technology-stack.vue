@@ -639,7 +639,7 @@
             </ul>
 
             <div class="mt-6 text-center">
-              <router-link to="/web-applications" class="btn-outline">
+              <router-link to="/services" class="btn-outline">
                 Web Application Services
               </router-link>
             </div>

@@ -1,6 +1,6 @@
 // composables/useSeo.js
 
-import { seoConfig } from "~/src/config/seo.config";
+import { seoConfig } from "~/config/seo.config";
 
 /**
  * Reusable SEO composable for managing head/meta tags using Nuxt's built-in SEO capabilities

@@ -33,7 +33,11 @@
       "mcp__playwright__browser_evaluate",
       "Bash(for file in src/components/*.vue)",
       "Bash(do cp \"$file\" components/)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(for file in pages/consultations.vue pages/landing-seo.vue pages/shopify.vue pages/wordpress.vue)",
+      "Bash(do echo \"Fixing $file\")",
+      "Bash(sed:*)",
+      "Bash(for file in pages/landing-seo.vue pages/consultations.vue)"
     ],
     "deny": [],
     "ask": []

@@ -72,15 +72,17 @@ onBeforeUnmount(() => {
 });
 
 // In case component is immediately visible (no scroll yet)
-watchEffect(() => {
-  if (shouldLoad.value === false && root.value) {
-    const rect = root.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) {
-      shouldLoad.value = true;
-      if (observer) observer.disconnect();
+if (process.client) {
+  watchEffect(() => {
+    if (shouldLoad.value === false && root.value) {
+      const rect = root.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        shouldLoad.value = true;
+        if (observer) observer.disconnect();
+      }
     }
-  }
-});
+  });
+}
 </script>
 
 <style scoped>

@@ -2,65 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-        <loc>https://www.ottawawebmasters.ca/</loc>
-        <lastmod>2025-09-02T16:34:44.502Z</lastmod>
+        <loc>https://ottawawebmasters.ca/</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/services</loc>
-        <lastmod>2025-09-02T16:34:44.502Z</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.ottawawebmasters.ca/portfolio</loc>
-        <lastmod>2025-09-02T16:34:44.502Z</lastmod>
+        <loc>https://ottawawebmasters.ca/about</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/about</loc>
-        <lastmod>2025-09-02T16:34:44.502Z</lastmod>
+        <loc>https://ottawawebmasters.ca/services</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/portfolio</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/contact</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/contact</loc>
-        <lastmod>2025-09-02T16:34:44.502Z</lastmod>
+        <loc>https://ottawawebmasters.ca/blog</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/case-studies</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/blog/equity-based-web-application-development-partnership</loc>
+        <loc>https://ottawawebmasters.ca/seo-checklist</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/startup-partnership</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/web-applications</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/landing-seo</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/seo</loc>
+        <lastmod>2025-09-02T22:15:43.489Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://ottawawebmasters.ca/blog/equity-based-web-application-development-partnership</loc>
         <lastmod>2025-04-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
 
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/blog/choosing-right-web-development-platform</loc>
+        <loc>https://ottawawebmasters.ca/blog/choosing-right-web-development-platform</loc>
         <lastmod>2025-02-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
 
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/blog/essential-seo-strategies-2025</loc>
+        <loc>https://ottawawebmasters.ca/blog/essential-seo-strategies-2025</loc>
         <lastmod>2025-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
 
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/blog/complete-website-maintenance-guide</loc>
+        <loc>https://ottawawebmasters.ca/blog/complete-website-maintenance-guide</loc>
         <lastmod>2025-03-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
 
     </url>
     <url>
-        <loc>https://www.ottawawebmasters.ca/blog/progressive-web-apps-future</loc>
+        <loc>https://ottawawebmasters.ca/blog/progressive-web-apps-future</loc>
         <lastmod>2025-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>

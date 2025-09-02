@@ -592,7 +592,7 @@
 </template>
 
 <script setup>
-import TestimonialComponent from '~/components/TestimonialComponent.vue';
+import TestimonialComponent from '~/components/ui/TestimonialComponent.vue';
 import {
   ref,
   onMounted,
@@ -601,7 +601,7 @@ import {
   watchEffect,
 } from 'vue';
 const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/ContactForm.vue')
+  () => import('@/components/forms/ContactForm.vue')
 );
 const contactShouldLoad = ref(false);
 const contactRoot = ref(null);
@@ -627,13 +627,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
-watchEffect(() => {
-  if (!contactShouldLoad.value && contactRoot.value) {
-    const r = contactRoot.value.getBoundingClientRect();
-    if (r.top < window.innerHeight + 200) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
     }
-  }
-});
+  });
+}
 </script>

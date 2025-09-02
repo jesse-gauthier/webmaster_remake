@@ -11,12 +11,14 @@ import {
 } from '@/utils/security';
 
 // Import analytics from our plugin
-const gtag = inject('gtag');
-const analytics = inject('analytics');
+const gtag = inject('gtag', null);
+const analytics = inject('analytics', null);
 
 // Track form views
 onMounted(() => {
-  analytics.trackEvent('Form', 'view', 'Contact Form');
+  if (analytics) {
+    analytics.trackEvent('Form', 'view', 'Contact Form');
+  }
 });
 
 // Form state
@@ -287,7 +289,9 @@ Additional Details:
 
 // Helper function to track field interactions
 const trackFieldInteraction = fieldName => {
-  analytics.trackEvent('Form', 'field_interaction', fieldName);
+  if (analytics) {
+    analytics.trackEvent('Form', 'field_interaction', fieldName);
+  }
 };
 
 // Focus state for selects (since peer placeholder trick not available)
@@ -751,6 +755,7 @@ const focusState = reactive({ service: false, budget: false });
                 :disabled="isSubmitting"
                 aria-busy="isSubmitting"
                 @click="
+                  analytics &&
                   analytics.trackEvent('Form', 'submit_attempt', 'Contact Form')
                 "
               >

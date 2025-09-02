@@ -315,5 +315,5 @@
 </template>
 
 <script setup>
-import OptimizedImage from '~/components/OptimizedImage.vue';
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
 </script>

@@ -60,7 +60,7 @@
         <!-- Portfolio Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
-            v-for="project in filteredProjects"
+            v-for="(project, index) in filteredProjects"
             :key="project.id"
             class="portfolio-card group bg-white rounded-lg shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg"
             data-aos="fade-up"
@@ -152,90 +152,92 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue';
 import { useSeo } from '~/composables/useSeo';
-import countyCooperageImage from "~/assets/countycooperage.svg";
-import gottaGoImage from "~/assets/gottago.svg";
-import upMediaImage from "~/assets/upmedia.svg";
-import lumacrm from "~/assets/lumacrm.svg";
+import countyCooperageImage from '~/assets/countycooperage.svg';
+import gottaGoImage from '~/assets/gottago.svg';
+import upMediaImage from '~/assets/upmedia.svg';
+import lumacrm from '~/assets/lumacrm.svg';
 
 // SEO Setup
 useSeo({
   title: 'Portfolio | Our Web Development & Design Projects',
-  description: 'Explore our portfolio of successful web development projects including custom websites, e-commerce solutions, and WordPress developments. See our expertise in action.',
+  description:
+    'Explore our portfolio of successful web development projects including custom websites, e-commerce solutions, and WordPress developments. See our expertise in action.',
   url: '/portfolio',
   structuredData: {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: 'Ottawa Webmasters Portfolio',
-    description: 'Portfolio showcasing professional web development and design projects',
+    description:
+      'Portfolio showcasing professional web development and design projects',
     creator: {
       '@type': 'Organization',
-      name: 'Ottawa Webmasters'
-    }
-  }
+      name: 'Ottawa Webmasters',
+    },
+  },
 });
 
 // Active category for filtering
-const activeCategory = ref("all");
+const activeCategory = ref('all');
 
 // Portfolio items data
 const portfolioItems = [
   {
-    id: "county-cooperage",
-    title: "The County Cooperage",
-    category: "web design",
+    id: 'county-cooperage',
+    title: 'The County Cooperage',
+    category: 'web design',
     description:
-      "A ecomerce website for a wine barrel manufacturer featuring product listings, custom orders, and a blog with industry news and tips.",
+      'A ecomerce website for a wine barrel manufacturer featuring product listings, custom orders, and a blog with industry news and tips.',
     image: countyCooperageImage,
-    tags: ["Vue.js", "Tailwind CSS", "Responsive Design"],
+    tags: ['Vue.js', 'Tailwind CSS', 'Responsive Design'],
     featured: true,
   },
   {
-    id: "gotta-go",
-    title: "GottaGo Ottawa",
-    category: "blog management",
+    id: 'gotta-go',
+    title: 'GottaGo Ottawa',
+    category: 'blog management',
     description:
-      "A nonprofit that works with local businesses to provide public washrooms for the homeless. The website features a blog, donation system, and volunteer sign-ups.",
+      'A nonprofit that works with local businesses to provide public washrooms for the homeless. The website features a blog, donation system, and volunteer sign-ups.',
     image: gottaGoImage,
-    tags: ["WordPress", "Custom Theme", "Event Integration"],
+    tags: ['WordPress', 'Custom Theme', 'Event Integration'],
     featured: true,
   },
 
   {
-    id: "up-media",
-    title: "UpMedia Video Production",
-    category: "web design",
+    id: 'up-media',
+    title: 'UpMedia Video Production',
+    category: 'web design',
     description:
-      "A video production company website with a portfolio of past projects, client testimonials, and a contact form for inquiries.",
+      'A video production company website with a portfolio of past projects, client testimonials, and a contact form for inquiries.',
     image: upMediaImage,
-    tags: ["WordPress", "Custom Theme", "Portfolio Integration"],
+    tags: ['WordPress', 'Custom Theme', 'Portfolio Integration'],
     featured: true,
   },
   {
-    id: "LumaCrm",
-    title: "Luma CRM",
-    category: "Web Application",
+    id: 'LumaCrm',
+    title: 'Luma CRM',
+    category: 'Web Application',
     description:
-      "LumaCRM is a modern, mobile-first customer relationship management system designed for sales teams to efficiently manage leads and customer interactions. Built with a focus on intuitive user experience, the platform features a streamlined pipeline visualization, robust communication tools, and comprehensive analytics.",
+      'LumaCRM is a modern, mobile-first customer relationship management system designed for sales teams to efficiently manage leads and customer interactions. Built with a focus on intuitive user experience, the platform features a streamlined pipeline visualization, robust communication tools, and comprehensive analytics.',
     image: lumacrm,
-    tags: ["Web App", "Vue", "Custom App"],
+    tags: ['Web App', 'Vue', 'Custom App'],
     featured: true,
   },
 ];
 
 // Extract unique categories for the filter buttons
 const uniqueCategories = computed(() => {
-  return [...new Set(portfolioItems.map((item) => item.category))];
+  return [...new Set(portfolioItems.map(item => item.category))];
 });
 
 // Filter projects based on active category
 const filteredProjects = computed(() => {
-  if (activeCategory.value === "all") {
+  if (activeCategory.value === 'all') {
     return portfolioItems;
   } else {
     return portfolioItems.filter(
-      (project) => project.category === activeCategory.value
+      project => project.category === activeCategory.value
     );
   }
 });

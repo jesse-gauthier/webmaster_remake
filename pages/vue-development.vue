@@ -8,17 +8,21 @@ const isModalOpen = ref(false);
 const openModal = () => {
   isModalOpen.value = true;
   // Track modal open in analytics
-  analytics.trackEvent('Modal', 'open', 'Web App Equity Modal');
+  if (analytics) {
+    analytics.trackEvent('Modal', 'open', 'Web App Equity Modal');
+  }
 };
 const closeModal = () => {
   isModalOpen.value = false;
   // Track modal close in analytics
-  analytics.trackEvent('Modal', 'close', 'Web App Equity Modal');
+  if (analytics) {
+    analytics.trackEvent('Modal', 'close', 'Web App Equity Modal');
+  }
 };
 
 // Inject analytics functionality
-const analytics = inject('analytics');
-const gtag = inject('gtag');
+const analytics = inject('analytics', null);
+const gtag = inject('gtag', null);
 
 // Reactive state for pricing toggle
 const pricingModel = ref('equity');
@@ -49,7 +53,13 @@ const submitForm = async e => {
   formStatus.errors = {};
 
   // Track form submission attempt
-  analytics.trackEvent('Contact', 'form_submission_attempt', 'Vue Dev Inquiry');
+  if (analytics) {
+    analytics.trackEvent(
+      'Contact',
+      'form_submission_attempt',
+      'Vue Dev Inquiry'
+    );
+  }
 
   // Basic validation
   let hasErrors = false;
@@ -147,7 +157,9 @@ const submitForm = async e => {
 
 // Track form field interactions
 const trackFieldInteraction = fieldName => {
-  analytics.trackEvent('Contact', 'field_interaction', fieldName);
+  if (analytics) {
+    analytics.trackEvent('Contact', 'field_interaction', fieldName);
+  }
 };
 
 // Features list

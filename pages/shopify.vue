@@ -334,24 +334,26 @@ import { useSeo } from '~/composables/useSeo';
 // SEO Setup
 useSeo({
   title: 'Shopify Development Services | Professional E-Commerce Solutions',
-  description: 'Expert Shopify development services including custom themes, app development, store setup, and Shopify Plus solutions. Build your successful e-commerce store with us.',
+  description:
+    'Expert Shopify development services including custom themes, app development, store setup, and Shopify Plus solutions. Build your successful e-commerce store with us.',
   url: '/shopify',
   structuredData: {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Shopify Development Services',
-    description: 'Professional Shopify e-commerce development and customization',
+    description:
+      'Professional Shopify e-commerce development and customization',
     provider: {
       '@type': 'Organization',
-      name: 'Ottawa Webmasters'
+      name: 'Ottawa Webmasters',
     },
-    serviceType: 'E-Commerce Development'
-  }
+    serviceType: 'E-Commerce Development',
+  },
 });
 
 // Async load of ContactForm (code split)
 const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/ContactForm.vue')
+  () => import('@/components/forms/ContactForm.vue')
 );
 
 const contactShouldLoad = ref(false);
@@ -382,15 +384,17 @@ onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
 
-watchEffect(() => {
-  if (!contactShouldLoad.value && contactRoot.value) {
-    const rect = contactRoot.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
     }
-  }
-});
+  });
+}
 
 // Shopify Features
 const shopifyFeatures = ref([

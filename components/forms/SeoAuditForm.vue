@@ -55,6 +55,7 @@
               class="btn-primary w-full"
               :disabled="formState.submitting"
               @click="
+                analytics &&
                 analytics.trackEvent('Form', 'submit_attempt', 'SEO Audit Form')
               "
             >
@@ -205,11 +206,13 @@ const formState = reactive({
 
 const showSuccessModal = ref(false);
 
-const analytics = inject('analytics');
+const analytics = inject('analytics', null);
 
 // Track form view
 onMounted(() => {
-  analytics.trackEvent('Form', 'view', 'SEO Audit Form');
+  if (analytics) {
+    analytics.trackEvent('Form', 'view', 'SEO Audit Form');
+  }
 });
 
 const submitForm = async () => {
@@ -244,17 +247,19 @@ This is a request for a free SEO audit. Please provide a detailed analysis of th
       showSuccessModal.value = true;
 
       // Track successful form submission
-      analytics.trackFormSubmission('seo_audit_form', {
-        website: formData.website,
-        source_page: document.location.pathname,
-      });
+      if (analytics) {
+        analytics.trackFormSubmission('seo_audit_form', {
+          website: formData.website,
+          source_page: document.location.pathname,
+        });
 
-      // Track conversion
-      analytics.trackConversion(
-        'AW-16921221005',
-        'seo_audit_request',
-        50 // Estimated value
-      );
+        // Track conversion
+        analytics.trackConversion(
+          'AW-16921221005',
+          'seo_audit_request',
+          50 // Estimated value
+        );
+      }
 
       // We don't reset the form here because we want to keep the data visible in the background
       // It will be reset when the modal is closed
@@ -282,7 +287,9 @@ const closeModal = () => {
 
 // Track input interactions
 const trackFieldFocus = fieldName => {
-  analytics.trackEvent('Form', 'field_focus', fieldName);
+  if (analytics) {
+    analytics.trackEvent('Form', 'field_focus', fieldName);
+  }
 };
 
 // Add event listener to close modal with ESC key

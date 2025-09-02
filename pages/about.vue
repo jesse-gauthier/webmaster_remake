@@ -317,7 +317,8 @@ import { useSeo } from '~/composables/useSeo';
 // SEO Setup
 useSeo({
   title: 'About Ottawa Webmasters | Your Trusted Web Development Partner',
-  description: 'Learn about Ottawa Webmasters, your trusted partner for exceptional web solutions. We specialize in custom web design, development, and digital marketing services in Ottawa and beyond.',
+  description:
+    'Learn about Ottawa Webmasters, your trusted partner for exceptional web solutions. We specialize in custom web design, development, and digital marketing services in Ottawa and beyond.',
   url: '/about',
   structuredData: {
     '@context': 'https://schema.org',
@@ -328,21 +329,23 @@ useSeo({
       '@type': 'PostalAddress',
       addressLocality: 'Ottawa',
       addressRegion: 'Ontario',
-      addressCountry: 'Canada'
+      addressCountry: 'Canada',
     },
     serviceArea: {
       '@type': 'Place',
-      name: 'Ottawa and surrounding areas'
-    }
-  }
+      name: 'Ottawa and surrounding areas',
+    },
+  },
 });
 
 // Get analytics methods
-const analytics = inject('analytics');
+const analytics = inject('analytics', null);
 
 // Track page view when component mounts
 onMounted(() => {
-  analytics.pageView('/about');
+  if (analytics) {
+    analytics.pageView('/about');
+  }
   analytics.trackEvent('Page', 'view', 'About Page');
 });
 

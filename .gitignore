@@ -10,6 +10,9 @@ yarn-error.log*
 .nitro/
 dist/
 
+./nuxt
+
+
 # Environment
 .env
 .env.local

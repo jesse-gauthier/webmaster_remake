@@ -4,7 +4,7 @@ import { onUnmounted, ref, inject } from 'vue';
  * Composable for consistent analytics tracking throughout the application
  */
 export function useAnalytics() {
-    const analytics = inject('analytics');
+    const analytics = inject('analytics', null);
 
     // Tracking section visibility
     const observerRef = ref(null);
@@ -16,8 +16,10 @@ export function useAnalytics() {
      * @param {string} pageTitle - The page title
      */
     const trackPageView = (path, pageTitle) => {
-        analytics.pageView(path);
-        analytics.trackEvent('Page', 'view', pageTitle);
+        if (analytics) {
+            analytics.pageView(path);
+            analytics.trackEvent('Page', 'view', pageTitle);
+        }
     };
 
     /**
@@ -26,7 +28,9 @@ export function useAnalytics() {
      * @param {object} additionalData - Any additional data to track
      */
     const trackButtonClick = (buttonName, additionalData = {}) => {
-        analytics.trackEvent('Button', 'click', buttonName, null, additionalData);
+        if (analytics) {
+            analytics.trackEvent('Button', 'click', buttonName, null, additionalData);
+        }
     };
 
     /**
@@ -35,6 +39,8 @@ export function useAnalytics() {
      * @param {number} threshold - Intersection threshold (0-1)
      */
     const setupSectionTracking = (selector = 'section[id]', threshold = 0.5) => {
+        if (!analytics) return;
+
         observerRef.value = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const sectionId = entry.target.id;
@@ -57,7 +63,7 @@ export function useAnalytics() {
      * @param {Array} depths - Array of depth percentages to track (0-100)
      */
     const setupScrollDepthTracking = (element, depths = [25, 50, 75, 100]) => {
-        if (!element) return;
+        if (!element || !analytics) return;
 
         const trackedDepths = new Set();
         const trackDepth = () => {

@@ -16,9 +16,7 @@
               This website uses cookies to enhance your browsing experience,
               analyze site traffic, and personalize content. By clicking "Accept
               All", you consent to our use of cookies as described in our
-              <router-link
-                to="/policies"
-                class="text-primary-600 hover:underline"
+              <router-link to="/policy" class="text-primary-600 hover:underline"
                 >Cookie Policy</router-link
               >.
             </p>
@@ -185,20 +183,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject, defineProps } from "vue";
+import { ref, onMounted, inject } from 'vue';
 
 // Define updateConsent as a prop
 const props = defineProps({
   updateConsent: {
     type: Function,
-    default: (consent) => {
-      console.log("Consent update (mock):", consent);
+    default: consent => {
+      console.log('Consent update (mock):', consent);
     },
   },
 });
 
-const COOKIE_CONSENT_KEY = "cookie_consent_status";
-const COOKIE_PREFERENCES_KEY = "cookie_preferences";
+const COOKIE_CONSENT_KEY = 'cookie_consent_status';
+const COOKIE_PREFERENCES_KEY = 'cookie_preferences';
 
 const isVisible = ref(false);
 const showCustomizationModal = ref(false);
@@ -209,8 +207,8 @@ const cookiePreferences = ref({
 });
 
 // Get analytics and consent update functions from app with fallbacks for development
-const analytics = inject("analytics", {
-  trackEvent: (...args) => console.log("Analytics event (mock):", ...args),
+const analytics = inject('analytics', {
+  trackEvent: (...args) => console.log('Analytics event (mock):', ...args),
 });
 
 // Initialize component
@@ -242,22 +240,22 @@ const loadSavedPreferences = () => {
       // Apply the saved preferences
       applyConsentPreferences(cookiePreferences.value);
     } catch (e) {
-      console.error("Error parsing saved cookie preferences:", e);
+      console.error('Error parsing saved cookie preferences:', e);
     }
   }
 };
 
 // Apply the consent settings to the actual analytics tools
-const applyConsentPreferences = (preferences) => {
+const applyConsentPreferences = preferences => {
   try {
     props.updateConsent({
-      analytics_storage: preferences.analytics ? "granted" : "denied",
-      ad_storage: preferences.marketing ? "granted" : "denied",
-      ad_user_data: preferences.marketing ? "granted" : "denied",
-      ad_personalization: preferences.marketing ? "granted" : "denied",
+      analytics_storage: preferences.analytics ? 'granted' : 'denied',
+      ad_storage: preferences.marketing ? 'granted' : 'denied',
+      ad_user_data: preferences.marketing ? 'granted' : 'denied',
+      ad_personalization: preferences.marketing ? 'granted' : 'denied',
     });
   } catch (error) {
-    console.warn("Failed to update consent settings:", error);
+    console.warn('Failed to update consent settings:', error);
   }
 };
 
@@ -269,8 +267,8 @@ const acceptAllCookies = () => {
     marketing: true,
   };
 
-  savePreferences("accepted_all");
-  analytics.trackEvent("Consent", "action", "accept_all_cookies");
+  savePreferences('accepted_all');
+  analytics.trackEvent('Consent', 'action', 'accept_all_cookies');
 };
 
 // User rejects non-essential cookies
@@ -281,22 +279,22 @@ const rejectNonEssentialCookies = () => {
     marketing: false,
   };
 
-  savePreferences("essential_only");
-  analytics.trackEvent("Consent", "action", "essential_only_cookies");
+  savePreferences('essential_only');
+  analytics.trackEvent('Consent', 'action', 'essential_only_cookies');
 };
 
 // Save custom preferences from the modal
 const saveCustomPreferences = () => {
-  savePreferences("custom");
+  savePreferences('custom');
   showCustomizationModal.value = false;
-  analytics.trackEvent("Consent", "action", "custom_preferences", {
+  analytics.trackEvent('Consent', 'action', 'custom_preferences', {
     analytics_enabled: cookiePreferences.value.analytics,
     marketing_enabled: cookiePreferences.value.marketing,
   });
 };
 
 // Helper function to save preferences and update UI
-const savePreferences = (consentType) => {
+const savePreferences = consentType => {
   // Save the user's choice type
   localStorage.setItem(COOKIE_CONSENT_KEY, consentType);
 

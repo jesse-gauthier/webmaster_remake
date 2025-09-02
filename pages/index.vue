@@ -1,9 +1,9 @@
 <script setup>
-import HomeHero from '~/components/HomeHero.vue';
-import ServicesShowcase from '~/components/ServicesShowcase.vue';
-import WorkProcess from '~/components/WorkProcess.vue';
-import PricingSection from '~/components/PricingSection.vue';
-import AwardsCarousel from '~/components/AwardsCarousel.vue';
+import HomeHero from '~/components/ui/HomeHero.vue';
+import ServicesShowcase from '~/components/ui/ServicesShowcase.vue';
+import WorkProcess from '~/components/ui/WorkProcess.vue';
+import PricingSection from '~/components/ui/PricingSection.vue';
+import AwardsCarousel from '~/components/ui/AwardsCarousel.vue';
 import {
   onMounted,
   onUnmounted,
@@ -19,13 +19,13 @@ import { useRouteSeo } from '~/composables/useRouteSeo';
 // Apply SEO from route meta
 useRouteSeo();
 
-const analytics = inject('analytics');
+const analytics = inject('analytics', null);
 const observerRef = ref(null);
 const visibleSections = ref(new Set());
 
 // Inline async ContactForm lazy load
 const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/ContactForm.vue')
+  () => import('@/components/forms/ContactForm.vue')
 );
 const contactShouldLoad = ref(false);
 const contactRoot = ref(null);
@@ -41,8 +41,10 @@ const contactLoadIfIntersecting = entries => {
 
 onMounted(() => {
   // Track page view
-  analytics.pageView('/');
-  analytics.trackEvent('Page', 'view', 'Home Page');
+  if (analytics) {
+    analytics.pageView('/');
+    analytics.trackEvent('Page', 'view', 'Home Page');
+  }
 
   // Set up section visibility tracking
   setupSectionVisibilityTracking();
@@ -61,15 +63,18 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
-watchEffect(() => {
-  if (!contactShouldLoad.value && contactRoot.value) {
-    const rect = contactRoot.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
+// Guard for SSR: only run this reactive DOM check on client
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
     }
-  }
-});
+  });
+}
 
 // Clean up observer
 onUnmounted(() => {
@@ -86,7 +91,9 @@ const setupSectionVisibilityTracking = () => {
         const sectionId = entry.target.id;
         if (entry.isIntersecting && !visibleSections.value.has(sectionId)) {
           visibleSections.value.add(sectionId);
-          analytics.trackEvent('Section', 'view', sectionId);
+          if (analytics) {
+            analytics.trackEvent('Section', 'view', sectionId);
+          }
         }
       });
     },
@@ -101,7 +108,9 @@ const setupSectionVisibilityTracking = () => {
 
 // Track CTA button clicks
 const trackCtaClick = buttonName => {
-  analytics.trackEvent('Button', 'click', buttonName);
+  if (analytics) {
+    analytics.trackEvent('Button', 'click', buttonName);
+  }
 };
 </script>
 

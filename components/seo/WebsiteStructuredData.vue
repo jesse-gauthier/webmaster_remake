@@ -4,52 +4,49 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { seoConfig } from "~/config/seo.config";
+import { computed } from 'vue';
+import { seoConfig } from '~/config/seo.config';
 
-// Generate structured data for the website
-const websiteStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
+// Safe access helpers
+const orgName = seoConfig.organization?.name || seoConfig.siteName;
+const orgLogo =
+  seoConfig.organization?.logo || seoConfig.siteUrl + '/favicon.ico';
+const defaultDescription =
+  seoConfig.defaultDescription ||
+  'Professional web development and SEO services.';
+
+const websiteStructuredData = computed(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
   name: seoConfig.siteName,
   url: seoConfig.siteUrl,
-  description: seoConfig.defaultDescription,
+  description: defaultDescription,
   potentialAction: {
-    "@type": "SearchAction",
+    '@type': 'SearchAction',
     target: {
-      "@type": "EntryPoint",
+      '@type': 'EntryPoint',
       urlTemplate: `${seoConfig.siteUrl}/search?q={search_term_string}`,
     },
-    "query-input": "required name=search_term_string",
+    'query-input': 'required name=search_term_string',
   },
   publisher: {
-    "@type": "Organization",
-    name: seoConfig.organization.name,
+    '@type': 'Organization',
+    name: orgName,
     logo: {
-      "@type": "ImageObject",
-      url: seoConfig.organization.logo,
+      '@type': 'ImageObject',
+      url: orgLogo,
     },
   },
-};
+}));
 
-// Function to add structured data to the page
-const addStructuredData = () => {
-  // Remove any existing website structured data
-  const existingScript = document.getElementById("website-structured-data");
-  if (existingScript) {
-    existingScript.remove();
-  }
-
-  // Create and add the new script element
-  const script = document.createElement("script");
-  script.id = "website-structured-data";
-  script.type = "application/ld+json";
-  script.textContent = JSON.stringify(websiteStructuredData);
-  document.head.appendChild(script);
-};
-
-// Add structured data when component mounts
-onMounted(() => {
-  addStructuredData();
+// Inject JSON-LD via useHead so it works in SSR/prerender
+useHead({
+  script: [
+    {
+      id: 'website-structured-data',
+      type: 'application/ld+json',
+      children: JSON.stringify(websiteStructuredData.value),
+    },
+  ],
 });
 </script>

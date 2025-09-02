@@ -20,14 +20,14 @@ const footerLinks = {
   ],
   Resources: [
     { name: 'Free SEO Checklist', url: '/seo-checklist' },
-    { name: 'New Client Form', url: '/new-client-form' },
-    { name: 'Startup Partnership', url: '/startup' },
+    { name: 'New Client Form', url: '/contact' },
+    { name: 'Startup Partnership', url: '/startup-partnership' },
     { name: 'Technology Stack', url: '/technology-stack' },
   ],
   Legal: [
-    { name: 'Privacy Policy', url: '/policies#privacy' },
-    { name: 'Terms of Service', url: '/policies#terms' },
-    { name: 'Cookie Policy', url: '/policies#cookies' },
+    { name: 'Privacy Policy', url: '/policy#privacy' },
+    { name: 'Terms of Service', url: '/policy#terms' },
+    { name: 'Cookie Policy', url: '/policy#cookies' },
   ],
 };
 
@@ -190,21 +190,21 @@ const socialLinks = [
 
           <div class="flex flex-wrap gap-4 text-sm">
             <router-link
-              to="/policies#privacy"
+              to="/policy#privacy"
               class="text-primary-100 hover:text-accent transition-colors"
             >
               Privacy Policy
             </router-link>
             <span class="text-primary-300">•</span>
             <router-link
-              to="/policies#terms"
+              to="/policy#terms"
               class="text-primary-100 hover:text-accent transition-colors"
             >
               Terms of Service
             </router-link>
             <span class="text-primary-300">•</span>
             <router-link
-              to="/policies#cookies"
+              to="/policy#cookies"
               class="text-primary-100 hover:text-accent transition-colors"
             >
               Cookie Policy

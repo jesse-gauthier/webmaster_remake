@@ -334,24 +334,26 @@ import { useSeo } from '~/composables/useSeo';
 // SEO Setup
 useSeo({
   title: 'WordPress Development Services | Custom WordPress Solutions',
-  description: 'Professional WordPress development services including custom themes, plugin development, migrations, and maintenance. Expert WordPress solutions tailored to your business needs.',
+  description:
+    'Professional WordPress development services including custom themes, plugin development, migrations, and maintenance. Expert WordPress solutions tailored to your business needs.',
   url: '/wordpress',
   structuredData: {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'WordPress Development Services',
-    description: 'Custom WordPress development, themes, plugins, and maintenance',
+    description:
+      'Custom WordPress development, themes, plugins, and maintenance',
     provider: {
       '@type': 'Organization',
-      name: 'Ottawa Webmasters'
+      name: 'Ottawa Webmasters',
     },
-    serviceType: 'WordPress Development'
-  }
+    serviceType: 'WordPress Development',
+  },
 });
 
 // Inline async ContactForm
 const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/ContactForm.vue')
+  () => import('@/components/forms/ContactForm.vue')
 );
 const contactShouldLoad = ref(false);
 const contactRoot = ref(null);
@@ -377,15 +379,17 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
-watchEffect(() => {
-  if (!contactShouldLoad.value && contactRoot.value) {
-    const rect = contactRoot.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
+if (process.client) {
+  watchEffect(() => {
+    if (!contactShouldLoad.value && contactRoot.value) {
+      const rect = contactRoot.value.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        contactShouldLoad.value = true;
+        if (contactObserver) contactObserver.disconnect();
+      }
     }
-  }
-});
+  });
+}
 
 // Services data
 const services = ref([

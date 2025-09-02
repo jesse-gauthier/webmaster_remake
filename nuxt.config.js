@@ -102,9 +102,21 @@ export default defineNuxtConfig({
         '/blog',
         '/case-studies',
         '/seo-checklist',
-        '/startup-partnership'
+        '/startup-partnership',
+        '/seo',
+        '/web-applications'
       ]
     }
+  },
+
+  // Simple redirect rules so legacy/short paths resolve.
+  routeRules: {
+    // Redirect /startup to the canonical startup program page
+    '/startup': { redirect: { to: '/startup-partnership', statusCode: 301 } },
+    // Ensure /seo goes to the existing landing page component
+    '/seo': { redirect: { to: '/landing-seo', statusCode: 301 } },
+    // Map /web-applications to services section anchor (or a dedicated page if created)
+    '/web-applications': { redirect: { to: '/services#web-applications', statusCode: 301 } }
   },
 
   // Router Configuration

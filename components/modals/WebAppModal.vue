@@ -213,7 +213,7 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 const showContent = ref(false);
 const isExpanding = ref(false);
-const analytics = inject('analytics');
+const analytics = inject('analytics', null);
 
 watch(
   () => props.isOpen,
