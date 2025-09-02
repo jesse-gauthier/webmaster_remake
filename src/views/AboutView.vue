@@ -303,15 +303,15 @@
       </div>
     </section>
 
-    <!-- SEO Audit Component -->
-    <SeoAuditForm id="audit-section" />
+  <!-- SEO Audit Component (lazy) -->
+  <LazySeoAuditForm id="audit-section" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { inject } from "vue";
-import SeoAuditForm from "@/components/SeoAuditForm.vue";
+import LazySeoAuditForm from "@/components/LazySeoAuditForm.vue";
 
 // Get analytics methods
 const analytics = inject("analytics");
