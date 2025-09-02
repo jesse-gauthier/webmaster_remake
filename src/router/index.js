@@ -334,7 +334,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // Allow navigation to proceed immediately
   next();
-  
+
   // Handle SEO data asynchronously after navigation
   if (to.meta.seo) {
     // For dynamic blog articles, fetch SEO data from the article content
