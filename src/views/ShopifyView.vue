@@ -290,7 +290,7 @@
           <div class="">
             <div class="card-body">
               <!-- Using the imported ContactForm component -->
-              <ContactForm :services="serviceOptions" />
+              <LazyContactForm :services="serviceOptions" />
             </div>
           </div>
         </div>
@@ -301,7 +301,7 @@
 
 <script setup>
 import { ref } from "vue";
-import ContactForm from "@/components/ContactForm.vue";
+import LazyContactForm from "@/components/LazyContactForm.vue";
 
 // Shopify Features
 const shopifyFeatures = ref([

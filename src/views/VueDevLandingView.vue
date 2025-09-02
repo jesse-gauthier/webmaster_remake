@@ -1,76 +1,77 @@
 <script setup>
-import { ref, onMounted, reactive, inject } from "vue";
-import WebAppModal from "@/components/modals/WebAppModal.vue";
+import { ref, onMounted, reactive, inject } from 'vue';
+import WebAppModal from '@/components/modals/WebAppModal.vue';
+import { Icon } from '@iconify/vue';
 
 // Modal state
 const isModalOpen = ref(false);
 const openModal = () => {
   isModalOpen.value = true;
   // Track modal open in analytics
-  analytics.trackEvent("Modal", "open", "Web App Equity Modal");
+  analytics.trackEvent('Modal', 'open', 'Web App Equity Modal');
 };
 const closeModal = () => {
   isModalOpen.value = false;
   // Track modal close in analytics
-  analytics.trackEvent("Modal", "close", "Web App Equity Modal");
+  analytics.trackEvent('Modal', 'close', 'Web App Equity Modal');
 };
 
 // Inject analytics functionality
-const analytics = inject("analytics");
-const gtag = inject("gtag");
+const analytics = inject('analytics');
+const gtag = inject('gtag');
 
 // Reactive state for pricing toggle
-const pricingModel = ref("equity");
-const togglePricing = (model) => {
+const pricingModel = ref('equity');
+const togglePricing = model => {
   pricingModel.value = model;
 };
 
 // Form handling
 const formData = reactive({
-  name: "",
-  email: "",
-  company: "",
-  interest: "equity",
-  message: "",
+  name: '',
+  email: '',
+  company: '',
+  interest: 'equity',
+  message: '',
 });
 
 const formStatus = reactive({
   submitting: false,
   submitted: false,
   success: false,
-  message: "",
+  message: '',
   errors: {},
 });
 
-const submitForm = async (e) => {
+const submitForm = async e => {
   e.preventDefault();
   formStatus.submitting = true;
   formStatus.errors = {};
 
   // Track form submission attempt
-  analytics.trackEvent("Contact", "form_submission_attempt", "Vue Dev Inquiry");
+  analytics.trackEvent('Contact', 'form_submission_attempt', 'Vue Dev Inquiry');
 
   // Basic validation
   let hasErrors = false;
   if (!formData.name.trim()) {
-    formStatus.errors.name = "Name is required";
+    formStatus.errors.name = 'Name is required';
     hasErrors = true;
   }
 
   if (!formData.email.trim()) {
-    formStatus.errors.email = "Email is required";
+    formStatus.errors.email = 'Email is required';
     hasErrors = true;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    formStatus.errors.email = "Please enter a valid email address";
+    formStatus.errors.email = 'Please enter a valid email address';
     hasErrors = true;
   }
 
   if (hasErrors) {
     // Track validation errors
     analytics.trackEvent(
-      "Contact",
-      "form_validation_error",
-      Object.keys(formStatus.errors).join(",")
+      'Contact',
+      'form_validation_error',
+      Object.keys(formStatus.errors).join(',')
     );
     formStatus.submitting = false;
     return;
@@ -79,15 +80,15 @@ const submitForm = async (e) => {
   try {
     // Create form data object for submission
     const form = new FormData();
-    form.append("name", formData.name);
-    form.append("email", formData.email);
-    form.append("company", formData.company);
-    form.append("interest", formData.interest);
-    form.append("message", formData.message);
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('company', formData.company);
+    form.append('interest', formData.interest);
+    form.append('message', formData.message);
 
     // Submit to PHP handler
-    const response = await fetch("/php/applicationDev.php", {
-      method: "POST",
+    const response = await fetch('/php/applicationDev.php', {
+      method: 'POST',
       body: form,
     });
 
@@ -100,27 +101,27 @@ const submitForm = async (e) => {
     if (result.success) {
       // Track successful submission
       analytics.trackEvent(
-        "Contact",
-        "form_submission_success",
-        "Vue Dev Inquiry"
+        'Contact',
+        'form_submission_success',
+        'Vue Dev Inquiry'
       );
 
       // Track conversion for Google Ads (if applicable)
-      gtag("event", "conversion", {
-        send_to: "AW-16921221005/abcdefghijklmnop", // Replace with actual conversion ID/label
+      gtag('event', 'conversion', {
+        send_to: 'AW-16921221005/abcdefghijklmnop', // Replace with actual conversion ID/label
         value: 1,
-        currency: "USD",
+        currency: 'USD',
       });
 
       // Reset form on success
-      formData.name = "";
-      formData.email = "";
-      formData.company = "";
-      formData.interest = "equity";
-      formData.message = "";
+      formData.name = '';
+      formData.email = '';
+      formData.company = '';
+      formData.interest = 'equity';
+      formData.message = '';
     } else {
       // Track server-side validation errors
-      analytics.trackEvent("Contact", "form_server_error", result.message);
+      analytics.trackEvent('Contact', 'form_server_error', result.message);
 
       // Display server-side validation errors
       if (result.errors) {
@@ -130,68 +131,68 @@ const submitForm = async (e) => {
   } catch (error) {
     // Track submission error
     analytics.trackEvent(
-      "Contact",
-      "form_submission_error",
-      error.message || "Unknown error"
+      'Contact',
+      'form_submission_error',
+      error.message || 'Unknown error'
     );
 
     formStatus.success = false;
     formStatus.message =
-      "There was a problem submitting your request. Please try again later.";
-    console.error("Form submission error:", error);
+      'There was a problem submitting your request. Please try again later.';
+    console.error('Form submission error:', error);
   } finally {
     formStatus.submitting = false;
   }
 };
 
 // Track form field interactions
-const trackFieldInteraction = (fieldName) => {
-  analytics.trackEvent("Contact", "field_interaction", fieldName);
+const trackFieldInteraction = fieldName => {
+  analytics.trackEvent('Contact', 'field_interaction', fieldName);
 };
 
 // Features list
 const features = [
   {
     id: 1,
-    title: "Modern Vue 3 Architecture",
+    title: 'Modern Vue 3 Architecture',
     description:
-      "Leverage the power of Vue 3 Composition API for highly maintainable and scalable applications.",
-    icon: "fas fa-code",
+      'Leverage the power of Vue 3 Composition API for highly maintainable and scalable applications.',
+    icon: 'mdi:code-braces',
   },
   {
     id: 2,
-    title: "Responsive Design",
+    title: 'Responsive Design',
     description:
-      "Pixel-perfect interfaces that work flawlessly across all devices and screen sizes.",
-    icon: "fas fa-mobile-alt",
+      'Pixel-perfect interfaces that work flawlessly across all devices and screen sizes.',
+    icon: 'mdi:cellphone',
   },
   {
     id: 3,
-    title: "Performance Optimization",
+    title: 'Performance Optimization',
     description:
-      "Blazing fast load times and smooth user experiences with optimized Vue applications.",
-    icon: "fas fa-tachometer-alt",
+      'Blazing fast load times and smooth user experiences with optimized Vue applications.',
+    icon: 'mdi:speedometer',
   },
   {
     id: 4,
-    title: "State Management",
+    title: 'State Management',
     description:
-      "Robust state management with Pinia or Vuex to handle complex application data flows.",
-    icon: "fas fa-database",
+      'Robust state management with Pinia or Vuex to handle complex application data flows.',
+    icon: 'mdi:database',
   },
   {
     id: 5,
-    title: "API Integration",
+    title: 'API Integration',
     description:
-      "Seamless integration with REST or GraphQL APIs for dynamic data-driven applications.",
-    icon: "fas fa-plug",
+      'Seamless integration with REST or GraphQL APIs for dynamic data-driven applications.',
+    icon: 'mdi:power-plug-outline',
   },
   {
     id: 6,
-    title: "Automated Testing",
+    title: 'Automated Testing',
     description:
-      "Comprehensive test coverage with Vitest, Jest, or Cypress for reliable applications.",
-    icon: "fas fa-vial",
+      'Comprehensive test coverage with Vitest, Jest, or Cypress for reliable applications.',
+    icon: 'mdi:test-tube',
   },
 ];
 
@@ -199,38 +200,38 @@ const features = [
 const processSteps = [
   {
     id: 1,
-    title: "Discovery",
+    title: 'Discovery',
     description:
-      "We begin with in-depth discussions to understand your business goals, target audience, and application requirements.",
-    icon: "fas fa-search",
+      'We begin with in-depth discussions to understand your business goals, target audience, and application requirements.',
+    icon: 'mdi:magnify',
   },
   {
     id: 2,
-    title: "Planning",
+    title: 'Planning',
     description:
-      "Our team creates a detailed roadmap with project milestones, technology choices, and architecture decisions.",
-    icon: "fas fa-map",
+      'Our team creates a detailed roadmap with project milestones, technology choices, and architecture decisions.',
+    icon: 'mdi:map',
   },
   {
     id: 3,
-    title: "Design & Development",
+    title: 'Design & Development',
     description:
-      "We build your application iteratively with Vue 3, implementing features and refining the UI/UX.",
-    icon: "fas fa-code-branch",
+      'We build your application iteratively with Vue 3, implementing features and refining the UI/UX.',
+    icon: 'mdi:source-branch',
   },
   {
     id: 4,
-    title: "Testing & Deployment",
+    title: 'Testing & Deployment',
     description:
-      "Rigorous quality assurance and seamless deployment to your preferred hosting environment.",
-    icon: "fas fa-rocket",
+      'Rigorous quality assurance and seamless deployment to your preferred hosting environment.',
+    icon: 'mdi:rocket-launch-outline',
   },
   {
     id: 5,
-    title: "Support & Growth",
+    title: 'Support & Growth',
     description:
-      "Ongoing maintenance, performance monitoring, and feature enhancements to ensure long-term success.",
-    icon: "fas fa-chart-line",
+      'Ongoing maintenance, performance monitoring, and feature enhancements to ensure long-term success.',
+    icon: 'mdi:chart-line',
   },
 ];
 
@@ -239,23 +240,23 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "The equity model was perfect for our startup. We got a high-quality Vue application without the upfront costs, and the team truly became invested in our success.",
-    author: "Sarah Johnson",
-    company: "FinTech Innovators",
+      'The equity model was perfect for our startup. We got a high-quality Vue application without the upfront costs, and the team truly became invested in our success.',
+    author: 'Sarah Johnson',
+    company: 'FinTech Innovators',
   },
   {
     id: 2,
     quote:
-      "Working with this team transformed our digital presence. Their Vue expertise helped us build a platform that scaled with our business from day one.",
-    author: "Michael Chen",
-    company: "GrowthMetrics",
+      'Working with this team transformed our digital presence. Their Vue expertise helped us build a platform that scaled with our business from day one.',
+    author: 'Michael Chen',
+    company: 'GrowthMetrics',
   },
   {
     id: 3,
     quote:
-      "The development process was transparent and collaborative. Our Vue application exceeded expectations and continues to drive our business forward.",
-    author: "Rajiv Patel",
-    company: "EduTech Solutions",
+      'The development process was transparent and collaborative. Our Vue application exceeded expectations and continues to drive our business forward.',
+    author: 'Rajiv Patel',
+    company: 'EduTech Solutions',
   },
 ];
 
@@ -263,21 +264,21 @@ const testimonials = [
 onMounted(() => {
   const observerOptions = {
     threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
+    rootMargin: '0px 0px -50px 0px',
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("animate-fade-in");
+        entry.target.classList.add('animate-fade-in');
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
-    el.classList.add("opacity-0");
+    el.classList.add('opacity-0');
   });
 });
 </script>
@@ -348,7 +349,13 @@ onMounted(() => {
               <div
                 class="absolute -bottom-4 right-0 md:-right-4 bg-accent p-3 md:p-4 rounded-lg shadow-lg"
               >
-                <i class="fab fa-vuejs text-3xl md:text-4xl text-white"></i>
+                <Icon
+                  icon="mdi:vuejs"
+                  class="text-white"
+                  width="44"
+                  height="44"
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>
@@ -372,9 +379,21 @@ onMounted(() => {
             class="inline-block mb-8 text-accent hover:text-primary transition-colors"
           >
             <span class="flex items-center">
-              <i class="fas fa-code-branch mr-2"></i>
+              <Icon
+                icon="mdi:source-branch"
+                class="mr-2"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              />
               Explore our complete technology stack
-              <i class="fas fa-chevron-right ml-2 text-sm"></i>
+              <Icon
+                icon="mdi:chevron-right"
+                class="ml-2 text-sm"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              />
             </span>
           </router-link>
         </div>
@@ -389,7 +408,13 @@ onMounted(() => {
               <div
                 class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-primary"
               >
-                <i :class="feature.icon" class="text-xl"></i>
+                <Icon
+                  :icon="feature.icon"
+                  class="text-xl"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="ml-4 text-xl font-semibold text-primary">
                 {{ feature.title }}
@@ -426,7 +451,13 @@ onMounted(() => {
                 <div
                   class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                 >
-                  <i class="fas fa-check text-sm"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-sm"
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  />
                 </div>
                 <span class="ml-3 text-neutral-text"
                   >Pay just $1,500 upfront vs. $15,000-$50,000 for traditional
@@ -437,7 +468,13 @@ onMounted(() => {
                 <div
                   class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                 >
-                  <i class="fas fa-check text-sm"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-sm"
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  />
                 </div>
                 <span class="ml-3 text-neutral-text"
                   >We take a small percentage of revenue (5-8%) only once your
@@ -448,7 +485,13 @@ onMounted(() => {
                 <div
                   class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                 >
-                  <i class="fas fa-check text-sm"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-sm"
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  />
                 </div>
                 <span class="ml-3 text-neutral-text"
                   >Enterprise-grade development with modern frameworks and
@@ -459,7 +502,13 @@ onMounted(() => {
                 <div
                   class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white mt-1"
                 >
-                  <i class="fas fa-check text-sm"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-sm"
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  />
                 </div>
                 <span class="ml-3 text-neutral-text"
                   >Ongoing technical partnership including maintenance, updates,
@@ -479,7 +528,14 @@ onMounted(() => {
                 class="btn-outline"
                 aria-label="View equity model details"
               >
-                <i class="fas fa-info-circle mr-2"></i> Learn More
+                <Icon
+                  icon="mdi:information"
+                  class="mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
+                Learn More
               </button>
             </div>
           </div>
@@ -519,7 +575,13 @@ onMounted(() => {
             </div>
             <div class="ml-6">
               <h3 class="text-xl font-semibold text-primary flex items-center">
-                <i :class="step.icon" class="mr-2"></i>
+                <Icon
+                  :icon="step.icon"
+                  class="mr-2"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                />
                 {{ step.title }}
               </h3>
               <p class="text-neutral-text mt-2">{{ step.description }}</p>
@@ -596,37 +658,73 @@ onMounted(() => {
 
               <ul class="space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Full Vue application development</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >2-5% revenue share (negotiable based on project)</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Ongoing support and maintenance included</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Priority feature development</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Quarterly performance optimization</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Strategic partnership for growth</span
                   >
@@ -665,37 +763,73 @@ onMounted(() => {
 
               <ul class="space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Complete Vue application development</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >100% ownership of all code</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >3 months of support included</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Optional maintenance plan available</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >One-time feature additions at hourly rate</span
                   >
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success mt-1"></i>
+                  <Icon
+                    icon="mdi:check"
+                    class="text-success mt-1"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   <span class="ml-3 text-neutral-text"
                     >Documentation and knowledge transfer</span
                   >
@@ -751,12 +885,16 @@ onMounted(() => {
             <p class="text-neutral-text mb-4 italic">
               "{{ testimonial.quote }}"
             </p>
-            <div class="flex text-accent">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+            <div class="flex text-accent" aria-label="5 star rating">
+              <Icon
+                v-for="n in 5"
+                :key="n"
+                icon="mdi:star"
+                class="mr-0.5"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
@@ -786,7 +924,13 @@ onMounted(() => {
                 class="alert alert-success mb-6"
                 role="alert"
               >
-                <i class="fas fa-check-circle mr-2"></i>
+                <Icon
+                  icon="mdi:check-circle"
+                  class="mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 {{ formStatus.message }}
               </div>
 
@@ -800,7 +944,13 @@ onMounted(() => {
                 class="alert alert-error mb-6"
                 role="alert"
               >
-                <i class="fas fa-exclamation-circle mr-2"></i>
+                <Icon
+                  icon="mdi:alert-circle"
+                  class="mr-2"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                />
                 {{ formStatus.message }}
               </div>
 
@@ -891,10 +1041,24 @@ onMounted(() => {
                   aria-label="Submit contact form"
                 >
                   <span v-if="formStatus.submitting">
-                    <i class="fas fa-spinner fa-spin mr-2"></i> Submitting...
+                    <Icon
+                      icon="mdi:loading"
+                      class="mr-2 animate-spin"
+                      width="18"
+                      height="18"
+                      aria-hidden="true"
+                    />
+                    Submitting...
                   </span>
                   <span v-else>
-                    Let's Talk <i class="fas fa-arrow-right ml-2"></i>
+                    Let's Talk
+                    <Icon
+                      icon="mdi:arrow-right"
+                      class="ml-2"
+                      width="18"
+                      height="18"
+                      aria-hidden="true"
+                    />
                   </span>
                 </button>
               </form>
@@ -917,7 +1081,14 @@ onMounted(() => {
                   "
                   class="btn-outline"
                 >
-                  <i class="fas fa-plus mr-2"></i> Submit Another Inquiry
+                  <Icon
+                    icon="mdi:plus"
+                    class="mr-2"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  />
+                  Submit Another Inquiry
                 </button>
               </div>
             </div>
@@ -934,7 +1105,13 @@ onMounted(() => {
                   <div
                     class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0"
                   >
-                    <i class="fas fa-code text-xl"></i>
+                    <Icon
+                      icon="mdi:code-braces"
+                      class="text-xl"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div class="ml-4">
                     <h4 class="text-white font-medium">Vue.js Specialists</h4>
@@ -948,7 +1125,13 @@ onMounted(() => {
                   <div
                     class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0"
                   >
-                    <i class="fas fa-chart-line text-xl"></i>
+                    <Icon
+                      icon="mdi:chart-line"
+                      class="text-xl"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div class="ml-4">
                     <h4 class="text-white font-medium">Growth-Focused</h4>
@@ -962,7 +1145,13 @@ onMounted(() => {
                   <div
                     class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0"
                   >
-                    <i class="fas fa-handshake text-xl"></i>
+                    <Icon
+                      icon="mdi:handshake-outline"
+                      class="text-xl"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div class="ml-4">
                     <h4 class="text-white font-medium">True Partnership</h4>
@@ -977,7 +1166,13 @@ onMounted(() => {
                   <div
                     class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0"
                   >
-                    <i class="fas fa-users text-xl"></i>
+                    <Icon
+                      icon="mdi:account-group"
+                      class="text-xl"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div class="ml-4">
                     <h4 class="text-white font-medium">Expert Team</h4>

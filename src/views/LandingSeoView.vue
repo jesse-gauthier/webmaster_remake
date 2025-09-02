@@ -54,7 +54,12 @@
           <div class="card card-hover">
             <div class="card-body">
               <div class="mb-4 text-accent text-4xl">
-                <i class="fas fa-search"></i>
+                <Icon
+                  icon="mdi:magnify"
+                  width="40"
+                  height="40"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl mb-2">On-Page SEO</h3>
               <p>
@@ -68,7 +73,12 @@
           <div class="card card-hover">
             <div class="card-body">
               <div class="mb-4 text-accent text-4xl">
-                <i class="fas fa-link"></i>
+                <Icon
+                  icon="mdi:link-variant"
+                  width="40"
+                  height="40"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl mb-2">Off-Page SEO</h3>
               <p>
@@ -82,7 +92,12 @@
           <div class="card card-hover">
             <div class="card-body">
               <div class="mb-4 text-accent text-4xl">
-                <i class="fas fa-file-alt"></i>
+                <Icon
+                  icon="mdi:file-document-outline"
+                  width="40"
+                  height="40"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl mb-2">Content Strategy</h3>
               <p>
@@ -96,7 +111,12 @@
           <div class="card card-hover">
             <div class="card-body">
               <div class="mb-4 text-accent text-4xl">
-                <i class="fas fa-chart-line"></i>
+                <Icon
+                  icon="mdi:chart-line"
+                  width="40"
+                  height="40"
+                  aria-hidden="true"
+                />
               </div>
               <h3 class="text-xl mb-2">Technical SEO</h3>
               <p>
@@ -125,7 +145,13 @@
             <div
               class="bg-accent-light p-4 rounded-full mb-4 w-16 h-16 flex items-center justify-center"
             >
-              <i class="fas fa-chart-bar text-accent text-2xl"></i>
+              <Icon
+                icon="mdi:chart-bar"
+                class="text-accent text-2xl"
+                width="32"
+                height="32"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl mb-2">Data-Driven Approach</h3>
             <p>
@@ -139,7 +165,13 @@
             <div
               class="bg-accent-light p-4 rounded-full mb-4 w-16 h-16 flex items-center justify-center"
             >
-              <i class="fas fa-cogs text-accent text-2xl"></i>
+              <Icon
+                icon="mdi:cogs"
+                class="text-accent text-2xl"
+                width="32"
+                height="32"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl mb-2">Custom Strategy</h3>
             <p>
@@ -153,7 +185,13 @@
             <div
               class="bg-accent-light p-4 rounded-full mb-4 w-16 h-16 flex items-center justify-center"
             >
-              <i class="fas fa-file-contract text-accent text-2xl"></i>
+              <Icon
+                icon="mdi:file-sign"
+                class="text-accent text-2xl"
+                width="32"
+                height="32"
+                aria-hidden="true"
+              />
             </div>
             <h3 class="text-xl mb-2">Transparent Reporting</h3>
             <p>
@@ -165,7 +203,7 @@
       </div>
     </section>
     <section class="my-3">
-      <ContactForm />
+      <LazyContactForm />
     </section>
     <!-- FAQ Section -->
     <section class="mt-3 bg-neutral-50 section-padding">
@@ -249,11 +287,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import ContactForm from "@/components/ContactForm.vue";
-import TestimonialComponent from "@/components/TestimonialComponent.vue";
-import { useRouteSeo } from "@/composables/useRouteSeo";
-import { useSeo } from "@/composables/useSeo";
+import { ref, onMounted } from 'vue';
+import { Icon } from '@iconify/vue';
+import LazyContactForm from '@/components/LazyContactForm.vue';
+import TestimonialComponent from '@/components/TestimonialComponent.vue';
+import { useRouteSeo } from '@/composables/useRouteSeo';
+import { useSeo } from '@/composables/useSeo';
 
 // Apply SEO from route meta
 useRouteSeo();
@@ -261,22 +300,22 @@ useRouteSeo();
 // Add FAQ schema for this page
 const faqItems = [
   {
-    question: "How long does it take to see results from SEO?",
+    question: 'How long does it take to see results from SEO?',
     answer:
-      "SEO is a long-term strategy, not a quick fix. While you may start seeing initial improvements within 2-3 months, significant results typically emerge around 4-6 months. The timeline varies based on your industry competitiveness, website history, and starting point.",
+      'SEO is a long-term strategy, not a quick fix. While you may start seeing initial improvements within 2-3 months, significant results typically emerge around 4-6 months. The timeline varies based on your industry competitiveness, website history, and starting point.',
   },
   {
-    question: "What makes your SEO services different?",
+    question: 'What makes your SEO services different?',
     answer:
-      "We focus on sustainable, white-hat SEO strategies that build long-term value. Our approach combines technical expertise, quality content creation, and data-driven decision making. We prioritize transparency with detailed monthly reporting and a clear ROI focus.",
+      'We focus on sustainable, white-hat SEO strategies that build long-term value. Our approach combines technical expertise, quality content creation, and data-driven decision making. We prioritize transparency with detailed monthly reporting and a clear ROI focus.',
   },
   {
-    question: "Do you guarantee first-page rankings?",
+    question: 'Do you guarantee first-page rankings?',
     answer:
-      "No reputable SEO agency can guarantee specific rankings, as search algorithms are complex and constantly evolving. However, we have a proven track record of improving rankings for our clients. We focus on measurable metrics like organic traffic growth, lead generation, and revenue increase.",
+      'No reputable SEO agency can guarantee specific rankings, as search algorithms are complex and constantly evolving. However, we have a proven track record of improving rankings for our clients. We focus on measurable metrics like organic traffic growth, lead generation, and revenue increase.',
   },
   {
-    question: "What does your free SEO audit include?",
+    question: 'What does your free SEO audit include?',
     answer:
       "Our free SEO audit provides an overview of your website's current performance, identifying critical issues affecting your rankings. It includes technical SEO assessment, content evaluation, competitive analysis, keyword opportunities, and actionable recommendations.",
   },
@@ -284,39 +323,39 @@ const faqItems = [
 
 // Apply additional structured data for FAQs
 useSeo({
-  title: "SEO Services & Optimization | Ottawa Web Masters",
+  title: 'SEO Services & Optimization | Ottawa Web Masters',
   description:
     "Professional search engine optimization services to improve your website's visibility and rankings in search results.",
-  url: "/seo",
-  type: "service",
+  url: '/seo',
+  type: 'service',
   structuredData: [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqItems.map((item) => ({
-        "@type": "Question",
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map(item => ({
+        '@type': 'Question',
         name: item.question,
         acceptedAnswer: {
-          "@type": "Answer",
+          '@type': 'Answer',
           text: item.answer,
         },
       })),
     },
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: "SEO Services",
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'SEO Services',
       description:
         "Professional search engine optimization services to improve your website's visibility and rankings in search results.",
       provider: {
-        "@type": "Organization",
-        name: "Ottawa Web Masters",
-        url: "https://www.ottawawebmasters.ca",
+        '@type': 'Organization',
+        name: 'Ottawa Web Masters',
+        url: 'https://www.ottawawebmasters.ca',
       },
-      serviceType: "Search Engine Optimization",
+      serviceType: 'Search Engine Optimization',
       areaServed: {
-        "@type": "City",
-        name: "Ottawa",
+        '@type': 'City',
+        name: 'Ottawa',
       },
     },
   ],
@@ -324,9 +363,9 @@ useSeo({
 
 // Track page view
 onMounted(() => {
-  if (typeof window.trackEvent === "function") {
-    window.trackEvent("page_view", {
-      page_title: "Seo Landing Page",
+  if (typeof window.trackEvent === 'function') {
+    window.trackEvent('page_view', {
+      page_title: 'Seo Landing Page',
       page_location: window.location.href,
       page_path: window.location.pathname,
     });

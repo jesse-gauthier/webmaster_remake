@@ -20,7 +20,7 @@
             class="text-white hover:text-neutral-100 transition-colors ml-4 p-2"
             aria-label="Close banner"
           >
-            <i class="fas fa-times text-lg"></i>
+            <Icon icon="mdi:close" class="text-lg" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -29,11 +29,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { RouterLink } from "vue-router";
+import { ref, onMounted } from 'vue';
+import { Icon } from '@iconify/vue';
+import { RouterLink } from 'vue-router';
 
 const isVisible = ref(false);
-const STORAGE_KEY = "seo_banner_closed";
+const STORAGE_KEY = 'seo_banner_closed';
 
 // Check if user has previously closed the banner
 onMounted(() => {
@@ -65,9 +66,9 @@ const closeBanner = () => {
   localStorage.setItem(STORAGE_KEY, Date.now().toString());
 
   // Track banner close event
-  if (typeof window.trackEvent === "function") {
-    window.trackEvent("banner_closed", {
-      banner_type: "seo_checklist",
+  if (typeof window.trackEvent === 'function') {
+    window.trackEvent('banner_closed', {
+      banner_type: 'seo_checklist',
       page: window.location.pathname,
     });
   }
@@ -75,10 +76,10 @@ const closeBanner = () => {
 
 // Track when user clicks on the CTA
 const trackBannerClick = () => {
-  if (typeof window.trackEvent === "function") {
-    window.trackEvent("banner_cta_click", {
-      banner_type: "seo_checklist",
-      cta: "get_checklist",
+  if (typeof window.trackEvent === 'function') {
+    window.trackEvent('banner_cta_click', {
+      banner_type: 'seo_checklist',
+      cta: 'get_checklist',
       page: window.location.pathname,
     });
   }

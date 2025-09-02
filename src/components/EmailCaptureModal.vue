@@ -21,7 +21,7 @@
           aria-label="Close modal"
           ref="closeButton"
         >
-          <i class="fas fa-times text-lg" aria-hidden="true"></i>
+          <Icon icon="mdi:close" class="text-lg" aria-hidden="true" />
         </button>
 
         <!-- Modal content -->
@@ -101,15 +101,25 @@
                 :disabled="isSubmitting"
                 aria-busy="isSubmitting"
               >
-                <span v-if="isSubmitting" aria-hidden="true">
-                  <i class="fas fa-circle-notch fa-spin mr-2"></i>
+                <span
+                  v-if="isSubmitting"
+                  aria-hidden="true"
+                  class="inline-flex items-center"
+                >
+                  <Icon
+                    icon="mdi:loading"
+                    class="mr-2 animate-spin"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  />
                   Submitting...
                 </span>
                 <span v-else> Get Instant Access </span>
                 <span class="sr-only">{{
                   isSubmitting
-                    ? "Submitting form..."
-                    : "Submit email to get SEO checklist"
+                    ? 'Submitting form...'
+                    : 'Submit email to get SEO checklist'
                 }}</span>
               </button>
             </form>
@@ -118,7 +128,13 @@
           <!-- Success message -->
           <div v-else class="text-center py-6" aria-live="polite">
             <div class="text-success mb-4" aria-hidden="true">
-              <i class="fas fa-check-circle text-5xl"></i>
+              <Icon
+                icon="mdi:check-circle"
+                class="text-5xl"
+                width="56"
+                height="56"
+                aria-hidden="true"
+              />
             </div>
             <h2
               id="success-title"
@@ -173,8 +189,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { Icon } from '@iconify/vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   delay: {
@@ -196,9 +213,9 @@ const isVisible = ref(false);
 const isSubmitting = ref(false);
 const isSubmitted = ref(false);
 const redirectProgress = ref(0);
-const email = ref("");
+const email = ref('');
 const agreeToTerms = ref(false);
-const emailError = ref("");
+const emailError = ref('');
 const termsError = ref(false);
 let modalTimer = null;
 let redirectTimer = null;
@@ -209,7 +226,7 @@ const router = useRouter();
 // Show modal after delay
 const initializeModalTimer = () => {
   // Check if modal has been shown before
-  const hasSeenModal = localStorage.getItem("seo_modal_shown");
+  const hasSeenModal = localStorage.getItem('seo_modal_shown');
 
   if (!hasSeenModal) {
     modalTimer = setTimeout(() => {
@@ -225,7 +242,7 @@ const showModal = () => {
 
   // Show the modal
   isVisible.value = true;
-  trackEvent("modal_shown", { modal_type: "seo_checklist_offer" });
+  trackEvent('modal_shown', { modal_type: 'seo_checklist_offer' });
 
   // Focus the close button after the modal is visible
   // Using nextTick to ensure the DOM has updated
@@ -241,26 +258,26 @@ const showModal = () => {
 
 // Track event helper - compatible with the provided analytics setup
 const trackEvent = (eventName, eventParams) => {
-  if (typeof window.trackEvent === "function") {
+  if (typeof window.trackEvent === 'function') {
     window.trackEvent(eventName, eventParams);
   } else {
     // Fallback if the global trackEvent isn't available
-    console.log("Event tracked:", eventName, eventParams);
+    console.log('Event tracked:', eventName, eventParams);
   }
 };
 
 // Close the modal
 const closeModal = () => {
   isVisible.value = false;
-  trackEvent("modal_closed", { modal_type: "seo_checklist_offer" });
+  trackEvent('modal_closed', { modal_type: 'seo_checklist_offer' });
 
   // Set flag in localStorage to prevent showing again in this session
-  localStorage.setItem("seo_modal_shown", "true");
+  localStorage.setItem('seo_modal_shown', 'true');
 
   // Restore focus to the element that was focused before the modal opened
   if (
     previouslyFocusedElement &&
-    typeof previouslyFocusedElement.focus === "function"
+    typeof previouslyFocusedElement.focus === 'function'
   ) {
     // Small delay to ensure DOM updates before focus is moved
     setTimeout(() => {
@@ -270,7 +287,7 @@ const closeModal = () => {
 };
 
 // Validate email format
-const validateEmail = (email) => {
+const validateEmail = email => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 };
@@ -278,17 +295,17 @@ const validateEmail = (email) => {
 // Handle form submission
 const submitForm = async () => {
   // Reset errors
-  emailError.value = "";
+  emailError.value = '';
   termsError.value = false;
 
   // Validate email
   if (!email.value.trim()) {
-    emailError.value = "Email address is required";
+    emailError.value = 'Email address is required';
     return;
   }
 
   if (!validateEmail(email.value)) {
-    emailError.value = "Please enter a valid email address";
+    emailError.value = 'Please enter a valid email address';
     return;
   }
 
@@ -303,10 +320,10 @@ const submitForm = async () => {
 
   try {
     // Send email to API endpoint
-    const response = await fetch("/api/submit", {
-      method: "POST",
+    const response = await fetch('/api/submit', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: email.value,
@@ -316,20 +333,20 @@ SEO Checklist Subscription
 Email: ${email.value}
 
 User has requested access to the SEO checklist and agreed to receive marketing emails.
-        `.trim()
+        `.trim(),
       }),
     });
 
     const result = await response.json();
-    
+
     if (!result.success) {
       throw new Error(result.message || 'Subscription failed');
     }
 
     // Track successful submission
-    trackEvent("lead_capture", {
-      form_type: "seo_checklist_modal",
-      source: "timed_modal",
+    trackEvent('lead_capture', {
+      form_type: 'seo_checklist_modal',
+      source: 'timed_modal',
     });
 
     // Update state to show success message
@@ -337,22 +354,22 @@ User has requested access to the SEO checklist and agreed to receive marketing e
     isSubmitted.value = true;
 
     // Store email in localStorage for potential future use
-    localStorage.setItem("user_email", email.value);
+    localStorage.setItem('user_email', email.value);
 
     // Set a permanent flag that user has subscribed
-    localStorage.setItem("seo_modal_subscribed", "true");
+    localStorage.setItem('seo_modal_subscribed', 'true');
 
     // Start progress bar for redirect
     startRedirectProgress();
 
     // Redirect after delay
     redirectTimer = setTimeout(() => {
-      router.push("/seo-checklist");
+      router.push('/seo-checklist');
     }, props.redirectDelay);
   } catch (error) {
-    console.error("Form submission error:", error);
+    console.error('Form submission error:', error);
     isSubmitting.value = false;
-    emailError.value = "Something went wrong. Please try again.";
+    emailError.value = 'Something went wrong. Please try again.';
   }
 };
 
@@ -371,24 +388,24 @@ const startRedirectProgress = () => {
 };
 
 // Keyboard event handlers
-const handleKeyDown = (event) => {
+const handleKeyDown = event => {
   if (!isVisible.value) return;
 
   // Close on Escape key
-  if (event.key === "Escape") {
+  if (event.key === 'Escape') {
     closeModal();
     return;
   }
 
   // Trap focus within modal with Tab key
-  if (event.key === "Tab") {
+  if (event.key === 'Tab') {
     trapFocus(event);
   }
 };
 
 // Focus trap implementation
-const trapFocus = (event) => {
-  const modal = document.querySelector(".animate-fade-in");
+const trapFocus = event => {
+  const modal = document.querySelector('.animate-fade-in');
   if (!modal) return;
 
   const focusableElements = modal.querySelectorAll(
@@ -420,13 +437,13 @@ const cleanup = () => {
   if (modalTimer) clearTimeout(modalTimer);
   if (redirectTimer) clearTimeout(redirectTimer);
   if (progressInterval) clearInterval(progressInterval);
-  document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener('keydown', handleKeyDown);
 };
 
 // Initialize on component mount
 onMounted(() => {
   initializeModalTimer();
-  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener('keydown', handleKeyDown);
 });
 
 // Cleanup on component unmount

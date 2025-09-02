@@ -128,7 +128,7 @@
 
     <!-- Contact Form Section -->
     <div id="contact-form">
-      <ContactForm />
+      <LazyContactForm />
     </div>
 
     <!-- Enhanced FAQ Section -->
@@ -220,5 +220,5 @@
 </template>
 
 <script setup>
-import ContactForm from '@/components/ContactForm.vue';
+import LazyContactForm from '@/components/LazyContactForm.vue';
 </script>

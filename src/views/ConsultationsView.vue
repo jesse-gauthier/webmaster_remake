@@ -273,7 +273,7 @@
         <div class=" mx-auto">
           <h2 class="text-2xl md:text-3xl font-semibold text-center mb-8">Book Your Consultation</h2>
 
-          <ContactForm />
+          <LazyContactForm />
         </div>
       </div>
     </section>
@@ -296,6 +296,6 @@
 </template>
 
 <script setup>
-import ContactForm from '@/components/ContactForm.vue';
+import LazyContactForm from '@/components/LazyContactForm.vue';
 import TestimonialComponent from '@/components/TestimonialComponent.vue';
 </script>
