@@ -214,7 +214,7 @@
 
             <!-- Enhanced Floating Card Elements with fixed positioning -->
             <div
-              class="hidden md:block absolute -bottom-8 -left-16 w-64 h-20 z-20"
+              class="hidden md:block absolute -bottom-8 -left-16 w-64 h-32 z-20"
             >
               <div
                 class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform -rotate-3 animate-bounce-light border border-accent/20 w-full h-full"
@@ -284,7 +284,7 @@
 
             <!-- Additional floating element -->
             <div
-              class="hidden lg:block absolute top-1/2 -left-8 bg-gradient-to-br from-accent-500 to-accent-600 p-6 rounded-2xl shadow-xl z-20 transform animate-bounce-light"
+              class="hidden lg:block absolute top-1/4 -left-8 bg-gradient-to-br from-accent-500 to-accent-600 p-6 rounded-2xl shadow-xl z-20 transform animate-bounce-light"
               style="animation-delay: 2s"
             >
               <div class="text-white text-center">
