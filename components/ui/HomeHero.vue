@@ -251,7 +251,7 @@
               class="hidden md:block absolute -top-6 -right-12 w-64 h-20 z-20"
             >
               <div
-                class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform rotate-3 animate-bounce-light border border-primary/20 w-full h-full"
+                class="backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform rotate-3 animate-bounce-light border border-primary/20 w-full h-full"
                 style="animation-delay: 1s"
               >
                 <div class="flex items-center gap-4 h-full">
