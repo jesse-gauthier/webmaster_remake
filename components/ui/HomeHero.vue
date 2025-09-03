@@ -198,17 +198,19 @@
               <div
                 class="absolute -inset-4 bg-gradient-to-r from-accent-500 to-primary-500 rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"
               ></div>
-              <!-- Use OptimizedImage component to prevent layout shift -->
-              <OptimizedImage
+              <!-- Optimized hero image using Nuxt Image (Vercel docs quickstart) -->
+              <NuxtImg
                 src="/images/hero-image.jpg"
                 alt="Web design and development illustration"
-                aspect-ratio="4-3"
-                loading="eager"
+                width="600"
+                height="450"
+                sizes="(max-width: 1024px) 100vw, 600px"
+                format="webp"
+                preload
+                placeholder="blur"
+                decoding="async"
                 fetchpriority="high"
-                :width="600"
-                :height="450"
-                image-class="rounded-xl transform group-hover:scale-105 transition-all duration-500"
-                fallback-text="Ottawa Web Masters"
+                class="rounded-xl w-full h-auto transform group-hover:scale-105 transition-all duration-500"
               />
             </div>
 
@@ -315,5 +317,5 @@
 </template>
 
 <script setup>
-import OptimizedImage from '~/components/ui/OptimizedImage.vue';
+// NuxtImg is auto-registered by @nuxt/image module.
 </script>

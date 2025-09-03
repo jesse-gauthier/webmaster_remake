@@ -57,7 +57,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/robots',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxt/image',
   ],
 
   // Tailwind Configuration
