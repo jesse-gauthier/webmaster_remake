@@ -59,17 +59,23 @@
       </slot>
     </div>
 
-    <!-- Actual image -->
-    <img
+    <!-- Actual optimized image via Nuxt Image -->
+    <NuxtImg
+      v-if="currentSrc"
       v-show="!isLoading && !hasError"
       ref="image"
       :src="currentSrc"
       :alt="alt"
       :width="width"
       :height="height"
-      :class="imageClass"
       :loading="loading"
       :decoding="decoding"
+      :sizes="sizes"
+      :format="format"
+      :quality="quality"
+      :fit="fit"
+      :placeholder="placeholder"
+      :class="imageClass"
       @load="handleLoad"
       @error="handleError"
     />
@@ -153,13 +159,36 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  // Nuxt image specific enhancements
+  sizes: {
+    type: String,
+    default: '100vw',
+  },
+  format: {
+    type: [String, Array],
+    default: () => ['webp', 'auto'],
+  },
+  quality: {
+    type: [Number, String],
+    default: 80,
+  },
+  fit: {
+    type: String,
+    default: 'cover',
+  },
+  placeholder: {
+    // true | 'blur' | 'empty' | base64 string
+    type: [Boolean, String],
+    default: 'blur',
+  },
 });
 
 const emit = defineEmits(['load', 'error', 'visible']);
 
 // Reactive state
 const imageContainer = ref(null);
-const image = ref(null);
+const image = ref(null); // reference to NuxtImg component root element
 const isLoading = ref(true);
 const hasError = ref(false);
 const isVisible = ref(false);

@@ -26,10 +26,16 @@
             </div>
           </div>
           <div class="animate-slide-up">
-            <img
+            <OptimizedImage
               src="/images/hero-image.jpg"
               alt="SEO services and search engine optimization"
-              class="rounded-lg shadow-lg w-full"
+              :width="600"
+              :height="400"
+              :lazy="true"
+              sizes="(max-width: 768px) 100vw, 600px"
+              class="block"
+              container-class="relative rounded-lg shadow-lg overflow-hidden"
+              image-class="w-full h-auto object-cover rounded-lg"
             />
           </div>
         </div>
@@ -317,6 +323,7 @@ import {
   watchEffect,
 } from 'vue';
 import { Icon } from '@iconify/vue';
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
 // Inline async ContactForm
 const AsyncContactForm = defineAsyncComponent(
   () => import('@/components/forms/ContactForm.vue')

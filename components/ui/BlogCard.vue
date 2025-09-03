@@ -21,8 +21,16 @@
                 </div>
             </div>
 
-            <!-- Actual image if available -->
-            <img v-else :src="blog.featuredImage" :alt="blog.title" class="w-full h-full object-cover">
+                        <!-- Actual image if available -->
+                        <OptimizedImage
+                            v-else
+                            :src="blog.featuredImage"
+                            :alt="blog.title"
+                            :lazy="true"
+                            sizes="(max-width: 768px) 100vw, 384px"
+                            container-class="relative w-full h-full"
+                            image-class="w-full h-full object-cover transition-opacity duration-300"
+                        />
 
             <!-- Category badge (only shown when image exists) -->
             <span v-if="blog.featuredImage" class="badge badge-accent absolute top-4 right-4">
@@ -55,6 +63,7 @@
 
 <script setup>
 import { getGradientForCategory } from '~/utils/gradientUtils';
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
 
 defineProps({
     blog: {

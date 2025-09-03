@@ -20,11 +20,13 @@
         <h3 class="text-2xl font-semibold text-primary mb-8">Trusted by Growing Businesses</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60 hover:opacity-100 transition-opacity duration-300">
           <div v-for="client in clients" :key="client.name" class="flex items-center justify-center">
-            <img 
-              :src="client.logo" 
+            <OptimizedImage
+              :src="client.logo"
               :alt="client.name"
-              class="max-h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-              loading="lazy"
+              :lazy="true"
+              sizes="120px"
+              container-class="flex items-center justify-center max-h-12"
+              image-class="max-h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 object-contain"
             />
           </div>
         </div>
@@ -69,6 +71,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
 
 // Component for counting up numbers
 const CountUp = {

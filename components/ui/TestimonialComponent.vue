@@ -4,7 +4,14 @@
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/3 flex justify-center">
           <div class="w-52 h-52 rounded-full overflow-hidden border-4 border-white shadow-md">
-            <img src="@/assets/countycooperage.svg" alt="Happy Client" class="w-full h-full object-contain p-4" />
+            <OptimizedImage
+              src="@/assets/countycooperage.svg"
+              alt="Happy Client"
+              :lazy="true"
+              sizes="208px"
+              container-class="w-full h-full"
+              image-class="w-full h-full object-contain p-4"
+            />
           </div>
         </div>
         <div class="md:w-2/3">
@@ -32,4 +39,6 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
+</script>

@@ -775,12 +775,15 @@
           </div>
 
           <div class="order-1 md:order-2" data-aos="fade-left">
-            <img
+            <OptimizedImage
               src="/images/hero-image.jpg"
               alt="Our development team at work"
-              class="rounded-lg shadow-lg"
-              width="600"
-              height="400"
+              :width="600"
+              :height="400"
+              sizes="(max-width: 768px) 100vw, 600px"
+              :lazy="true"
+              container-class="relative rounded-lg shadow-lg overflow-hidden"
+              image-class="w-full h-auto object-cover rounded-lg"
             />
             <p class="text-sm text-neutral-text mt-4 italic">
               Our team follows industry-leading development practices to ensure
@@ -824,6 +827,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { Icon } from '@iconify/vue';
+import OptimizedImage from '~/components/ui/OptimizedImage.vue';
 
 // Add AOS animation on component mount
 onMounted(() => {
