@@ -331,7 +331,7 @@ const caseStudies = [
     testimonial: {
       quote:
         'The website perfectly captures the traditional craftsmanship that goes into our barrels while providing a modern shopping experience. Our customers can now easily configure exactly what they need, and our sales have increased significantly since launch.',
-      author: 'Michael Thompson',
+      author: 'Joe Thompson',
       position: 'Owner',
       company: 'The County Cooperage',
     },
