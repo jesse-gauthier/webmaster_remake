@@ -251,7 +251,7 @@
               class="hidden md:block absolute -top-6 -right-12 w-64 h-20 z-20"
             >
               <div
-                class="backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform rotate-3 animate-bounce-light border border-primary/20 w-full h-full"
+                class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl transform rotate-3 animate-bounce-light border border-primary/20 w-full h-full"
                 style="animation-delay: 1s"
               >
                 <div class="flex items-center gap-4 h-full">
@@ -284,12 +284,12 @@
 
             <!-- Additional floating element -->
             <div
-              class="hidden lg:block absolute top-1/2 -left-8 bg-gradient-to-br from-accent-500 to-accent-600 p-4 rounded-2xl shadow-xl z-20 transform animate-bounce-light"
+              class="hidden lg:block absolute top-1/2 -left-8 bg-gradient-to-br from-accent-500 to-accent-600 p-8 rounded-2xl shadow-xl z-20 transform animate-bounce-light"
               style="animation-delay: 2s"
             >
               <div class="text-white text-center">
-                <div class="text-2xl font-bold">24/7</div>
-                <div class="text-xs">Support</div>
+                <div class="text-2xl font-bold mb-1">24/7</div>
+                <div class="text-sm">Support</div>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
   <header class="bg-white shadow-md fixed w-full top-0 z-sticky h-header">
     <div class="container-site h-full flex items-center justify-between">
       <!-- Brand Logo/Name with fixed dimensions -->
-      <div class="flex-shrink-0 w-48">
+      <div class="flex-shrink-0 w-fit">
         <Logo />
       </div>
 
