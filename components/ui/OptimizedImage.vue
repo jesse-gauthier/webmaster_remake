@@ -61,10 +61,10 @@
 
     <!-- Actual optimized image via Nuxt Image -->
     <NuxtImg
-      v-if="currentSrc"
+      v-if="resolvedSrc"
       v-show="!isLoading && !hasError"
       ref="image"
-      :src="currentSrc"
+      :src="resolvedSrc"
       :alt="alt"
       :width="width"
       :height="height"
@@ -74,7 +74,7 @@
       :format="format"
       :quality="quality"
       :fit="fit"
-      :placeholder="placeholder"
+      :placeholder="placeholderAttr"
       :class="imageClass"
       @load="handleLoad"
       @error="handleError"
@@ -182,6 +182,37 @@ const props = defineProps({
     type: [Boolean, String],
     default: 'blur',
   },
+
+  /* Placeholder customization API */
+  // Select behavior: auto (use placeholder prop), blur, empty, none, custom, color, shimmer
+  placeholderMode: {
+    type: String,
+    default: 'auto',
+    validator: v =>
+      ['auto', 'blur', 'empty', 'none', 'custom', 'color', 'shimmer'].includes(
+        v
+      ),
+  },
+  // Provide custom base64 (data URI) or string for NuxtImg placeholder when placeholderMode = 'custom'
+  customPlaceholder: {
+    type: String,
+    default: '',
+  },
+  // When using placeholderMode color, use this color (falls back to placeholderColor prop)
+  solidPlaceholderColor: {
+    type: String,
+    default: '',
+  },
+  // Enable a CSS shimmer overlay while loading (independent of Nuxt image placeholder)
+  shimmer: {
+    type: Boolean,
+    default: false,
+  },
+  // Optional alt text override for fallback image
+  fallbackAlt: {
+    type: String,
+    default: '',
+  },
 });
 
 const emit = defineEmits(['load', 'error', 'visible']);
@@ -193,9 +224,29 @@ const isLoading = ref(true);
 const hasError = ref(false);
 const isVisible = ref(false);
 const observer = ref(null);
+const fallbackActive = ref(false);
+
+// Compute effective placeholder attribute based on mode
+const placeholderAttr = computed(() => {
+  if (props.placeholderMode === 'auto') return props.placeholder;
+  if (props.placeholderMode === 'blur') return 'blur';
+  if (props.placeholderMode === 'empty' || props.placeholderMode === 'none')
+    return 'empty';
+  if (props.placeholderMode === 'custom' && props.customPlaceholder)
+    return props.customPlaceholder;
+  if (props.placeholderMode === 'color') {
+    // Nuxt Image doesn't support plain color placeholder directly; fall back to 'empty' and rely on container background
+    return 'empty';
+  }
+  if (props.placeholderMode === 'shimmer') {
+    // We'll render shimmer via CSS; keep image placeholder minimal
+    return 'empty';
+  }
+  return props.placeholder;
+});
 
 // Computed properties
-const currentSrc = computed(() => {
+const baseSrc = computed(() => {
   if (typeof props.src === 'string') {
     return isVisible.value || !props.lazy ? props.src : '';
   }
@@ -211,6 +262,11 @@ const currentSrc = computed(() => {
 
   return '';
 });
+
+// Resolved src accounts for fallback
+const resolvedSrc = computed(() =>
+  fallbackActive.value && props.fallbackSrc ? props.fallbackSrc : baseSrc.value
+);
 
 // Intersection Observer for lazy loading
 const setupObserver = () => {
@@ -241,15 +297,14 @@ const handleLoad = event => {
 };
 
 const handleError = event => {
+  // Attempt fallback once
+  if (props.fallbackSrc && !fallbackActive.value) {
+    fallbackActive.value = true;
+    isLoading.value = true; // treat fallback load as a new load
+    return; // NuxtImg will re-render with fallback src
+  }
   hasError.value = true;
   isLoading.value = false;
-
-  // Try fallback image if provided
-  if (props.fallbackSrc && image.value.src !== props.fallbackSrc) {
-    image.value.src = props.fallbackSrc;
-    return;
-  }
-
   emit('error', event);
 };
 
