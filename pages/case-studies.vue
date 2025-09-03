@@ -23,16 +23,16 @@
     </section>
 
     <!-- Filter Section -->
-    <section class="bg-white py-8">
+    <section class="bg-white py-12">
       <div class="container-site px-4 sm:px-6">
-        <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex flex-wrap justify-center gap-4">
           <button
             @click="activeFilter = 'all'"
-            class="px-4 py-2 rounded-full text-sm font-medium transition-colors"
+            class="px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-md"
             :class="
               activeFilter === 'all'
-                ? 'bg-primary text-white'
-                : 'bg-neutral-100 text-neutral-text hover:bg-neutral-200'
+                ? 'bg-primary text-white shadow-lg transform scale-105'
+                : 'bg-white border border-neutral-300 text-neutral-text hover:bg-primary hover:text-white hover:border-primary'
             "
             aria-label="Show all case studies"
           >
@@ -42,11 +42,11 @@
             v-for="category in categories"
             :key="category"
             @click="activeFilter = category"
-            class="px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize"
+            class="px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-md capitalize"
             :class="
               activeFilter === category
-                ? 'bg-primary text-white'
-                : 'bg-neutral-100 text-neutral-text hover:bg-neutral-200'
+                ? 'bg-primary text-white shadow-lg transform scale-105'
+                : 'bg-white border border-neutral-300 text-neutral-text hover:bg-primary hover:text-white hover:border-primary'
             "
             :aria-label="`Show ${category} case studies`"
           >
@@ -57,9 +57,9 @@
     </section>
 
     <!-- Case Studies List -->
-    <section class="py-16 bg-white">
+    <section class="py-20 bg-white">
       <div class="container-site px-4 sm:px-6">
-        <div class="grid grid-cols-1 gap-16">
+        <div class="grid grid-cols-1 gap-20">
           <!-- Case Study Item (repeated for each study) -->
           <div
             v-for="study in filteredCaseStudies"
@@ -68,78 +68,91 @@
             :id="study.id"
             :data-category="study.category"
           >
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <!-- Image Column (alternating layout) -->
-              <div
-                :class="[
-                  'case-study-image',
-                  study.id % 2 === 0 ? 'lg:order-2' : 'lg:order-1',
-                ]"
-              >
-                <div class="relative">
-                  <div
-                    :style="`background-image: url(${study.images.featured}); background-position: center; background-size: contain; background-repeat: no-repeat;`"
-                    class="rounded-lg shadow-lg w-full h-64 md:h-80"
-                    :aria-label="`${study.title} project screenshot`"
-                  ></div>
-                  <div class="absolute top-4 right-4">
+            <!-- New Layout: Logo centered at top, Challenge/Solution below, Results on right -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Left Column: Logo + Challenge/Solution -->
+              <div class="lg:col-span-2">
+                <!-- Logo Section -->
+                <div class="text-center mb-8">
+                  <div class="inline-block relative">
+                    <div
+                      class="rounded-lg shadow-lg h-full w-full bg-gradient-to-br from-primary-light to-neutral-50 flex items-center justify-center p-4 mb-4"
+                    >
+                      <img
+                        :src="study.images.featured"
+                        :alt="`${study.title} logo`"
+                        class="w-full h-auto object-contain filter drop-shadow-lg"
+                      />
+                    </div>
                     <span
                       class="inline-block bg-primary text-white text-xs px-3 py-1 rounded-full capitalize"
                     >
                       {{ study.category }}
                     </span>
                   </div>
-                </div>
-              </div>
 
-              <!-- Content Column -->
-              <div
-                :class="[
-                  'case-study-content',
-                  study.id % 2 === 0 ? 'lg:order-1' : 'lg:order-2',
-                ]"
-              >
-                <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">
-                  {{ study.title }}
-                </h2>
+                  <h2
+                    class="text-2xl md:text-3xl font-bold text-primary mt-4 mb-3"
+                  >
+                    {{ study.title }}
+                  </h2>
 
-                <p class="text-lg text-neutral-text mb-6">
-                  {{ study.summary }}
-                </p>
-
-                <!-- Challenge Box -->
-                <div class="bg-neutral-50 p-6 rounded-lg mb-6">
-                  <h3 class="text-xl font-semibold text-primary mb-2">
-                    The Challenge
-                  </h3>
-                  <p class="text-neutral-text">{{ study.challenge }}</p>
+                  <p class="text-lg text-neutral-text max-w-2xl mx-auto">
+                    {{ study.summary }}
+                  </p>
                 </div>
 
-                <!-- Solution Box -->
-                <div class="bg-neutral-50 p-6 rounded-lg mb-6">
-                  <h3 class="text-xl font-semibold text-primary mb-2">
-                    Our Solution
-                  </h3>
-                  <p class="text-neutral-text mb-4">{{ study.solution }}</p>
+                <!-- Challenge and Solution Side by Side -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <!-- Challenge Box -->
+                  <div class="bg-neutral-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-primary mb-3">
+                      The Challenge
+                    </h3>
+                    <p class="text-neutral-text text-sm leading-relaxed">
+                      {{ study.challenge }}
+                    </p>
+                  </div>
 
-                  <!-- Technologies Used -->
-                  <div class="flex flex-wrap gap-2 mt-4">
-                    <div
-                      v-for="tech in study.technologies"
-                      :key="tech"
-                      class="px-3 py-1 bg-white text-primary-dark text-sm rounded-full shadow-sm"
-                    >
-                      {{ tech }}
-                    </div>
+                  <!-- Solution Box -->
+                  <div class="bg-neutral-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-primary mb-3">
+                      Our Solution
+                    </h3>
+                    <p class="text-neutral-text text-sm leading-relaxed">
+                      {{ study.solution }}
+                    </p>
                   </div>
                 </div>
 
-                <!-- Results Box -->
-                <div class="bg-accent-light p-6 rounded-lg">
-                  <h3 class="text-xl font-semibold text-primary mb-2">
+                <!-- CTA Button -->
+                <div class="text-center mt-8">
+                  <a
+                    :href="study.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition-all duration-300 hover:scale-105 hover:shadow-xl transform"
+                    :aria-label="`Visit ${study.title} website`"
+                  >
+                    View Live Project
+                    <Icon
+                      icon="mdi:open-in-new"
+                      class="ml-3 transition-transform group-hover:translate-x-1 group-hover:scale-110"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right Column: Results -->
+              <div class="lg:col-span-1">
+                <div class="bg-accent-light p-6 rounded-lg h-fit sticky top-8">
+                  <h3 class="text-xl font-semibold text-primary mb-4">
                     Results
                   </h3>
-                  <ul class="space-y-2">
+                  <ul class="space-y-3">
                     <li
                       v-for="(result, idx) in study.results"
                       :key="idx"
@@ -147,34 +160,16 @@
                     >
                       <Icon
                         icon="mdi:chart-line"
-                        class="text-accent mt-1 mr-3"
+                        class="text-accent mt-1 mr-3 flex-shrink-0"
                         width="20"
                         height="20"
                         aria-hidden="true"
                       />
-                      <span class="text-neutral-text">{{ result }}</span>
+                      <span class="text-neutral-text text-sm leading-relaxed">{{
+                        result
+                      }}</span>
                     </li>
                   </ul>
-                </div>
-
-                <!-- CTA Button -->
-                <div class="mt-8">
-                  <a
-                    :href="study.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline"
-                    :aria-label="`Visit ${study.title} website`"
-                  >
-                    View Live Project
-                    <Icon
-                      icon="mdi:open-in-new"
-                      class="ml-2"
-                      width="18"
-                      height="18"
-                      aria-hidden="true"
-                    />
-                  </a>
                 </div>
               </div>
             </div>
@@ -214,26 +209,27 @@
               </blockquote>
             </div>
 
-            <!-- Project Gallery (if applicable) -->
+            <!-- Key Features Section -->
             <div
-              v-if="study.images.gallery && study.images.gallery.length > 0"
-              class="mt-16"
+              class="mt-12 bg-white p-8 rounded-lg border border-neutral-200"
             >
               <h3 class="text-xl font-semibold text-primary mb-6">
-                Project Gallery
+                Key Features Delivered
               </h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div
-                  v-for="(image, idx) in study.images.gallery"
-                  :key="idx"
-                  class="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                  v-for="tech in study.technologies"
+                  :key="tech"
+                  class="flex items-center p-4 bg-neutral-50 rounded-lg"
                 >
-                  <img
-                    :src="image.src"
-                    :alt="image.alt"
-                    class="w-full h-auto"
-                    loading="lazy"
+                  <Icon
+                    icon="mdi:check-circle"
+                    class="text-accent mr-3 flex-shrink-0"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
                   />
+                  <span class="text-neutral-text font-medium">{{ tech }}</span>
                 </div>
               </div>
             </div>
@@ -291,6 +287,10 @@
 import { ref, computed } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useSeo } from '~/composables/useSeo';
+import countyCooperageImage from '~/assets/countycooperage.svg';
+import gottaGoImage from '~/assets/gottago.svg';
+import upMediaImage from '~/assets/upmedia.svg';
+import lumaCrmImage from '~/assets/lumacrm.svg';
 
 // Active filter for case studies
 const activeFilter = ref('all');
@@ -336,15 +336,7 @@ const caseStudies = [
       company: 'The County Cooperage',
     },
     images: {
-      featured: '/src/assets/countycooperage.svg',
-      gallery: [
-        { src: '/images/hero-image.jpg', alt: 'County Cooperage product page' },
-        {
-          src: '/images/hero-image.jpg',
-          alt: 'Custom barrel configuration tool',
-        },
-        { src: '/images/hero-image.jpg', alt: 'County Cooperage mobile view' },
-      ],
+      featured: countyCooperageImage,
     },
     link: 'https://www.thecountycooperage.ca',
   },
@@ -379,18 +371,7 @@ const caseStudies = [
       company: 'GottaGo Ottawa',
     },
     images: {
-      featured: '/src/assets/gottago.svg',
-      gallery: [
-        {
-          src: '/images/hero-image.jpg',
-          alt: 'GottaGo Ottawa interactive map',
-        },
-        { src: '/images/hero-image.jpg', alt: 'GottaGo donation page' },
-        {
-          src: '/images/hero-image.jpg',
-          alt: 'GottaGo mobile bathroom finder',
-        },
-      ],
+      featured: gottaGoImage,
     },
     link: 'https://new.gottago-ottawa.ca/',
   },
@@ -425,12 +406,7 @@ const caseStudies = [
       company: 'UpMedia Productions',
     },
     images: {
-      featured: '/src/assets/upmedia.svg',
-      gallery: [
-        { src: '/images/hero-image.jpg', alt: 'UpMedia portfolio page' },
-        { src: '/images/hero-image.jpg', alt: 'UpMedia video showcase' },
-        { src: '/images/hero-image.jpg', alt: 'UpMedia booking system' },
-      ],
+      featured: upMediaImage,
     },
     link: 'https://www.upmedia.video/',
   },
@@ -466,12 +442,7 @@ const caseStudies = [
       company: 'TechVision Solutions',
     },
     images: {
-      featured: '/src/assets/lumacrm.svg',
-      gallery: [
-        { src: '/images/hero-image.jpg', alt: 'Luma CRM dashboard' },
-        { src: '/images/hero-image.jpg', alt: 'Luma CRM mobile interface' },
-        { src: '/images/hero-image.jpg', alt: 'Luma CRM sales pipeline view' },
-      ],
+      featured: lumaCrmImage,
     },
     link: 'https://lumacrm.ca',
   },
@@ -489,7 +460,8 @@ const filteredCaseStudies = computed(() => {
 // Use Nuxt's built-in SEO capabilities
 useSeo({
   title: 'Case Studies | Web Development Success Stories',
-  description: 'Explore our web development case studies showcasing successful projects across e-commerce, custom applications, WordPress sites, and more. See real results from our work.',
+  description:
+    'Explore our web development case studies showcasing successful projects across e-commerce, custom applications, WordPress sites, and more. See real results from our work.',
   url: '/case-studies',
   structuredData: {
     '@context': 'https://schema.org',
@@ -504,30 +476,53 @@ useSeo({
         description: study.summary,
       },
     })),
-  }
+  },
 });
 </script>
 
 <style scoped>
 /* Animation for case study items */
 .case-study-item {
-  transition:
-    opacity 0.3s,
-    transform 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 
 .case-study-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+}
+
+.case-study-item:hover .case-study-image img {
+  transform: scale(1.05);
+}
+
+/* Enhanced button hover effects */
+.btn-outline {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-outline:hover::before {
+  left: 100%;
 }
 
 /* Add scroll behavior for anchor links */
 html {
   scroll-behavior: smooth;
-}
-
-/* Ensure proper image aspect ratios */
-img {
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
 }
 </style>
