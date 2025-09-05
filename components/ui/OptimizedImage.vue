@@ -7,7 +7,7 @@
     <!-- Loading placeholder -->
     <div
       v-if="isLoading"
-      class="absolute inset-0 flex items-center justify-center bg-gray-100"
+      class="absolute inset-0 flex items-center justify-center bg-transparent"
       :style="{ backgroundColor: placeholderColor }"
     >
       <div v-if="showLoadingSpinner" class="animate-pulse flex space-x-4">

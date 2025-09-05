@@ -41,7 +41,14 @@
       "Bash(rg:*)",
       "Bash(del \"C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\plugins\\luckyOrange.js\")",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\assets\\css/**)",
+      "Bash(tasklist:*)"
     ],
     "deny": [],
     "ask": []

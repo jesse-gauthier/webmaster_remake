@@ -207,7 +207,6 @@
                 sizes="(max-width: 1024px) 100vw, 600px"
                 format="webp"
                 preload
-                placeholder="blur"
                 decoding="async"
                 fetchpriority="high"
                 class="rounded-xl w-full h-auto transform group-hover:scale-105 transition-all duration-500"
