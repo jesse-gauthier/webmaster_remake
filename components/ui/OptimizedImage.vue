@@ -36,7 +36,6 @@
       </div>
     </div>
 
-    <!-- Error state -->
     <div
       v-else-if="hasError"
       class="absolute inset-0 flex items-center justify-center text-gray-500"
@@ -60,8 +59,19 @@
     </div>
 
     <!-- Actual optimized image via Nuxt Image -->
+    <!-- For SVGs, bypass Nuxt Image transformations to avoid placeholder 'empty' src glitch -->
+    <img
+      v-if="resolvedSrc && isSvg"
+      :src="resolvedSrc"
+      :alt="alt"
+      :decoding="decoding"
+      :loading="lazy ? 'lazy' : 'eager'"
+      :class="imageClass"
+      @load="handleLoad"
+      @error="handleError"
+    />
     <NuxtImg
-      v-if="resolvedSrc"
+      v-else-if="resolvedSrc"
       v-show="!isLoading && !hasError"
       ref="image"
       :src="resolvedSrc"
@@ -71,10 +81,10 @@
       :loading="loading"
       :decoding="decoding"
       :sizes="sizes"
-      :format="format"
+      :format="finalFormat"
       :quality="quality"
       :fit="fit"
-      :placeholder="placeholderAttr"
+      :placeholder="finalPlaceholder"
       :class="imageClass"
       @load="handleLoad"
       @error="handleError"
@@ -166,8 +176,8 @@ const props = defineProps({
     default: '100vw',
   },
   format: {
-    type: [String, Array],
-    default: () => ['webp', 'auto'],
+    type: String,
+    default: 'webp',
   },
   quality: {
     type: [Number, String],
@@ -266,6 +276,20 @@ const baseSrc = computed(() => {
 // Resolved src accounts for fallback
 const resolvedSrc = computed(() =>
   fallbackActive.value && props.fallbackSrc ? props.fallbackSrc : baseSrc.value
+);
+
+// Detect SVG so we can adjust behavior (no blur transform, no format/quality conversion)
+const isSvg = computed(
+  () =>
+    typeof resolvedSrc.value === 'string' && resolvedSrc.value.endsWith('.svg')
+);
+
+// Final format: don't force webp (or any) for SVGs
+const finalFormat = computed(() => (isSvg.value ? undefined : props.format));
+
+// Final placeholder: skip blur for SVG (keeps it crisp & avoids showing word 'blur')
+const finalPlaceholder = computed(() =>
+  isSvg.value ? 'empty' : placeholderAttr.value
 );
 
 // Intersection Observer for lazy loading

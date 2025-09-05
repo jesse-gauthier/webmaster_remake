@@ -48,7 +48,17 @@
       "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake/**)",
       "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake/**)",
       "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\assets\\css/**)",
-      "Bash(tasklist:*)"
+      "Bash(tasklist:*)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\assets/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\.playwright-mcp/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Bash(taskkill:*)",
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)"
     ],
     "deny": [],
     "ask": []

@@ -111,6 +111,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import OptimizedImage from '~/components/ui/OptimizedImage.vue';
+// Import SVG logos so they bypass Nuxt Image transformations correctly
+import countyCooperageLogo from '@/assets/countycooperage.svg';
+import gottaGoLogo from '@/assets/gottago.svg';
+import upMediaLogo from '@/assets/upmedia.svg';
+import lumaCrmLogo from '@/assets/lumacrm.svg';
 
 // Component for counting up numbers
 const CountUp = {
@@ -151,10 +156,10 @@ const stats = ref([
 
 // Client logos (you would replace these with actual client logos)
 const clients = ref([
-  { name: 'County Cooperage', logo: '/src/assets/countycooperage.svg' },
-  { name: 'Gotta Go Ottawa', logo: '/src/assets/gottago.svg' },
-  { name: 'UpMedia', logo: '/src/assets/upmedia.svg' },
-  { name: 'Luma CRM', logo: '/src/assets/lumacrm.svg' },
+  { name: 'County Cooperage', logo: countyCooperageLogo },
+  { name: 'Gotta Go Ottawa', logo: gottaGoLogo },
+  { name: 'UpMedia', logo: upMediaLogo },
+  { name: 'Luma CRM', logo: lumaCrmLogo },
 ]);
 
 // Trust badges

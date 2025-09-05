@@ -7,7 +7,7 @@
             class="w-52 h-52 rounded-full overflow-hidden border-4 border-white shadow-md"
           >
             <OptimizedImage
-              src="@/assets/countycooperage.svg"
+              :src="countyCooperageLogo"
               alt="Happy Client"
               :lazy="true"
               sizes="208px"
@@ -50,4 +50,5 @@
 
 <script setup>
 import OptimizedImage from '~/components/ui/OptimizedImage.vue';
+import countyCooperageLogo from '@/assets/countycooperage.svg';
 </script>

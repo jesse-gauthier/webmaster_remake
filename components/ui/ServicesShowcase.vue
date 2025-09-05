@@ -1,6 +1,6 @@
 <!-- Enhanced Services Showcase -->
 <template>
-  <section class="py-20 bg-gradient-to-br from-neutral-cream via-white to-primary-50 relative overflow-hidden">
+  <section class="py-20 bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900 relative overflow-hidden">
     <!-- Background decoration -->
     <div class="absolute inset-0 overflow-hidden opacity-5">
       <div class="absolute top-20 right-20 w-64 h-64 bg-accent rounded-full animate-bounce-light"></div>
@@ -10,13 +10,13 @@
     <div class="container-site relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <span class="inline-block bg-accent bg-opacity-20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
+        <span class="inline-block bg-accent bg-opacity-20 text-accent-light px-4 py-2 rounded-full text-sm font-medium mb-4">
           🎯 What We Do Best
         </span>
-        <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
           Our Core Services
         </h2>
-        <p class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed">
+        <p class="text-xl text-primary-100 max-w-3xl mx-auto leading-relaxed">
           We combine cutting-edge technology with creative design to deliver digital solutions 
           that drive real business results and exceed expectations.
         </p>
@@ -32,7 +32,7 @@
             class="px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105"
             :class="activeTab === index ? 
               'bg-gradient-to-r from-primary to-accent text-white shadow-lg' : 
-              'bg-white text-neutral-text hover:bg-neutral-50 shadow-sm border border-neutral-200'"
+              'bg-white/20 backdrop-blur-sm text-primary-100 hover:bg-white/30 shadow-sm border border-white/20'"
           >
             <span class="flex items-center gap-2">
               <component :is="getTabIcon(index)" class="w-4 h-4" />
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Enhanced Tab Content -->
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-neutral-100">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-white/20">
           <transition name="slide" mode="out-in">
             <div :key="activeTab" class="grid lg:grid-cols-2 gap-0">
               <!-- Enhanced Image Side -->
@@ -123,7 +123,7 @@
 
       <!-- Enhanced Service Stats -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+        <div class="text-center p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group border border-white/20">
           <div class="bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
@@ -133,7 +133,7 @@
           <div class="text-sm font-medium text-neutral-600">Projects Completed</div>
         </div>
         
-        <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+        <div class="text-center p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group border border-white/20">
           <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -143,7 +143,7 @@
           <div class="text-sm font-medium text-neutral-600">Client Satisfaction</div>
         </div>
         
-        <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+        <div class="text-center p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group border border-white/20">
           <div class="bg-gradient-to-br from-accent-600 to-primary-600 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -153,7 +153,7 @@
           <div class="text-sm font-medium text-neutral-600">Years Experience</div>
         </div>
         
-        <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+        <div class="text-center p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group border border-white/20">
           <div class="bg-gradient-to-br from-primary-400 to-accent-500 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
