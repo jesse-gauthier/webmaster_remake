@@ -5,12 +5,13 @@
 </template>
 
 <script setup>
-import { onMounted, inject } from "vue";
+import { onMounted } from "vue";
 import StartupProgramComponent from "~/components/ui/StartupProgramComponent.vue";
 import { useSeo } from '~/composables/useSeo';
+import { useAnalytics } from '~/composables/useAnalytics';
 
 // Get analytics methods
-const analytics = inject("analytics");
+const { trackPageView } = useAnalytics();
 
 // Use Nuxt's built-in SEO capabilities
 useSeo({
@@ -22,8 +23,7 @@ useSeo({
 // Track page view when component mounts
 onMounted(() => {
   // Page view tracking
-  analytics.pageView("/startup-partnership");
-  analytics.trackEvent("Page", "view", "Startup Partnership Page");
+  trackPageView("/startup-partnership", "Startup Partnership Page");
 });
 </script>
 

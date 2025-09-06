@@ -280,13 +280,11 @@ const navItems = ref([
       { name: 'Shopify', url: '/shopify', active: false },
       { name: 'Monthly Maintenance', url: '/maintenance', active: false },
       { name: 'Consultations', url: '/consultations', active: false },
-      { name: 'Web Apps', url: '/services', active: false },
       {
         name: 'Startup Partnership',
         url: '/startup-partnership',
         active: false,
       },
-      { name: 'Technology Stack', url: '/technology-stack', active: false },
     ],
   },
   { name: 'Portfolio', url: '/portfolio', active: false },
