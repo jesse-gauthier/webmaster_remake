@@ -302,7 +302,7 @@ const focusState = reactive({ service: false, budget: false });
   <!-- Updated Contact Section with gradient + decorative elements for cohesion with hero -->
   <section
     id="contact-form"
-    class="relative py-24 overflow-hidden bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900"
+    class="relative py-24 overflow-hidden bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900 rounded-md"
   >
     <div class="container-site relative z-10 px-4 sm:px-6 lg:px-8">
       <div
@@ -444,14 +444,14 @@ const focusState = reactive({ service: false, budget: false });
                   Personal Information
                 </h3>
 
-                <div class="mb-4 relative h-20">
+                <div class="mb-4 relative">
                   <input
                     id="name"
                     v-model="formData.name"
                     @blur="validateField('name')"
                     @focus="trackFieldInteraction('name')"
                     type="text"
-                    class="peer w-full h-14 rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none transition-colors duration-200"
+                    class="peer w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 placeholder-transparent shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none"
                     :class="
                       formErrors.name
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
