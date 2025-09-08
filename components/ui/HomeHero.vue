@@ -237,10 +237,10 @@
                     </svg>
                   </div>
                   <div class="min-w-0 flex-1">
-                    <p class="text-base font-semibold text-primary truncate">
+                    <p class="text-base font-semibold text-primary">
                       Affordable Pricing
                     </p>
-                    <p class="text-sm text-neutral-600 truncate">
+                    <p class="text-sm text-neutral-600">
                       Tailored to your budget
                     </p>
                   </div>
@@ -272,10 +272,10 @@
                     </svg>
                   </div>
                   <div class="min-w-0 flex-1">
-                    <p class="text-base font-semibold text-primary truncate">
+                    <p class="text-base font-semibold text-primary">
                       Lightning Fast
                     </p>
-                    <p class="text-sm text-neutral-600 truncate">
+                    <p class="text-sm text-neutral-600">
                       Optimized performance
                     </p>
                   </div>

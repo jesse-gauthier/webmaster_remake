@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- Enhanced structured data for contact page -->
+    <ContactStructuredData />
     <!-- Enhanced Hero Section -->
     <section
       class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 py-20 md:py-32 overflow-hidden"
@@ -248,46 +250,60 @@
       </div>
     </section>
 
-    <!-- Contact Form Section (inline lazy-loaded) -->
-    <div id="contact-form">
-      <div ref="contactRoot" class="async-contact-form">
-        <ClientOnly>
-          <Suspense v-if="contactShouldLoad">
-            <template #default>
-              <AsyncContactForm />
-            </template>
-            <template #fallback>
-              <div
-                class="flex items-center justify-center py-16"
-                aria-busy="true"
-              >
-                <div
-                  class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-                ></div>
-                <span class="sr-only">Loading contact form...</span>
-              </div>
-            </template>
-          </Suspense>
-          <template #fallback>
-            <div class="flex items-center justify-center py-16">
-              <div class="text-center">
-                <p class="text-sm text-neutral-600 mb-4">
-                  Loading contact form...
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-20 bg-white">
+      <div class="container-site">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+              Tell Us About Your Project
+            </h2>
+            <p class="text-lg text-neutral-text">
+              Fill out the form below and we'll get back to you within 24 hours with a detailed response.
+            </p>
+          </div>
+          
+          <div ref="contactRoot" class="contact-form-wrapper">
+            <ClientOnly fallback-tag="div">
+              <template #fallback>
+                <div class="bg-neutral-cream rounded-2xl p-8 text-center">
+                  <div class="animate-pulse">
+                    <div class="h-4 bg-neutral-300 rounded w-3/4 mx-auto mb-4"></div>
+                    <div class="h-4 bg-neutral-300 rounded w-1/2 mx-auto mb-6"></div>
+                    <div class="space-y-4">
+                      <div class="h-12 bg-neutral-300 rounded"></div>
+                      <div class="h-12 bg-neutral-300 rounded"></div>
+                      <div class="h-32 bg-neutral-300 rounded"></div>
+                      <div class="h-12 bg-primary-300 rounded"></div>
+                    </div>
+                  </div>
+                  <p class="text-sm text-neutral-600 mt-4">Loading contact form...</p>
+                </div>
+              </template>
+              <ContactFormComponent />
+            </ClientOnly>
+            
+            <!-- No JavaScript Fallback -->
+            <noscript>
+              <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8 text-center">
+                <h3 class="text-xl font-semibold text-primary mb-4">JavaScript Required</h3>
+                <p class="text-neutral-text mb-6">
+                  Our contact form requires JavaScript to function. Please enable JavaScript in your browser or use one of the alternative contact methods above.
                 </p>
-                <div
-                  class="animate-spin h-6 w-6 border-2 border-primary-200 border-t-primary-500 rounded-full mx-auto"
-                ></div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a href="mailto:contact@ottawawebmasters.ca" class="btn-primary">
+                    Email Us Directly
+                  </a>
+                  <a href="/consultations" class="btn-outline">
+                    Schedule a Call
+                  </a>
+                </div>
               </div>
-            </div>
-          </template>
-        </ClientOnly>
-        <noscript>
-          <p class="text-sm text-neutral-600">
-            Enable JavaScript to load the contact form.
-          </p>
-        </noscript>
+            </noscript>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Enhanced FAQ Section -->
     <section class="py-20 bg-gradient-to-br from-neutral-cream to-primary-50">
@@ -471,13 +487,12 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  defineAsyncComponent,
-} from 'vue';
+import { ref } from 'vue';
+import ContactFormComponent from '~/components/forms/ContactForm.vue';
+import ContactStructuredData from '~/components/seo/ContactStructuredData.vue';
 import { useSeo } from '~/composables/useSeo';
 
-// SEO Setup
+// SEO Setup with enhanced structured data
 useSeo({
   title: 'Contact Ottawa Webmasters | Get Your Free Consultation',
   description:
@@ -492,18 +507,22 @@ useSeo({
     provider: {
       '@type': 'Organization',
       name: 'Ottawa Webmasters',
+      email: 'contact@ottawawebmasters.ca',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Ottawa',
+        addressRegion: 'ON',
+        addressCountry: 'CA'
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Customer Service',
+        email: 'contact@ottawawebmasters.ca',
+        availableLanguage: 'English'
+      }
     },
   },
 });
 
-// Async component (code-split chunk)
-const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/forms/ContactForm.vue')
-);
-
-// Load form immediately on contact page since it's the main purpose
-const contactShouldLoad = ref(true);
 const contactRoot = ref(null);
-
-// No need for intersection observer on contact page - form loads immediately
 </script>
