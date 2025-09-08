@@ -1,15 +1,7 @@
-<!-- Enhanced Hero Section -->
-<script setup>
-// Ensure this component loads with highest priority
-if (process.client) {
-  document.documentElement.style.setProperty('--hero-priority', '1');
-}
-</script>
-
 <template>
   <section
     class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 min-h-screen overflow-hidden hero-section"
-    style="z-index: 1000; position: relative;"
+    style="z-index: 1000; position: relative"
   >
     <!-- Dynamic Background Pattern Elements -->
     <div class="absolute inset-0 overflow-hidden opacity-20">
