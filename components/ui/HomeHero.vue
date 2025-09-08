@@ -9,7 +9,7 @@ if (process.client) {
 <template>
   <section
     class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 min-h-screen overflow-hidden hero-section"
-    style="z-index: 10; position: relative;"
+    style="z-index: 1000; position: relative;"
   >
     <!-- Dynamic Background Pattern Elements -->
     <div class="absolute inset-0 overflow-hidden opacity-20">

@@ -53,10 +53,20 @@ const contactLoadIfIntersecting = entries => {
 onMounted(() => {
   // Ensure hero is always visible first before any tracking
   const heroSection = document.getElementById('hero-section');
+  const servicesSection = document.getElementById('services-section');
+  
   if (heroSection) {
     heroSection.style.transform = 'translateZ(0)';
     heroSection.style.opacity = '1';
     heroSection.style.visibility = 'visible';
+    heroSection.style.zIndex = '1000';
+    heroSection.style.position = 'relative';
+  }
+  
+  if (servicesSection) {
+    servicesSection.style.zIndex = '1';
+    servicesSection.style.position = 'relative';
+    servicesSection.style.marginTop = '0';
   }
 
   // Track page view
@@ -172,6 +182,10 @@ const trackCtaClick = buttonName => {
 .services-deferred {
   contain: layout;
   transform: translateZ(0);
+  position: relative;
+  z-index: 1;
+  margin-top: 0 !important;
+  top: 0 !important;
 }
 
 /* Optimize for first paint - ensure hero is always visible first */
@@ -179,6 +193,22 @@ const trackCtaClick = buttonName => {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  position: relative;
+  z-index: 100;
+  isolation: isolate;
+}
+
+/* Ensure proper stacking context */
+main {
+  position: relative;
+}
+
+/* Force services section to stay in its place */
+.services-deferred::before {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
 }
 </style>
 
@@ -186,10 +216,10 @@ const trackCtaClick = buttonName => {
   <main>
     <!-- Enhanced structured data for homepage SEO -->
     <HomepageStructuredData />
-    <section id="hero-section" class="hero-section hero-priority">
+    <section id="hero-section" class="hero-section hero-priority" style="position: relative; z-index: 1000;">
       <HomeHero />
     </section>
-    <section id="services-section" class="py-16 bg-white services-deferred">
+    <section id="services-section" class="py-16 bg-white services-deferred" style="position: relative; z-index: 1; margin-top: 0;">
       <ServicesShowcase />
     </section>
     <section id="awards-section">
