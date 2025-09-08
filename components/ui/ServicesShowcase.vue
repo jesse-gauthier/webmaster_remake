@@ -1,13 +1,13 @@
 <!-- Enhanced Services Showcase -->
 <template>
-  <section class="py-20 bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900 relative overflow-hidden">
+  <section class="py-20 bg-gradient-to-br from-primary-700 via-primary-800 to-primary-900 relative overflow-hidden" style="z-index: 1; position: relative;">
     <!-- Background decoration -->
     <div class="absolute inset-0 overflow-hidden opacity-5">
       <div class="absolute top-20 right-20 w-64 h-64 bg-accent rounded-full animate-bounce-light"></div>
       <div class="absolute bottom-20 left-20 w-48 h-48 bg-primary rounded-full animate-bounce-light" style="animation-delay: 1s"></div>
     </div>
 
-    <div class="container-site relative z-10">
+    <div class="container-site relative z-1">
       <!-- Section Header -->
       <div class="text-center mb-16">
         <span class="inline-block bg-accent bg-opacity-20 text-accent-light px-4 py-2 rounded-full text-sm font-medium mb-4">
