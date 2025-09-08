@@ -43,7 +43,7 @@
     </div>
 
     <!-- Main Hero Content -->
-    <div class="container-site relative z-10 py-20 sm:py-24 md:py-32 lg:py-40">
+    <div class="container-site relative z-10 py-20 sm:py-24 md:py-32 lg:pb-40">
       <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
         <!-- Left Column - Enhanced Text Content -->
         <div class="space-y-6 sm:space-y-8 max-w-2xl">
@@ -314,7 +314,3 @@
     </div>
   </section>
 </template>
-
-<script setup>
-// NuxtImg is auto-registered by @nuxt/image module.
-</script>

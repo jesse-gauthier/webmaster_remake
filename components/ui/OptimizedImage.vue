@@ -4,7 +4,7 @@
     :class="containerClass"
     :style="{ backgroundColor: placeholderColor }"
   >
-    <!-- Loading placeholder -->
+    <!-- Loading placeholderdfsdfd -->
     <div
       v-if="isLoading"
       class="absolute inset-0 flex items-center justify-center bg-transparent"
@@ -19,19 +19,7 @@
       </div>
       <div v-else class="text-gray-500">
         <slot name="placeholder">
-          <div class="flex items-center justify-center h-full">
-            <svg
-              class="w-8 h-8 text-gray-300"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </div>
+          <div class="flex items-center justify-center h-full"></div>
         </slot>
       </div>
     </div>
