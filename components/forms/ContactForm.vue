@@ -644,7 +644,7 @@ const focusState = reactive({ service: false, budget: false });
                       trackFieldInteraction('budget');
                       focusState.budget = true;
                     "
-                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 pt-5 pb-2 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none appearance-none pr-10"
+                    class="w-full rounded-xl border border-neutral-300 bg-white/80 backdrop-blur-sm px-4 p-3 text-sm md:text-base text-neutral-800 shadow-sm focus:border-accent-400 focus:ring-2 focus:ring-accent-300/40 focus:outline-none appearance-none pr-10"
                     :class="
                       formErrors.budget
                         ? 'border-red-400 focus:border-red-400 focus:ring-red-300/40'
