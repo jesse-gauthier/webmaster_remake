@@ -68,6 +68,21 @@ onMounted(() => {
     heroSection.style.height = '100%';
     heroSection.style.opacity = '1';
     heroSection.style.visibility = 'visible';
+    
+    // Simple protection: check periodically if hero still exists
+    const heroProtectionInterval = setInterval(() => {
+      const currentHero = document.getElementById('hero-section');
+      const heroContainer = document.querySelector('.hero-container');
+      
+      if (!currentHero && heroContainer) {
+        console.warn('Hero section missing, page may need refresh');
+        // Instead of trying to restore, just log the issue
+        clearInterval(heroProtectionInterval);
+      }
+    }, 1000);
+    
+    // Store interval for cleanup
+    window._heroProtectionInterval = heroProtectionInterval;
   }
 
   // Track page view
@@ -103,10 +118,16 @@ onBeforeUnmount(() => {
   if (contactObserver) contactObserver.disconnect();
 });
 
-// Clean up observer
+// Clean up observers
 onUnmounted(() => {
   if (observerRef.value) {
     observerRef.value.disconnect();
+  }
+  
+  // Clean up hero protection interval
+  if (window._heroProtectionInterval) {
+    clearInterval(window._heroProtectionInterval);
+    window._heroProtectionInterval = null;
   }
 });
 
@@ -127,8 +148,8 @@ const setupSectionVisibilityTracking = () => {
     { threshold: 0.25 }
   );
 
-  // Observe all sections
-  document.querySelectorAll('section[id]').forEach(section => {
+  // Observe all sections EXCEPT hero section to avoid interference
+  document.querySelectorAll('section[id]:not(#hero-section)').forEach(section => {
     observerRef.value.observe(section);
   });
 };
