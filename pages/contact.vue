@@ -253,23 +253,28 @@
     <!-- Contact Form Section -->
     <section id="contact-form" class="py-20 bg-white">
       <div class="container-site">
-        <div class="max-w-4xl mx-auto">
+        <div class="mx-auto">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
               Tell Us About Your Project
             </h2>
             <p class="text-lg text-neutral-text">
-              Fill out the form below and we'll get back to you within 24 hours with a detailed response.
+              Fill out the form below and we'll get back to you within 24 hours
+              with a detailed response.
             </p>
           </div>
-          
+
           <div ref="contactRoot" class="contact-form-wrapper">
             <ClientOnly fallback-tag="div">
               <template #fallback>
                 <div class="bg-neutral-cream rounded-2xl p-8 text-center">
                   <div class="animate-pulse">
-                    <div class="h-4 bg-neutral-300 rounded w-3/4 mx-auto mb-4"></div>
-                    <div class="h-4 bg-neutral-300 rounded w-1/2 mx-auto mb-6"></div>
+                    <div
+                      class="h-4 bg-neutral-300 rounded w-3/4 mx-auto mb-4"
+                    ></div>
+                    <div
+                      class="h-4 bg-neutral-300 rounded w-1/2 mx-auto mb-6"
+                    ></div>
                     <div class="space-y-4">
                       <div class="h-12 bg-neutral-300 rounded"></div>
                       <div class="h-12 bg-neutral-300 rounded"></div>
@@ -277,21 +282,32 @@
                       <div class="h-12 bg-primary-300 rounded"></div>
                     </div>
                   </div>
-                  <p class="text-sm text-neutral-600 mt-4">Loading contact form...</p>
+                  <p class="text-sm text-neutral-600 mt-4">
+                    Loading contact form...
+                  </p>
                 </div>
               </template>
               <ContactFormComponent />
             </ClientOnly>
-            
+
             <!-- No JavaScript Fallback -->
             <noscript>
-              <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8 text-center">
-                <h3 class="text-xl font-semibold text-primary mb-4">JavaScript Required</h3>
+              <div
+                class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8 text-center"
+              >
+                <h3 class="text-xl font-semibold text-primary mb-4">
+                  JavaScript Required
+                </h3>
                 <p class="text-neutral-text mb-6">
-                  Our contact form requires JavaScript to function. Please enable JavaScript in your browser or use one of the alternative contact methods above.
+                  Our contact form requires JavaScript to function. Please
+                  enable JavaScript in your browser or use one of the
+                  alternative contact methods above.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="mailto:contact@ottawawebmasters.ca" class="btn-primary">
+                  <a
+                    href="mailto:contact@ottawawebmasters.ca"
+                    class="btn-primary"
+                  >
                     Email Us Directly
                   </a>
                   <a href="/consultations" class="btn-outline">
@@ -512,14 +528,14 @@ useSeo({
         '@type': 'PostalAddress',
         addressLocality: 'Ottawa',
         addressRegion: 'ON',
-        addressCountry: 'CA'
+        addressCountry: 'CA',
       },
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Customer Service',
         email: 'contact@ottawawebmasters.ca',
-        availableLanguage: 'English'
-      }
+        availableLanguage: 'English',
+      },
     },
   },
 });
