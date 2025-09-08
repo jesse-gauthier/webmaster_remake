@@ -4,6 +4,7 @@ import ServicesShowcase from '~/components/ui/ServicesShowcase.vue';
 import WorkProcess from '~/components/ui/WorkProcess.vue';
 import PricingSection from '~/components/ui/PricingSection.vue';
 import AwardsCarousel from '~/components/ui/AwardsCarousel.vue';
+import HomepageStructuredData from '~/components/seo/HomepageStructuredData.vue';
 import {
   onMounted,
   onUnmounted,
@@ -23,10 +24,20 @@ const analytics = inject('analytics', null);
 const observerRef = ref(null);
 const visibleSections = ref(new Set());
 
-// Inline async ContactForm lazy load
-const AsyncContactForm = defineAsyncComponent(
-  () => import('@/components/forms/ContactForm.vue')
-);
+// Use Nuxt's LazyContactForm auto-import for better hydration
+const LazyContactForm = defineAsyncComponent({
+  loader: () => import('@/components/forms/ContactForm.vue'),
+  delay: 200,
+  timeout: 3000,
+  loadingComponent: {
+    template: `
+      <div class="flex items-center justify-center py-16" aria-busy="true">
+        <div class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full" aria-hidden="true"></div>
+        <span class="sr-only">Loading contact form...</span>
+      </div>
+    `
+  }
+});
 const contactShouldLoad = ref(false);
 const contactRoot = ref(null);
 let contactObserver;
@@ -113,6 +124,8 @@ const trackCtaClick = buttonName => {
 
 <template>
   <main>
+    <!-- Enhanced structured data for homepage SEO -->
+    <HomepageStructuredData />
     <section id="hero-section" class="hero-section">
       <HomeHero />
     </section>
@@ -503,40 +516,31 @@ const trackCtaClick = buttonName => {
     </section>
     <section id="contact-section">
       <div ref="contactRoot" class="async-contact-form">
-        <ClientOnly>
-          <Suspense v-if="contactShouldLoad">
-            <template #default>
-              <AsyncContactForm />
-            </template>
-            <template #fallback>
-              <div
-                class="flex items-center justify-center py-16"
-                aria-busy="true"
-              >
-                <div
-                  class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-                ></div>
-                <span class="sr-only">Loading contact form...</span>
-              </div>
-            </template>
-          </Suspense>
-          <div v-else class="flex items-center justify-center py-16">
+        <ClientOnly fallback-tag="div" class="flex items-center justify-center py-16">
+          <template #fallback>
             <div class="text-center">
               <p class="text-sm text-neutral-600 mb-4">
                 Loading contact form...
               </p>
               <div
                 class="animate-spin h-6 w-6 border-2 border-primary-200 border-t-primary-500 rounded-full mx-auto"
+                aria-hidden="true"
+              ></div>
+              <span class="sr-only">Loading contact form...</span>
+            </div>
+          </template>
+          <LazyContactForm v-if="contactShouldLoad" />
+          <div v-else class="flex items-center justify-center py-16">
+            <div class="text-center">
+              <p class="text-sm text-neutral-600 mb-4">
+                Scroll down to load the contact form
+              </p>
+              <div
+                class="animate-pulse h-6 w-6 bg-primary-200 rounded-full mx-auto"
+                aria-hidden="true"
               ></div>
             </div>
           </div>
-          <template #fallback>
-            <div class="flex items-center justify-center py-16">
-              <p class="text-sm text-neutral-600">
-                Enable JavaScript to load the contact form.
-              </p>
-            </div>
-          </template>
         </ClientOnly>
       </div>
     </section>
