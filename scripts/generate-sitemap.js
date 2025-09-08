@@ -1,6 +1,6 @@
 // scripts/generate-sitemap.js
 
-import { writeSitemapToFile } from '../src/utils/sitemapGenerator.js';
+import { writeSitemapToFile } from '../utils/sitemapGenerator.js';
 
 console.log('Generating sitemap.xml...');
 try {
