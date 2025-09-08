@@ -1,5 +1,4 @@
 export default defineNuxtPlugin(() => {
-  const { $config } = useNuxtApp()
   const clarityProjectId = 'f8qppto63t'
 
   // Only run in production and if project ID is provided

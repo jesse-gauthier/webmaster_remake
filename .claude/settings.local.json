@@ -58,7 +58,9 @@
       "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
       "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
       "Bash(taskkill:*)",
-      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)"
+      "Read(/C:\\Users\\jesse\\Documents\\github\\webmaster_remake\\components\\ui/**)",
+      "Bash(del content.config.ts)",
+      "Bash(del content.config.js)"
     ],
     "deny": [],
     "ask": []

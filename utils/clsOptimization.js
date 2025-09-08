@@ -109,8 +109,7 @@ export function initImagePlaceholders() {
             const height = img.getAttribute('height')
 
             if (width && height) {
-                // Calculate aspect ratio and set container
-                const aspectRatio = height / width
+                // Set aspect ratio and container dimensions
                 img.style.aspectRatio = `${width} / ${height}`
                 img.style.width = '100%'
                 img.style.height = 'auto'
