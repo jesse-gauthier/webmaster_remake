@@ -9,6 +9,7 @@
 
       <!-- Desktop Navigation with reserved space -->
       <nav
+        id="main-navigation"
         class="hidden lg:flex items-center space-x-nav-item flex-1 justify-end"
         aria-label="Main navigation"
       >
@@ -184,6 +185,7 @@
           <nav
             class="p-5 flex flex-col space-y-4"
             aria-label="Mobile navigation"
+            id="mobile-navigation"
           >
             <template v-for="(item, index) in navItems" :key="index">
               <!-- Parent item -->

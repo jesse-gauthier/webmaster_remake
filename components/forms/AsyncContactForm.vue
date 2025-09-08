@@ -1,32 +1,35 @@
 <template>
   <div ref="root" class="async-contact-form">
-    <Suspense v-if="shouldLoad">
-      <template #default>
-        <AsyncContactForm v-bind="passThroughProps" />
-      </template>
+    <ClientOnly>
+      <Suspense v-if="shouldLoad">
+        <template #default>
+          <AsyncContactForm v-bind="passThroughProps" />
+        </template>
+        <template #fallback>
+          <div class="flex items-center justify-center py-16" aria-busy="true">
+            <div
+              class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+            ></div>
+            <span class="sr-only">Loading contact form...</span>
+          </div>
+        </template>
+      </Suspense>
+      <div v-else class="flex items-center justify-center py-16">
+        <p class="text-sm text-neutral-600">Loading contact form...</p>
+      </div>
       <template #fallback>
-        <div class="flex items-center justify-center py-16" aria-busy="true">
-          <div
-            class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-          ></div>
-          <span class="sr-only">Loading contact form...</span>
+        <div class="flex items-center justify-center py-16">
+          <p class="text-sm text-neutral-600">
+            Enable JavaScript to load the contact form.
+          </p>
         </div>
       </template>
-    </Suspense>
-    <p v-if="!shouldLoad && !isJavaScriptEnabled" class="text-sm text-neutral-600">
-      Enable JavaScript to load the contact form.
-    </p>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup>
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  defineAsyncComponent,
-  watchEffect,
-} from 'vue';
+import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue';
 
 // Allow passing props through to ContactForm (extend as needed)
 const props = defineProps({
@@ -37,7 +40,6 @@ const passThroughProps = props;
 
 const shouldLoad = ref(false);
 const root = ref(null);
-const isJavaScriptEnabled = ref(false);
 let observer;
 
 // Async load of the original heavy component (separate chunk)
@@ -55,7 +57,6 @@ const loadIfIntersecting = entries => {
 };
 
 onMounted(() => {
-  isJavaScriptEnabled.value = true;
   // If already below-the-fold, defer until visible; if above, load immediately
   if ('IntersectionObserver' in window) {
     observer = new IntersectionObserver(loadIfIntersecting, {
@@ -65,24 +66,20 @@ onMounted(() => {
   } else {
     shouldLoad.value = true;
   }
+
+  // Check if component is immediately visible
+  if (root.value) {
+    const rect = root.value.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      shouldLoad.value = true;
+      if (observer) observer.disconnect();
+    }
+  }
 });
 
 onBeforeUnmount(() => {
   if (observer) observer.disconnect();
 });
-
-// In case component is immediately visible (no scroll yet)
-if (process.client) {
-  watchEffect(() => {
-    if (shouldLoad.value === false && root.value) {
-      const rect = root.value.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 200) {
-        shouldLoad.value = true;
-        if (observer) observer.disconnect();
-      }
-    }
-  });
-}
 </script>
 
 <style scoped>

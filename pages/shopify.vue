@@ -1,74 +1,146 @@
 <template>
   <div class="min-h-screen">
     <!-- Enhanced Hero Section -->
-    <section aria-labelledby="hero-title" class="relative bg-gradient-to-br from-accent-600 via-accent-700 to-accent-900 py-20 md:py-32 overflow-hidden">
+    <section
+      aria-labelledby="hero-title"
+      class="relative bg-gradient-to-br from-accent-600 via-accent-700 to-accent-900 py-20 md:py-32 overflow-hidden"
+    >
       <!-- Background decorative elements -->
       <div class="absolute inset-0 overflow-hidden opacity-20">
-        <div class="absolute -right-40 -top-40 w-96 h-96 bg-primary rounded-full animate-bounce-light"></div>
-        <div class="absolute -left-20 top-1/2 w-80 h-80 bg-primary-light rounded-full animate-bounce-light" style="animation-delay: 1s"></div>
-        <div class="absolute right-1/4 -bottom-20 w-64 h-64 bg-primary-300 rounded-full animate-bounce-light" style="animation-delay: 2s"></div>
+        <div
+          class="absolute -right-40 -top-40 w-96 h-96 bg-primary rounded-full animate-bounce-light"
+        ></div>
+        <div
+          class="absolute -left-20 top-1/2 w-80 h-80 bg-primary-light rounded-full animate-bounce-light"
+          style="animation-delay: 1s"
+        ></div>
+        <div
+          class="absolute right-1/4 -bottom-20 w-64 h-64 bg-primary-300 rounded-full animate-bounce-light"
+          style="animation-delay: 2s"
+        ></div>
       </div>
 
       <!-- Floating particles -->
       <div class="absolute inset-0 overflow-hidden opacity-30">
-        <div class="absolute top-20 left-20 w-4 h-4 bg-primary-300 rounded-full animate-bounce-light" style="animation-delay: 0.5s"></div>
-        <div class="absolute top-40 right-32 w-3 h-3 bg-primary-400 rounded-full animate-bounce-light" style="animation-delay: 1.5s"></div>
-        <div class="absolute bottom-32 left-1/3 w-5 h-5 bg-accent-300 rounded-full animate-bounce-light" style="animation-delay: 2.5s"></div>
+        <div
+          class="absolute top-20 left-20 w-4 h-4 bg-primary-300 rounded-full animate-bounce-light"
+          style="animation-delay: 0.5s"
+        ></div>
+        <div
+          class="absolute top-40 right-32 w-3 h-3 bg-primary-400 rounded-full animate-bounce-light"
+          style="animation-delay: 1.5s"
+        ></div>
+        <div
+          class="absolute bottom-32 left-1/3 w-5 h-5 bg-accent-300 rounded-full animate-bounce-light"
+          style="animation-delay: 2.5s"
+        ></div>
       </div>
 
       <div class="container-site px-4 sm:px-6 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
           <!-- Badge with Emoji -->
-          <span class="inline-flex items-center gap-2 bg-primary bg-opacity-20 text-primary-200 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
+          <span
+            class="inline-flex items-center gap-2 bg-primary bg-opacity-20 text-primary-200 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in"
+          >
             <span class="text-lg">🛍️</span>
             Shopify Expertise
           </span>
 
-          <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-slide-up leading-tight">
+          <h1
+            id="hero-title"
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-slide-up leading-tight"
+          >
             Professional Shopify
-            <span class="block text-accent-200 animate-slide-up" style="animation-delay: 0.1s">Development Services</span>
+            <span
+              class="block text-accent-200 animate-slide-up"
+              style="animation-delay: 0.1s"
+              >Development Services</span
+            >
           </h1>
-          <p class="text-xl md:text-2xl text-accent-100 mb-8 animate-slide-up leading-relaxed" style="animation-delay: 0.2s">
-            Elevate your e-commerce business with custom Shopify solutions that drive sales and deliver exceptional customer experiences.
+          <p
+            class="text-xl md:text-2xl text-accent-100 mb-8 animate-slide-up leading-relaxed"
+            style="animation-delay: 0.2s"
+          >
+            Elevate your e-commerce business with custom Shopify solutions that
+            drive sales and deliver exceptional customer experiences.
           </p>
-          
-          <div class="flex flex-col sm:flex-row justify-center gap-6 animate-slide-up" style="animation-delay: 0.3s">
+
+          <div
+            class="flex flex-col sm:flex-row justify-center gap-6 animate-slide-up"
+            style="animation-delay: 0.3s"
+          >
             <router-link
               to="/contact#contact-form"
               class="btn-primary bg-white text-accent-600 hover:bg-neutral-100 btn-lg transform hover:scale-105 transition-all duration-300 shadow-xl inline-flex items-center gap-2"
             >
               Start Your Project
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                ></path>
               </svg>
             </router-link>
-            <router-link to="/portfolio" class="btn-outline btn-lg text-white border-white hover:bg-white hover:text-accent-600 transform hover:scale-105 transition-all duration-300">
+            <router-link
+              to="/portfolio"
+              class="btn-outline btn-lg text-white border-white hover:bg-white hover:text-accent-600 transform hover:scale-105 transition-all duration-300"
+            >
               Explore Our Work
             </router-link>
           </div>
 
           <!-- Enhanced trust indicators -->
-          <div class="flex flex-wrap justify-center items-center gap-8 pt-12 animate-slide-up" style="animation-delay: 0.4s">
+          <div
+            class="flex flex-wrap justify-center items-center gap-8 pt-12 animate-slide-up"
+            style="animation-delay: 0.4s"
+          >
             <div class="flex items-center gap-3">
               <div class="bg-primary bg-opacity-20 rounded-full p-2">
-                <svg class="h-6 w-6 text-primary-200" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                <svg
+                  class="h-6 w-6 text-primary-200"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
                 </svg>
               </div>
               <div>
-                <div class="text-sm font-semibold text-white">Shopify Experts</div>
+                <div class="text-sm font-semibold text-white">
+                  Shopify Experts
+                </div>
                 <div class="text-xs text-accent-200">Certified Partners</div>
               </div>
             </div>
 
             <div class="flex items-center gap-3">
               <div class="bg-accent-300 bg-opacity-30 rounded-full p-2">
-                <svg class="h-6 w-6 text-accent-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                <svg
+                  class="h-6 w-6 text-accent-100"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  ></path>
                 </svg>
               </div>
               <div>
-                <div class="text-sm font-semibold text-white">Proven Results</div>
+                <div class="text-sm font-semibold text-white">
+                  Proven Results
+                </div>
                 <div class="text-xs text-accent-200">135% Average Increase</div>
               </div>
             </div>
@@ -78,30 +150,54 @@
 
       <!-- Wave divider -->
       <div class="absolute bottom-0 left-0 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="#FFFFFF" preserveAspectRatio="none" class="w-full h-20">
-          <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 120"
+          fill="#FFFFFF"
+          preserveAspectRatio="none"
+          class="w-full h-20"
+        >
+          <path
+            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+          ></path>
         </svg>
       </div>
     </section>
 
     <!-- Enhanced Why Shopify Section -->
-    <section aria-labelledby="features-title" class="py-20 bg-gradient-to-br from-white via-neutral-cream to-primary-50 relative overflow-hidden">
+    <section
+      aria-labelledby="features-title"
+      class="py-20 bg-gradient-to-br from-white via-neutral-cream to-primary-50 relative overflow-hidden"
+    >
       <!-- Background decoration -->
       <div class="absolute inset-0 overflow-hidden opacity-5">
-        <div class="absolute top-20 right-20 w-64 h-64 bg-accent rounded-full animate-bounce-light"></div>
-        <div class="absolute bottom-20 left-20 w-48 h-48 bg-primary rounded-full animate-bounce-light" style="animation-delay: 1s"></div>
+        <div
+          class="absolute top-20 right-20 w-64 h-64 bg-accent rounded-full animate-bounce-light"
+        ></div>
+        <div
+          class="absolute bottom-20 left-20 w-48 h-48 bg-primary rounded-full animate-bounce-light"
+          style="animation-delay: 1s"
+        ></div>
       </div>
 
       <div class="container-site px-4 sm:px-6 relative z-10">
         <div class="text-center mb-16">
-          <span class="inline-block bg-accent bg-opacity-20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <span
+            class="inline-block bg-accent bg-opacity-20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4"
+          >
             🏆 Platform Benefits
           </span>
-          <h2 id="features-title" class="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <h2
+            id="features-title"
+            class="text-4xl md:text-5xl font-bold text-primary mb-6"
+          >
             Why Choose Shopify?
           </h2>
-          <p class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed">
-            Shopify is the leading e-commerce platform for businesses of all sizes. Here's why it's the perfect choice for your online store.
+          <p
+            class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed"
+          >
+            Shopify is the leading e-commerce platform for businesses of all
+            sizes. Here's why it's the perfect choice for your online store.
           </p>
         </div>
 
@@ -113,11 +209,17 @@
           >
             <div class="h-2 bg-gradient-to-r from-accent to-primary"></div>
             <div class="p-8">
-              <div class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+              >
                 <span class="text-3xl">{{ feature.icon }}</span>
               </div>
-              <h3 class="text-2xl font-bold text-primary mb-4">{{ feature.title }}</h3>
-              <p class="text-neutral-text leading-relaxed">{{ feature.description }}</p>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                {{ feature.title }}
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                {{ feature.description }}
+              </p>
             </div>
           </div>
         </div>
@@ -353,27 +455,36 @@
             <div class="card-body">
               <!-- Inline lazy-loaded ContactForm -->
               <div ref="contactRoot" class="async-contact-form">
-                <Suspense v-if="contactShouldLoad">
-                  <template #default>
-                    <AsyncContactForm :services="serviceOptions" />
-                  </template>
-                  <template #fallback>
-                    <div
-                      class="flex items-center justify-center py-16"
-                      aria-busy="true"
-                    >
+                <ClientOnly>
+                  <Suspense v-if="contactShouldLoad">
+                    <template #default>
+                      <AsyncContactForm :services="serviceOptions" />
+                    </template>
+                    <template #fallback>
                       <div
-                        class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-                      ></div>
-                      <span class="sr-only">Loading contact form...</span>
+                        class="flex items-center justify-center py-16"
+                        aria-busy="true"
+                      >
+                        <div
+                          class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+                        ></div>
+                        <span class="sr-only">Loading contact form...</span>
+                      </div>
+                    </template>
+                  </Suspense>
+                  <div v-else class="flex items-center justify-center py-16">
+                    <p class="text-sm text-neutral-600">
+                      Loading contact form...
+                    </p>
+                  </div>
+                  <template #fallback>
+                    <div class="flex items-center justify-center py-16">
+                      <p class="text-sm text-neutral-600">
+                        Enable JavaScript to load the contact form.
+                      </p>
                     </div>
                   </template>
-                </Suspense>
-                <noscript>
-                  <p class="text-sm text-neutral-600">
-                    Enable JavaScript to load the contact form.
-                  </p>
-                </noscript>
+                </ClientOnly>
               </div>
             </div>
           </div>

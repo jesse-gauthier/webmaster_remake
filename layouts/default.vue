@@ -1,10 +1,32 @@
 <template>
   <div>
+    <!-- Skip Navigation Links for Accessibility -->
+    <div class="sr-only focus-within:not-sr-only focus-within:absolute focus-within:top-4 focus-within:left-4 focus-within:z-50 focus-within:flex focus-within:gap-2">
+      <a
+        href="#main-content"
+        class="bg-primary text-white px-4 py-2 rounded text-sm font-medium shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
+      >
+        Skip to main content
+      </a>
+      <a
+        href="#main-navigation"
+        class="bg-primary text-white px-4 py-2 rounded text-sm font-medium shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
+      >
+        Skip to navigation
+      </a>
+      <a
+        href="#footer"
+        class="bg-primary text-white px-4 py-2 rounded text-sm font-medium shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
+      >
+        Skip to footer
+      </a>
+    </div>
+
     <!-- Header -->
     <AppHeader />
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 
@@ -67,5 +89,34 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Add any layout-specific styles here */
+/* Skip link enhancements for better accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Ensure skip links are accessible when focused */
+.focus-within\:not-sr-only:focus-within {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+/* Custom focus styles for skip links */
+.skiplink-focus {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 </style>

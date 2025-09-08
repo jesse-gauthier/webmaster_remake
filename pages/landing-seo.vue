@@ -210,27 +210,34 @@
     </section>
     <section class="my-3">
       <div ref="contactRoot" class="async-contact-form">
-        <Suspense v-if="contactShouldLoad">
-          <template #default>
-            <AsyncContactForm />
-          </template>
-          <template #fallback>
-            <div
-              class="flex items-center justify-center py-16"
-              aria-busy="true"
-            >
+        <ClientOnly>
+          <Suspense v-if="contactShouldLoad">
+            <template #default>
+              <AsyncContactForm />
+            </template>
+            <template #fallback>
               <div
-                class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-              ></div>
-              <span class="sr-only">Loading contact form...</span>
+                class="flex items-center justify-center py-16"
+                aria-busy="true"
+              >
+                <div
+                  class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+                ></div>
+                <span class="sr-only">Loading contact form...</span>
+              </div>
+            </template>
+          </Suspense>
+          <div v-else class="flex items-center justify-center py-16">
+            <p class="text-sm text-neutral-600">Loading contact form...</p>
+          </div>
+          <template #fallback>
+            <div class="flex items-center justify-center py-16">
+              <p class="text-sm text-neutral-600">
+                Enable JavaScript to load the contact form.
+              </p>
             </div>
           </template>
-        </Suspense>
-        <noscript>
-          <p class="text-sm text-neutral-600">
-            Enable JavaScript to load the contact form.
-          </p>
-        </noscript>
+        </ClientOnly>
       </div>
     </section>
     <!-- FAQ Section -->

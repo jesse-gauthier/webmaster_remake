@@ -251,22 +251,36 @@
     <!-- Contact Form Section (inline lazy-loaded) -->
     <div id="contact-form">
       <div ref="contactRoot" class="async-contact-form">
-        <Suspense v-if="contactShouldLoad">
-          <template #default>
-            <AsyncContactForm />
-          </template>
-          <template #fallback>
-            <div
-              class="flex items-center justify-center py-16"
-              aria-busy="true"
-            >
+        <ClientOnly>
+          <Suspense v-if="contactShouldLoad">
+            <template #default>
+              <AsyncContactForm />
+            </template>
+            <template #fallback>
               <div
-                class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
-              ></div>
-              <span class="sr-only">Loading contact form...</span>
+                class="flex items-center justify-center py-16"
+                aria-busy="true"
+              >
+                <div
+                  class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full"
+                ></div>
+                <span class="sr-only">Loading contact form...</span>
+              </div>
+            </template>
+          </Suspense>
+          <template #fallback>
+            <div class="flex items-center justify-center py-16">
+              <div class="text-center">
+                <p class="text-sm text-neutral-600 mb-4">
+                  Loading contact form...
+                </p>
+                <div
+                  class="animate-spin h-6 w-6 border-2 border-primary-200 border-t-primary-500 rounded-full mx-auto"
+                ></div>
+              </div>
             </div>
           </template>
-        </Suspense>
+        </ClientOnly>
         <noscript>
           <p class="text-sm text-neutral-600">
             Enable JavaScript to load the contact form.
@@ -459,10 +473,7 @@
 <script setup>
 import {
   ref,
-  onMounted,
-  onBeforeUnmount,
   defineAsyncComponent,
-  watchEffect,
 } from 'vue';
 import { useSeo } from '~/composables/useSeo';
 
@@ -490,44 +501,9 @@ const AsyncContactForm = defineAsyncComponent(
   () => import('@/components/forms/ContactForm.vue')
 );
 
-const contactShouldLoad = ref(false);
+// Load form immediately on contact page since it's the main purpose
+const contactShouldLoad = ref(true);
 const contactRoot = ref(null);
-let contactObserver;
 
-const contactLoadIfIntersecting = entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      contactShouldLoad.value = true;
-      if (contactObserver) contactObserver.disconnect();
-    }
-  });
-};
-
-onMounted(() => {
-  if ('IntersectionObserver' in window) {
-    contactObserver = new IntersectionObserver(contactLoadIfIntersecting, {
-      rootMargin: '200px 0px',
-    });
-    if (contactRoot.value) contactObserver.observe(contactRoot.value);
-  } else {
-    contactShouldLoad.value = true;
-  }
-});
-
-onBeforeUnmount(() => {
-  if (contactObserver) contactObserver.disconnect();
-});
-
-// Guard for SSR: only run this reactive DOM check on client
-if (process.client) {
-  watchEffect(() => {
-    if (!contactShouldLoad.value && contactRoot.value) {
-      const rect = contactRoot.value.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 200) {
-        contactShouldLoad.value = true;
-        if (contactObserver) contactObserver.disconnect();
-      }
-    }
-  });
-}
+// No need for intersection observer on contact page - form loads immediately
 </script>
