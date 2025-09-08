@@ -1,18 +1,12 @@
 <script setup>
-import HomeHero from '~/components/ui/HomeHero.vue';
-import ServicesShowcase from '~/components/ui/ServicesShowcase.vue';
-import WorkProcess from '~/components/ui/WorkProcess.vue';
-import PricingSection from '~/components/ui/PricingSection.vue';
-import AwardsCarousel from '~/components/ui/AwardsCarousel.vue';
-import HomepageStructuredData from '~/components/seo/HomepageStructuredData.vue';
+// Components are auto-imported by Nuxt from ~/components directory
 import {
   onMounted,
   onUnmounted,
   ref,
   inject,
   onBeforeUnmount,
-  defineAsyncComponent,
-  watchEffect,
+  defineAsyncComponent
 } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useRouteSeo } from '~/composables/useRouteSeo';
@@ -35,8 +29,8 @@ const LazyContactForm = defineAsyncComponent({
         <div class="animate-spin h-8 w-8 border-4 border-primary-200 border-t-primary-500 rounded-full" aria-hidden="true"></div>
         <span class="sr-only">Loading contact form...</span>
       </div>
-    `
-  }
+    `,
+  },
 });
 const contactShouldLoad = ref(false);
 const contactRoot = ref(null);
@@ -51,39 +45,6 @@ const contactLoadIfIntersecting = entries => {
 };
 
 onMounted(() => {
-  // Ensure hero container is properly set up
-  const heroContainer = document.querySelector('.hero-container');
-  const heroSection = document.getElementById('hero-section');
-  
-  if (heroContainer) {
-    heroContainer.style.minHeight = '100vh';
-    heroContainer.style.position = 'relative';
-    heroContainer.style.zIndex = '1000';
-  }
-  
-  if (heroSection) {
-    heroSection.style.position = 'absolute';
-    heroSection.style.inset = '0';
-    heroSection.style.width = '100%';
-    heroSection.style.height = '100%';
-    heroSection.style.opacity = '1';
-    heroSection.style.visibility = 'visible';
-    
-    // Simple protection: check periodically if hero still exists
-    const heroProtectionInterval = setInterval(() => {
-      const currentHero = document.getElementById('hero-section');
-      const heroContainer = document.querySelector('.hero-container');
-      
-      if (!currentHero && heroContainer) {
-        console.warn('Hero section missing, page may need refresh');
-        // Instead of trying to restore, just log the issue
-        clearInterval(heroProtectionInterval);
-      }
-    }, 1000);
-    
-    // Store interval for cleanup
-    window._heroProtectionInterval = heroProtectionInterval;
-  }
 
   // Track page view
   if (analytics) {
@@ -123,12 +84,7 @@ onUnmounted(() => {
   if (observerRef.value) {
     observerRef.value.disconnect();
   }
-  
-  // Clean up hero protection interval
-  if (window._heroProtectionInterval) {
-    clearInterval(window._heroProtectionInterval);
-    window._heroProtectionInterval = null;
-  }
+
 });
 
 // Track section visibility
@@ -149,9 +105,11 @@ const setupSectionVisibilityTracking = () => {
   );
 
   // Observe all sections EXCEPT hero section to avoid interference
-  document.querySelectorAll('section[id]:not(#hero-section)').forEach(section => {
-    observerRef.value.observe(section);
-  });
+  document
+    .querySelectorAll('section[id]:not(#hero-section)')
+    .forEach(section => {
+      observerRef.value.observe(section);
+    });
 };
 
 // Track CTA button clicks
@@ -163,35 +121,17 @@ const trackCtaClick = buttonName => {
 </script>
 
 <style scoped>
-.hero-priority {
-  /* Ensure hero section renders with highest priority */
-  contain: layout style;
-  will-change: transform;
-  transform: translateZ(0);
+.hero-container {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1000;
 }
 
-/* Force immediate visibility for hero content */
 .hero-section {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-/* Critical path rendering optimization */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-section {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Ensure services section doesn't interfere with hero */
@@ -200,40 +140,9 @@ const trackCtaClick = buttonName => {
   z-index: 1;
 }
 
-/* Defer services section rendering to allow hero to render first */
-.services-deferred {
-  contain: layout;
-  transform: translateZ(0);
-  position: relative;
-  z-index: 1;
-  margin-top: 0 !important;
-  top: 0 !important;
-}
-
-/* Optimize for first paint - ensure hero is always visible first */
-.hero-priority {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-container {
-  isolation: isolate;
-}
-
 /* Ensure proper stacking context */
 main {
   position: relative;
-}
-
-/* Force services section to stay in its place */
-.services-deferred::before {
-  content: '';
-  display: block;
-  height: 0;
-  clear: both;
 }
 </style>
 
@@ -241,12 +150,12 @@ main {
   <main>
     <!-- Enhanced structured data for homepage SEO -->
     <HomepageStructuredData />
-    <div class="hero-container" style="min-height: 100vh; position: relative; z-index: 1000;">
-      <section id="hero-section" class="hero-section hero-priority" style="position: absolute; inset: 0;">
+    <div class="hero-container">
+      <section id="hero-section" class="hero-section">
         <HomeHero />
       </section>
     </div>
-    <div style="position: relative; z-index: 1; background: white;">
+    <div style="position: relative; z-index: 1; background: white">
       <section id="services-section" class="py-16 bg-white services-deferred">
         <ServicesShowcase />
       </section>
@@ -635,7 +544,10 @@ main {
     </section>
     <section id="contact-section">
       <div ref="contactRoot" class="async-contact-form">
-        <ClientOnly fallback-tag="div" class="flex items-center justify-center py-16">
+        <ClientOnly
+          fallback-tag="div"
+          class="flex items-center justify-center py-16"
+        >
           <template #fallback>
             <div class="text-center">
               <p class="text-sm text-neutral-600 mb-4">
