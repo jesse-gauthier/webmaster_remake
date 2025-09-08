@@ -51,22 +51,23 @@ const contactLoadIfIntersecting = entries => {
 };
 
 onMounted(() => {
-  // Ensure hero is always visible first before any tracking
+  // Ensure hero container is properly set up
+  const heroContainer = document.querySelector('.hero-container');
   const heroSection = document.getElementById('hero-section');
-  const servicesSection = document.getElementById('services-section');
   
-  if (heroSection) {
-    heroSection.style.transform = 'translateZ(0)';
-    heroSection.style.opacity = '1';
-    heroSection.style.visibility = 'visible';
-    heroSection.style.zIndex = '1000';
-    heroSection.style.position = 'relative';
+  if (heroContainer) {
+    heroContainer.style.minHeight = '100vh';
+    heroContainer.style.position = 'relative';
+    heroContainer.style.zIndex = '1000';
   }
   
-  if (servicesSection) {
-    servicesSection.style.zIndex = '1';
-    servicesSection.style.position = 'relative';
-    servicesSection.style.marginTop = '0';
+  if (heroSection) {
+    heroSection.style.position = 'absolute';
+    heroSection.style.inset = '0';
+    heroSection.style.width = '100%';
+    heroSection.style.height = '100%';
+    heroSection.style.opacity = '1';
+    heroSection.style.visibility = 'visible';
   }
 
   // Track page view
@@ -193,8 +194,11 @@ const trackCtaClick = buttonName => {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
-  position: relative;
-  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-container {
   isolation: isolate;
 }
 
@@ -216,12 +220,16 @@ main {
   <main>
     <!-- Enhanced structured data for homepage SEO -->
     <HomepageStructuredData />
-    <section id="hero-section" class="hero-section hero-priority" style="position: relative; z-index: 1000;">
-      <HomeHero />
-    </section>
-    <section id="services-section" class="py-16 bg-white services-deferred" style="position: relative; z-index: 1; margin-top: 0;">
-      <ServicesShowcase />
-    </section>
+    <div class="hero-container" style="min-height: 100vh; position: relative; z-index: 1000;">
+      <section id="hero-section" class="hero-section hero-priority" style="position: absolute; inset: 0;">
+        <HomeHero />
+      </section>
+    </div>
+    <div style="position: relative; z-index: 1; background: white;">
+      <section id="services-section" class="py-16 bg-white services-deferred">
+        <ServicesShowcase />
+      </section>
+    </div>
     <section id="awards-section">
       <AwardsCarousel />
     </section>
