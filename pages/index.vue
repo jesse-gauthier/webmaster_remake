@@ -6,7 +6,7 @@ import {
   ref,
   inject,
   onBeforeUnmount,
-  defineAsyncComponent
+  defineAsyncComponent,
 } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useRouteSeo } from '~/composables/useRouteSeo';
@@ -45,7 +45,6 @@ const contactLoadIfIntersecting = entries => {
 };
 
 onMounted(() => {
-
   // Track page view
   if (analytics) {
     analytics.pageView('/');
@@ -84,7 +83,6 @@ onUnmounted(() => {
   if (observerRef.value) {
     observerRef.value.disconnect();
   }
-
 });
 
 // Track section visibility
@@ -148,8 +146,6 @@ main {
 
 <template>
   <main>
-    <!-- Enhanced structured data for homepage SEO -->
-    <HomepageStructuredData />
     <div class="hero-container">
       <section id="hero-section" class="hero-section">
         <!-- Hero Section Content -->
@@ -197,7 +193,9 @@ main {
           </div>
 
           <!-- Main Hero Content -->
-          <div class="container-site relative z-10 py-20 sm:py-24 md:py-32 lg:pb-40">
+          <div
+            class="container-site relative z-10 py-20 sm:py-24 md:py-32 lg:pb-40"
+          >
             <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
               <!-- Left Column - Enhanced Text Content -->
               <div class="space-y-6 sm:space-y-8 max-w-2xl">
@@ -233,9 +231,9 @@ main {
                   class="text-xl sm:text-2xl text-primary-100 animate-slide-up leading-relaxed"
                   style="animation-delay: 0.3s"
                 >
-                  We transform your vision into powerful digital solutions that drive
-                  growth, engage customers, and deliver measurable results for your
-                  business.
+                  We transform your vision into powerful digital solutions that
+                  drive growth, engage customers, and deliver measurable results
+                  for your business.
                 </p>
 
                 <!-- CTA Buttons with Enhanced Styling -->
@@ -334,8 +332,12 @@ main {
                       </svg>
                     </div>
                     <div>
-                      <div class="text-sm font-semibold text-white">Ottawa Based</div>
-                      <div class="text-xs text-primary-200">Local Expertise</div>
+                      <div class="text-sm font-semibold text-white">
+                        Ottawa Based
+                      </div>
+                      <div class="text-xs text-primary-200">
+                        Local Expertise
+                      </div>
                     </div>
                   </div>
                 </div>
