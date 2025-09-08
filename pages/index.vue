@@ -51,6 +51,14 @@ const contactLoadIfIntersecting = entries => {
 };
 
 onMounted(() => {
+  // Ensure hero is always visible first before any tracking
+  const heroSection = document.getElementById('hero-section');
+  if (heroSection) {
+    heroSection.style.transform = 'translateZ(0)';
+    heroSection.style.opacity = '1';
+    heroSection.style.visibility = 'visible';
+  }
+
   // Track page view
   if (analytics) {
     analytics.pageView('/');
@@ -122,14 +130,66 @@ const trackCtaClick = buttonName => {
 };
 </script>
 
+<style scoped>
+.hero-priority {
+  /* Ensure hero section renders with highest priority */
+  contain: layout style;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Force immediate visibility for hero content */
+.hero-section {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Critical path rendering optimization */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-section {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure services section doesn't interfere with hero */
+#services-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Defer services section rendering to allow hero to render first */
+.services-deferred {
+  contain: layout;
+  transform: translateZ(0);
+}
+
+/* Optimize for first paint - ensure hero is always visible first */
+.hero-priority {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+</style>
+
 <template>
   <main>
     <!-- Enhanced structured data for homepage SEO -->
     <HomepageStructuredData />
-    <section id="hero-section" class="hero-section">
+    <section id="hero-section" class="hero-section hero-priority">
       <HomeHero />
     </section>
-    <section id="services-section" class="py-16 bg-white">
+    <section id="services-section" class="py-16 bg-white services-deferred">
       <ServicesShowcase />
     </section>
     <section id="awards-section">
