@@ -52,12 +52,16 @@ const submissionError = ref(false);
 // Validation functions
 const validateFirstName = () => {
   formData.firstName = sanitizeInput(formData.firstName);
-  formErrors.firstName = formData.firstName.trim() ? '' : 'First name is required';
+  formErrors.firstName = formData.firstName.trim()
+    ? ''
+    : 'First name is required';
 };
 
 const validateCompanyName = () => {
   formData.companyName = sanitizeInput(formData.companyName);
-  formErrors.companyName = formData.companyName.trim() ? '' : 'Company name is required';
+  formErrors.companyName = formData.companyName.trim()
+    ? ''
+    : 'Company name is required';
 };
 
 const validateWebsite = () => {
@@ -66,9 +70,10 @@ const validateWebsite = () => {
     formErrors.website = 'Website URL is required';
     return;
   }
-  
+
   // Basic URL validation
-  const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+  const urlPattern =
+    /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
   if (!urlPattern.test(formData.website.trim())) {
     formErrors.website = 'Please enter a valid website URL';
   } else {
@@ -138,8 +143,10 @@ const submitForm = async () => {
 
   try {
     // Get landing page tracking data if available
-    const landingData = JSON.parse(sessionStorage.getItem('accessibilityLandingData') || '{}');
-    
+    const landingData = JSON.parse(
+      sessionStorage.getItem('accessibilityLandingData') || '{}'
+    );
+
     // Prepare secure form data with CSRF token and landing page data
     const secureFormData = {
       ...formData,
@@ -147,7 +154,7 @@ const submitForm = async () => {
       timestamp: Date.now(),
       user_agent: navigator.userAgent.substring(0, 200),
       form_type: 'accessibility_audit',
-      landing_data: landingData
+      landing_data: landingData,
     };
 
     // Submit to API endpoint
@@ -246,7 +253,7 @@ Additional Details:
             website_url: formData.website,
             landing_page: 'accessibility',
             utm_source: landingData.utmSource || 'none',
-            utm_campaign: landingData.utmCampaign || 'none'
+            utm_campaign: landingData.utmCampaign || 'none',
           });
         }
       } catch (analyticsError) {
@@ -272,7 +279,11 @@ Additional Details:
 // Helper function to track field interactions
 const trackFieldInteraction = fieldName => {
   if (analytics) {
-    analytics.trackEvent('Form', 'field_interaction', `accessibility_audit_${fieldName}`);
+    analytics.trackEvent(
+      'Form',
+      'field_interaction',
+      `accessibility_audit_${fieldName}`
+    );
   }
 };
 </script>
@@ -285,90 +296,177 @@ const trackFieldInteraction = fieldName => {
   >
     <!-- Background decorative elements -->
     <div class="absolute inset-0 overflow-hidden opacity-20">
-      <div class="absolute -right-40 -top-40 w-96 h-96 bg-accent rounded-full animate-bounce-light"></div>
-      <div class="absolute -left-20 top-1/2 w-80 h-80 bg-accent-light rounded-full animate-bounce-light" style="animation-delay: 1s"></div>
+      <div
+        class="absolute -right-40 -top-40 w-96 h-96 bg-accent rounded-full animate-bounce-light"
+      ></div>
+      <div
+        class="absolute -left-20 top-1/2 w-80 h-80 bg-accent-light rounded-full animate-bounce-light"
+        style="animation-delay: 1s"
+      ></div>
     </div>
 
     <!-- Floating particles -->
     <div class="absolute inset-0 overflow-hidden opacity-30">
-      <div class="absolute top-20 left-20 w-4 h-4 bg-accent-300 rounded-full animate-bounce-light" style="animation-delay: 0.5s"></div>
-      <div class="absolute top-40 right-32 w-6 h-6 bg-accent-200 rounded-full animate-bounce-light" style="animation-delay: 1.5s"></div>
-      <div class="absolute bottom-32 left-1/3 w-5 h-5 bg-accent-400 rounded-full animate-bounce-light" style="animation-delay: 2s"></div>
+      <div
+        class="absolute top-20 left-20 w-4 h-4 bg-accent-300 rounded-full animate-bounce-light"
+        style="animation-delay: 0.5s"
+      ></div>
+      <div
+        class="absolute top-40 right-32 w-6 h-6 bg-accent-200 rounded-full animate-bounce-light"
+        style="animation-delay: 1.5s"
+      ></div>
+      <div
+        class="absolute bottom-32 left-1/3 w-5 h-5 bg-accent-400 rounded-full animate-bounce-light"
+        style="animation-delay: 2s"
+      ></div>
     </div>
 
     <div class="container-site relative z-10 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div
+        class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-center"
+      >
         <!-- Info Panel -->
         <div class="text-white">
           <!-- Badge -->
-          <span class="inline-flex items-center gap-2 bg-accent bg-opacity-20 text-accent-light px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <span
+            class="inline-flex items-center gap-2 bg-accent bg-opacity-20 text-accent-light px-4 py-2 rounded-full text-sm font-medium mb-6"
+          >
             <span class="text-lg">🚀</span>
             Free Accessibility Audit
           </span>
 
           <!-- Headline -->
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
-            Get Your Free 
+          <h2
+            class="text-3xl md:text-4xl font-bold mb-6 leading-tight text-accent-200"
+          >
+            Get Your Free
             <span class="text-accent-300">Accessibility Audit</span>
           </h2>
-          
+
           <!-- Description -->
           <p class="text-xl text-primary-100 mb-8 leading-relaxed">
-            Discover how accessible your website really is. Get a comprehensive report with specific recommendations to improve compliance and user experience.
+            Discover how accessible your website really is. Get a comprehensive
+            report with specific recommendations to improve compliance and user
+            experience.
           </p>
 
           <!-- Benefits List -->
           <ul class="space-y-4 mb-8">
             <li class="flex items-start gap-4">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
               </span>
               <div class="text-primary-100">
-                <div class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1">
+                <div
+                  class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                >
                   Comprehensive Report
                 </div>
-                <p class="text-white font-medium">Detailed WCAG 2.1 AA compliance analysis of your entire website</p>
+                <p class="text-white font-medium">
+                  Detailed WCAG 2.1 AA compliance analysis of your entire
+                  website
+                </p>
               </div>
             </li>
             <li class="flex items-start gap-4">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </span>
               <div class="text-primary-100">
-                <div class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1">
+                <div
+                  class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                >
                   Fast Turnaround
                 </div>
-                <p class="text-white font-medium">Receive your audit report within 24-48 hours</p>
+                <p class="text-white font-medium">
+                  Receive your audit report within 24-48 hours
+                </p>
               </div>
             </li>
             <li class="flex items-start gap-4">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
                 </svg>
               </span>
               <div class="text-primary-100">
-                <div class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1">
+                <div
+                  class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                >
                   Actionable Recommendations
                 </div>
-                <p class="text-white font-medium">Prioritized fixes with implementation guidance</p>
+                <p class="text-white font-medium">
+                  Prioritized fixes with implementation guidance
+                </p>
               </div>
             </li>
             <li class="flex items-start gap-4">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59-1.35 2.45A1 1 0 008 17h9m0 0a3 3 0 100 6 3 3 0 000-6zm0 0H10M6 5h15l-1.68 6H8.52"/>
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-500/20 text-accent-200 ring-1 ring-accent-400/30 flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5h2l3.6 7.59-1.35 2.45A1 1 0 008 17h9m0 0a3 3 0 100 6 3 3 0 000-6zm0 0H10M6 5h15l-1.68 6H8.52"
+                  />
                 </svg>
               </span>
               <div class="text-primary-100">
-                <div class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1">
+                <div
+                  class="font-semibold tracking-wide uppercase text-[11px] text-accent-200 mb-1"
+                >
                   No Obligation
                 </div>
-                <p class="text-white font-medium">Completely free with no strings attached</p>
+                <p class="text-white font-medium">
+                  Completely free with no strings attached
+                </p>
               </div>
             </li>
           </ul>
@@ -378,7 +476,9 @@ const trackFieldInteraction = fieldName => {
             <p class="text-accent-200 font-medium mb-4">
               Join 100+ companies who've improved their accessibility
             </p>
-            <div class="flex items-center justify-center md:justify-start gap-4">
+            <div
+              class="flex items-center justify-center md:justify-start gap-4"
+            >
               <div class="flex items-center gap-2 text-primary-100">
                 <span class="text-accent-300 text-xl">⭐</span>
                 <span class="text-sm font-medium">4.9/5 Client Rating</span>
@@ -393,12 +493,18 @@ const trackFieldInteraction = fieldName => {
 
         <!-- Form Card -->
         <div class="relative">
-          <div class="relative p-6 sm:p-8 lg:p-10 rounded-3xl bg-white shadow-xl ring-1 ring-neutral-200/60 overflow-hidden">
-            <div class="absolute -inset-px rounded-3xl pointer-events-none border border-transparent bg-gradient-to-tr from-accent-500/10 via-transparent to-primary-500/10"></div>
-            
+          <div
+            class="relative p-6 sm:p-8 lg:p-10 rounded-3xl bg-white shadow-xl ring-1 ring-neutral-200/60 overflow-hidden"
+          >
+            <div
+              class="absolute -inset-px rounded-3xl pointer-events-none border border-transparent bg-gradient-to-tr from-accent-500/10 via-transparent to-primary-500/10"
+            ></div>
+
             <!-- Form Header -->
             <div class="text-center mb-8 relative z-10">
-              <h3 class="text-2xl font-bold text-primary mb-2">Start Your Free Audit</h3>
+              <h3 class="text-2xl font-bold text-primary mb-2">
+                Start Your Free Audit
+              </h3>
               <p class="text-neutral-text">Takes less than 30 seconds</p>
             </div>
 
@@ -426,7 +532,8 @@ const trackFieldInteraction = fieldName => {
                 <label
                   for="firstName"
                   class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
-                >First Name</label>
+                  >First Name</label
+                >
                 <p
                   v-if="formErrors.firstName"
                   class="mt-1 text-sm text-red-500"
@@ -460,7 +567,8 @@ const trackFieldInteraction = fieldName => {
                 <label
                   for="companyName"
                   class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
-                >Company Name</label>
+                  >Company Name</label
+                >
                 <p
                   v-if="formErrors.companyName"
                   class="mt-1 text-sm text-red-500"
@@ -494,7 +602,8 @@ const trackFieldInteraction = fieldName => {
                 <label
                   for="website"
                   class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
-                >Website URL</label>
+                  >Website URL</label
+                >
                 <p
                   v-if="formErrors.website"
                   class="mt-1 text-sm text-red-500"
@@ -528,7 +637,8 @@ const trackFieldInteraction = fieldName => {
                 <label
                   for="email"
                   class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm origin-left transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent-600 peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-neutral-500"
-                >Email Address</label>
+                  >Email Address</label
+                >
                 <p
                   v-if="formErrors.email"
                   class="mt-1 text-sm text-red-500"
@@ -568,7 +678,8 @@ const trackFieldInteraction = fieldName => {
                 aria-live="polite"
               >
                 <span class="sr-only">Success:</span>
-                🎉 Thank you! Your audit request has been received. We'll send your comprehensive accessibility report within 24-48 hours.
+                🎉 Thank you! Your audit request has been received. We'll send
+                your comprehensive accessibility report within 24-48 hours.
               </div>
               <div
                 v-if="submissionError"
@@ -577,7 +688,8 @@ const trackFieldInteraction = fieldName => {
                 aria-live="assertive"
               >
                 <span class="sr-only">Error:</span>
-                Oops! There was an error submitting your request. Please try again or contact us directly.
+                Oops! There was an error submitting your request. Please try
+                again or contact us directly.
               </div>
 
               <!-- Submit Button -->
@@ -631,14 +743,20 @@ const trackFieldInteraction = fieldName => {
                   </svg>
                 </span>
                 <span class="sr-only">{{
-                  isSubmitting ? 'Processing your audit request...' : 'Submit accessibility audit request'
+                  isSubmitting
+                    ? 'Processing your audit request...'
+                    : 'Submit accessibility audit request'
                 }}</span>
               </button>
 
               <!-- Trust Indicators -->
               <div class="text-center pt-4">
-                <p class="text-xs text-neutral-500 mb-2">🔒 Your information is secure and will never be shared</p>
-                <p class="text-xs text-neutral-400">⏱️ Report delivered within 24-48 hours</p>
+                <p class="text-xs text-neutral-500 mb-2">
+                  🔒 Your information is secure and will never be shared
+                </p>
+                <p class="text-xs text-neutral-400">
+                  ⏱️ Report delivered within 24-48 hours
+                </p>
               </div>
             </form>
           </div>
@@ -648,8 +766,16 @@ const trackFieldInteraction = fieldName => {
 
     <!-- Wave divider -->
     <div class="absolute bottom-0 left-0 right-0">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="#FFFFFF" preserveAspectRatio="none" class="w-full h-20">
-        <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 120"
+        fill="#FFFFFF"
+        preserveAspectRatio="none"
+        class="w-full h-20"
+      >
+        <path
+          d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+        ></path>
       </svg>
     </div>
   </section>
