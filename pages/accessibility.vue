@@ -584,7 +584,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <ContactForm :services="accessibilityServices" />
+    <AccessibilityAuditForm />
   </div>
 </template>
 
@@ -787,17 +787,6 @@ useHead({
     }
   ]
 });
-
-// Services for the contact form dropdown
-const accessibilityServices = [
-  'Accessibility Audit',
-  'Accessibility Remediation', 
-  'WCAG 2.1 AA Compliance',
-  'ADA Compliance Consultation',
-  'Ongoing Accessibility Monitoring',
-  'Accessibility Training',
-  'Other Accessibility Services'
-];
 
 // Expose tracking function for template use
 defineExpose({
