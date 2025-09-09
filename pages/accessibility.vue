@@ -272,11 +272,6 @@
             <div class="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
             <div class="p-8">
               <div class="flex items-center mb-6">
-                <div
-                  class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300"
-                >
-                  <span class="text-white font-bold text-2xl">🇨🇦</span>
-                </div>
                 <h3 class="text-2xl font-bold text-primary">Canadian Laws</h3>
               </div>
 
@@ -440,11 +435,6 @@
             <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
             <div class="p-8">
               <div class="flex items-center mb-6">
-                <div
-                  class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300"
-                >
-                  <span class="text-white font-bold text-2xl">🇺🇸</span>
-                </div>
                 <h3 class="text-2xl font-bold text-primary">US Laws</h3>
               </div>
 
@@ -626,187 +616,233 @@
       </div>
     </section>
 
-    <!-- Why Accessibility Matters Section -->
-    <section id="benefits" class="py-16 lg:py-24 bg-white">
-      <div class="container-site px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-6">
-            Beyond Compliance: Why Accessibility Matters
+    <!-- Beyond Compliance: Why Accessibility Matters Section -->
+    <section id="benefits" class="py-20 bg-gradient-to-br from-white via-neutral-cream to-primary-50 relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute inset-0 overflow-hidden opacity-5">
+        <div
+          class="absolute top-20 right-20 w-64 h-64 bg-accent rounded-full animate-bounce-light"
+        ></div>
+        <div
+          class="absolute bottom-20 left-20 w-48 h-48 bg-primary rounded-full animate-bounce-light"
+          style="animation-delay: 1s"
+        ></div>
+      </div>
+
+      <div class="container-site px-4 sm:px-6 relative z-10">
+        <div class="text-center mb-16">
+          <span
+            class="inline-block bg-accent bg-opacity-20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4"
+          >
+            🌟 Beyond Compliance
+          </span>
+          <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            Why Accessibility Matters
           </h2>
-          <p class="text-xl text-neutral-600 leading-relaxed">
+          <p class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed">
             Accessibility isn't just about avoiding lawsuits—it's about creating
             better experiences for everyone and growing your business.
           </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Expanded Market Reach
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Reach 22% of Canadians and 26% of Americans with disabilities,
+                representing over <strong class="text-accent-600">$490 billion</strong> in annual disposable income.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Expanded Market Reach
-            </h3>
-            <p class="text-neutral-600">
-              Reach 22% of Canadians and 26% of Americans with disabilities,
-              representing over $490 billion in annual disposable income.
-            </p>
           </div>
 
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Better SEO Rankings
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Accessible websites rank higher in search results due to better
+                structure, faster loading, and improved user experience.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Better SEO Rankings
-            </h3>
-            <p class="text-neutral-600">
-              Accessible websites rank higher in search results due to better
-              structure, faster loading, and improved user experience.
-            </p>
           </div>
 
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Enhanced Brand Reputation
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Demonstrate your commitment to inclusion and social
+                responsibility, building trust with all customers.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Enhanced Brand Reputation
-            </h3>
-            <p class="text-neutral-600">
-              Demonstrate your commitment to inclusion and social
-              responsibility, building trust with all customers.
-            </p>
           </div>
 
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Legal Protection
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Avoid costly lawsuits and compliance issues by proactively meeting
+                accessibility standards.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Legal Protection
-            </h3>
-            <p class="text-neutral-600">
-              Avoid costly lawsuits and compliance issues by proactively meeting
-              accessibility standards.
-            </p>
           </div>
 
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Improved Performance
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Accessible websites load faster, have cleaner code, and provide
+                better experiences for all users.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Improved Performance
-            </h3>
-            <p class="text-neutral-600">
-              Accessible websites load faster, have cleaner code, and provide
-              better experiences for all users.
-            </p>
           </div>
 
-          <div class="text-center p-6">
-            <div
-              class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-accent-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div
+            class="group bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-neutral-100"
+          >
+            <div class="h-2 bg-gradient-to-r from-primary to-accent"></div>
+            <div class="p-8 text-center">
+              <div
+                class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl w-fit p-4 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-primary mb-4">
+                Innovation Driver
+              </h3>
+              <p class="text-neutral-text leading-relaxed">
+                Accessible design promotes innovation and creative solutions that
+                benefit everyone, not just people with disabilities.
+              </p>
             </div>
-            <h3 class="text-xl font-semibold text-primary-900 mb-2">
-              Innovation Driver
-            </h3>
-            <p class="text-neutral-600">
-              Accessible design promotes innovation and creative solutions that
-              benefit everyone, not just people with disabilities.
-            </p>
           </div>
         </div>
 
         <div class="text-center">
           <a
             href="#contact-form"
-            class="btn-primary text-lg px-8 py-4 inline-flex items-center justify-center"
+            class="btn-primary btn-lg hover:text-white transform hover:scale-105 transition-all duration-300 shadow-xl inline-flex items-center gap-2"
             @click="
               trackCTAClick(
                 'Start Your Accessibility Journey',
@@ -816,7 +852,7 @@
           >
             Start Your Accessibility Journey
             <svg
-              class="w-5 h-5 ml-2"
+              class="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -1295,9 +1331,42 @@ const trackSectionView = sectionName => {
   }
 };
 
+// Add smooth scrolling for anchor links
+const setupSmoothScrolling = () => {
+  // Add smooth scroll behavior to all anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href !== '#') {
+        e.preventDefault();
+        
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Calculate offset for fixed headers (adjust as needed)
+          const headerOffset = 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+};
+
 // Initialize tracking on mount
 onMounted(() => {
   trackPageVisit();
+  
+  // Setup smooth scrolling
+  setupSmoothScrolling();
 
   // Set up intersection observer for section tracking
   const observerOptions = {
@@ -1373,5 +1442,17 @@ defineExpose({
 .bg-grid-pattern {
   background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Global smooth scrolling for the document */
+:global(html) {
+  scroll-behavior: smooth;
+}
+
+/* Override smooth scrolling for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :global(html) {
+    scroll-behavior: auto;
+  }
 }
 </style>
