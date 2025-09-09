@@ -617,7 +617,10 @@
     </section>
 
     <!-- Beyond Compliance: Why Accessibility Matters Section -->
-    <section id="benefits" class="py-20 bg-gradient-to-br from-white via-neutral-cream to-primary-50 relative overflow-hidden">
+    <section
+      id="benefits"
+      class="py-20 bg-gradient-to-br from-white via-neutral-cream to-primary-50 relative overflow-hidden"
+    >
       <!-- Background decoration -->
       <div class="absolute inset-0 overflow-hidden opacity-5">
         <div
@@ -639,7 +642,9 @@
           <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
             Why Accessibility Matters
           </h2>
-          <p class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed">
+          <p
+            class="text-xl text-neutral-text max-w-3xl mx-auto leading-relaxed"
+          >
             Accessibility isn't just about avoiding lawsuits—it's about creating
             better experiences for everyone and growing your business.
           </p>
@@ -673,7 +678,9 @@
               </h3>
               <p class="text-neutral-text leading-relaxed">
                 Reach 22% of Canadians and 26% of Americans with disabilities,
-                representing over <strong class="text-accent-600">$490 billion</strong> in annual disposable income.
+                representing over
+                <strong class="text-accent-600">$490 billion</strong> in annual
+                disposable income.
               </p>
             </div>
           </div>
@@ -768,8 +775,8 @@
                 Legal Protection
               </h3>
               <p class="text-neutral-text leading-relaxed">
-                Avoid costly lawsuits and compliance issues by proactively meeting
-                accessibility standards.
+                Avoid costly lawsuits and compliance issues by proactively
+                meeting accessibility standards.
               </p>
             </div>
           </div>
@@ -832,8 +839,8 @@
                 Innovation Driver
               </h3>
               <p class="text-neutral-text leading-relaxed">
-                Accessible design promotes innovation and creative solutions that
-                benefit everyone, not just people with disabilities.
+                Accessible design promotes innovation and creative solutions
+                that benefit everyone, not just people with disabilities.
               </p>
             </div>
           </div>
@@ -1121,7 +1128,7 @@
     >
       <div class="container-site px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center text-white">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">
             Ready to Make Your Website Accessible?
           </h2>
           <p class="text-xl text-primary-100 mb-8 leading-relaxed">
@@ -1335,25 +1342,26 @@ const trackSectionView = sectionName => {
 const setupSmoothScrolling = () => {
   // Add smooth scroll behavior to all anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  
+
   anchorLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', e => {
       const href = link.getAttribute('href');
       if (href && href !== '#') {
         e.preventDefault();
-        
+
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           // Calculate offset for fixed headers (adjust as needed)
           const headerOffset = 80;
           const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }
       }
@@ -1364,7 +1372,7 @@ const setupSmoothScrolling = () => {
 // Initialize tracking on mount
 onMounted(() => {
   trackPageVisit();
-  
+
   // Setup smooth scrolling
   setupSmoothScrolling();
 
