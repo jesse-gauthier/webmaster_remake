@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- Skip Navigation Links for Accessibility -->
-    <div class="sr-only focus-within:not-sr-only focus-within:absolute focus-within:top-4 focus-within:left-4 focus-within:z-50 focus-within:flex focus-within:gap-2">
+    <div
+      class="sr-only focus-within:not-sr-only focus-within:absolute focus-within:top-4 focus-within:left-4 focus-within:z-50 focus-within:flex focus-within:gap-2"
+    >
       <a
         href="#main-content"
         class="bg-primary text-white px-4 py-2 rounded text-sm font-medium shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
@@ -32,9 +34,6 @@
     <main id="main-content">
       <slot />
     </main>
-
-    <!-- Footer -->
-    <AppFooter />
 
     <!-- Cookie Consent -->
     <CookieConsentBar />
