@@ -726,7 +726,6 @@ const trackFieldInteraction = fieldName => {
                   Processing...
                 </span>
                 <span v-else class="flex items-center">
-                  <span class="text-xl mr-2">🚀</span>
                   Get My Free Audit Report
                   <svg
                     class="w-5 h-5 ml-2"
