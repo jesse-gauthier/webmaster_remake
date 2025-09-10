@@ -1,50 +1,85 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Ottawa Webmasters Constitution
+
+<!-- Professional web development agency specializing in modern web solutions -->
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Component-First Development
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Component Architecture Priority**: Every UI feature starts as a reusable Vue component; Components must be self-contained, independently testable, and well-documented; Clear purpose required - no organizational-only components; Follow Vue 3 Composition API standards.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. SEO & Performance First (NON-NEGOTIABLE)
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Search Engine Optimization Mandatory**: Every page must include proper meta tags, structured data, and semantic HTML; Core Web Vitals must meet Google standards; Mobile-first responsive design enforced; Performance budgets strictly monitored with Lighthouse audits.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Test-Driven Development
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Quality Assurance Required**: Unit tests with Vitest for all utility functions and composables; End-to-end testing with Playwright for critical user flows; Visual regression testing for UI components; All tests must pass before deployment.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Accessibility & Inclusivity
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**WCAG 2.1 AA Compliance**: All components must support keyboard navigation; Color contrast ratios must meet accessibility standards; Screen reader compatibility required; Alt text mandatory for all images; Focus management implemented properly.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Modern Technology Stack
+
+**Nuxt.js Framework Standard**: Vue 3 with Composition API for reactive interfaces; Tailwind CSS for consistent styling; TypeScript integration for type safety when needed; Pinia for state management; Modern ES modules throughout.
+
+## Technology Standards
+
+### Development Environment
+
+- **Framework**: Nuxt.js 4.x with Vue 3 Composition API
+- **Styling**: Tailwind CSS with custom design system
+- **Testing**: Vitest for units, Playwright for E2E
+- **Linting**: ESLint with Vue-specific rules, Oxlint for performance
+- **Formatting**: Prettier with consistent configuration
+- **Analytics**: Vercel Analytics and Microsoft Clarity integration
+- **SEO**: Structured data, meta management, sitemap generation
+
+### Code Quality Requirements
+
+- All code must pass ESLint and Oxlint checks
+- 80%+ test coverage for business logic
+- Performance budgets: < 3s load time, > 90 Lighthouse score
+- Security headers and HTTPS enforcement
+- Proper error handling and user feedback
+
+## Development Workflow
+
+### Feature Development Process
+
+1. **Planning**: Create feature specification in `/templates/spec-template.md`
+2. **Branch Creation**: Use feature branch naming: `feature/description`
+3. **Component Development**: Build reusable components in `/components`
+4. **Page Integration**: Implement pages using component composition
+5. **SEO Implementation**: Add meta tags, structured data, accessibility
+6. **Testing**: Write and run all required tests
+7. **Review**: Code review focusing on performance and accessibility
+8. **Deployment**: Automated deployment via Vercel with preview builds
+
+### Quality Gates
+
+- All ESLint rules must pass without warnings
+- Lighthouse score > 90 for Performance, Accessibility, SEO
+- Core Web Vitals within green thresholds
+- Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+- Mobile responsiveness verified across device sizes
+- A11y compliance verified with screen readers
+
+### Content Management
+
+- Blog content managed through `/data/blogs.json`
+- SEO checklists maintained in `/data/seoChecklistData.js`
+- Portfolio projects documented with case studies
+- Client testimonials and reviews integrated
+- Regular content audits for accuracy and relevance
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+**Constitution Authority**: This constitution supersedes all other development practices and guidelines; All feature development and code reviews must verify compliance with these principles; Complexity must be justified with clear business value and technical necessity.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendment Process**: Constitution changes require documentation of rationale, approval from lead developer, and migration plan for existing code; Use `/memory/constitution_update_checklist.md` for change tracking.
+
+**Development Guidance**: Follow `/scripts/` automation for consistent workflows; Use `/templates/` for standardized documentation; Reference `/UI_DESIGN_GUIDE.md` for visual consistency.
+
+**Version**: 1.0.0 | **Ratified**: 2025-09-10 | **Last Amended**: 2025-09-10

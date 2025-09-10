@@ -62,7 +62,8 @@
       "Bash(del content.config.ts)",
       "Bash(del content.config.js)",
       "Bash(npm run:*)",
-      "mcp__playwright__browser_press_key"
+      "mcp__playwright__browser_press_key",
+      "Bash(dir C:UsersjesseDocumentsgithubwebmaster_remakepublic)"
     ],
     "deny": [],
     "ask": []
