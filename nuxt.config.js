@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@nuxt/image',
+    '@vercel/analytics/nuxt',
   ],
 
   // Tailwind Configuration
@@ -105,7 +106,12 @@ export default defineNuxtConfig({
         '/seo-checklist',
         '/startup-partnership',
         '/seo',
-        '/web-applications'
+        '/web-applications',
+        '/accessibility',
+        '/technology-stack',
+        '/wordpress',
+        '/shopify',
+        '/maintenance'
       ]
     }
   },

@@ -441,7 +441,7 @@ import { useSeo } from '~/composables/useSeo';
 useSeo({
   title: 'About Ottawa Webmasters | Your Trusted Web Development Partner',
   description:
-    'Learn about Ottawa Webmasters, your trusted partner for exceptional web solutions. We specialize in custom web design, development, and digital marketing services in Ottawa and beyond.',
+    'Meet Ottawa Webmasters - your trusted partner for custom web design, development & digital marketing. 98% client satisfaction. Get your free consultation today!',
   url: '/about',
   structuredData: {
     '@context': 'https://schema.org',

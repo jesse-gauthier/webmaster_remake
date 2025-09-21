@@ -512,7 +512,7 @@ import { useSeo } from '~/composables/useSeo';
 useSeo({
   title: 'Contact Ottawa Webmasters | Get Your Free Consultation',
   description:
-    'Contact Ottawa Webmasters for professional web development, design, and SEO services. Get your free consultation today and transform your online presence.',
+    'Ready to transform your online presence? Contact Ottawa Webmasters for professional web development & SEO services. Free consultation available!',
   url: '/contact',
   structuredData: {
     '@context': 'https://schema.org',

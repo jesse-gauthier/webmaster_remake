@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /.nuxt
+Disallow: /api/
+Disallow: /php/
+
+Sitemap: https://ottawawebmasters.ca/sitemap.xml

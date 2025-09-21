@@ -157,6 +157,14 @@ import { ref, computed, onMounted, watch } from 'vue';
 import blogData from '~/data/blogs.json';
 import BlogPagination from '~/components/ui/BlogPagination.vue';
 import BlogCard from '~/components/ui/BlogCard.vue';
+import { useSeo } from '~/composables/useSeo';
+
+// SEO Setup
+useSeo({
+  title: 'Web Development Blog - Tips, Tutorials & Industry News',
+  description: 'Expert web development insights & tutorials from Ottawa Webmasters. Vue.js, React, WordPress & Shopify tips to grow your business online.',
+  url: '/blog'
+});
 
 const route = useRoute();
 const router = useRouter();

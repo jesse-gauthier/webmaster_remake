@@ -432,19 +432,66 @@ import { useSeo } from '~/composables/useSeo'
 // SEO Setup
 useSeo({
   title: 'Professional Web Services | Design, Development & SEO',
-  description: 'Comprehensive web services including custom design, development, e-commerce solutions, SEO optimization, and website maintenance. Expert solutions to help your business thrive online.',
+  description: 'Professional web services in Ottawa: custom design, development, e-commerce & SEO optimization. Transform your business online. Free consultation!',
   url: '/services',
-  structuredData: {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Web Development & Design Services',
-    description: 'Professional web services including design, development, e-commerce, and SEO',
-    provider: {
-      '@type': 'Organization',
-      name: 'WebMaster'
+  structuredData: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Professional Web Development & Design Services',
+      description: 'Comprehensive web services including custom design, development, e-commerce solutions, SEO optimization, and website maintenance in Ottawa.',
+      provider: {
+        '@type': 'Organization',
+        name: 'Ottawa Webmasters',
+        url: 'https://ottawawebmasters.ca',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Ottawa',
+          addressRegion: 'ON',
+          addressCountry: 'CA'
+        }
+      },
+      serviceType: ['Web Design', 'Web Development', 'E-Commerce Development', 'SEO Services', 'Website Maintenance', 'WordPress Development', 'Shopify Development'],
+      areaServed: {
+        '@type': 'Place',
+        name: 'Ottawa, Ontario, Canada'
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock',
+        priceRange: '$500 - $10,000'
+      }
     },
-    serviceType: ['Web Design', 'Web Development', 'E-Commerce', 'SEO', 'Website Maintenance']
-  }
+    {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Ottawa Webmasters',
+      description: 'Professional web development and design agency serving Ottawa and surrounding areas',
+      url: 'https://ottawawebmasters.ca',
+      telephone: '+1-613-000-0000',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Ottawa',
+        addressRegion: 'ON',
+        addressCountry: 'CA'
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '45.4215',
+        longitude: '-75.6972'
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00'
+      },
+      sameAs: [
+        'https://www.linkedin.com/company/ottawa-webmasters',
+        'https://twitter.com/ottawawebmasters'
+      ]
+    }
+  ]
 })
 
 const openFaq = ref(null)

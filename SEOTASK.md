@@ -7,6 +7,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Current SEO Status ✅
 
 ### Strengths
+
 - ✅ **Analytics Implementation**: Google Analytics 4, Google Tag Manager, Microsoft Clarity, and Vercel Analytics properly implemented
 - ✅ **Technical SEO**: Modern Nuxt.js framework with built-in SEO optimizations
 - ✅ **Structured Data**: Comprehensive JSON-LD implementation for Organization, Website, Breadcrumbs, and Contact pages
@@ -20,10 +21,12 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## High Priority SEO Improvements 🚨
 
 ### 1. Page-Specific SEO Meta Implementation
+
 **Issue**: Many pages lack specific SEO meta implementations
 **Impact**: Missing opportunities for targeted keyword optimization
 
 **Tasks:**
+
 - [ ] Add `useSeo()` composable calls to all main pages:
   - `/services` - "Professional Web Development Services Ottawa"
   - `/about` - "About Ottawa Webmasters - Expert Web Development Team"
@@ -33,11 +36,14 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
   - `/case-studies` - "Client Success Stories - Web Development Case Studies"
 
 ### 2. Create robots.txt File
+
 **Issue**: No physical robots.txt file found in public directory
 **Impact**: Search engines may not receive proper crawling instructions
 
 **Tasks:**
+
 - [ ] Create `/public/robots.txt` file with:
+
   ```
   User-agent: *
   Allow: /
@@ -45,15 +51,17 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
   Disallow: /.nuxt
   Disallow: /api/
   Disallow: /php/
-  
+
   Sitemap: https://ottawawebmasters.ca/sitemap.xml
   ```
 
 ### 3. Missing Critical Pages
+
 **Issue**: Some important SEO pages are missing
 **Impact**: Missing opportunities for local SEO and service-specific rankings
 
 **Tasks:**
+
 - [ ] Create `/public/robots.txt` (physical file)
 - [ ] Add missing pages to sitemap:
   - `/accessibility` page (exists but not in sitemap)
@@ -65,10 +73,12 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Medium Priority Improvements 📈
 
 ### 4. Enhanced Structured Data
+
 **Issue**: Limited structured data coverage
 **Impact**: Missing rich snippets and enhanced search results
 
 **Tasks:**
+
 - [ ] Add Service schema to services page
 - [ ] Add Article schema to blog posts
 - [ ] Add Review/Rating schema for testimonials
@@ -76,19 +86,23 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 - [ ] Add FAQ schema for common questions
 
 ### 5. Meta Description Optimization
+
 **Issue**: Generic meta descriptions in some areas
 **Impact**: Lower click-through rates from search results
 
 **Tasks:**
+
 - [ ] Create unique, compelling meta descriptions for each page (150-160 characters)
 - [ ] Include target keywords naturally
 - [ ] Add call-to-action elements where appropriate
 
 ### 6. Open Graph Images
+
 **Issue**: Missing custom OG images for different pages
 **Impact**: Poor social media sharing appearance
 
 **Tasks:**
+
 - [ ] Create custom OG images for each main page (1200x630px)
 - [ ] Add page-specific images to SEO composable calls
 - [ ] Ensure images include branding and page context
@@ -96,30 +110,36 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Low Priority Optimizations 🔧
 
 ### 7. Blog SEO Enhancement
+
 **Issue**: Blog posts could benefit from enhanced SEO structure
 **Impact**: Missing long-tail keyword opportunities
 
 **Tasks:**
+
 - [ ] Add category and tag meta descriptions
 - [ ] Implement related posts section for internal linking
 - [ ] Add estimated reading time
 - [ ] Create topic clusters around main services
 
 ### 8. Local SEO Improvements
+
 **Issue**: Limited local Ottawa optimization
 **Impact**: Missing local search opportunities
 
 **Tasks:**
+
 - [ ] Add Google My Business integration
 - [ ] Create location-specific landing pages
 - [ ] Add Ottawa-specific keywords to content
 - [ ] Include local landmarks and neighborhoods in content
 
 ### 9. Technical SEO Enhancements
+
 **Issue**: Minor technical improvements available
 **Impact**: Marginal performance and crawling improvements
 
 **Tasks:**
+
 - [ ] Add hreflang tags if planning multi-language support
 - [ ] Implement breadcrumb navigation on all pages
 - [ ] Add pagination meta tags for blog
@@ -128,6 +148,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Analytics & Tracking Status 📊
 
 ### Current Implementation ✅
+
 - **Google Analytics 4**: Properly configured with gtag
 - **Google Tag Manager**: Environment variables ready
 - **Microsoft Clarity**: Production-only implementation
@@ -135,6 +156,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 - **Custom Analytics**: Comprehensive event tracking throughout site
 
 ### Recommended Analytics Enhancements
+
 - [ ] Set up Google Search Console
 - [ ] Configure Google Analytics 4 goals and conversions
 - [ ] Implement enhanced e-commerce tracking for lead generation
@@ -143,17 +165,21 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Content Strategy Recommendations 📝
 
 ### 10. Content Gaps Analysis
+
 **Opportunities identified:**
+
 - [ ] Create "Web Development Ottawa" pillar content
 - [ ] Add case studies for each service type
 - [ ] Develop FAQ section addressing common client questions
 - [ ] Create comparison content (WordPress vs Shopify, etc.)
 
 ### 11. Internal Linking Strategy
+
 **Issue**: Limited strategic internal linking
 **Impact**: Reduced page authority distribution
 
 **Tasks:**
+
 - [ ] Create topic clusters around main services
 - [ ] Add contextual internal links in blog posts
 - [ ] Implement related services suggestions
@@ -162,16 +188,19 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Implementation Priority Timeline 📅
 
 ### Week 1 (Critical)
+
 1. Add robots.txt file
 2. Implement page-specific SEO meta tags
 3. Add missing pages to sitemap
 
 ### Week 2 (High Impact)
+
 1. Create custom OG images
 2. Enhance structured data
 3. Optimize meta descriptions
 
 ### Week 3-4 (Enhancement)
+
 1. Implement local SEO improvements
 2. Enhance blog SEO structure
 3. Set up additional analytics goals
@@ -179,6 +208,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Monitoring & Maintenance 🔍
 
 ### SEO Health Checks (Monthly)
+
 - [ ] Monitor Core Web Vitals
 - [ ] Check for broken links
 - [ ] Review Google Search Console errors
@@ -186,6 +216,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 - [ ] Update sitemap as needed
 
 ### Content Updates (Quarterly)
+
 - [ ] Refresh outdated blog content
 - [ ] Update service descriptions
 - [ ] Add new case studies
@@ -194,6 +225,7 @@ Based on a comprehensive audit of the Ottawa Webmasters website, the SEO impleme
 ## Expected Results 📈
 
 Implementing these improvements should result in:
+
 - **20-30% increase** in organic search visibility
 - **15-25% improvement** in click-through rates
 - **Better local search rankings** for Ottawa-based queries
@@ -203,6 +235,7 @@ Implementing these improvements should result in:
 ---
 
 ## Notes
+
 - All analytics tracking is properly implemented and GDPR compliant
 - Site architecture is SEO-friendly with clean URLs
 - Page load speeds are optimized with Nuxt Image and modern build tools

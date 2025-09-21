@@ -613,7 +613,7 @@ const filteredCaseStudies = computed(() => {
 useSeo({
   title: 'Case Studies | Web Development Success Stories',
   description:
-    'Explore our web development case studies showcasing successful projects across e-commerce, custom applications, WordPress sites, and more. See real results from our work.',
+    'Real web development success stories: e-commerce, custom apps & WordPress sites. See measurable results from our Ottawa projects. Get inspired!',
   url: '/case-studies',
   structuredData: {
     '@context': 'https://schema.org',

@@ -269,7 +269,7 @@ import lumacrm from '~/assets/lumacrm.svg';
 useSeo({
   title: 'Portfolio | Our Web Development & Design Projects',
   description:
-    'Explore our portfolio of successful web development projects including custom websites, e-commerce solutions, and WordPress developments. See our expertise in action.',
+    'View our stunning portfolio: custom websites, e-commerce stores & WordPress solutions. 100+ successful projects delivered. Start your project today!',
   url: '/portfolio',
   structuredData: {
     '@context': 'https://schema.org',
