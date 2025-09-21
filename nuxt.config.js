@@ -58,7 +58,6 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@nuxt/image',
-    '@vercel/analytics/nuxt',
   ],
 
   // Tailwind Configuration
